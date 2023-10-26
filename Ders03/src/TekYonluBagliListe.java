@@ -1,18 +1,7 @@
 
 public class TekYonluBagliListe {
 
-	// Düğüm sınıfı - Tek yönlü bağlı liste düğümlerini temsil eden iç sınıf.
-	class Dugum {
-		int veri;      // Düğümün içinde saklanan veri.
-		Dugum sonraki;  // Düğümün bir sonraki düğümüne işaret eden referans.
-
-		Dugum(int veri) {
-			this.veri = veri;
-			this.sonraki = null;
-		}
-	}
-
-	Dugum bas;  // Bağlı listenin başlangıç düğümünü temsil eden referans.
+	TekYonluDugum bas;  // Bağlı listenin başlangıç düğümünü temsil eden referans.
 
 	// Tek Yönlü Bağlı Liste Başlatma - Bağlı listenin başlangıç durumunu oluşturan constructor.
 	TekYonluBagliListe() {
@@ -22,7 +11,7 @@ public class TekYonluBagliListe {
 	//Liste Başına Düğüm Ekleme - Verilen veriyi liste başına ekler.
 	void basaEkle(int veri) {
 		// Yeni bir düğüm oluştur ve içine veriyi yerleştir.
-		Dugum yeniDugum = new Dugum(veri);
+		TekYonluDugum yeniDugum = new TekYonluDugum(veri);
 
 		// Yeni düğümün sonraki referansını mevcut baş düğüme ayarla.
 		yeniDugum.sonraki = bas;
@@ -35,7 +24,7 @@ public class TekYonluBagliListe {
 	//Liste Sonuna Düğüm Ekleme - Verilen veriyi liste sonuna ekler.
 	void sonaEkle(int veri) {
 		// Yeni bir düğüm oluştur ve içine veriyi yerleştir.
-		Dugum yeniDugum = new Dugum(veri);
+		TekYonluDugum yeniDugum = new TekYonluDugum(veri);
 
 		// Eğer liste boşsa, yeni düğümü listenin başı olarak ayarla ve işlemi bitir.
 		if (bas == null) {
@@ -44,7 +33,7 @@ public class TekYonluBagliListe {
 		}
 
 		// Geçici bir düğüm oluştur ve bu düğümü baş düğümle başlat.
-		Dugum gecici = bas;
+		TekYonluDugum gecici = bas;
 
 		// Geçici düğümü listenin sonuna gitmek için sonraki düğümleri takip ederek ilerlet.
 		while (gecici.sonraki != null) {
@@ -59,7 +48,7 @@ public class TekYonluBagliListe {
 	//Belirli Bir Konuma Düğüm Ekleme - Verilen veriyi belirtilen konuma ekler.
 	void konumaEkle(int veri, int konum) {
 		// Yeni bir düğüm oluştur ve içine veriyi yerleştir.
-		Dugum yeniDugum = new Dugum(veri);
+		TekYonluDugum yeniDugum = new TekYonluDugum(veri);
 
 		// Eğer konum 0 ise, yeni düğümü listenin başına ekleyerek işlemi bitir.
 		if (konum == 0) {
@@ -69,7 +58,7 @@ public class TekYonluBagliListe {
 		}
 
 		// Geçici bir düğüm oluştur ve bu düğümü baş düğümle başlat.
-		Dugum gecici = bas;
+		TekYonluDugum gecici = bas;
 
 		// Belirtilen konuma gitmek için döngüyü kullanarak geçici düğümü ilerlet.
 		for (int i = 0; i < konum - 1; i++) {
@@ -101,7 +90,7 @@ public class TekYonluBagliListe {
 		}
 
 		// İlk düğümü silmeden önce bu düğümü bir geçici değişkene kopyala.
-		Dugum silinecekDugum = bas;
+		TekYonluDugum silinecekDugum = bas;
 
 		// Listenin başını bir sonraki düğüme taşı.
 		bas = bas.sonraki;
@@ -129,7 +118,7 @@ public class TekYonluBagliListe {
 		}
 
 		// Geçici bir düğüm oluştur ve bu düğümü baş düğümle başlat.
-		Dugum gecici = bas;
+		TekYonluDugum gecici = bas;
 
 		// Son düğüme gitmek için döngüyü kullanarak geçici düğümü ilerlet.
 		while (gecici.sonraki.sonraki != null) {
@@ -156,8 +145,8 @@ public class TekYonluBagliListe {
 		}
 
 		// Geçici düğüm ve önceki düğüm oluştur, geçici düğümü baş düğümün sonraki düğümüyle başlat.
-		Dugum onceki = bas;
-		Dugum gecici = bas.sonraki;
+		TekYonluDugum onceki = bas;
+		TekYonluDugum gecici = bas.sonraki;
 
 		// Verilen veriyi içeren düğümü aramak için döngüyü kullan.
 		while (gecici != null) {
@@ -180,7 +169,7 @@ public class TekYonluBagliListe {
 	//Belirli Bir Elemanı Arama - Verilen veriyi arar ve konumunu veya bulunamadığını bildirir.
 	boolean elemaniAra(int arananVeri) {
 		// Geçici bir düğüm oluştur ve baş düğümle başlat, konumu sıfırla.
-		Dugum gecici = bas;
+		TekYonluDugum gecici = bas;
 		int konum = 0;
 
 		// Liste boyunca döngü ile verilen veriyi ara.
@@ -204,7 +193,7 @@ public class TekYonluBagliListe {
 	//Liste Uzunluğunu Hesaplama - Bağlı listenin uzunluğunu hesaplar ve döndürür.
 	int listeUzunlugu() {
 		int uzunluk = 0;  // Bağlı listenin uzunluğunu saklayacak değişken.
-		Dugum gecici = bas;  // Geçici bir düğüm oluştur ve baş düğümle başlat.
+		TekYonluDugum gecici = bas;  // Geçici bir düğüm oluştur ve baş düğümle başlat.
 
 		// Liste boyunca döngü ile düğümleri say ve uzunluğu hesapla.
 		while (gecici != null) {
@@ -220,7 +209,7 @@ public class TekYonluBagliListe {
 
 	//Liste Üzerinde Dolaşma ve Verileri Yazdırma - Bağlı liste üzerinde dolaşır ve verileri yazdırır.
 	void listeyiYazdir() {
-		Dugum gecici = bas;  // Geçici bir düğüm oluştur ve baş düğümle başlat.
+		TekYonluDugum gecici = bas;  // Geçici bir düğüm oluştur ve baş düğümle başlat.
 		System.out.print("Bağlı Liste: ");  // Liste başlığını yazdır.
 
 		// Liste boyunca döngü ile düğümleri gezin ve verileri yazdırın.
@@ -236,9 +225,9 @@ public class TekYonluBagliListe {
 
 	//Liste Ters Çevirme - Bağlı listeyi ters çevirir.
 	void listeyiTersCevir() {
-		Dugum onceki = null;  // Önceki düğümü başlangıçta null olarak ayarla.
-		Dugum suanki = bas;   // Şu anki düğümü baş düğümle başlat.
-		Dugum sonraki = null; // Sonraki düğümü başlangıçta null olarak ayarla.
+		TekYonluDugum onceki = null;  // Önceki düğümü başlangıçta null olarak ayarla.
+		TekYonluDugum suanki = bas;   // Şu anki düğümü baş düğümle başlat.
+		TekYonluDugum sonraki = null; // Sonraki düğümü başlangıçta null olarak ayarla.
 
 		// Listenin sonuna kadar dolaşarak düğümleri ters çevir.
 		while (suanki != null) {
@@ -258,8 +247,8 @@ public class TekYonluBagliListe {
 			return -1; // Liste boşsa, -1 döndür
 		}
 
-		Dugum yavas = bas;   // Yavaş pointer baş düğümle başlar
-		Dugum hizli = bas;   // Hızlı pointer da baş düğümle başlar
+		TekYonluDugum yavas = bas;   // Yavaş pointer baş düğümle başlar
+		TekYonluDugum hizli = bas;   // Hızlı pointer da baş düğümle başlar
 
 		// Hızlı pointerın sonuna ulaşana kadar yavaş pointerı bir adım, hızlı pointerı iki adım ilerlet
 		while (hizli != null && hizli.sonraki != null) {
@@ -275,7 +264,7 @@ public class TekYonluBagliListe {
 	//Tek Yönlü Bağlı Listeyi Kopyalama
 	TekYonluBagliListe kopyala() {
 		TekYonluBagliListe kopyaListe = new TekYonluBagliListe(); // Yeni bir bağlı liste oluştur
-		Dugum gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
+		TekYonluDugum gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
 
 		while (gecici != null) {
 			kopyaListe.sonaEkle(gecici.veri); // Geçici düğümün verisini kopya listeye ekle
@@ -294,8 +283,8 @@ public class TekYonluBagliListe {
 		}
 
 		TekYonluBagliListe kume = new TekYonluBagliListe(); // Bir küme oluştur, tekrarlayanları kontrol etmek için
-		Dugum onceki = null; // Önceki düğümü saklamak için kullanılan geçici değişken
-		Dugum gecici = bas;  // Geçici bir düğüm oluştur ve baş düğümle başlat
+		TekYonluDugum onceki = null; // Önceki düğümü saklamak için kullanılan geçici değişken
+		TekYonluDugum gecici = bas;  // Geçici bir düğüm oluştur ve baş düğümle başlat
 
 		while (gecici != null) {
 			int veri = gecici.veri; // Şu anki düğümün verisini al
@@ -314,8 +303,8 @@ public class TekYonluBagliListe {
 	//İki Sıralı Listeyi Birleştirme
 	static TekYonluBagliListe birlestir(TekYonluBagliListe liste1, TekYonluBagliListe liste2) {
 		TekYonluBagliListe birlesmisListe = new TekYonluBagliListe(); // Birleşmiş liste oluştur
-		Dugum gecici1 = liste1.bas; // İlk liste için geçici düğüm
-		Dugum gecici2 = liste2.bas; // İkinci liste için geçici düğüm
+		TekYonluDugum gecici1 = liste1.bas; // İlk liste için geçici düğüm
+		TekYonluDugum gecici2 = liste2.bas; // İkinci liste için geçici düğüm
 
 		// İki listeyi karşılaştırarak birleştir
 		while (gecici1 != null && gecici2 != null) {
@@ -349,10 +338,10 @@ public class TekYonluBagliListe {
 			return; // Liste boşsa sıralama yapmaya gerek yok
 		}
 
-		Dugum suanki = bas; // Şu anki düğümü baş düğümle başlat
+		TekYonluDugum suanki = bas; // Şu anki düğümü baş düğümle başlat
 
 		while (suanki != null) {
-			Dugum diger = suanki.sonraki; // Diğer düğümü şu anki düğümün bir sonraki düğümü olarak başlat
+			TekYonluDugum diger = suanki.sonraki; // Diğer düğümü şu anki düğümün bir sonraki düğümü olarak başlat
 
 			while (diger != null) {
 				if (suanki.veri > diger.veri) {
