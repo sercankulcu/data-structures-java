@@ -56,24 +56,32 @@ public class InfixToPostfixPrefix {
 
 		for (int i = 0; i < ifade.length(); i++) {
 			char karakter = ifade.charAt(i);
-
+			System.out.println("Adım: " + karakter);
 			if (Character.isLetterOrDigit(karakter)) {
 				postfix.append(karakter);
+				System.out.println("postfix: " + postfix);
 			} else if (karakter == '(') {
 				stack.push(karakter);
+				System.out.println("Yığına koy " + karakter);
 			} else if (karakter == ')') {
 				while (!stack.isEmpty() && stack.peek() != '(') {
+					System.out.println("Yığından al " + stack.peek());
 					postfix.append(stack.pop());
+					System.out.println("postfix: " + postfix);
 				}
 				if (!stack.isEmpty() && stack.peek() != '(') {
 					return "Geçersiz İfade";
 				} else {
+					System.out.println("Yığından al " + stack.peek());
 					stack.pop();
 				}
 			} else {
 				while (!stack.isEmpty() && oncelik(karakter) <= oncelik(stack.peek())) {
+					System.out.println("Yığından al " + stack.peek());
 					postfix.append(stack.pop());
+					System.out.println("postfix: " + postfix);
 				}
+				System.out.println("Yığına koy " + karakter);
 				stack.push(karakter);
 			}
 		}
@@ -82,7 +90,9 @@ public class InfixToPostfixPrefix {
 			if (stack.peek() == '(') {
 				return "Geçersiz İfade";
 			}
+			System.out.println("Yığından al " + stack.peek());
 			postfix.append(stack.pop());
+			System.out.println("postfix: " + postfix);
 		}
 
 		return postfix.toString();

@@ -41,16 +41,20 @@ public class HanoiKulesi {
 
 		// Başlangıç durumu
 		yigin.push(new Disk(diskSayisi, 'A', 'B', 'C'));
-
+		System.out.println("Yığına ekle 3 A B C");
 		while (!yigin.isEmpty()) {
 			Disk disk = yigin.pop();
+			System.out.println("Yığından al " + disk.boyut + " " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef + " ");
 			if (disk.boyut == 1) {
 				System.out.println("Diski " + disk.kaynak + " çubuğundan " + disk.hedef + " çubuğuna taşı.");
 			} else {
 				// Yardımcı çubuğu kullanarak diskleri geçici olarak taşı
 				yigin.push(new Disk(disk.boyut - 1, disk.yardimci, disk.kaynak, disk.hedef));
+				System.out.println("Yığına ekle " + (disk.boyut - 1) + " " + disk.yardimci + " " + disk.kaynak + " " + disk.hedef + " ");
 				yigin.push(new Disk(1, disk.kaynak, disk.yardimci, disk.hedef));
+				System.out.println("Yığına ekle " + (1) + " " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef + " ");
 				yigin.push(new Disk(disk.boyut - 1, disk.kaynak, disk.hedef, disk.yardimci));
+				System.out.println("Yığına ekle " + (disk.boyut - 1) + " " + disk.kaynak + " " + disk.hedef + " " + disk.yardimci + " ");
 			}
 		}
 	}

@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Stack;
 
 /*
@@ -39,29 +40,33 @@ import java.util.Stack;
 public class HisseSenediSicrama {
 
 	public static int[] hesaplaSicrama(int[] fiyatlar) {
-		int[] sıcrama = new int[fiyatlar.length];
-		Stack<Integer> indeksYığını = new Stack<>();
+		int[] sicrama = new int[fiyatlar.length];
+		Stack<Integer> yigin = new Stack<>();
 
-		indeksYığını.push(0); 
-		sıcrama[0] = 1;
+		yigin.push(0); 
+		System.out.println("Yığına ekle " + 0);
+		sicrama[0] = 1;
 
 		for (int i = 1; i < fiyatlar.length; i++) {
-			while (!indeksYığını.isEmpty() && fiyatlar[i] >= fiyatlar[indeksYığını.peek()]) {
-				indeksYığını.pop();
+			System.out.println("Adım " + i);
+			while (!yigin.isEmpty() && fiyatlar[i] >= fiyatlar[yigin.peek()]) {
+				System.out.println("Yığından al " + yigin.peek());
+				yigin.pop();
 			}
 
-			sıcrama[i] = indeksYığını.isEmpty() ? (i + 1) : (i - indeksYığını.peek());
-			indeksYığını.push(i);
+			sicrama[i] = yigin.isEmpty() ? (i + 1) : (i - yigin.peek());
+			System.out.println("Yığına ekle " + i + ", sicrama[" + i + "] " + sicrama[i]);
+			yigin.push(i);
 		}
 
-		return sıcrama;
+		return sicrama;
 	}
 
 	public static void main(String[] args) {
 		int[] fiyatlar = {100, 80, 60, 70, 60, 75, 85};
-		int[] sıcrama = hesaplaSicrama(fiyatlar);
+		int[] sicrama = hesaplaSicrama(fiyatlar);
 
-		System.out.println("Hisse Senedi Fiyatları: " + java.util.Arrays.toString(fiyatlar));
-		System.out.println("Sıçrama Değerleri: " + java.util.Arrays.toString(sıcrama));
+		System.out.println("Hisse Senedi Fiyatları: " + Arrays.toString(fiyatlar));
+		System.out.println("Sıçrama Değerleri: " + Arrays.toString(sicrama));
 	}
 }
