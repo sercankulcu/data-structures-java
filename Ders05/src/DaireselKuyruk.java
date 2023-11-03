@@ -1,41 +1,6 @@
 
-public class DaireselKuyrukOrnegi {
-
-	public static void main(String[] args) {
-
-		DaireselKuyruk<String> kuyruk = new DaireselKuyruk<>(5);
-
-		// Kuyruğa (queue) öğeleri ekle (enqueue)
-		kuyruk.ekle("Öğe 1");
-		kuyruk.ekle("Öğe 2");
-		kuyruk.ekle("Öğe 3");
-		kuyruk.ekle("Öğe 4");
-
-		// Kuyruktaki öğeleri göster
-		kuyruk.kuyruguGoster();
-
-		// Kuyruktan (queue) öğeleri çıkar (dequeue)
-		String çıkarılanÖğe = kuyruk.cikar();
-		System.out.println("Çıkarılan Öğe: " + çıkarılanÖğe);
-
-		// Kuyruktaki güncel öğeleri göster
-		kuyruk.kuyruguGoster();
-
-		// Kuyruğun önündeki öğeye bak (peek)
-		String önÖğe = kuyruk.oneBak();
-		System.out.println("Ön Öğe: " + önÖğe);
-
-		// Kuyruğun boş olup olmadığını kontrol et
-		boolean bosMu = kuyruk.bosMu();
-		System.out.println("Kuyruk Boş mu? " + bosMu);
-
-		// Kuyruğun boyutunu al
-		int boyut = kuyruk.boyut();
-		System.out.println("Kuyruk Boyutu: " + boyut);
-	}
-}
-
-class DaireselKuyruk<E> {
+public class DaireselKuyruk<E> {
+	
 	private E[] dizi; // Dairesel kuyruğun öğelerini saklayan dizi
 	private int bas; // Kuyruğun başlangıç (front) işaretçisi
 	private int son; // Kuyruğun son (rear) işaretçisi
@@ -108,6 +73,39 @@ class DaireselKuyruk<E> {
 			sayac++;
 		}
 		System.out.println();
+	}
+
+	public static void main(String[] args) {
+
+		DaireselKuyruk<String> kuyruk = new DaireselKuyruk<>(5);
+
+		// Kuyruğa (queue) öğeleri ekle (enqueue)
+		kuyruk.ekle("Öğe 1");
+		kuyruk.ekle("Öğe 2");
+		kuyruk.ekle("Öğe 3");
+		kuyruk.ekle("Öğe 4");
+
+		// Kuyruktaki öğeleri göster
+		kuyruk.kuyruguGoster();
+
+		// Kuyruktan (queue) öğeleri çıkar (dequeue)
+		String çıkarılanÖğe = kuyruk.cikar();
+		System.out.println("Çıkarılan Öğe: " + çıkarılanÖğe);
+
+		// Kuyruktaki güncel öğeleri göster
+		kuyruk.kuyruguGoster();
+
+		// Kuyruğun önündeki öğeye bak (peek)
+		String önÖğe = kuyruk.oneBak();
+		System.out.println("Ön Öğe: " + önÖğe);
+
+		// Kuyruğun boş olup olmadığını kontrol et
+		boolean bosMu = kuyruk.bosMu();
+		System.out.println("Kuyruk Boş mu? " + bosMu);
+
+		// Kuyruğun boyutunu al
+		int boyut = kuyruk.boyut();
+		System.out.println("Kuyruk Boyutu: " + boyut);
 	}
 
 }

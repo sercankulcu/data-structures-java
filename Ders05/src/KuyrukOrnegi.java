@@ -25,8 +25,8 @@ public class KuyrukOrnegi {
 		System.out.println("Güncellenmiş Kuyruk İçeriği: " + kuyruk);
 
 		// Kuyruğun başındaki elemana erişelim, ancak kuyruktan çıkarmadan
-		String basindakiEleman2 = kuyruk.peek();
-		System.out.println("Kuyruğun Başındaki Eleman (Çıkarılmadan): " + basindakiEleman2);
+		basindakiEleman = kuyruk.peek();
+		System.out.println("Kuyruğun Başındaki Eleman (Çıkarılmadan): " + basindakiEleman);
 
 		// Kuyruğun boyutunu alalım
 		int kuyrukBoyutu = kuyruk.size();

@@ -1,3 +1,4 @@
+
 public class QueueArrayImplementation {
 	
 	private int maxSize;
@@ -55,7 +56,7 @@ public class QueueArrayImplementation {
 		myQueue.enqueue(30);
 		myQueue.enqueue(40);
 
-		System.out.println("Kuyrukun İlk Elemanı: " + myQueue.peekFront());
+		System.out.println("Kuyruğun İlk Elemanı: " + myQueue.peekFront());
 
 		myQueue.dequeue();
 		myQueue.dequeue();
