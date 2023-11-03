@@ -1,8 +1,8 @@
 
 public class MatrisCarpimi {
-	
+
 	public static void main(String[] args) {
-		
+
 		int[][] matrisA = {
 				{1, 2, 3},
 				{4, 5, 6}
@@ -27,24 +27,25 @@ public class MatrisCarpimi {
 	}
 
 	public static int[][] matrisCarpimi(int[][] matrisA, int[][] matrisB) {
-		int aSatir = matrisA.length;
-		int aSutun = matrisA[0].length;
-		int bSutun = matrisB[0].length;
+		int aSatir = matrisA.length; // Matris A'nın satır sayısı
+		int aSutun = matrisA[0].length; // Matris A'nın sütun sayısı
+		int bSutun = matrisB[0].length; // Matris B'nin sütun sayısı
 
-		int[][] carpimSonucu = new int[aSatir][bSutun];
+		int[][] carpimSonucu = new int[aSatir][bSutun]; // Çarpım sonucunu tutacak matris
 
 		for (int i = 0; i < aSatir; i++) {
 			for (int j = 0; j < bSutun; j++) {
-				int toplam = 0;
+				int toplam = 0; // Toplam değeri sıfırla
 				for (int k = 0; k < aSutun; k++) {
-					toplam += matrisA[i][k] * matrisB[k][j];
+					toplam += matrisA[i][k] * matrisB[k][j]; // Çarpım sonucunu hesapla
 				}
-				carpimSonucu[i][j] = toplam;
+				carpimSonucu[i][j] = toplam; // Sonucu çarpım matrisine ekle
 			}
 		}
 
-		return carpimSonucu;
+		return carpimSonucu; // Çarpım sonucunu döndür
 	}
+
 
 	public static void matrisiYazdir(int[][] matris) {
 		for (int i = 0; i < matris.length; i++) {
