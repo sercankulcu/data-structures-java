@@ -6,7 +6,7 @@ public class TekCiftYonluBagliListeDonusturucu {
 		CiftYonluBagliListe liste2 = new CiftYonluBagliListe();
 
 		// İlk düğümü işaret et
-		TekYonluDugum gecici = liste1.bas;
+		TekYonluDugum<Integer> gecici = liste1.bas;
 
 		// Tek yönlü listedeki her düğümü çift yönlü listeye ekleyin
 		while (gecici != null) {

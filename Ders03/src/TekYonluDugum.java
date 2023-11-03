@@ -1,11 +1,11 @@
 
 // Düğüm sınıfı - Tek yönlü bağlı liste düğümlerini temsil eden iç sınıf.
-public class TekYonluDugum {
+public class TekYonluDugum<E> {
 	
-	int veri;      // Düğümün içinde saklanan veri.
-	TekYonluDugum sonraki;  // Düğümün bir sonraki düğümüne işaret eden referans.
+	E veri;      // Düğümün içinde saklanan veri.
+	TekYonluDugum<E> sonraki;  // Düğümün bir sonraki düğümüne işaret eden referans.
 
-	TekYonluDugum(int veri) {
+	TekYonluDugum(E veri) {
 		this.veri = veri;
 		this.sonraki = null;
 	}

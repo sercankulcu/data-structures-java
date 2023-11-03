@@ -1,35 +1,27 @@
 
 public class IkiBoyutluMatristenBagliListe {
 
-	// Bağlı liste düğümü
-	static class Dugum {
-		int veri;
-		Dugum sag;
-		Dugum asagi;
-	};
-
 	// 2D matristen oluşturulan bağlı listenin başlangıç işaretçisini döndürür
-	static Dugum olustur(int matris[][], int i, int j)
+	MatrisDugum<Integer> olustur(int matris[][], int i, int j)
 	{
 		// i veya j sınırları aşıldıysa dön
 		if (i > matris.length - 1 || j > matris[0].length - 1)
 			return null;
 		// Geçerli i ve j için yeni bir düğüm oluştur ve
 		// alt ve sağ işaretçilerini sırasıyla ayarla
-		Dugum temp = new Dugum();
-		temp.veri = matris[i][j];
+		MatrisDugum<Integer> temp = new MatrisDugum<Integer>(matris[i][j]);
 		temp.sag = olustur(matris, i, j + 1);
 		temp.asagi = olustur(matris, i + 1, j);
 		return temp;
 	}
 	
 	// Bağlı liste verilerini görüntüleme
-	static void goruntule(Dugum baslangic)
+	void goruntule(MatrisDugum<Integer> baslangic)
 	{
 		// Sağa doğru hareket etmek için işaretçi
-		Dugum sag;
+		MatrisDugum<Integer> sag;
 		// Aşağı doğru hareket etmek için işaretçi
-		Dugum asagi = baslangic;
+		MatrisDugum<Integer> asagi = baslangic;
 
 		int sayac = 0;
 		// Aşağıdaki düğüm NULL olana kadar dön
@@ -61,11 +53,12 @@ public class IkiBoyutluMatristenBagliListe {
 	// Ana program
 	public static void main(String args[])
 	{
+		IkiBoyutluMatristenBagliListe matristenBagliListe = new IkiBoyutluMatristenBagliListe();
 		// İki boyutlu matris
 		int matris[][] = { 	{1, 2, 3},
 												{4, 5, 6},
 												{7, 8, 9} };
-		Dugum baslangic = olustur(matris, 0, 0);
-		goruntule(baslangic);
+		MatrisDugum<Integer> baslangic = matristenBagliListe.olustur(matris, 0, 0);
+		matristenBagliListe.goruntule(baslangic);
 	}
 }

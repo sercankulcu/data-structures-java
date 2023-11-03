@@ -1,8 +1,8 @@
 
 public class CiftYonluBagliListe {
 	
-	private CiftYonluDugum bas; // Baş düğümünü saklayan değişken
-	private CiftYonluDugum son; // Son düğümü saklayan değişken
+	private CiftYonluDugum<Integer> bas; // Baş düğümünü saklayan değişken
+	private CiftYonluDugum<Integer> son; // Son düğümü saklayan değişken
 
 	// Çift yönlü bağlı listenin başlatılması
 	public CiftYonluBagliListe() {
@@ -13,7 +13,7 @@ public class CiftYonluBagliListe {
 
 	//Listenin başına düğüm ekleme
 	public void basaEkle(int veri) {
-		CiftYonluDugum yeniDugum = new CiftYonluDugum(veri); // Eklenecek yeni düğümü oluştur
+		CiftYonluDugum<Integer> yeniDugum = new CiftYonluDugum<Integer>(veri); // Eklenecek yeni düğümü oluştur
 
 		if (bas == null) {
 			// Liste boşsa, yeni düğüm hem başı hem de sonu temsil eder
@@ -30,7 +30,7 @@ public class CiftYonluBagliListe {
 
 	//Listenin sonuna düğüm ekleme
 	public void sonaEkle(int veri) {
-		CiftYonluDugum yeniDugum = new CiftYonluDugum(veri); // Eklenecek yeni düğümü oluştur
+		CiftYonluDugum<Integer> yeniDugum = new CiftYonluDugum<Integer>(veri); // Eklenecek yeni düğümü oluştur
 
 		if (bas == null) {
 			// Liste boşsa, yeni düğüm hem başı hem de sonu temsil eder
@@ -47,7 +47,7 @@ public class CiftYonluBagliListe {
 
 	//Belirli bir konuma eleman ekleme
 	void konumaEkle(int veri, int konum) {
-		CiftYonluDugum yeniDugum = new CiftYonluDugum(veri); // Eklenecek yeni düğümü oluştur
+		CiftYonluDugum<Integer> yeniDugum = new CiftYonluDugum<Integer>(veri); // Eklenecek yeni düğümü oluştur
 
 		if (konum <= 1) {
 			// Konum 1 veya daha küçükse, yeni düğümü listenin başına ekle
@@ -55,7 +55,7 @@ public class CiftYonluBagliListe {
 			bas.onceki = yeniDugum; // Eski baş düğümün önceki referansını yeni düğüm yap
 			bas = yeniDugum; // Yeni düğümü baş düğüm olarak ayarla
 		} else {
-			CiftYonluDugum gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
+			CiftYonluDugum<Integer> gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
 			int adim = 1;
 
 			while (gecici != null && adim < konum - 1) {
@@ -80,7 +80,7 @@ public class CiftYonluBagliListe {
 
 	//Çift yönlü bağlı listenin uzunluğunu bulma
 	int listeUzunlugu() {
-		CiftYonluDugum gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
+		CiftYonluDugum<Integer> gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
 		int uzunluk = 0; // Listenin uzunluğunu saklayan değişken
 
 		while (gecici != null) {
@@ -122,7 +122,7 @@ public class CiftYonluBagliListe {
 			bas = null;
 		} else {
 			// Eğer liste birden fazla eleman içeriyorsa, son elemanı sil
-			CiftYonluDugum gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
+			CiftYonluDugum<Integer> gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
 
 			while (gecici.sonraki != null) {
 				gecici = gecici.sonraki; // Son elemana kadar ilerle
@@ -149,7 +149,7 @@ public class CiftYonluBagliListe {
 			return;
 		}
 
-		CiftYonluDugum gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
+		CiftYonluDugum<Integer> gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
 
 		while (gecici != null && gecici.veri != veri) {
 			gecici = gecici.sonraki; // Silinecek elemanı bulana kadar ilerle
@@ -171,7 +171,7 @@ public class CiftYonluBagliListe {
 
 	//Çift yönlü bağlı listeyi ileri yönde yazdırma
 	void listeyiIleriYazdir() {
-		CiftYonluDugum gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
+		CiftYonluDugum<Integer> gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
 
 		System.out.print("İleri Yönde: ");
 		while (gecici != null) {
@@ -184,7 +184,7 @@ public class CiftYonluBagliListe {
 
 	//Çift yönlü bağlı listeyi geri yönde yazdırma
 	void listeyiGeriYazdir() {
-		CiftYonluDugum gecici = bas;
+		CiftYonluDugum<Integer> gecici = bas;
 
 		// En son elemana ilerle
 		while (gecici.sonraki != null) {
@@ -202,7 +202,7 @@ public class CiftYonluBagliListe {
 
 	//Belirli bir elemanı arama
 	boolean elemaniAra(int hedef) {
-		CiftYonluDugum gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
+		CiftYonluDugum<Integer> gecici = bas; // Geçici bir düğüm oluştur ve baş düğümle başlat
 		int konum = 0; // Elemanın konumunu izlemek için bir değişken
 
 		while (gecici != null) {

@@ -1,18 +1,8 @@
 
 public class DaireselBagliListe {
-	//Dairesel bağlı listenin düğümünü temsil eden iç içe sınıf
-	class Dugum {
-		int veri;      // Düğümün sakladığı veri
-		Dugum sonraki; // Düğümün bir sonraki düğümle olan bağlantısı
-
-		Dugum(int veri) {
-			this.veri = veri;
-			this.sonraki = null;
-		}
-	}
-
-	private Dugum bas; // Dairesel bağlı listenin baş düğümü
-	private Dugum son; // Dairesel bağlı listenin son düğümü
+	
+	private TekYonluDugum<Integer> bas; // Dairesel bağlı listenin baş düğümü
+	private TekYonluDugum<Integer> son; // Dairesel bağlı listenin son düğümü
 
 	// Dairesel bağlı listenin başlatılması
 	public DaireselBagliListe() {
@@ -22,7 +12,7 @@ public class DaireselBagliListe {
 
 	//Listeye yeni bir düğüm ekleme
 	public void ekle(int veri) {
-		Dugum yeniDugum = new Dugum(veri); // Yeni bir düğüm oluştur
+		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<Integer>(veri); // Yeni bir düğüm oluştur
 
 		if (bas == null) {
 			bas = yeniDugum;         // Liste boşsa, yeni düğümü baş olarak ayarla
@@ -43,8 +33,8 @@ public class DaireselBagliListe {
 			return;
 		}
 
-		Dugum onceki = null;
-		Dugum gecici = bas;
+		TekYonluDugum<Integer> onceki = null;
+		TekYonluDugum<Integer> gecici = bas;
 
 		do {
 			if (gecici.veri == hedefVeri) {
@@ -56,7 +46,7 @@ public class DaireselBagliListe {
 					gecici = null;
 					return;
 				} else {
-					Dugum son = bas;
+					TekYonluDugum<Integer> son = bas;
 					while (son.sonraki != bas) {
 						son = son.sonraki;
 					}
@@ -85,7 +75,7 @@ public class DaireselBagliListe {
 			return;
 		}
 
-		Dugum simdiki = bas; // Başlangıç düğümü ile başla
+		TekYonluDugum<Integer> simdiki = bas; // Başlangıç düğümü ile başla
 		System.out.print("Dairesel Bağlı Liste: ");
 		do {
 			System.out.print(simdiki.veri + " -> "); // Düğümün verisini yazdır
