@@ -1,88 +1,92 @@
 
 public class DaireselKuyrukOrnegi {
-	
+
 	public static void main(String[] args) {
-		
+
 		DaireselKuyruk<String> kuyruk = new DaireselKuyruk<>(5);
 
-		// Kuyruğa (queue) öğeleri ekleyelim (enqueue)
+		// Kuyruğa (queue) öğeleri ekle (enqueue)
 		kuyruk.ekle("Öğe 1");
 		kuyruk.ekle("Öğe 2");
 		kuyruk.ekle("Öğe 3");
 		kuyruk.ekle("Öğe 4");
 
-		// Kuyruktaki öğeleri gösterelim
-		kuyruk.kuyruğuGöster();
+		// Kuyruktaki öğeleri göster
+		kuyruk.kuyruguGoster();
 
-		// Kuyruktan (queue) öğeleri çıkaralım (dequeue)
-		String çıkarılanÖğe = kuyruk.çıkar();
+		// Kuyruktan (queue) öğeleri çıkar (dequeue)
+		String çıkarılanÖğe = kuyruk.cikar();
 		System.out.println("Çıkarılan Öğe: " + çıkarılanÖğe);
 
-		// Kuyruktaki güncel öğeleri gösterelim
-		kuyruk.kuyruğuGöster();
+		// Kuyruktaki güncel öğeleri göster
+		kuyruk.kuyruguGoster();
 
-		// Kuyruğun önündeki öğeye bakalım (peek) ve çıkartmadan
-		String önÖğe = kuyruk.önüneBak();
+		// Kuyruğun önündeki öğeye bak (peek)
+		String önÖğe = kuyruk.oneBak();
 		System.out.println("Ön Öğe: " + önÖğe);
 
-		// Kuyruğun boş olup olmadığını kontrol edelim
-		boolean boşMu = kuyruk.boşMu();
-		System.out.println("Kuyruk Boş mu? " + boşMu);
+		// Kuyruğun boş olup olmadığını kontrol et
+		boolean bosMu = kuyruk.bosMu();
+		System.out.println("Kuyruk Boş mu? " + bosMu);
 
-		// Kuyruğun boyutunu alalım
+		// Kuyruğun boyutunu al
 		int boyut = kuyruk.boyut();
 		System.out.println("Kuyruk Boyutu: " + boyut);
 	}
 }
 
 class DaireselKuyruk<E> {
-	private Object[] dizi;
-	private int baş;
-	private int son;
-	private int boyut;
-	private int kapasite;
+	private E[] dizi; // Dairesel kuyruğun öğelerini saklayan dizi
+	private int bas; // Kuyruğun başlangıç (front) işaretçisi
+	private int son; // Kuyruğun son (rear) işaretçisi
+	private int boyut; // Kuyruktaki öğe sayısı
+	private int kapasite; // Kuyruğun maksimum kapasitesi
 
+	@SuppressWarnings("unchecked")
 	public DaireselKuyruk(int kapasite) {
-		this.kapasite = kapasite;
-		dizi = new Object[kapasite];
-		baş = -1;
-		son = -1;
-		boyut = 0;
+		this.kapasite = kapasite; // Kuyruğun maksimum kapasitesini ayarla
+		dizi = (E[]) new Object[kapasite]; // Genel dizi oluşturma (Tür güvenliği uyarısı)
+		bas = -1; // Başlangıç işaretçisini -1 olarak ayarla
+		son = -1; // Son işaretçisini -1 olarak ayarla
+		boyut = 0; // Kuyruktaki öğe sayısını sıfıra ayarla
 	}
 
-	public void ekle(E öğe) {
+	public void ekle(E oge) {
 		if (boyut == kapasite) {
-			System.out.println("Kuyruk dolu, öğe eklenemedi.");
-			return;
+			System.out.println("Kuyruk dolu, öğe eklenemedi."); // Kuyruk doluysa hata mesajı
+			return; // Öğe eklenemedi, işlemi sonlandır
 		}
-		if (baş == -1) {
-			baş = 0;
+		if (bas == -1) {
+			bas = 0; // Kuyruk başlangıcı ayarla
 		}
-		son = (son + 1) % kapasite;
-		dizi[son] = öğe;
-		boyut++;
+		son = (son + 1) % kapasite; // Dairesel kuyrukta son işaretçisini güncelle
+		dizi[son] = oge; // Öğeyi kuyruğa ekle
+		boyut++; // Kuyruktaki öğe sayısını artır
 	}
 
-	public E çıkar() {
-		if (boşMu()) {
-			System.out.println("Kuyruk boş, öğe çıkarılamaz.");
-			return null;
+
+	public E cikar() {
+		if (bosMu()) {
+			System.out.println("Kuyruk boş, öğe çıkarılamaz."); // Kuyruk boşsa hata mesajı
+			return null; // Öğe çıkarılamadı, null döndür
 		}
-		E öğe = (E) dizi[baş];
-		baş = (baş + 1) % kapasite;
-		boyut--;
-		return öğe;
+		E oge = (E) dizi[bas]; // Başlangıçtaki öğeyi al
+		bas = (bas + 1) % kapasite; // Baş işaretçisini güncelle (dairesel kuyruk)
+		boyut--; // Kuyruktaki öğe sayısını azalt
+		return oge; // Çıkarılan öğeyi döndür
 	}
 
-	public E önüneBak() {
-		if (boşMu()) {
-			System.out.println("Kuyruk boş, öğe yok.");
-			return null;
+
+	public E oneBak() {
+		if (bosMu()) {
+			System.out.println("Kuyruk boş, öğe yok."); // Kuyruk boşsa bilgilendirme mesajı
+			return null; // Kuyruğun başındaki öğe yok, null döndür
 		}
-		return (E) dizi[baş];
+		return (E) dizi[bas]; // Kuyruğun başındaki öğeyi döndür
 	}
 
-	public boolean boşMu() {
+
+	public boolean bosMu() {
 		return boyut == 0;
 	}
 
@@ -90,19 +94,20 @@ class DaireselKuyruk<E> {
 		return boyut;
 	}
 
-	public void kuyruğuGöster() {
-		if (boşMu()) {
-			System.out.println("Kuyruk boş.");
+	public void kuyruguGoster() {
+		if (bosMu()) {
+			System.out.println("Kuyruk boş."); // Kuyruk boşsa bilgilendirme mesajı
 			return;
 		}
-		int i = baş;
-		int sayac = 0;
+		int i = bas; // Başlangıç indeksi
+		int sayac = 0; // Öğeleri saymak için kullanılan sayaç
 		System.out.print("Kuyruk Öğeleri: ");
 		while (sayac < boyut) {
-			System.out.print(dizi[i] + " ");
-			i = (i + 1) % kapasite;
+			System.out.print(dizi[i] + " "); // Kuyruktaki öğeleri ekrana yazdır
+			i = (i + 1) % kapasite; // Dairesel kuyrukta sonraki indeksi al
 			sayac++;
 		}
 		System.out.println();
 	}
+
 }

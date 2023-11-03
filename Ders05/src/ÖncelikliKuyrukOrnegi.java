@@ -12,32 +12,32 @@ public class ÖncelikliKuyrukOrnegi {
 		kuyruk.ekle("Öğe 4", 1); // Öncelik: 1
 
 		// Öncelikli kuyruktaki öğeleri gösterelim
-		kuyruk.kuyruğuGöster();
+		kuyruk.kuyruguGoster();
 
 		// Öncelikli kuyruktan (priority queue) öğeleri çıkaralım (dequeue)
 		String çıkarılanOge = kuyruk.çıkar();
 		System.out.println("Çıkarılan Öğe: " + çıkarılanOge);
 
 		// Öncelikli kuyruktaki güncel öğeleri gösterelim
-		kuyruk.kuyruğuGöster();
+		kuyruk.kuyruguGoster();
 
 		// Öncelikli kuyruktan (priority queue) öğeleri çıkaralım (dequeue)
 		çıkarılanOge = kuyruk.çıkar();
 		System.out.println("Çıkarılan Öğe: " + çıkarılanOge);
 
 		// Öncelikli kuyruktaki güncel öğeleri gösterelim
-		kuyruk.kuyruğuGöster();
+		kuyruk.kuyruguGoster();
 
 		// Öncelikli kuyruktan (priority queue) öğeleri çıkaralım (dequeue)
 		çıkarılanOge = kuyruk.çıkar();
 		System.out.println("Çıkarılan Öğe: " + çıkarılanOge);
 
 		// Öncelikli kuyruktaki güncel öğeleri gösterelim
-		kuyruk.kuyruğuGöster();
+		kuyruk.kuyruguGoster();
 
 		// Öncelikli kuyruğun boş olup olmadığını kontrol edelim
-		boolean boşMu = kuyruk.boşMu();
-		System.out.println("Öncelikli Kuyruk Boş mu? " + boşMu);
+		boolean bosMu = kuyruk.bosMu();
+		System.out.println("Öncelikli Kuyruk Boş mu? " + bosMu);
 	}
 }
 
@@ -80,7 +80,7 @@ class ÖncelikliKuyruk<E> {
 	}
 
 	public E çıkar() {
-		if (boşMu()) {
+		if (bosMu()) {
 			throw new IllegalStateException("Öncelikli kuyruk boş");
 		}
 
@@ -93,7 +93,7 @@ class ÖncelikliKuyruk<E> {
 		return çıkarılan;
 	}
 
-	public boolean boşMu() {
+	public boolean bosMu() {
 		return boyut == 0;
 	}
 
@@ -106,8 +106,8 @@ class ÖncelikliKuyruk<E> {
 		dizi = yeniDizi;
 	}
 
-	public void kuyruğuGöster() {
-		if (boşMu()) {
+	public void kuyruguGoster() {
+		if (bosMu()) {
 			System.out.println("Öncelikli Kuyruk boş.");
 			return;
 		}

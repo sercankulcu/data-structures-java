@@ -1,34 +1,34 @@
 
 public class KuyrukDiziGosterimi {
 	
-	private int maxBoyut; // Kuyruğun maksimum boyutu
+	private int kapasite; // Kuyruğun maksimum boyutu
 	private int[] kuyrukDizi; // Kuyruğu temsil eden dizi
 	private int on; // Kuyruğun başı
 	private int arka; // Kuyruğun sonu
-	private int elemanSayisi; // Kuyruktaki eleman sayısı
+	private int boyut; // Kuyruktaki eleman sayısı
 
 	public KuyrukDiziGosterimi(int boyut) {
-		maxBoyut = boyut;
-		kuyrukDizi = new int[maxBoyut];
+		kapasite = boyut;
+		kuyrukDizi = new int[kapasite];
 		on = 0;
 		arka = -1;
-		elemanSayisi = 0;
+		boyut = 0;
 	}
 
 	public void ekle(int deger) {
-		if (arka == maxBoyut - 1) {
+		if (arka == kapasite - 1) {
 			arka = -1;
 		}
 		kuyrukDizi[++arka] = deger;
-		elemanSayisi++;
+		boyut++;
 	}
 
 	public int cikar() {
 		int gecici = kuyrukDizi[on++];
-		if (on == maxBoyut) {
+		if (on == kapasite) {
 			on = 0;
 		}
-		elemanSayisi--;
+		boyut--;
 		return gecici;
 	}
 
@@ -37,15 +37,15 @@ public class KuyrukDiziGosterimi {
 	}
 
 	public boolean bosMu() {
-		return elemanSayisi == 0;
+		return boyut == 0;
 	}
 
 	public boolean doluMu() {
-		return elemanSayisi == maxBoyut;
+		return boyut == kapasite;
 	}
 
 	public int boyut() {
-		return elemanSayisi;
+		return boyut;
 	}
 
 	public static void main(String[] args) {
