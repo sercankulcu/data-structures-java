@@ -113,7 +113,7 @@ public class InfixToPostfixPrefix {
 	}
 
 	public static void main(String[] args) {
-		String infixIfade = "A*(B+C)/D";
+		String infixIfade = "A*(B+C+D)/D";
 		String postfixIfade = infixToPostfix(infixIfade);
 		String prefixIfade = infixToPrefix(infixIfade);
 

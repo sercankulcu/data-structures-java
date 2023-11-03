@@ -5,7 +5,7 @@ public class PalindromKontrol {
 
 	public static boolean palindromKontrol(String metin) {
 		// Boşlukları ve noktalama işaretlerini kaldırın ve metni küçük harfe çevirin
-		//metin = metin.replaceAll("[\\s.,?!]", "").toLowerCase();
+		metin = metin.replaceAll("[\\s.,?!]", "").toLowerCase();
 
 		// Bir yığın (stack) oluşturun
 		Stack<Character> yigin = new Stack<Character>();
