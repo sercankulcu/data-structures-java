@@ -1,13 +1,13 @@
 
 public class DiziIleStackUygulama {
 	
-	private int maksBoyut;
+	private int kapasite;
 	private int tepe;
 	private int[] dizi;
 
 	public DiziIleStackUygulama(int boyut) {
-		maksBoyut = boyut;
-		dizi = new int[maksBoyut];
+		kapasite = boyut;
+		dizi = new int[kapasite];
 		tepe = -1; // Tepe işaretçisini (-1 boş yığın) başlangıçta tanımla.
 	}
 
@@ -16,7 +16,7 @@ public class DiziIleStackUygulama {
 	}
 
 	public boolean doluMu() {
-		return (tepe == maksBoyut - 1);
+		return (tepe == kapasite - 1);
 	}
 
 	public void ekle(int deger) {

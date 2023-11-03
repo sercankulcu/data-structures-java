@@ -22,11 +22,11 @@
 import java.util.Stack;
 
 class Disk {
-	int boyut;
+	int diskSayisi;
 	char kaynak, yardimci, hedef;
 
-	Disk(int boyut, char kaynak, char yardimci, char hedef) {
-		this.boyut = boyut;
+	Disk(int diskSayisi, char kaynak, char yardimci, char hedef) {
+		this.diskSayisi = diskSayisi;
 		this.kaynak = kaynak;
 		this.yardimci = yardimci;
 		this.hedef = hedef;
@@ -44,17 +44,17 @@ public class HanoiKulesi {
 		System.out.println("Yığına ekle 3 A B C");
 		while (!yigin.isEmpty()) {
 			Disk disk = yigin.pop();
-			System.out.println("Yığından al " + disk.boyut + " " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef + " ");
-			if (disk.boyut == 1) {
+			System.out.println("Yığından al " + disk.diskSayisi + " " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef + " ");
+			if (disk.diskSayisi == 1) {
 				System.out.println("Diski " + disk.kaynak + " çubuğundan " + disk.hedef + " çubuğuna taşı.");
 			} else {
 				// Yardımcı çubuğu kullanarak diskleri geçici olarak taşı
-				yigin.push(new Disk(disk.boyut - 1, disk.yardimci, disk.kaynak, disk.hedef));
-				System.out.println("Yığına ekle " + (disk.boyut - 1) + " " + disk.yardimci + " " + disk.kaynak + " " + disk.hedef + " ");
+				yigin.push(new Disk(disk.diskSayisi - 1, disk.yardimci, disk.kaynak, disk.hedef));
+				System.out.println("Yığına ekle " + (disk.diskSayisi - 1) + " " + disk.yardimci + " " + disk.kaynak + " " + disk.hedef + " ");
 				yigin.push(new Disk(1, disk.kaynak, disk.yardimci, disk.hedef));
 				System.out.println("Yığına ekle " + (1) + " " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef + " ");
-				yigin.push(new Disk(disk.boyut - 1, disk.kaynak, disk.hedef, disk.yardimci));
-				System.out.println("Yığına ekle " + (disk.boyut - 1) + " " + disk.kaynak + " " + disk.hedef + " " + disk.yardimci + " ");
+				yigin.push(new Disk(disk.diskSayisi - 1, disk.kaynak, disk.hedef, disk.yardimci));
+				System.out.println("Yığına ekle " + (disk.diskSayisi - 1) + " " + disk.kaynak + " " + disk.hedef + " " + disk.yardimci + " ");
 			}
 		}
 	}
