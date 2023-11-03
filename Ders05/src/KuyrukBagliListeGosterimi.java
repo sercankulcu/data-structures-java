@@ -1,5 +1,5 @@
 
-public class BagliListeKuyruk<E> {
+public class KuyrukBagliListeGosterimi<E> {
 	
 	private TekYonluDugum<E> bas;
 	private TekYonluDugum<E> son;
@@ -82,7 +82,7 @@ public class BagliListeKuyruk<E> {
 	
 public static void main(String[] args) {
 		
-		BagliListeKuyruk<String> kuyruk = new BagliListeKuyruk<>();
+	KuyrukBagliListeGosterimi<String> kuyruk = new KuyrukBagliListeGosterimi<>();
 
 		// Kuyruğa (queue) öğeleri ekle (enqueue)
 		kuyruk.ekle("Öğe 1");
