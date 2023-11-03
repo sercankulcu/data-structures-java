@@ -1,10 +1,13 @@
 
+// OncelikliKuyrukEleman sınıfı, öncelikli kuyruktaki her bir elemanı temsil eder.
 public class OncelikliKuyrukEleman {
-		String veri;
-		int �ncelik;
+    // Elemanın veri ve öncelik değerlerini saklamak için kullanılan sınıf değişkenleri.
+    String veri;
+    int öncelik;
 
-		OncelikliKuyrukEleman(String veri, int �ncelik) {
-			this.veri = veri;
-			this.�ncelik = �ncelik;
-		}
-	}
+    // Constructor (Yapıcı Metod): Bir elemanı oluşturmak için veri ve öncelik değerlerini alır.
+    OncelikliKuyrukEleman(String veri, int öncelik) {
+        this.veri = veri;
+        this.öncelik = öncelik;
+    }
+}

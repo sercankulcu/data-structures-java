@@ -29,7 +29,6 @@ public class DaireselKuyruk<E> {
 		boyut++; // Kuyruktaki öğe sayısını artır
 	}
 
-
 	public E cikar() {
 		if (bosMu()) {
 			System.out.println("Kuyruk boş, öğe çıkarılamaz."); // Kuyruk boşsa hata mesajı
@@ -41,7 +40,6 @@ public class DaireselKuyruk<E> {
 		return oge; // Çıkarılan öğeyi döndür
 	}
 
-
 	public E oneBak() {
 		if (bosMu()) {
 			System.out.println("Kuyruk boş, öğe yok."); // Kuyruk boşsa bilgilendirme mesajı
@@ -49,7 +47,6 @@ public class DaireselKuyruk<E> {
 		}
 		return (E) dizi[bas]; // Kuyruğun başındaki öğeyi döndür
 	}
-
 
 	public boolean bosMu() {
 		return boyut == 0;
@@ -107,5 +104,4 @@ public class DaireselKuyruk<E> {
 		int boyut = kuyruk.boyut();
 		System.out.println("Kuyruk Boyutu: " + boyut);
 	}
-
 }

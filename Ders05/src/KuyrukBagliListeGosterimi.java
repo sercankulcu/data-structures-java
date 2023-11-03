@@ -1,6 +1,6 @@
 
 public class KuyrukBagliListeGosterimi<E> {
-	
+
 	private TekYonluDugum<E> bas;
 	private TekYonluDugum<E> son;
 	private int boyut;
@@ -22,33 +22,31 @@ public class KuyrukBagliListeGosterimi<E> {
 		boyut++;
 	}
 
-
 	public E cikar() {
-		// Eğer kuyruk boşsa, bir durum istisnası fırlatın.
+		// Eğer kuyruk boşsa, bir beklenmeyen hata fırlat
 		if (bosMu()) {
 			throw new IllegalStateException("Kuyruk boş");
 		}
-		
-		// Öğe çıkarma işlemi: Baş düğümündeki veriyi alın.
+
+		// Öğe çıkarma işlemi: Baş düğümdeki veriyi al
 		E veri = bas.veri;
-		
-		// Baş düğümünü bir sonraki düğüme taşıyarak öğeyi kuyruktan çıkarın.
+
+		// Baş düğümünü bir sonraki düğüme taşıyarak öğeyi kuyruktan çıkar
 		bas = bas.sonraki;
-		
-		// Kuyruktaki öğe sayısını azaltın.
+
+		// Kuyruktaki öğe sayısını azalt
 		boyut--;
-		
-		// Çıkarılan öğeyi döndürün.
+
+		// Çıkarılan öğeyi döndür
 		return veri;
 	}
-
 
 	public E oneBak() {
 		// Eğer kuyruk boşsa, bir beklenmeyen hata fırlat
 		if (bosMu()) {
 			throw new IllegalStateException("Kuyruk boş");
 		}
-		
+
 		// Kuyruğun başındaki öğeyi döndür
 		return bas.veri;
 	}
@@ -63,26 +61,24 @@ public class KuyrukBagliListeGosterimi<E> {
 		return boyut;
 	}
 
-
 	public void kuyruguGoster() {
 		// Başlangıç düğümünü şu anki düğüm olarak ayarla
 		TekYonluDugum<E> simdiki = bas;
-		
+
 		// Kuyruğun öğelerini ekrana yazdır
 		System.out.print("Kuyruk Öğeleri: ");
 		while (simdiki != null) {
 			System.out.print(simdiki.veri + " "); // Şu anki düğümün verisini yazdır
 			simdiki = simdiki.sonraki; // Sonraki düğüme geç
 		}
-		
+
 		// Kuyruğun tüm öğeleri yazdırıldığında, bir satır sonu yap
 		System.out.println();
 	}
 
-	
-public static void main(String[] args) {
-		
-	KuyrukBagliListeGosterimi<String> kuyruk = new KuyrukBagliListeGosterimi<>();
+	public static void main(String[] args) {
+
+		KuyrukBagliListeGosterimi<String> kuyruk = new KuyrukBagliListeGosterimi<>();
 
 		// Kuyruğa (queue) öğeleri ekle (enqueue)
 		kuyruk.ekle("Öğe 1");
