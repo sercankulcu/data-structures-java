@@ -7,7 +7,7 @@ public class TicTacToe {
 		char[][] tahta = new char[3][3]; // 3x3'lük oyun tahtası
 		char oyuncu = 'X'; // İlk oyuncu X ile başlar
 		boolean oyunDevamEdiyor = true;
-		tahtaDoldur(tahta); // Tahtayı başlangıç durumuyla doldur
+		tahtayiDoldur(tahta); // Tahtayı başlangıç durumuyla doldur
 		while (oyunDevamEdiyor) {
 			tahtayiGoster(tahta);
 			hamleYap(tahta, oyuncu);
@@ -17,7 +17,7 @@ public class TicTacToe {
 		tahtayiGoster(tahta);
 	}
 
-	public static void tahtaDoldur(char[][] tahta) {
+	public static void tahtayiDoldur(char[][] tahta) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				tahta[i][j] = ' ';

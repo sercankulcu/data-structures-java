@@ -14,19 +14,16 @@ public class IkiBoyutluDiziOrnegi {
 
 		int[][] ikiBoyutluDizi = new int[satirSayisi][sutunSayisi];
 
-		System.out.println("Elemanları girin:");
-
 		for (int i = 0; i < satirSayisi; i++) {
 			for (int j = 0; j < sutunSayisi; j++) {
-				System.out.print("Eleman [" + i + "][" + j + "]: ");
-				ikiBoyutluDizi[i][j] = scanner.nextInt();
+				ikiBoyutluDizi[i][j] = i * 3 + j * 5;
 			}
 		}
 
-		System.out.println("\nİki Boyutlu Dizi (Türkçe):");
+		System.out.println("\nİki Boyutlu Dizi:");
 		for (int i = 0; i < satirSayisi; i++) {
 			for (int j = 0; j < sutunSayisi; j++) {
-				System.out.print(ikiBoyutluDizi[i][j] + " ");
+				System.out.print(ikiBoyutluDizi[i][j] + "\t");
 			}
 			System.out.println(); // Bir sonraki satıra geçmek için
 		}

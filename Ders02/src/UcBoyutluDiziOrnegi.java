@@ -17,18 +17,15 @@ public class UcBoyutluDiziOrnegi {
 
 		int[][][] ucBoyutluDizi = new int[katmanSayisi][satirSayisi][sutunSayisi];
 
-		System.out.println("Elemanları girin:");
-
 		for (int i = 0; i < katmanSayisi; i++) {
 			for (int j = 0; j < satirSayisi; j++) {
 				for (int k = 0; k < sutunSayisi; k++) {
-					System.out.print("Eleman [" + i + "][" + j + "][" + k + "]: ");
-					ucBoyutluDizi[i][j][k] = scanner.nextInt();
+					ucBoyutluDizi[i][j][k] = i * 2 + j * 3 + k;
 				}
 			}
 		}
 
-		System.out.println("\nÜç Boyutlu Dizi (Türkçe):");
+		System.out.println("\nÜç Boyutlu Dizi:");
 		for (int i = 0; i < katmanSayisi; i++) {
 			for (int j = 0; j < satirSayisi; j++) {
 				for (int k = 0; k < sutunSayisi; k++) {
