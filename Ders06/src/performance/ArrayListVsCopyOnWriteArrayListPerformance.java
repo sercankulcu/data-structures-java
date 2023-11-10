@@ -8,7 +8,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ArrayListVsCopyOnWriteArrayListPerformance {
 
-	final static int SIZE = 10000;
+	// TODO: try with different SIZE values
+	final static int SIZE = 50000;
 
 	public static void main(String[] args) {
 		// Create an ArrayList and a CopyOnWriteArrayList with the same number of elements.
@@ -22,14 +23,14 @@ public class ArrayListVsCopyOnWriteArrayListPerformance {
 		// Measure the time it takes to access the first element in the ArrayList and CopyOnWriteArrayList.
 		Instant start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			int firstArrayListElement = arrayList.get(i);
+			arrayList.get(i);
 		}
 		Instant end = Instant.now();
 		Duration arrayListAccessTime = Duration.between(start, end);
 
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			Integer firstCopyOnWriteArrayListElement = copyOnWriteArrayList.get(i);
+			copyOnWriteArrayList.get(i);
 		}
 		end = Instant.now();
 		Duration copyOnWriteArrayListAccessTime = Duration.between(start, end);
@@ -37,14 +38,14 @@ public class ArrayListVsCopyOnWriteArrayListPerformance {
 		// Measure the time it takes to add an element to the ArrayList and CopyOnWriteArrayList.
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			arrayList.add(1000001);
+			arrayList.add(i);
 		}
 		end = Instant.now();
 		Duration arrayListAddTime = Duration.between(start, end);
 
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			copyOnWriteArrayList.add(1000001);
+			copyOnWriteArrayList.add(i);
 		}
 		end = Instant.now();
 		Duration copyOnWriteArrayListAddTime = Duration.between(start, end);
@@ -63,6 +64,7 @@ public class ArrayListVsCopyOnWriteArrayListPerformance {
 		// Measure the time it takes to remove an element from the ArrayList and CopyOnWriteArrayList.
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
+		// TODO: try with different values
 			arrayList.remove(i);
 		}
 		end = Instant.now();
@@ -70,6 +72,7 @@ public class ArrayListVsCopyOnWriteArrayListPerformance {
 
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
+		// TODO: try with different values
 			copyOnWriteArrayList.remove(i);
 		}
 		end = Instant.now();

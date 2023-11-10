@@ -7,7 +7,8 @@ import java.util.Stack;
 
 public class ArrayListVsStackPerformance {
 	
-	final static int SIZE = 100000;
+	// TODO: try with different SIZE values
+	final static int SIZE = 200000;
 
 	public static void main(String[] args) {
 		// Create an ArrayList and a Stack with the same number of elements.
@@ -21,14 +22,14 @@ public class ArrayListVsStackPerformance {
 		// Measure the time it takes to access the first element in the ArrayList and Stack.
 		Instant start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			int firstArrayListElement = arrayList.get(i);
+			arrayList.get(i);
 		}
 		Instant end = Instant.now();
 		Duration arrayListAccessTime = Duration.between(start, end);
 
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			Integer firstStackElement = stack.peek();
+			stack.peek();
 		}
 		end = Instant.now();
 		Duration stackAccessTime = Duration.between(start, end);
@@ -36,14 +37,14 @@ public class ArrayListVsStackPerformance {
 		// Measure the time it takes to add an element to the ArrayList and Stack.
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			arrayList.add(1000001);
+			arrayList.add(i);
 		}
 		end = Instant.now();
 		Duration arrayListAddTime = Duration.between(start, end);
 
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			stack.push(1000001);
+			stack.push(i);
 		}
 		end = Instant.now();
 		Duration stackAddTime = Duration.between(start, end);
@@ -51,7 +52,7 @@ public class ArrayListVsStackPerformance {
 		// Measure the time it takes to remove an element from the ArrayList and Stack.
 		start = Instant.now();
 		for (int i = 0; i < SIZE; i++) {
-			arrayList.remove(SIZE);
+			arrayList.remove(i);
 		}
 		end = Instant.now();
 		Duration arrayListRemoveTime = Duration.between(start, end);
