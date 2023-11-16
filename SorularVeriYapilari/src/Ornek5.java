@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class Ornek5 {
-	
+
 	int fonksiyon(ListIterator<String> it)
 	{
 		if(it.hasNext()) {
