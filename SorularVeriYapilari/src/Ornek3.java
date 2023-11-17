@@ -7,9 +7,11 @@ public class Ornek3{
 		list.add("cat"); 
 		list.add("frog"); 
 		
+		System.out.println(list);
 		System.out.println(list.contains("cat"));
 		//System.out.println(list.hasObject("cat"));
 		System.out.println(list.indexOf("cat"));
+		System.out.println(list.get(1));
 		System.out.println(list.indexOf(1));
 	}
 }

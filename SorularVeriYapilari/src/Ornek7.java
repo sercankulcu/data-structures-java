@@ -7,7 +7,7 @@ public class Ornek7<E> {
 	private int capacity;
 	private int N; // number of items
 	private Object[] items;
-
+	
 	public Ornek7() {
 		this.N = 0;
 		this.capacity = DEFAULT_CAPACITY;
@@ -38,9 +38,11 @@ public class Ornek7<E> {
 		Ornek7<Integer> ornek = new Ornek7<>();
 		for(int i = 0; i < 20; i++) {
 			ornek.addItem(i);
+			System.out.println(Arrays.toString(ornek.items));
 		}
 		for(int i = 0; i < 15; i++) {
 			ornek.removeItem();
+			System.out.println(Arrays.toString(ornek.items));
 		}
 		System.out.println(Arrays.toString(ornek.items));
 	}
