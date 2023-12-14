@@ -1,20 +1,32 @@
 
-public class IkiliAgac {
+public class IkiliAgacOzYinelemeli {
 
 	private Dugum<Integer> kok;
 
 	public void ikiliAgacOlustur() {
+
 		Dugum<Integer> birinci = new Dugum<Integer>(9);   // Birinci düğümü oluştur (kök düğüm)
 		Dugum<Integer> ikinci = new Dugum<Integer>(2);    // İkinci düğümü oluştur
 		Dugum<Integer> ucuncu = new Dugum<Integer>(3);    // Üçüncü düğümü oluştur
 		Dugum<Integer> dorduncu = new Dugum<Integer>(4);  // Dördüncü düğümü oluştur
+		Dugum<Integer> besinci = new Dugum<Integer>(7);  // Dördüncü düğümü oluştur
+		Dugum<Integer> altinci = new Dugum<Integer>(5);  // Dördüncü düğümü oluştur
+		
+		//     9
+		//    / \
+		//   2   3
+		//  /   /
+		// 4   5
+		//  \
+		//   7
 
 		kok = birinci;                 // Kök düğümü belirle
 		birinci.sol = ikinci;          // Birinci düğümün sol alt düğümünü ayarla
 		birinci.sag = ucuncu;          // Birinci düğümün sağ alt düğümünü ayarla
 		ikinci.sol = dorduncu;         // İkinci düğümün sol alt düğümünü ayarla
+		dorduncu.sag = besinci;
+		ucuncu.sol = altinci;
 	}
-
 
 	public void kokBastaDolas(Dugum<Integer> kok) {
 		if (kok == null) {
@@ -54,16 +66,16 @@ public class IkiliAgac {
 	}
 
 	private void seviyeSiraliDolas(Dugum<Integer> dugum, int hedefSeviye) {
-    if (dugum == null) {
-        return; // Düğüm boşsa işlemi sonlandır
-    }
-    if (hedefSeviye == 0) {
-        System.out.print(dugum.veri + " "); // Hedef seviyeye ulaşıldığında düğüm değerini yazdır
-    } else {
-        seviyeSiraliDolas(dugum.sol, hedefSeviye - 1); // Sol ağacı hedef seviyeye kadar dolaş
-        seviyeSiraliDolas(dugum.sag, hedefSeviye - 1); // Sağ ağacı hedef seviyeye kadar dolaş
-    }
-}
+		if (dugum == null) {
+			return; // Düğüm boşsa işlemi sonlandır
+		}
+		if (hedefSeviye == 0) {
+			System.out.print(dugum.veri + " "); // Hedef seviyeye ulaşıldığında düğüm değerini yazdır
+		} else {
+			seviyeSiraliDolas(dugum.sol, hedefSeviye - 1); // Sol ağacı hedef seviyeye kadar dolaş
+			seviyeSiraliDolas(dugum.sag, hedefSeviye - 1); // Sağ ağacı hedef seviyeye kadar dolaş
+		}
+	}
 
 	private int agacDerinligi(Dugum<Integer> dugum) {
 		if (dugum == null) {
@@ -76,10 +88,9 @@ public class IkiliAgac {
 		}
 	}
 
-
 	public static void main(String[] args) {
 
-		IkiliAgac ia = new IkiliAgac();
+		IkiliAgacOzYinelemeli ia = new IkiliAgacOzYinelemeli();
 		ia.ikiliAgacOlustur();
 
 		System.out.print("Kök başta: ");
@@ -93,7 +104,7 @@ public class IkiliAgac {
 		System.out.print("Kök sonda: ");
 		ia.kokSondaDolas(ia.kok);
 		System.out.println();
-		
+
 		System.out.print("Seviye sıralı: ");
 		ia.seviyeSiraliDolas(ia.kok);
 		System.out.println();

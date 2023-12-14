@@ -29,21 +29,50 @@ public class AgacDizi {
 		}
 	}
 
-	private boolean sil(int indeks, int veri) {
+	private boolean sil(int indeks, int deger) {
+
 		if (indeks >= boyut || agac[indeks] == -1) {
-			System.out.println(veri + " ağaçta bulunamdı.");
+			System.out.println(deger + " ağaçta bulunamadı.");
 			return false; // Eleman ağaçta bulunamadı
 		}
 
-		if (veri == agac[indeks]) {
-			agac[indeks] = -1; // Elemanı sil
-			System.out.println(veri + " ağaçta silindi. index: " + indeks);
+		if (deger == agac[indeks]) {
+			// Durum 1: Hiç çocuğu olmayan düğüm (yaprak düğüm)
+			if (agac[2 * indeks + 1] == -1 && agac[2 * indeks + 2] == -1) {
+				agac[indeks] = -1;
+			}
+			// Durum 2: Bir çocuğu olan düğüm (sol)
+			else if (agac[2 * indeks + 1] != -1 && agac[2 * indeks + 2] == -1) {
+				agac[indeks] = agac[2 * indeks + 1];
+				sil(2 * indeks + 1, agac[2 * indeks + 1]);
+			}
+			// Durum 3: Bir çocuğu olan düğüm (sağ)
+			else if (agac[2 * indeks + 1] == -1 && agac[2 * indeks + 2] != -1) {
+				agac[indeks] = agac[2 * indeks + 2];
+				sil(2 * indeks + 2, agac[2 * indeks + 2]);
+			}
+			// Durum 4: İki çocuğu olan düğüm
+			else {
+				int halef = yerineDugumBul(2 * indeks + 2);
+				sil(2 * indeks + 2, halef);
+				agac[indeks] = halef;
+				System.out.println(deger + " ağaçtan silindi. İndeks: " + indeks);
+			}
+			
 			return true;
-		} else if (veri < agac[indeks]) {
-			return sil(2 * indeks + 1, veri); // Sol alt ağaçta silme işlemi
+		} else if (deger < agac[indeks]) {
+			return sil(2 * indeks + 1, deger); // Sol alt ağaçta arama
 		} else {
-			return sil(2 * indeks + 2, veri); // Sağ alt ağaçta silme işlemi
+			return sil(2 * indeks + 2, deger); // Sağ alt ağaçta arama
 		}
+	}
+
+	private int yerineDugumBul(int indeks) {
+		// Sağ alt ağacın en soldaki düğümü
+		while (agac[2 * indeks + 1] != -1) {
+			indeks = 2 * indeks + 1;
+		}
+		return agac[indeks];
 	}
 
 	public void kokOndeDolasma(int indeks) {
@@ -73,7 +102,7 @@ public class AgacDizi {
 	public void seviyeSiralama() {
 		int derinlik = agacDerinligi(); // Ağaç derinliğini al
 		int sonIndeks = 0; // Her bir seviyenin başlangıç indeksini tut
-		int seviyeDugumSayisi = 1; // Her bir sviyedeki eleman sayısı
+		int seviyeDugumSayisi = 1; // Her bir seviyedeki eleman sayısı
 		for (int seviye = 0; seviye < derinlik; seviye++) {
 			for (int indeks = sonIndeks; indeks < sonIndeks + seviyeDugumSayisi; indeks++) {
 				if (indeks < boyut && agac[indeks] != -1) {
@@ -122,7 +151,7 @@ public class AgacDizi {
 
 	public static void main(String[] args) {
 
-		int agacBoyutu = 10; // Ağacın maksimum boyutu
+		int agacBoyutu = 15; // Ağacın maksimum boyutu
 		AgacDizi agac = new AgacDizi(agacBoyutu);
 
 		// Ağaca öğeleri ekleyin
@@ -146,14 +175,15 @@ public class AgacDizi {
 		System.out.print("Kök Sonda Dolaşma: ");
 		agac.kokSondaDolasma(0);
 		System.out.println();
-		
 
+		System.out.print("Seviye Sıralı Dolaşma: ");
 		agac.seviyeSiralama();
 
 		// Ağaçta bir öğeyi arayın
 		agac.ara(0, 40);
-
+		agac.sil(0, 330);
 		agac.sil(0, 30);
+		agac.sil(0, 50);
 
 		System.out.print("Kök Önde Dolaşma: ");
 		agac.kokOndeDolasma(0);
@@ -168,10 +198,13 @@ public class AgacDizi {
 		agac.kokSondaDolasma(0);
 		System.out.println();
 
+		System.out.print("Seviye Sıralı Dolaşma: ");
+		agac.seviyeSiralama();
+
 		// Ağaçta bir öğeyi arayın
 		agac.ara(0, 40);
 
 		agac.agacDerinligi();
-		
+
 	}
 }

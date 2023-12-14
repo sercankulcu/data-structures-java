@@ -11,7 +11,7 @@ class GenelDugum {
     }
 }
 
-public class GenelAgacGorselleme {
+public class GenelAgacGorsellestirme {
     public static void agaciYazdir(GenelDugum kok, String onEk, boolean sonCocuk) {
         System.out.println(onEk + (sonCocuk ? "└── " : "├── ") + kok.veri);
 
@@ -36,7 +36,7 @@ public class GenelAgacGorselleme {
         dugumB.cocuklar.add(dugumE);
         dugumB.cocuklar.add(dugumF);
 
-        System.out.println("Genel Ağaç Görselleme:");
+        System.out.println("Genel Ağaç Görselleştirme:");
         agaciYazdir(kok, "", true);
     }
 }

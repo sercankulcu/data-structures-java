@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public class IkiliAgacYigit {
+public class IkiliAgacDongulu {
 
 	private Dugum<Integer> kok;
 
@@ -105,10 +105,10 @@ public class IkiliAgacYigit {
 			System.out.print(tempDugum.veri + " "); // Düğümün değerini yazdır
 
 			if (tempDugum.sol != null)
-				kuyruk.add(tempDugum.sol); // Sol düğümü kuyruğa ekle
+				kuyruk.offer(tempDugum.sol); // Sol düğümü kuyruğa ekle
 
 			if (tempDugum.sag != null)
-				kuyruk.add(tempDugum.sag); // Sağ düğümü kuyruğa ekle
+				kuyruk.offer(tempDugum.sag); // Sağ düğümü kuyruğa ekle
 		}
 	}
 
@@ -125,7 +125,7 @@ public class IkiliAgacYigit {
 
 	public static void main(String[] args) {
 
-		IkiliAgacYigit ia = new IkiliAgacYigit();
+		IkiliAgacDongulu ia = new IkiliAgacDongulu();
 		ia.ikiliAgacOlustur();
 
 		System.out.print("Kök başta: ");
