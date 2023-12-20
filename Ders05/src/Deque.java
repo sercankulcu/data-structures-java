@@ -1,5 +1,5 @@
 
-public class Dequeue<E> {
+public class Deque<E> {
 
 	private CiftYonluDugum<E> bas;
 	private CiftYonluDugum<E> son;
@@ -137,7 +137,7 @@ public class Dequeue<E> {
 
 	public static void main(String[] args) {
 
-		Dequeue<String> dequeue = new Dequeue<>();
+		Deque<String> dequeue = new Deque<>();
 
 		// Dequeue'in başına ve sonuna öğeleri ekleyelim
 		dequeue.basaEkle("Öğe 1");

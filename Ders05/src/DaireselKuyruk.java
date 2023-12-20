@@ -86,15 +86,15 @@ public class DaireselKuyruk<E> {
 		kuyruk.kuyruguGoster();
 
 		// Kuyruktan (queue) öğeleri çıkar (dequeue)
-		String çıkarılanÖğe = kuyruk.cikar();
-		System.out.println("Çıkarılan Öğe: " + çıkarılanÖğe);
+		String çıkarılanOge = kuyruk.cikar();
+		System.out.println("Çıkarılan Öğe: " + çıkarılanOge);
 
 		// Kuyruktaki güncel öğeleri göster
 		kuyruk.kuyruguGoster();
 
 		// Kuyruğun önündeki öğeye bak (peek)
-		String önÖğe = kuyruk.oneBak();
-		System.out.println("Ön Öğe: " + önÖğe);
+		String onOge = kuyruk.oneBak();
+		System.out.println("Ön Öğe: " + onOge);
 
 		// Kuyruğun boş olup olmadığını kontrol et
 		boolean bosMu = kuyruk.bosMu();
