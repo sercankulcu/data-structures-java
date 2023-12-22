@@ -1,38 +1,29 @@
 
 public class DaireselKuyruk<E> {
-	
 	private E[] dizi; // Dairesel kuyruğun öğelerini saklayan dizi
 	private int bas; // Kuyruğun başlangıç (front) işaretçisi
 	private int son; // Kuyruğun son (rear) işaretçisi
 	private int boyut; // Kuyruktaki öğe sayısı
 	private int kapasite; // Kuyruğun maksimum kapasitesi
-
 	@SuppressWarnings("unchecked")
 	public DaireselKuyruk(int kapasite) {
 		this.kapasite = kapasite; // Kuyruğun maksimum kapasitesini ayarla
 		dizi = (E[]) new Object[kapasite]; // Genel dizi oluşturma (Tür güvenliği uyarısı)
-		bas = -1; // Başlangıç işaretçisini -1 olarak ayarla
-		son = -1; // Son işaretçisini -1 olarak ayarla
-		boyut = 0; // Kuyruktaki öğe sayısını sıfıra ayarla
+		bas = son = boyut = 0; // Kuyruktaki öğe sayısını sıfıra ayarla
 	}
 
 	public void ekle(E oge) {
 		if (boyut == kapasite) {
-			System.out.println("Kuyruk dolu, öğe eklenemedi."); // Kuyruk doluysa hata mesajı
-			return; // Öğe eklenemedi, işlemi sonlandır
+			throw new IllegalStateException("Kuyruk dolu.");
 		}
-		if (bas == -1) {
-			bas = 0; // Kuyruk başlangıcı ayarla
-		}
-		son = (son + 1) % kapasite; // Dairesel kuyrukta son işaretçisini güncelle
 		dizi[son] = oge; // Öğeyi kuyruğa ekle
 		boyut++; // Kuyruktaki öğe sayısını artır
+		son = (son + 1) % kapasite; // Dairesel kuyrukta son işaretçisini güncelle
 	}
 
 	public E cikar() {
 		if (bosMu()) {
-			System.out.println("Kuyruk boş, öğe çıkarılamaz."); // Kuyruk boşsa hata mesajı
-			return null; // Öğe çıkarılamadı, null döndür
+			throw new IllegalStateException("Kuyruk boş.");
 		}
 		E oge = (E) dizi[bas]; // Başlangıçtaki öğeyi al
 		bas = (bas + 1) % kapasite; // Baş işaretçisini güncelle (dairesel kuyruk)
@@ -42,8 +33,7 @@ public class DaireselKuyruk<E> {
 
 	public E oneBak() {
 		if (bosMu()) {
-			System.out.println("Kuyruk boş, öğe yok."); // Kuyruk boşsa bilgilendirme mesajı
-			return null; // Kuyruğun başındaki öğe yok, null döndür
+			throw new IllegalStateException("Kuyruk boş.");
 		}
 		return (E) dizi[bas]; // Kuyruğun başındaki öğeyi döndür
 	}
@@ -86,8 +76,8 @@ public class DaireselKuyruk<E> {
 		kuyruk.kuyruguGoster();
 
 		// Kuyruktan (queue) öğeleri çıkar (dequeue)
-		String çıkarılanOge = kuyruk.cikar();
-		System.out.println("Çıkarılan Öğe: " + çıkarılanOge);
+		String cikarilanOge = kuyruk.cikar();
+		System.out.println("Çıkarılan Öğe: " + cikarilanOge);
 
 		// Kuyruktaki güncel öğeleri göster
 		kuyruk.kuyruguGoster();
@@ -103,5 +93,17 @@ public class DaireselKuyruk<E> {
 		// Kuyruğun boyutunu al
 		int boyut = kuyruk.boyut();
 		System.out.println("Kuyruk Boyutu: " + boyut);
+		
+		cikarilanOge = kuyruk.cikar();
+		System.out.println("Çıkarılan Öğe: " + cikarilanOge);
+		
+		cikarilanOge = kuyruk.cikar();
+		System.out.println("Çıkarılan Öğe: " + cikarilanOge);
+		
+		cikarilanOge = kuyruk.cikar();
+		System.out.println("Çıkarılan Öğe: " + cikarilanOge);
+		
+		cikarilanOge = kuyruk.cikar();
+		System.out.println("Çıkarılan Öğe: " + cikarilanOge);
 	}
 }

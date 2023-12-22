@@ -1,59 +1,62 @@
 
-public class OncelikliKuyruk {
+public class OncelikliKuyruk<E> {
 
-	private OncelikliKuyrukEleman[] dizi;
+	public class Eleman<T> {
+		// Elemanın veri ve öncelik değerlerini saklamak için kullanılan sınıf değişkenleri.
+		T veri;
+		int oncelik;
+		// Constructor (Yapıcı Metod): Bir elemanı oluşturmak için veri ve öncelik değerlerini alır.
+		Eleman(T veri, int oncelik) {
+			this.veri = veri;
+			this.oncelik = oncelik;
+		}
+	}
+
+	private Object[] dizi;
 	private int boyut;
-	final int BASLANGIC_KAPASITESI = 10;
+	int BASLANGIC_KAPASITESI = 10;
 
 	public OncelikliKuyruk() {
-		dizi = new OncelikliKuyrukEleman[BASLANGIC_KAPASITESI];
+		dizi = new Object[BASLANGIC_KAPASITESI];
 		boyut = 0;
 	}
 
 	//Öncelikli kuyruğa yeni bir eleman ekleme
-	public void ekle(String veri, int öncelik) {
+	public void ekle(E veri, int öncelik) {
 		// Eğer kuyruğun boyutu dizi uzunluğuna ulaştıysa, diziyi genişlet
 		if (boyut == dizi.length) {
 			diziGenislet();
 		}
-
 		// Yeni bir öncelikli kuyruk elemanı oluştur
-		OncelikliKuyrukEleman yeniEleman = new OncelikliKuyrukEleman(veri, öncelik);
-
+		Eleman<E> yeniEleman = new Eleman<E>(veri, öncelik);
 		// Elemanın ekleneceği indeksi belirlemek için başlangıç olarak boyut kullanılır.
 		int indeks = boyut;
-
 		// Yeni elemanın önceliği, dizideki diğer elemanların öncelikleri ile karşılaştırılarak
 		// doğru indeks bulunur ve eleman doğru konuma eklenir.
-		while (indeks > 0 && öncelik < dizi[indeks - 1].öncelik) {
+		while (indeks > 0 && öncelik < ((Eleman) dizi[indeks - 1]).oncelik) {
 			dizi[indeks] = dizi[indeks - 1];
 			indeks--;
 		}
-
 		// Yeni eleman, uygun indekse eklenir ve kuyruğun boyutu bir artırılır.
 		dizi[indeks] = yeniEleman;
 		boyut++;
 	}
 
 	//Öncelikli kuyruktan bir eleman çıkarma
-	public String cikar() {
+	public E cikar() {
 		// Eğer öncelikli kuyruk boşsa, bir istisna (exception) fırlat
 		if (bosMu()) {
 			throw new IllegalStateException("Öncelikli kuyruk boş");
 		}
-
 		// Çıkarılan elemanın verisini tutacak bir değişken oluştur
-		String cikarilan = dizi[0].veri;
-
+		E cikarilan = (E) ((Eleman) dizi[0]).veri;
 		// Dizideki elemanlar bir önceki elemanın yerine kaydırılarak bir eleman çıkarılır.
 		for (int i = 0; i < boyut - 1; i++) {
 			dizi[i] = dizi[i + 1];
 		}
-
 		// Son eleman null olarak ayarlanır ve kuyruğun boyutu bir azaltılır.
 		dizi[boyut - 1] = null;
 		boyut--;
-
 		// Çıkarılan elemanın verisi döndürülür.
 		return cikarilan;
 	}
@@ -70,7 +73,7 @@ public class OncelikliKuyruk {
 		int yeniBoyut = dizi.length * 2;
 
 		// Yeni bir dizi oluşturulur ve boyutu yeni boyut kadar yapılır.
-		OncelikliKuyrukEleman[] yeniDizi = new OncelikliKuyrukEleman[yeniBoyut];
+		Object[] yeniDizi = new Object[yeniBoyut];
 
 		// Mevcut dizideki elemanlar yeni diziye kopyalanır.
 		for (int i = 0; i < boyut; i++) {
@@ -93,7 +96,7 @@ public class OncelikliKuyruk {
 
 		// Kuyruktaki her elemanın verisini ve önceliğini ekrana yazdır
 		for (int i = 0; i < boyut; i++) {
-			System.out.print("(" + dizi[i].veri + ", Öncelik: " + dizi[i].öncelik + ") ");
+			System.out.print("(" + (String)((Eleman) dizi[i]).veri + ", Öncelik: " + ((Eleman) dizi[i]).oncelik + ") ");
 		}
 
 		// Öncelikli kuyruktaki tüm elemanlar yazıldıktan sonra bir satır atlanır.
@@ -103,13 +106,14 @@ public class OncelikliKuyruk {
 
 	public static void main(String[] args) {
 
-		OncelikliKuyruk kuyruk = new OncelikliKuyruk();
+		OncelikliKuyruk<String> kuyruk = new OncelikliKuyruk<String>();
 
 		// Öncelikli kuyruğa (priority queue) öğeleri ekle (enqueue)
 		kuyruk.ekle("Öğe 1", 3); // Öncelik: 3
 		kuyruk.ekle("Öğe 2", 1); // Öncelik: 1
 		kuyruk.ekle("Öğe 3", 2); // Öncelik: 2
 		kuyruk.ekle("Öğe 4", 1); // Öncelik: 1
+		kuyruk.ekle("Öğe 5", 2); // Öncelik: 2
 
 		// Öncelikli kuyruktaki öğeleri göster
 		kuyruk.kuyruguGoster();

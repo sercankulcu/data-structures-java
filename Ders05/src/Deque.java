@@ -8,7 +8,6 @@ public class Deque<E> {
 	public void basaEkle(E veri) {
 		// Yeni bir çift yönlü düğüm (node) oluşturulur ve bu düğüm veri ile ilklendirilir
 		CiftYonluDugum<E> yeniDugum = new CiftYonluDugum<E>(veri);
-
 		// Eğer kuyruk boşsa, yeni düğüm kuyruğun başı ve sonu olur.
 		if (bosMu()) {
 			bas = yeniDugum;
@@ -27,7 +26,6 @@ public class Deque<E> {
 	public void sonaEkle(E veri) {
 		// Yeni bir çift yönlü düğüm (node) oluştur ve bu düğümü veri ile ilklendir
 		CiftYonluDugum<E> yeniDugum = new CiftYonluDugum<E>(veri);
-
 		// Eğer kuyruk boşsa, yeni düğüm kuyruğun başı ve sonu olur.
 		if (bosMu()) {
 			bas = yeniDugum;
@@ -48,18 +46,14 @@ public class Deque<E> {
 		if (bosMu()) {
 			throw new IllegalStateException("Dequeue boş");
 		}
-
 		// Baş düğümünden (node) çıkarılacak veriyi al
 		E veri = bas.veri;
-
 		// Baş düğümü bir sonraki düğümü gösterecek şekilde güncelle
 		bas = bas.sonraki;
-
 		// Eğer baş hala bir düğümü gösteriyorsa, eski başın önceki işaretçisini null olarak ata
 		if (bas != null) {
 			bas.onceki = null;
 		}
-
 		// Çıkarılan veriyi döndür
 		return veri;
 	}
@@ -70,18 +64,14 @@ public class Deque<E> {
 		if (bosMu()) {
 			throw new IllegalStateException("Dequeue boş");
 		}
-
 		// Son düğümden (node) çıkarılacak veriyi al
 		E veri = son.veri;
-
 		// Son düğümü bir önceki düğümü gösterecek şekilde güncelle
 		son = son.onceki;
-
 		// Eğer son hala bir düğümü gösteriyorsa, eski sonun sonraki işaretçisini null olarak at
 		if (son != null) {
 			son.sonraki = null;
 		}
-
 		// Çıkarılan veriyi döndür
 		return veri;
 	}
