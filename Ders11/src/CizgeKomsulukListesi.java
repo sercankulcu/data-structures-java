@@ -48,18 +48,18 @@ public class CizgeKomsulukListesi {
 	}
 
 	public static void main(String[] args) {
-		CizgeKomsulukListesi graf = new CizgeKomsulukListesi();
-		graf.dugumEkle("A");
-		graf.dugumEkle("B");
-		graf.dugumEkle("C");
+		CizgeKomsulukListesi cizge = new CizgeKomsulukListesi();
+		cizge.dugumEkle("A");
+		cizge.dugumEkle("B");
+		cizge.dugumEkle("C");
 
-		graf.kenarEkle("A", "B", 2);
-		graf.kenarEkle("B", "C", 3);
-		graf.kenarEkle("A", "C", 1);
+		cizge.kenarEkle("A", "B", 2);
+		cizge.kenarEkle("B", "C", 3);
+		cizge.kenarEkle("A", "C", 1);
 
-		System.out.println("Kenarlar A: " + graf.kenarlarıAl("A"));
-		System.out.println("Kenarlar B: " + graf.kenarlarıAl("B"));
-		System.out.println("Kenarlar C: " + graf.kenarlarıAl("C"));
+		System.out.println("Kenarlar A: " + cizge.kenarlarıAl("A"));
+		System.out.println("Kenarlar B: " + cizge.kenarlarıAl("B"));
+		System.out.println("Kenarlar C: " + cizge.kenarlarıAl("C"));
 	}
 }
 

@@ -5,49 +5,45 @@ import java.util.List;
 public class CizgeKenarListesi {
 	
 	private class Kenar {
-		private String başlangıçDüğüm;
-		private String hedefDüğüm;
-		private int ağırlık;
+		private String baslangic;
+		private String hedef;
+		private int agirlik;
 
-		public Kenar(String başlangıçDüğüm, String hedefDüğüm, int ağırlık) {
-			this.başlangıçDüğüm = başlangıçDüğüm;
-			this.hedefDüğüm = hedefDüğüm;
-			this.ağırlık = ağırlık;
+		public Kenar(String baslangic, String hedef, int agirlik) {
+			this.baslangic = baslangic;
+			this.hedef = hedef;
+			this.agirlik = agirlik;
 		}
 
 		public String toString() {
-			return "(" + başlangıçDüğüm + " -> " + hedefDüğüm + ", Ağırlık: " + ağırlık + ")";
+			return "(" + baslangic + " -> " + hedef + ", Ağırlık: " + agirlik + ")";
 		}
 	}
 	
-	private List<String> düğümler;
+	private List<String> dugumler;
 	private List<Kenar> kenarlar;
 
 	public CizgeKenarListesi() {
-		düğümler = new ArrayList<>();
+		dugumler = new ArrayList<>();
 		kenarlar = new ArrayList<>();
 	}
 
-	public void düğümEkle(String düğüm) {
-		düğümler.add(düğüm);
+	public void dugumEkle(String düğüm) {
+		dugumler.add(düğüm);
 	}
 
-	public void kenarEkle(String başlangıçDüğüm, String hedefDüğüm, int ağırlık) {
-		if (!düğümler.contains(başlangıçDüğüm) || !düğümler.contains(hedefDüğüm)) {
+	public void kenarEkle(String baslangic, String hedef, int agirlik) {
+		if (!dugumler.contains(baslangic) || !dugumler.contains(hedef)) {
 			throw new IllegalArgumentException("Başlangıç ve hedef düğümler grafiğe eklenmeli.");
 		}
-		Kenar yeniKenar = new Kenar(başlangıçDüğüm, hedefDüğüm, ağırlık);
+		Kenar yeniKenar = new Kenar(baslangic, hedef, agirlik);
 		kenarlar.add(yeniKenar);
-	}
-
-	public List<Kenar> kenarlarıAl() {
-		return kenarlar;
 	}
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Düğümler: ");
-		sb.append(String.join(", ", düğümler));
+		sb.append(String.join(", ", dugumler));
 		sb.append("\nKenarlar: ");
 		for (Kenar kenar : kenarlar) {
 			sb.append(kenar.toString());
@@ -57,17 +53,17 @@ public class CizgeKenarListesi {
 	}
 	
 	public static void main(String[] args) {
-		CizgeKenarListesi graf = new CizgeKenarListesi();
-		graf.düğümEkle("A");
-		graf.düğümEkle("B");
-		graf.düğümEkle("C");
+		CizgeKenarListesi cizge = new CizgeKenarListesi();
+		cizge.dugumEkle("A");
+		cizge.dugumEkle("B");
+		cizge.dugumEkle("C");
 
-		graf.kenarEkle("A", "B", 2);
-		graf.kenarEkle("B", "C", 3);
-		graf.kenarEkle("A", "C", 1);
+		cizge.kenarEkle("A", "B", 2);
+		cizge.kenarEkle("B", "C", 3);
+		cizge.kenarEkle("A", "C", 1);
 
-		System.out.println(graf);
-		System.out.println(graf.kenarlarıAl());
+		System.out.println(cizge);
+		System.out.println(cizge.kenarlar);
 	}
 }
 

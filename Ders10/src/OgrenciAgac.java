@@ -64,7 +64,6 @@ public class OgrenciAgac {
 			System.out.println("Ağaçta " + numara + " bulunamadı.");  // Düğüm bulunamadığında bir mesaj yazdır
 			return false;
 		}
-
 		if (numara == kok.ogr.ogrenciNo) {
 			System.out.println("Ağaçta " + kok.ogr.ogrenciNo + " bulundu.");  // Aranan veri düğümün verisiyle eşleştiğinde bir mesaj yazdır
 			return true;
