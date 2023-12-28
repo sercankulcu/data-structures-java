@@ -16,7 +16,7 @@ public class DisjointSetDizi {
 		}
 	}
 
-	public int find(int x) {
+	int find(int x) {
 		if (ata[x] != x) {
 			// yol kısaltma
 			ata[x] = find(ata[x]);
@@ -24,7 +24,7 @@ public class DisjointSetDizi {
 		return ata[x];
 	}
 
-	public void union(int x, int y) {
+	void union(int x, int y) {
 		int kokX = find(x);
 		int kokY = find(y);
 		// ağaç büyüklüğüne göre birleştirme
