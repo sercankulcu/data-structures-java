@@ -1,17 +1,19 @@
 
-public class HaritaSinifi<K, V> {
+public class EslemeDizi<K, V> {
+	
 	private Object[] anahtarlar;
 	private Object[] degerler;
 	private int boyut;
+	
 	private final int BASLANGIC_BOYUT = 16;
 
-	public HaritaSinifi() {
+	public EslemeDizi() {
 		anahtarlar = new Object[BASLANGIC_BOYUT];
 		degerler = new Object[BASLANGIC_BOYUT];
 		boyut = 0;
 	}
 
-	// Anahtar-değer çifti eklemek
+	// Anahtar-değer çifti ekleme
 	public void ekle(K anahtar, V deger) {
 		if (boyut >= anahtarlar.length) {
 			genislet();
@@ -31,8 +33,9 @@ public class HaritaSinifi<K, V> {
 		boyut++;
 	}
 
-	// Anahtara göre değeri getirmek
+	// Anahtara göre değer getirme
 	public V getir(K anahtar) {
+		
 		int indeks = anahtar.hashCode() % anahtarlar.length;
 		while (anahtarlar[indeks] != null) {
 			if (anahtarlar[indeks].equals(anahtar)) {
@@ -43,8 +46,9 @@ public class HaritaSinifi<K, V> {
 		return null;
 	}
 
-	// Anahtarı içerip içermediğini kontrol etmek
+	// Anahtarı içerip içermediğini kontrol etme
 	public boolean icerir(K anahtar) {
+		
 		int indeks = anahtar.hashCode() % anahtarlar.length;
 		while (anahtarlar[indeks] != null) {
 			if (anahtarlar[indeks].equals(anahtar)) {
@@ -55,8 +59,9 @@ public class HaritaSinifi<K, V> {
 		return false;
 	}
 
-	// Anahtar-değer çiftini silmek
+	// Anahtar-değer çiftini silme
 	public void sil(K anahtar) {
+		
 		int indeks = anahtar.hashCode() % anahtarlar.length;
 		while (anahtarlar[indeks] != null) {
 			if (anahtarlar[indeks].equals(anahtar)) {
@@ -69,13 +74,14 @@ public class HaritaSinifi<K, V> {
 		}
 	}
 
-	// Harita boyutunu döndürmek
+	// Esleme boyutunu döndür
 	public int boyut() {
 		return boyut;
 	}
 
-	// Harita içeriğini yazdırmak
+	// Esleme veri yapısı içeriğini yazdır
 	public void yazdir() {
+		
 		for (int i = 0; i < anahtarlar.length; i++) {
 			if (anahtarlar[i] != null) {
 				System.out.print(anahtarlar[i] + " -> " + degerler[i] + " | ");
@@ -84,8 +90,9 @@ public class HaritaSinifi<K, V> {
 		System.out.println();
 	}
 
-	// Harita boyutunu genişletmek
+	// Esleme veri yapısı boyutunu genişlet
 	private void genislet() {
+		
 		int yeniBoyut = anahtarlar.length * 2;
 		Object[] yeniAnahtarlar = new Object[yeniBoyut];
 		Object[] yeniDegerler = new Object[yeniBoyut];
@@ -108,20 +115,21 @@ public class HaritaSinifi<K, V> {
 	}
 
 	public static void main(String[] args) {
-		HaritaSinifi<String, Integer> harita = new HaritaSinifi<>();
-		harita.ekle("Bir", 1);
-		harita.ekle("İki", 2);
-		harita.ekle("Üç", 3);
-		harita.ekle("Dört", 4);
-		harita.ekle("Beş", 5);
+		
+		EslemeDizi<String, Integer> esleme = new EslemeDizi<>();
+		esleme.ekle("Bir", 1);
+		esleme.ekle("İki", 2);
+		esleme.ekle("Üç", 3);
+		esleme.ekle("Dört", 4);
+		esleme.ekle("Beş", 5);
 
-		harita.yazdir();
+		esleme.yazdir();
 
-		System.out.println("Boyut: " + harita.boyut());
+		System.out.println("Boyut: " + esleme.boyut());
 
-		harita.sil("İki");
-		harita.yazdir();
+		esleme.sil("İki");
+		esleme.yazdir();
 
-		System.out.println("Boyut: " + harita.boyut());
+		System.out.println("Boyut: " + esleme.boyut());
 	}
 }
