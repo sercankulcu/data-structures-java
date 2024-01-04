@@ -5,24 +5,24 @@ public class BankaSiraIslemSimulasyonu {
 	
 	public static void main(String[] args) {
 		
-		Queue<Musteri> musteriSirası = new LinkedList<>();
+		Queue<Musteri> sira = new LinkedList<>();
 
-		musteriSirası.offer(new Musteri("Ahmet"));
-		musteriSirası.offer(new Musteri("Ayşe"));
-		musteriSirası.offer(new Musteri("Mehmet"));
-		musteriSirası.offer(new Musteri("Fatma"));
-		musteriSirası.offer(new Musteri("Ali"));
+		sira.offer(new Musteri("Ahmet"));
+		sira.offer(new Musteri("Ayşe"));
+		sira.offer(new Musteri("Mehmet"));
+		sira.offer(new Musteri("Fatma"));
+		sira.offer(new Musteri("Ali"));
 
 		System.out.println("Banka Girişi: Müşteri Sırası");
 		System.out.println("----------------------------");
 
-		while (!musteriSirası.isEmpty()) {
-			Musteri mevcutMusteri = musteriSirası.poll();
-			System.out.println(mevcutMusteri.isim + " sıradayken işlem yapıyor.");
+		while (!sira.isEmpty()) {
+			Musteri musteri = sira.poll();
+			System.out.println(musteri.isim + " sıradayken işlem yapıyor.");
 
 			// Burada müşterinin işlemleri simüle edilebilir, örneğin bir süre bekleme gibi.
 
-			System.out.println(mevcutMusteri.isim + " işlemini tamamladı.\n");
+			System.out.println(musteri.isim + " işlemini tamamladı.\n");
 		}
 	}
 }
