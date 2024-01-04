@@ -12,7 +12,7 @@ public class DaireselBagliListe {
 
 	//Listeye yeni bir düğüm ekleme
 	public void ekle(int veri) {
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<Integer>(veri); // Yeni bir düğüm oluştur
+		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri); // Yeni bir düğüm oluştur
 
 		if (bas == null) {
 			bas = yeniDugum;         // Liste boşsa, yeni düğümü baş olarak ayarla
@@ -27,7 +27,7 @@ public class DaireselBagliListe {
 
 
 	//Verilen bir düğümü dairesel bağlı listeden silme
-	public void elemanSil(int hedefVeri) {
+	public void elemanSil(int hedef) {
 		if (bas == null) {
 			System.out.println("Liste boş. Düğüm kaldırma işlemi yapılamaz.");
 			return;
@@ -37,13 +37,12 @@ public class DaireselBagliListe {
 		TekYonluDugum<Integer> gecici = bas;
 
 		do {
-			if (gecici.veri == hedefVeri) {
+			if (gecici.veri == hedef) {
 				if (onceki != null) {
 					onceki.sonraki = gecici.sonraki;
 					if (gecici == bas) {
 						bas = gecici.sonraki; // Baş düğümü kaldırıyorsak başı güncelle
 					}
-					gecici = null;
 					return;
 				} else {
 					TekYonluDugum<Integer> son = bas;

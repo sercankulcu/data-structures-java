@@ -6,7 +6,7 @@ public class LinkedListOrnegi {
     public static void main(String[] args) {
     	
         // LinkedList oluşturuluyor
-        LinkedList<String> sepet = new LinkedList<String>();
+        LinkedList<String> sepet = new LinkedList<>();
 
         // LinkedList'e elemanlar ekleniyor
         sepet.add("Elma");

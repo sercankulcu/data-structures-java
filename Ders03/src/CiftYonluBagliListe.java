@@ -30,7 +30,7 @@ public class CiftYonluBagliListe {
 
 	//Listenin sonuna düğüm ekleme
 	public void sonaEkle(int veri) {
-		CiftYonluDugum<Integer> yeniDugum = new CiftYonluDugum<Integer>(veri); // Eklenecek yeni düğümü oluştur
+		CiftYonluDugum<Integer> yeniDugum = new CiftYonluDugum<>(veri); // Eklenecek yeni düğümü oluştur
 
 		if (bas == null) {
 			// Liste boşsa, yeni düğüm hem başı hem de sonu temsil eder
@@ -47,7 +47,7 @@ public class CiftYonluBagliListe {
 
 	//Belirli bir konuma eleman ekleme
 	void konumaEkle(int veri, int konum) {
-		CiftYonluDugum<Integer> yeniDugum = new CiftYonluDugum<Integer>(veri); // Eklenecek yeni düğümü oluştur
+		CiftYonluDugum<Integer> yeniDugum = new CiftYonluDugum<>(veri); // Eklenecek yeni düğümü oluştur
 
 		if (konum <= 1) {
 			// Konum 1 veya daha küçükse, yeni düğümü listenin başına ekle

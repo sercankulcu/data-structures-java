@@ -11,7 +11,7 @@ public class TekYonluBagliListe {
 	//Liste Başına Düğüm Ekleme - Verilen veriyi liste başına ekler.
 	void basaEkle(int veri) {
 		// Yeni bir düğüm oluştur ve içine veriyi yerleştir.
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<Integer>(veri);
+		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri);
 
 		// Yeni düğümün sonraki referansını mevcut baş düğüme ayarla.
 		yeniDugum.sonraki = bas;
@@ -24,7 +24,7 @@ public class TekYonluBagliListe {
 	//Liste Sonuna Düğüm Ekleme - Verilen veriyi liste sonuna ekler.
 	void sonaEkle(int veri) {
 		// Yeni bir düğüm oluştur ve içine veriyi yerleştir.
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<Integer>(veri);
+		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri);
 
 		// Eğer liste boşsa, yeni düğümü listenin başı olarak ayarla ve işlemi bitir.
 		if (bas == null) {
@@ -48,7 +48,7 @@ public class TekYonluBagliListe {
 	//Belirli Bir Konuma Düğüm Ekleme - Verilen veriyi belirtilen konuma ekler.
 	void konumaEkle(int veri, int konum) {
 		// Yeni bir düğüm oluştur ve içine veriyi yerleştir.
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<Integer>(veri);
+		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri);
 
 		// Eğer konum 0 ise, yeni düğümü listenin başına ekleyerek işlemi bitir.
 		if (konum == 0) {
@@ -97,9 +97,6 @@ public class TekYonluBagliListe {
 
 		// Silinen düğümün sonraki referansını temizle.
 		silinecekDugum.sonraki = null;
-
-		// Bellekten silinen düğümü temizle.
-		silinecekDugum = null;
 	}
 
 
@@ -333,7 +330,7 @@ public class TekYonluBagliListe {
 
 
 	//Tek Yönlü Bağlı Listeyi Sıralama
-	void sırala() {
+	void sirala() {
 		if (bas == null) {
 			return; // Liste boşsa sıralama yapmaya gerek yok
 		}
@@ -403,7 +400,7 @@ public class TekYonluBagliListe {
 		liste.tekrarlayanlariKaldir();
 		liste.listeyiYazdir(); //Bağlı Liste: 2 -> 1 -> 6 -> 5 -> null
 		
-		liste.sırala();
+		liste.sirala();
 		liste.listeyiYazdir(); //Bağlı Liste: 1 -> 2 -> 5 -> 6 -> null
 
 		// İlk listeye düğümleri ekleyelim
