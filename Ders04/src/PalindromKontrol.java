@@ -8,7 +8,7 @@ public class PalindromKontrol {
 		metin = metin.replaceAll("[\\s.,?!]", "").toLowerCase();
 
 		// Bir yığın (stack) oluşturun
-		Stack<Character> yigin = new Stack<Character>();
+		Stack<Character> yigin = new Stack<>();
 		int uzunluk = metin.length();
 
 		// Metnin ilk yarısını yığına ekle

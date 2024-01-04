@@ -23,7 +23,9 @@ import java.util.Stack;
 
 class Disk {
 	int diskSayisi;
-	char kaynak, yardimci, hedef;
+	char kaynak;
+	char yardimci;
+	char hedef;
 
 	Disk(int diskSayisi, char kaynak, char yardimci, char hedef) {
 		this.diskSayisi = diskSayisi;

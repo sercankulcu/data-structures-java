@@ -45,8 +45,9 @@ public class InfixToPostfixPrefix {
 			return 2;
 		case '^':
 			return 3;
+		default:
+			return -1;
 		}
-		return -1;
 	}
 
 	// Infix ifadeyi Postfix ifadeye dönüştüren fonksiyon
