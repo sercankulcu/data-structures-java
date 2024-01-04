@@ -7,7 +7,7 @@ public class Deque<E> {
 	//Kuyruğun başına yeni bir eleman ekleme
 	public void basaEkle(E veri) {
 		// Yeni bir çift yönlü düğüm (node) oluşturulur ve bu düğüm veri ile ilklendirilir
-		CiftYonluDugum<E> yeniDugum = new CiftYonluDugum<E>(veri);
+		CiftYonluDugum<E> yeniDugum = new CiftYonluDugum<>(veri);
 		// Eğer kuyruk boşsa, yeni düğüm kuyruğun başı ve sonu olur.
 		if (bosMu()) {
 			bas = yeniDugum;
@@ -25,7 +25,7 @@ public class Deque<E> {
 	//Kuyruğun sonuna yeni bir eleman ekleme
 	public void sonaEkle(E veri) {
 		// Yeni bir çift yönlü düğüm (node) oluştur ve bu düğümü veri ile ilklendir
-		CiftYonluDugum<E> yeniDugum = new CiftYonluDugum<E>(veri);
+		CiftYonluDugum<E> yeniDugum = new CiftYonluDugum<>(veri);
 		// Eğer kuyruk boşsa, yeni düğüm kuyruğun başı ve sonu olur.
 		if (bosMu()) {
 			bas = yeniDugum;
