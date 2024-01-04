@@ -12,7 +12,7 @@ public class IkiliAgac<E extends Comparable<E>> {
 
 	IkiliAgacDugum<E> ekle(IkiliAgacDugum<E> kok, E veri) {
 		if (kok == null) {
-			kok = new IkiliAgacDugum<E>(veri);
+			kok = new IkiliAgacDugum<>(veri);
 			System.out.println("Ağaca eklendi: " + kok.veri);  // Düğüm ağaca eklendiğinde bir mesaj yazdır
 			return kok;
 		}

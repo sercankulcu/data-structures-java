@@ -206,7 +206,7 @@ public class KirmiziSiyahAgac {
 
 			// Geçici NIL düğümünü kaldır
 			if (yukariTasinanDugum.getClass() == NilDugum.class) {
-				cocuklarıYerDegistir(yukariTasinanDugum.ebeveyn, yukariTasinanDugum, null);
+				cocuklariYerDegistir(yukariTasinanDugum.ebeveyn, yukariTasinanDugum, null);
 			}
 		}
 		System.out.println("Ağaçta silindi: " + anahtar);
@@ -217,13 +217,13 @@ public class KirmiziSiyahAgac {
 	private KirmiziSiyahDugum sifirVeyaBirCocukluDugumuSil(KirmiziSiyahDugum dugum) {
 		// Düğümün SADECE sol çocuğu varsa --> sol çocuğu ile değiştirilir
 		if (dugum.solCocuk != null) {
-			cocuklarıYerDegistir(dugum.ebeveyn, dugum, dugum.solCocuk);
+			cocuklariYerDegistir(dugum.ebeveyn, dugum, dugum.solCocuk);
 			return dugum.solCocuk; // yukarı taşınan düğüm
 		}
 
 		// Düğümün SADECE sağ çocuğu varsa --> sağ çocuğu ile değiştirilir
 		else if (dugum.sagCocuk != null) {
-			cocuklarıYerDegistir(dugum.ebeveyn, dugum, dugum.sagCocuk);
+			cocuklariYerDegistir(dugum.ebeveyn, dugum, dugum.sagCocuk);
 			return dugum.sagCocuk; // yukarı taşınan düğüm
 		}
 
@@ -232,7 +232,7 @@ public class KirmiziSiyahAgac {
 		// * Düğüm siyah ise --> geçici bir NIL düğüm ile değiştirilir (Kırmızı-Siyah kurallarını düzeltmek için gereklidir)
 		else {
 			KirmiziSiyahDugum yeniCocuk = dugum.renk == BLACK ? new NilDugum() : null;
-			cocuklarıYerDegistir(dugum.ebeveyn, dugum, yeniCocuk);
+			cocuklariYerDegistir(dugum.ebeveyn, dugum, yeniCocuk);
 			return yeniCocuk;
 		}
 	}
@@ -380,7 +380,7 @@ public class KirmiziSiyahAgac {
 		dugum.ebeveyn = solCocuk;
 
 		// Ebeveyn düğümün çocuklarını güncelle
-		cocuklarıYerDegistir(ebeveyn, dugum, solCocuk);
+		cocuklariYerDegistir(ebeveyn, dugum, solCocuk);
 	}
 
 
@@ -401,13 +401,13 @@ public class KirmiziSiyahAgac {
 		dugum.ebeveyn = sagCocuk;
 
 		// Ebeveyn düğümün çocuklarını güncelle
-		cocuklarıYerDegistir(ebeveyn, dugum, sagCocuk);
+		cocuklariYerDegistir(ebeveyn, dugum, sagCocuk);
 	}
 
 
 	//Ebeveyn düğümün belirli bir çocuğunu başka bir düğümle değiştirme işlemini gerçekleştirir.
 	//Bu işlev, ağaç yapısındaki bağlantıları günceller.
-	private void cocuklarıYerDegistir(KirmiziSiyahDugum ebeveyn, KirmiziSiyahDugum eskiCocuk, KirmiziSiyahDugum yeniCocuk) {
+	private void cocuklariYerDegistir(KirmiziSiyahDugum ebeveyn, KirmiziSiyahDugum eskiCocuk, KirmiziSiyahDugum yeniCocuk) {
 		if (ebeveyn == null) {
 			// Eğer ebeveyn düğüm yoksa, yeni çocuk yeni kök olur
 			kok = yeniCocuk;
