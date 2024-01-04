@@ -1,23 +1,26 @@
 
 import java.util.*;
 
-public class AgirliksizEnKisaYol {
+public class AgirliksizCizgeEnKisaYol {
 
 	public static Map<Integer, List<Integer>> cizge = new HashMap<>();
 
 	public static Map<Integer, Integer> agirliksizEnKisaYol(int baslangic) {
+
 		Map<Integer, Integer> mesafeler = new HashMap<>();
 		Queue<Integer> kuyruk = new LinkedList<>();
+		
 		for (int dugum : cizge.keySet()) {
-			mesafeler.put(dugum, Integer.MAX_VALUE);
+			mesafeler.put(dugum, Integer.MAX_VALUE); // sonsuz değeri ata
 		}
-		mesafeler.put(baslangic, 0);
+		mesafeler.put(baslangic, 0); // ilk düğüm mesafe 0
 		kuyruk.offer(baslangic);
-		while (!kuyruk.isEmpty()) {
+		
+		while (!kuyruk.isEmpty()) { // tüm düğümler ziyaret edilene kadar
 			int mevcutDugum = kuyruk.poll();
-			for (int komsu : cizge.get(mevcutDugum)) {
+			for (int komsu : cizge.get(mevcutDugum)) { // tüm komşuları için dene
 				if (mesafeler.get(komsu) == Integer.MAX_VALUE) {
-					mesafeler.put(komsu, mesafeler.get(mevcutDugum) + 1);
+					mesafeler.put(komsu, mesafeler.get(mevcutDugum) + 1); // ağırlıksız olduğu için 1 arttır
 					kuyruk.offer(komsu);
 				}
 			}
@@ -26,7 +29,7 @@ public class AgirliksizEnKisaYol {
 	}
 
 	public static void main(String[] args) {
-		// Grafi oluştur
+		// Çizgeyi oluştur
 		cizge.put(1, Arrays.asList(2, 3));
 		cizge.put(2, Arrays.asList(1, 4, 5));
 		cizge.put(3, Arrays.asList(1, 6));

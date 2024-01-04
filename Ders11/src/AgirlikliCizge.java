@@ -2,41 +2,41 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class CizgeKenarListesi {
+public class AgirlikliCizge {
 	
 	private class Kenar {
-		private String baslangic;
+		private String kaynak;
 		private String hedef;
 		private int agirlik;
 
-		public Kenar(String baslangic, String hedef, int agirlik) {
-			this.baslangic = baslangic;
+		public Kenar(String kaynak, String hedef, int agirlik) {
+			this.kaynak = kaynak;
 			this.hedef = hedef;
 			this.agirlik = agirlik;
 		}
 
 		public String toString() {
-			return "(" + baslangic + " -> " + hedef + ", Ağırlık: " + agirlik + ")";
+			return "(" + kaynak + " -> " + hedef + ", w: " + agirlik + ")";
 		}
 	}
 	
 	private List<String> dugumler;
 	private List<Kenar> kenarlar;
 
-	public CizgeKenarListesi() {
+	public AgirlikliCizge() {
 		dugumler = new ArrayList<>();
 		kenarlar = new ArrayList<>();
 	}
 
-	public void dugumEkle(String düğüm) {
-		dugumler.add(düğüm);
+	public void dugumEkle(String dugum) {
+		dugumler.add(dugum);
 	}
 
-	public void kenarEkle(String baslangic, String hedef, int agirlik) {
-		if (!dugumler.contains(baslangic) || !dugumler.contains(hedef)) {
+	public void kenarEkle(String kaynak, String hedef, int agirlik) {
+		if (!dugumler.contains(kaynak) || !dugumler.contains(hedef)) {
 			throw new IllegalArgumentException("Başlangıç ve hedef düğümler grafiğe eklenmeli.");
 		}
-		Kenar yeniKenar = new Kenar(baslangic, hedef, agirlik);
+		Kenar yeniKenar = new Kenar(kaynak, hedef, agirlik);
 		kenarlar.add(yeniKenar);
 	}
 
@@ -53,14 +53,19 @@ public class CizgeKenarListesi {
 	}
 	
 	public static void main(String[] args) {
-		CizgeKenarListesi cizge = new CizgeKenarListesi();
+		
+		AgirlikliCizge cizge = new AgirlikliCizge();
 		cizge.dugumEkle("A");
 		cizge.dugumEkle("B");
 		cizge.dugumEkle("C");
+		cizge.dugumEkle("D");
+		cizge.dugumEkle("E");
 
 		cizge.kenarEkle("A", "B", 2);
 		cizge.kenarEkle("B", "C", 3);
 		cizge.kenarEkle("A", "C", 1);
+		cizge.kenarEkle("A", "D", 4);
+		cizge.kenarEkle("B", "E", 5);
 
 		System.out.println(cizge);
 		System.out.println(cizge.kenarlar);
