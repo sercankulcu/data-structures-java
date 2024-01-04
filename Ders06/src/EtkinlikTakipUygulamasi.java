@@ -31,7 +31,8 @@ public class EtkinlikTakipUygulamasi {
 	public static void main(String[] args) {
 		System.out.println("Canlı Etkinlik Takip Uygulamasına Hoş Geldiniz!");
 
-		while (true) {
+		boolean devam = true;
+		while (devam) {
 			System.out.println("\n1. Yeni Etkinlik Ekle");
 			System.out.println("2. Etkinlikleri Görüntüle");
 			System.out.println("3. Etkinlikten Vazgeç");
@@ -53,7 +54,7 @@ public class EtkinlikTakipUygulamasi {
 				break;
 			case 4:
 				System.out.println("Canlı Etkinlik Takip uygulamasından çıkılıyor. İyi eğlenceler!");
-				System.exit(0);
+				devam = false;
 				break;
 			default:
 				System.out.println("Geçersiz seçenek. Lütfen geçerli bir seçenek girin.");

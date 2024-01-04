@@ -17,7 +17,7 @@ public class ArrayListDemo {
 		String ilkIsim = isimler.get(0);
 		System.out.println(ilkIsim);
 
-		isimler.replaceAll(isim -> isim.toUpperCase());
+		isimler.replaceAll(String::toUpperCase);
 
 		System.out.println(isimler); // [ALI, AHMET, MEHMET]
 
@@ -50,7 +50,7 @@ public class ArrayListDemo {
 		sayilar.add(3);
 		sayilar.add(1);
 
-		sayilar.sort((sayi1, sayi2) -> Integer.compare(sayi1, sayi2));
+		sayilar.sort(Integer::compare);
 
 		System.out.println(sayilar); // [1, 3, 5]
 
@@ -62,7 +62,7 @@ public class ArrayListDemo {
 
 		Spliterator<String> kelimeSpliterator = kelimeler.spliterator();
 
-		while (kelimeSpliterator.tryAdvance(kelime -> System.out.println(kelime))) {
+		while (kelimeSpliterator.tryAdvance(System.out::println)) {
 			// do something with the word
 		}
 

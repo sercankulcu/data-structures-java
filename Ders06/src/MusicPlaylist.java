@@ -92,6 +92,8 @@ public class MusicPlaylist {
 				String song = scanner.nextLine();
 				musicPlaylist.addInOrder(musicPlaylist.playlist, song);
 				break;
+			default:
+				break;
 			}
 		}
 		scanner.close();

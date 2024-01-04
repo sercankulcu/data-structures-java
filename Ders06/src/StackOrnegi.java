@@ -3,7 +3,7 @@ import java.util.Stack;
 public class StackOrnegi {
 	public static void main(String[] args) {
 		// Stack oluşturma
-		Stack<String> stack = new Stack<String>();
+		Stack<String> stack = new Stack<>();
 
 		// Elemanlar eklemek (itme - push)
 		stack.push("Eleman 1");

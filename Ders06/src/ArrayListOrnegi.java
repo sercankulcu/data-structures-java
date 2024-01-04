@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class ArrayListOrnegi {
 	public static void main(String[] args) {
 		// ArrayList oluşturma
-		ArrayList<String> meyveler = new ArrayList<String>();
+		ArrayList<String> meyveler = new ArrayList<>();
 
 		// Elemanlar ekleme
 		meyveler.add("Elma");

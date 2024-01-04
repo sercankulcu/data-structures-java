@@ -3,7 +3,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class CopyOnWriteArrayListOrnegi {
 	public static void main(String[] args) {
 		// CopyOnWriteArrayList oluşturma
-		CopyOnWriteArrayList<String> liste = new CopyOnWriteArrayList<String>();
+		CopyOnWriteArrayList<String> liste = new CopyOnWriteArrayList<>();
 
 		// Elemanlar ekleme
 		liste.add("Elma");

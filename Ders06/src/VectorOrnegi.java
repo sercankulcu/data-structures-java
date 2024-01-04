@@ -3,7 +3,7 @@ import java.util.Vector;
 public class VectorOrnegi {
 	public static void main(String[] args) {
 		// Vector oluşturma
-		Vector<String> sehirler = new Vector<String>();
+		Vector<String> sehirler = new Vector<>();
 
 		// Elemanlar ekleme
 		sehirler.add("Ankara");

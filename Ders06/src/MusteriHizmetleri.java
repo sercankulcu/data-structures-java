@@ -37,7 +37,8 @@ public class MusteriHizmetleri {
 	public static void main(String[] args) {
 		System.out.println("Müşteri Hizmetleri Uygulamasına Hoş Geldiniz!");
 
-		while (true) {
+		boolean devam = true;
+		while (devam) {
 			System.out.println("\n1. Yeni Müşteri Kaydı Oluştur");
 			System.out.println("2. Müşteri Sorunlarını Görüntüle");
 			System.out.println("3. Uygulamadan Çıkış");
@@ -55,7 +56,7 @@ public class MusteriHizmetleri {
 				break;
 			case 3:
 				System.out.println("Müşteri Hizmetleri uygulamasından çıkılıyor. İyi günler!");
-				System.exit(0);
+				devam = false;
 				break;
 			default:
 				System.out.println("Geçersiz seçenek. Lütfen geçerli bir seçenek girin.");

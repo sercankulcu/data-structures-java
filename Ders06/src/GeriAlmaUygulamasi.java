@@ -8,7 +8,8 @@ public class GeriAlmaUygulamasi {
 	public static void main(String[] args) {
 		System.out.println("Geri Alma Uygulamasına Hoş Geldiniz!");
 
-		while (true) {
+		boolean devam = true;
+		while (devam) {
 			System.out.println("\n1. Metin Girin");
 			System.out.println("2. Metni Geri Al");
 			System.out.println("3. Çıkış");
@@ -26,7 +27,7 @@ public class GeriAlmaUygulamasi {
 				break;
 			case 3:
 				System.out.println("Geri Alma uygulamasından çıkılıyor. İyi günler!");
-				System.exit(0);
+				devam = false;
 				break;
 			default:
 				System.out.println("Geçersiz seçenek. Lütfen geçerli bir seçenek girin.");

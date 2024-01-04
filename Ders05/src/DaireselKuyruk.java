@@ -25,7 +25,7 @@ public class DaireselKuyruk<E> {
 		if (bosMu()) {
 			throw new IllegalStateException("Kuyruk boş.");
 		}
-		E oge = (E) dizi[bas]; // Başlangıçtaki öğeyi al
+		E oge = dizi[bas]; // Başlangıçtaki öğeyi al
 		bas = (bas + 1) % kapasite; // Baş işaretçisini güncelle (dairesel kuyruk)
 		boyut--; // Kuyruktaki öğe sayısını azalt
 		return oge; // Çıkarılan öğeyi döndür
@@ -35,7 +35,7 @@ public class DaireselKuyruk<E> {
 		if (bosMu()) {
 			throw new IllegalStateException("Kuyruk boş.");
 		}
-		return (E) dizi[bas]; // Kuyruğun başındaki öğeyi döndür
+		return dizi[bas]; // Kuyruğun başındaki öğeyi döndür
 	}
 
 	public boolean bosMu() {

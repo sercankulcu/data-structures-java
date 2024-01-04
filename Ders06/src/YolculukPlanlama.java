@@ -32,7 +32,8 @@ public class YolculukPlanlama {
 	public static void main(String[] args) {
 		System.out.println("Yolculuk Planlama Uygulamasına Hoş Geldiniz!");
 
-		while (true) {
+		boolean devam = true;
+		while (devam) {
 			System.out.println("\n1. Yeni Şehir Ekleyin");
 			System.out.println("2. Yolculuk Planını Görüntüleyin");
 			System.out.println("3. Yolculuk Planını Temizleyin");
@@ -54,7 +55,7 @@ public class YolculukPlanlama {
 				break;
 			case 4:
 				System.out.println("Yolculuk Planlama uygulamasından çıkılıyor. İyi yolculuklar!");
-				System.exit(0);
+				devam = false;
 				break;
 			default:
 				System.out.println("Geçersiz seçenek. Lütfen geçerli bir seçenek girin.");

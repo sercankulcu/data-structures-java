@@ -3,7 +3,7 @@ import java.util.LinkedList;
 public class LinkedListOrnegi {
 	public static void main(String[] args) {
 		// LinkedList oluşturma
-		LinkedList<String> sehirler = new LinkedList<String>();
+		LinkedList<String> sehirler = new LinkedList<>();
 
 		// Elemanlar ekleme
 		sehirler.add("Ankara");

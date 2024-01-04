@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class LinkedListVsArrayListPerformance {
 
 	// TODO: try with different SIZE values
-	final static int SIZE = 50000;
+	static final int SIZE = 50000;
 
 	public static void main(String[] args) {
 		// Create a LinkedList and an ArrayList with the same number of elements.

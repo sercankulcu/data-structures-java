@@ -31,7 +31,8 @@ public class KitapKutuphanesi {
 	public static void main(String[] args) {
 		System.out.println("Kitap Kütüphanesi Uygulamasına Hoş Geldiniz!");
 
-		while (true) {
+		boolean devam = true;
+		while (devam) {
 			System.out.println("\n1. Yeni Kitap Ekle");
 			System.out.println("2. Kütüphanedeki Kitapları Görüntüle");
 			System.out.println("3. Uygulamadan Çıkış");
@@ -49,7 +50,7 @@ public class KitapKutuphanesi {
 				break;
 			case 3:
 				System.out.println("Kitap Kütüphanesi uygulamasından çıkılıyor. İyi günler!");
-				System.exit(0);
+				devam = false;
 				break;
 			default:
 				System.out.println("Geçersiz seçenek. Lütfen geçerli bir seçenek girin.");

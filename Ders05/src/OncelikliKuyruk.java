@@ -14,26 +14,25 @@ public class OncelikliKuyruk<E> {
 
 	private Object[] dizi;
 	private int boyut;
-	int BASLANGIC_KAPASITESI = 10;
 
 	public OncelikliKuyruk() {
-		dizi = new Object[BASLANGIC_KAPASITESI];
+		dizi = new Object[10];
 		boyut = 0;
 	}
 
 	//Öncelikli kuyruğa yeni bir eleman ekleme
-	public void ekle(E veri, int öncelik) {
+	public void ekle(E veri, int oncelik) {
 		// Eğer kuyruğun boyutu dizi uzunluğuna ulaştıysa, diziyi genişlet
 		if (boyut == dizi.length) {
 			diziGenislet();
 		}
 		// Yeni bir öncelikli kuyruk elemanı oluştur
-		Eleman<E> yeniEleman = new Eleman<E>(veri, öncelik);
+		Eleman<E> yeniEleman = new Eleman<>(veri, oncelik);
 		// Elemanın ekleneceği indeksi belirlemek için başlangıç olarak boyut kullanılır.
 		int indeks = boyut;
 		// Yeni elemanın önceliği, dizideki diğer elemanların öncelikleri ile karşılaştırılarak
 		// doğru indeks bulunur ve eleman doğru konuma eklenir.
-		while (indeks > 0 && öncelik < ((Eleman) dizi[indeks - 1]).oncelik) {
+		while (indeks > 0 && oncelik < ((Eleman) dizi[indeks - 1]).oncelik) {
 			dizi[indeks] = dizi[indeks - 1];
 			indeks--;
 		}
@@ -106,7 +105,7 @@ public class OncelikliKuyruk<E> {
 
 	public static void main(String[] args) {
 
-		OncelikliKuyruk<String> kuyruk = new OncelikliKuyruk<String>();
+		OncelikliKuyruk<String> kuyruk = new OncelikliKuyruk<>();
 
 		// Öncelikli kuyruğa (priority queue) öğeleri ekle (enqueue)
 		kuyruk.ekle("Öğe 1", 3); // Öncelik: 3

@@ -10,7 +10,8 @@ public class ToDoList {
 
 		System.out.println("Welcome to the To-Do List Application!");
 
-		while (true) {
+		boolean devam = true;
+		while (devam) {
 			System.out.println("\n1. Add a to-do item");
 			System.out.println("2. Remove a to-do item");
 			System.out.println("3. View to-do list");
@@ -58,7 +59,7 @@ public class ToDoList {
 			case 4:
 				System.out.println("Thank you for using the To-Do List Application. Have a great day!");
 				scanner.close();
-				System.exit(0);
+				devam = false;
 			default:
 				System.out.println("Invalid choice. Please enter a valid option.");
 			}
