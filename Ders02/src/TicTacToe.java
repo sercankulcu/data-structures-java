@@ -38,7 +38,8 @@ public class TicTacToe {
 
 	public static void hamleYap(char[][] tahta, char oyuncu) {
 		Scanner scanner = new Scanner(System.in);
-		int satir, sutun;
+		int satir;
+		int sutun;
 		do {
 			System.out.print("Sıra " + oyuncu + " oyuncusunda. Satır ve sütun seçin (1-3): ");
 			satir = scanner.nextInt() - 1;
