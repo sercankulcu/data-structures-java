@@ -5,7 +5,7 @@ public class EslemeDizi<K, V> {
 	private Object[] degerler;
 	private int boyut;
 	
-	private final int BASLANGIC_BOYUT = 16;
+	private static final int BASLANGIC_BOYUT = 16;
 
 	public EslemeDizi() {
 		anahtarlar = new Object[BASLANGIC_BOYUT];

@@ -10,7 +10,7 @@ public class IkiliAgacGorsellestirme {
 	}
 
 	public static void main(String[] args) {
-		Dugum<Integer> kok = new Dugum<Integer>(1);
+		Dugum<Integer> kok = new Dugum<>(1);
 		kok.sol = new Dugum<Integer>(2);
 		kok.sag = new Dugum<Integer>(3);
 		kok.sol.sol = new Dugum<Integer>(4);

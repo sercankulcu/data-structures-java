@@ -7,13 +7,13 @@ public class IkiliAgacDongulu {
 	private Dugum<Integer> kok;
 
 	public void ikiliAgacOlustur() {
-		Dugum<Integer> birinci = new Dugum<Integer>(1);     // Birinci düğümü oluştur (kök düğüm)
-		Dugum<Integer> ikinci = new Dugum<Integer>(2);      // İkinci düğümü oluştur
-		Dugum<Integer> ucuncu = new Dugum<Integer>(3);      // Üçüncü düğümü oluştur
-		Dugum<Integer> dorduncu = new Dugum<Integer>(4);    // Dördüncü düğümü oluştur
-		Dugum<Integer> besinci = new Dugum<Integer>(5);     // Beşinci düğümü oluştur
-		Dugum<Integer> altinci = new Dugum<Integer>(6);     // Altıncı düğümü oluştur
-		Dugum<Integer> yedinci = new Dugum<Integer>(7);     // Yedinci düğümü oluştur
+		Dugum<Integer> birinci = new Dugum<>(1);     // Birinci düğümü oluştur (kök düğüm)
+		Dugum<Integer> ikinci = new Dugum<>(2);      // İkinci düğümü oluştur
+		Dugum<Integer> ucuncu = new Dugum<>(3);      // Üçüncü düğümü oluştur
+		Dugum<Integer> dorduncu = new Dugum<>(4);    // Dördüncü düğümü oluştur
+		Dugum<Integer> besinci = new Dugum<>(5);     // Beşinci düğümü oluştur
+		Dugum<Integer> altinci = new Dugum<>(6);     // Altıncı düğümü oluştur
+		Dugum<Integer> yedinci = new Dugum<>(7);     // Yedinci düğümü oluştur
 
 		kok = birinci;               // Kök düğümü belirle
 		birinci.sol = ikinci;        // Birinci düğümün sol alt düğümünü ayarla

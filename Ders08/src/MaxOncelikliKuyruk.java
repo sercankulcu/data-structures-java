@@ -18,7 +18,7 @@ public class MaxOncelikliKuyruk {
 
 	public void ekle(int x) {
 		if (n == heap.length - 1) {
-			buyut(2 * heap.length); // Dizi boyutunu büyültmek gerekiyorsa büyült
+			boyutAyarla(2 * heap.length); // Dizi boyutunu büyültmek gerekiyorsa büyült
 		}
 		n++; // Diziye bir eleman ekledikten sonra n'i artır
 		heap[n] = x; // Yeni elemanı heap dizisinin sonuna ekle
@@ -42,7 +42,7 @@ public class MaxOncelikliKuyruk {
 		batir(1); // Kökü doğru konumda düzenlemek için batırma işlemini uygula
 		heap[n + 1] = null; // Eski kökü temizle
 		if (n > 0 && (n == (heap.length - 1) / 4)) {
-			kucult(heap.length / 2); // Dizi boyutunu küçültmek gerekiyorsa küçült
+			boyutAyarla(heap.length / 2); // Dizi boyutunu küçültmek gerekiyorsa küçült
 		}
 		return max; // Silinen maksimum elemanı döndür
 	}
@@ -62,18 +62,10 @@ public class MaxOncelikliKuyruk {
 		}
 	}
 
-	private void kucult(int kapasite) {
-		Integer gecici[] = new Integer[kapasite];
+	private void boyutAyarla(int kapasite) {
+		Integer[] gecici = new Integer[kapasite];
 		for (int i = 0; i < heap.length; i++) {
 			gecici[i] = heap[i];
-		}
-		heap = gecici;
-	}
-
-	private void buyut(int kapasite) {
-		Integer gecici[] = new Integer[kapasite];
-		for(int i = 0; i < heap.length; i++) {
-			gecici[i] = heap[i]; 
 		}
 		heap = gecici;
 	}

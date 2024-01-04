@@ -24,12 +24,12 @@ public class AritmetikIfadeAgaci {
 			}
 
 			if (c == '+' || c == '-' || c == '*' || c == '/') {
-				Dugum<Character> dugum = new Dugum<Character>(c);
+				Dugum<Character> dugum = new Dugum<>(c);
 				dugum.sag = yigit.pop();
 				dugum.sol = yigit.pop();
 				yigit.push(dugum);
 			} else {
-				Dugum<Character> dugum = new Dugum<Character>(c);
+				Dugum<Character> dugum = new Dugum<>(c);
 				yigit.push(dugum);
 			}
 		}

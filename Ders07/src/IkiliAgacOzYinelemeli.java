@@ -5,12 +5,12 @@ public class IkiliAgacOzYinelemeli {
 
 	public void ikiliAgacOlustur() {
 
-		Dugum<Integer> birinci = new Dugum<Integer>(9);   // Birinci düğümü oluştur (kök düğüm)
-		Dugum<Integer> ikinci = new Dugum<Integer>(2);    // İkinci düğümü oluştur
-		Dugum<Integer> ucuncu = new Dugum<Integer>(3);    // Üçüncü düğümü oluştur
-		Dugum<Integer> dorduncu = new Dugum<Integer>(4);  // Dördüncü düğümü oluştur
-		Dugum<Integer> besinci = new Dugum<Integer>(7);  // Dördüncü düğümü oluştur
-		Dugum<Integer> altinci = new Dugum<Integer>(5);  // Dördüncü düğümü oluştur
+		Dugum<Integer> birinci = new Dugum<>(9);   // Birinci düğümü oluştur (kök düğüm)
+		Dugum<Integer> ikinci = new Dugum<>(2);    // İkinci düğümü oluştur
+		Dugum<Integer> ucuncu = new Dugum<>(3);    // Üçüncü düğümü oluştur
+		Dugum<Integer> dorduncu = new Dugum<>(4);  // Dördüncü düğümü oluştur
+		Dugum<Integer> besinci = new Dugum<>(7);  // Dördüncü düğümü oluştur
+		Dugum<Integer> altinci = new Dugum<>(5);  // Dördüncü düğümü oluştur
 		
 		//     9
 		//    / \
