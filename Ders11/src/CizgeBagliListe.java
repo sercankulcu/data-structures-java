@@ -34,7 +34,7 @@ public class CizgeBagliListe {
 		ziyaretEdildi.set(dugum, true);
 		kuyruk.add(dugum);
 
-		while (kuyruk.size() != 0) {
+		while (!kuyruk.isEmpty()) {
 			dugum = kuyruk.poll();
 			System.out.print(dugum + " ");
 
