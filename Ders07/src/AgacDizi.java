@@ -151,17 +151,20 @@ public class AgacDizi {
 
 	public static void main(String[] args) {
 
-		int agacBoyutu = 15; // Ağacın maksimum boyutu
+		int agacBoyutu = 64; // Ağacın maksimum boyutu
 		AgacDizi agac = new AgacDizi(agacBoyutu);
 
 		// Ağaca öğeleri ekleyin
-		agac.ekle(0, 50);
+		agac.ekle(0, 42);
+		agac.ekle(0, 17);
+		agac.ekle(0, 45);
+		agac.ekle(0, 7);
+		agac.ekle(0, 33);
+		agac.ekle(0, 55);
 		agac.ekle(0, 30);
-		agac.ekle(0, 70);
-		agac.ekle(0, 20);
-		agac.ekle(0, 40);
-		agac.ekle(0, 60);
-		agac.ekle(0, 80);
+		agac.ekle(0, 35);
+		agac.ekle(0, 49);
+		
 
 		System.out.print("Kök Önde Dolaşma: ");
 		agac.kokOndeDolasma(0);
@@ -181,9 +184,13 @@ public class AgacDizi {
 
 		// Ağaçta bir öğeyi arayın
 		agac.ara(0, 40);
-		agac.sil(0, 330);
-		agac.sil(0, 30);
-		agac.sil(0, 50);
+		//agac.sil(0, 330);
+		//agac.sil(0, 30);
+		//agac.sil(0, 50);
+		agac.ekle(0, 51);
+		agac.ekle(0, 5);
+		agac.ekle(0, 19);
+		agac.sil(0, 33);
 
 		System.out.print("Kök Önde Dolaşma: ");
 		agac.kokOndeDolasma(0);

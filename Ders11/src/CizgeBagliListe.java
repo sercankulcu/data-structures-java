@@ -25,6 +25,7 @@ public class CizgeBagliListe {
 
 	public void kenarEkle(int dugum, int komsu) {
 		komsuListesi.get(dugum).add(komsu);
+		komsuListesi.get(komsu).add(dugum);
 	}
 
 	public void BFS(int dugum) {
@@ -66,14 +67,15 @@ public class CizgeBagliListe {
 	public static void main(String[] args) {
 		CizgeBagliListe cizge = new CizgeBagliListe(10);
 		cizge.kenarEkle(0, 1);
-		cizge.kenarEkle(0, 4);
-		cizge.kenarEkle(1, 3);
-		cizge.kenarEkle(1, 4);
-		cizge.kenarEkle(3, 5);
-		cizge.kenarEkle(3, 6);
-		cizge.kenarEkle(4, 7);
-		cizge.kenarEkle(4, 8);
-		cizge.kenarEkle(7, 2);
+		cizge.kenarEkle(0, 2);
+		cizge.kenarEkle(1, 5);
+		cizge.kenarEkle(2, 3);
+		cizge.kenarEkle(2, 4);
+		cizge.kenarEkle(3, 7);
+		cizge.kenarEkle(4, 6);
+		cizge.kenarEkle(5, 6);
+		cizge.kenarEkle(6, 7);
+		cizge.kenarEkle(6, 8);
 
 		System.out.println("Başlangıç Düğümü (0) ile Genişlik Öncelikli Arama:");
 		cizge.temizle();

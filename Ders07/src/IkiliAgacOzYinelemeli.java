@@ -11,7 +11,7 @@ public class IkiliAgacOzYinelemeli {
 		Dugum<Integer> dorduncu = new Dugum<>(4);  // Dördüncü düğümü oluştur
 		Dugum<Integer> besinci = new Dugum<>(7);  // Dördüncü düğümü oluştur
 		Dugum<Integer> altinci = new Dugum<>(5);  // Dördüncü düğümü oluştur
-		
+
 		//     9
 		//    / \
 		//   2   3
@@ -29,13 +29,11 @@ public class IkiliAgacOzYinelemeli {
 	}
 
 	public void kokBastaDolas(Dugum<Integer> kok) {
-		if (kok == null) {
-			return;  // Eğer düğüm null ise, işlem sonlandırılır (temel durum)
+		if (kok != null) {
+			System.out.print(kok.veri + " ");  // Kök düğümün verisini ekrana yazdır
+			kokBastaDolas(kok.sol);  // Sol alt ağacı kökten başlayarak dolaş
+			kokBastaDolas(kok.sag);  // Sağ alt ağacı kökten başlayarak dolaş
 		}
-
-		System.out.print(kok.veri + " ");  // Kök düğümün verisini ekrana yazdır
-		kokBastaDolas(kok.sol);  // Sol alt ağacı kökten başlayarak dolaş
-		kokBastaDolas(kok.sag);  // Sağ alt ağacı kökten başlayarak dolaş
 	}
 
 	public void kokOrtadaDolas(Dugum<Integer> kok) {
@@ -49,13 +47,11 @@ public class IkiliAgacOzYinelemeli {
 	}
 
 	public void kokSondaDolas(Dugum<Integer> kok) {
-		if (kok == null) {
-			return;  // Eğer düğüm null ise, işlem sonlandırılır (temel durum)
+		if (kok != null) {
+			kokSondaDolas(kok.sol);
+			kokSondaDolas(kok.sag);
+			System.out.print(kok.veri + " ");
 		}
-
-		kokSondaDolas(kok.sol);   // Sol alt ağacı kökten başlayarak dolaş
-		kokSondaDolas(kok.sag);   // Sağ alt ağacı kökten başlayarak dolaş
-		System.out.print(kok.veri + " ");  // Kök düğümün verisini ekrana yazdır
 	}
 
 	public void seviyeSiraliDolas(Dugum<Integer> kok) {

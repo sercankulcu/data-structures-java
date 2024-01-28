@@ -86,13 +86,21 @@ public class MaxOncelikliKuyruk {
 		MaxOncelikliKuyruk ok = new MaxOncelikliKuyruk(3); // 3 eleman kapasiteli yeni bir MaxOK nesnesi oluştur
 
 		// Eleman ekleme işlemleri
-		ok.ekle(4);
-		ok.ekle(5);
+		ok.ekle(20);
+		ok.ekle(15);
+		ok.ekle(10);
+		ok.ekle(13);
+		ok.ekle(9);
+		ok.ekle(7);
 		ok.ekle(2);
-		ok.ekle(6);
+		ok.ekle(5);
+		ok.ekle(11);
+		ok.ekle(8);
 		ok.ekle(1);
-		ok.ekle(3);
-
+		ok.ekle(17);
+		ok.ekle(18);
+		ok.ekle(21);
+		
 		System.out.println(ok.buyukluk()); // Dizinin büyüklüğünü ekrana yazdır
 		ok.yazdir(); // Dizi içeriğini ekrana yazdır
 
