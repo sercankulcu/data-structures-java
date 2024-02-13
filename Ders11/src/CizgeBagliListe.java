@@ -66,16 +66,16 @@ public class CizgeBagliListe {
 
 	public static void main(String[] args) {
 		CizgeBagliListe cizge = new CizgeBagliListe(10);
-		cizge.kenarEkle(0, 1);
 		cizge.kenarEkle(0, 2);
-		cizge.kenarEkle(1, 5);
+		cizge.kenarEkle(0, 4);
+		cizge.kenarEkle(1, 2);
+		cizge.kenarEkle(1, 7);
 		cizge.kenarEkle(2, 3);
-		cizge.kenarEkle(2, 4);
-		cizge.kenarEkle(3, 7);
-		cizge.kenarEkle(4, 6);
-		cizge.kenarEkle(5, 6);
+		cizge.kenarEkle(3, 6);
+		cizge.kenarEkle(4, 5);
+		cizge.kenarEkle(5, 7);
 		cizge.kenarEkle(6, 7);
-		cizge.kenarEkle(6, 8);
+		cizge.kenarEkle(7, 8);
 
 		System.out.println("Başlangıç Düğümü (0) ile Genişlik Öncelikli Arama:");
 		cizge.temizle();

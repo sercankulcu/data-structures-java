@@ -97,9 +97,9 @@ public class MaxOncelikliKuyruk {
 		ok.ekle(11);
 		ok.ekle(8);
 		ok.ekle(1);
-		ok.ekle(17);
-		ok.ekle(18);
-		ok.ekle(21);
+		ok.ekle(23);
+		ok.ekle(22);
+		ok.ekle(8);
 		
 		System.out.println(ok.buyukluk()); // Dizinin büyüklüğünü ekrana yazdır
 		ok.yazdir(); // Dizi içeriğini ekrana yazdır
@@ -111,7 +111,7 @@ public class MaxOncelikliKuyruk {
 
 		System.out.println();
 
-		ok.sil(); // Maksimum elemanı sil
+		//ok.sil(); // Maksimum elemanı sil
 		ok.yazdir(); // Dizi içeriğini ekrana yazdır
 	}
 
