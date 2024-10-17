@@ -55,9 +55,9 @@ public class IkiBoyutluMatristenBagliListe {
 	{
 		IkiBoyutluMatristenBagliListe matristenBagliListe = new IkiBoyutluMatristenBagliListe();
 		// İki boyutlu matris
-		int[][] matris = { 	{1, 2, 3},
-												{4, 5, 6},
-												{7, 8, 9} };
+		int[][] matris = { 	{1, 2, 13},
+							{14, 5, 6},
+							{7, 18, 9} };
 		MatrisDugum<Integer> baslangic = matristenBagliListe.olustur(matris, 0, 0);
 		matristenBagliListe.goruntule(baslangic);
 	}
