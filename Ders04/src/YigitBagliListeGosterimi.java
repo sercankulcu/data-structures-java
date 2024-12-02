@@ -1,5 +1,5 @@
 
-public class BagliListeIleStack {
+public class YigitBagliListeGosterimi {
 	
 	class Dugum {
 		int veri;
@@ -13,7 +13,7 @@ public class BagliListeIleStack {
 
 	private Dugum tepe;
 
-	public BagliListeIleStack() {
+	public YigitBagliListeGosterimi() {
 		tepe = null; // Boş yığını temsil etmek için tepe başlangıçta null'dır.
 	}
 
@@ -50,7 +50,8 @@ public class BagliListeIleStack {
 	}
 
 	public static void main(String[] args) {
-		BagliListeIleStack yigin = new BagliListeIleStack();
+		
+		YigitBagliListeGosterimi yigin = new YigitBagliListeGosterimi();
 
 		yigin.ekle(10);
 		yigin.ekle(20);

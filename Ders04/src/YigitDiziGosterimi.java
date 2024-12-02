@@ -1,11 +1,11 @@
 
-public class DiziIleStackUygulama {
+public class YigitDiziGosterimi {
 	
 	private int kapasite;
 	private int tepe;
 	private int[] dizi;
 
-	public DiziIleStackUygulama(int boyut) {
+	public YigitDiziGosterimi(int boyut) {
 		kapasite = boyut;
 		dizi = new int[kapasite];
 		tepe = -1; // Tepe işaretçisini (-1 boş yığın) başlangıçta tanımla.
@@ -49,7 +49,8 @@ public class DiziIleStackUygulama {
 	}
 
 	public static void main(String[] args) {
-		DiziIleStackUygulama yigin = new DiziIleStackUygulama(5); // Maksimum 5 öğeli bir yığın oluşturun.
+		
+		YigitDiziGosterimi yigin = new YigitDiziGosterimi(5); // Maksimum 5 öğeli bir yığın oluşturun.
 
 		yigin.ekle(10);
 		yigin.ekle(20);
