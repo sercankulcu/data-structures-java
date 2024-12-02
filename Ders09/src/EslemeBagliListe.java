@@ -102,6 +102,7 @@ public class EslemeBagliListe<K, V> {
 				System.out.println();
 			}
 		}
+		System.out.println();
 	}
 
 	public static void main(String[] args) {
@@ -123,11 +124,13 @@ public class EslemeBagliListe<K, V> {
 		esleme.yazdir();
 
 		System.out.println("Boyut: " + esleme.boyut());
-
+		System.out.println();
+		
 		esleme.sil("İki");
 		esleme.yazdir();
 
 		System.out.println("Boyut: " + esleme.boyut());
+		System.out.println();
 	}
 }
 

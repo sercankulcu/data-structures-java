@@ -9,9 +9,9 @@ public class FindPairWithSum {
 
 		// Call the function to find a pair
 		findPairByBruteForce(arr, targetSum);
-		
+
 		findPairBySorting(arr, targetSum);
-		
+
 		findPairByHashing(arr, targetSum);
 	}
 
@@ -29,48 +29,48 @@ public class FindPairWithSum {
 
 		System.out.println("No pair with the given sum found.");
 	}
-	
+
 	public static void findPairBySorting(int[] arr, int targetSum) {
-        // Step 1: Sort the array
-        Arrays.sort(arr);
+		// Step 1: Sort the array
+		Arrays.sort(arr);
 
-        // Step 2: Use two pointers
-        int left = 0;
-        int right = arr.length - 1;
+		// Step 2: Use two pointers
+		int left = 0;
+		int right = arr.length - 1;
 
-        while (left < right) {
-            int currentSum = arr[left] + arr[right];
+		while (left < right) {
+			int currentSum = arr[left] + arr[right];
 
-            if (currentSum == targetSum) {
-                System.out.println("Pair found: (" + arr[left] + ", " + arr[right] + ")");
-                left++; // or right--
-            } else if (currentSum < targetSum) {
-                left++; // Increase the sum
-            } else {
-                right--; // Decrease the sum
-            }
-        }
+			if (currentSum == targetSum) {
+				System.out.println("Pair found: (" + arr[left] + ", " + arr[right] + ")");
+				left++; // or right--
+			} else if (currentSum < targetSum) {
+				left++; // Increase the sum
+			} else {
+				right--; // Decrease the sum
+			}
+		}
 
-        System.out.println("No pair with the given sum found.");
-    }
-	
+		System.out.println("No pair with the given sum found.");
+	}
+
 	public static void findPairByHashing(int[] arr, int targetSum) {
-        // Step 1: Create a HashSet to store elements
-        HashSet<Integer> seen = new HashSet<>();
+		// Step 1: Create a HashSet to store elements
+		HashSet<Integer> seen = new HashSet<>();
 
-        // Step 2: Iterate through the array
-        for (int num : arr) {
-            int complement = targetSum - num;
+		// Step 2: Iterate through the array
+		for (int num : arr) {
+			int complement = targetSum - num;
 
-            // Check if the complement exists in the set
-            if (seen.contains(complement)) {
-                System.out.println("Pair found: (" + num + ", " + complement + ")");
-            }
+			// Check if the complement exists in the set
+			if (seen.contains(complement)) {
+				System.out.println("Pair found: (" + num + ", " + complement + ")");
+			}
 
-            // Add the current number to the set
-            seen.add(num);
-        }
+			// Add the current number to the set
+			seen.add(num);
+		}
 
-        System.out.println("No pair with the given sum found.");
-    }
+		System.out.println("No pair with the given sum found.");
+	}
 }
