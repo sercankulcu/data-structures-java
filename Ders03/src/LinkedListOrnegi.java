@@ -14,10 +14,10 @@ public class LinkedListOrnegi {
         sepet.add("Muz");
         sepet.add("Çilek");
 
-        // Elemanları ekrana yazdırma
+        // Elemanlari ekrana yazdirma
         System.out.print("Sepettekiler : ");
         for (String meyve : sepet) {
-            System.out.print(meyve + " ");
+            System.out.print(meyve + " , ");
         }System.out.println();
 
         // Belirli bir pozisyona eleman ekleme
@@ -26,16 +26,16 @@ public class LinkedListOrnegi {
         // Eklemeden sonraki hali
         System.out.print("\nPortakal Eklendikten Sonra: ");
         for (String meyve : sepet) {
-            System.out.print(meyve + " ");
+            System.out.print(meyve + " , ");
         }System.out.println();
 
-        // Belirli bir elemanı kaldırma
+        // Belirli bir elemani kaldirma
         sepet.remove("Armut");
 
-        // Kaldırmadan sonraki hali
-        System.out.print("\nArmut Kaldırıldıktan Sonra: ");
+        // Kaldirmadan sonraki hali
+        System.out.print("\nArmut Kaldirildiktan Sonra: ");
         for (String meyve : sepet) {
-            System.out.print(meyve + " ");
+            System.out.print(meyve + " , ");
         }System.out.println();
     }
 }

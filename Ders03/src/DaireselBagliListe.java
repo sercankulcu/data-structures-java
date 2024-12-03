@@ -1,59 +1,59 @@
 
 public class DaireselBagliListe {
 	
-	private TekYonluDugum<Integer> bas; // Dairesel bağlı listenin baş düğümü
-	private TekYonluDugum<Integer> son; // Dairesel bağlı listenin son düğümü
+	private TekYonluDugum<Integer> ilk; // Dairesel bagli listenin ilk dugumu
+	private TekYonluDugum<Integer> son; // Dairesel bagli listenin son dugumu
 
-	// Dairesel bağlı listenin başlatılması
+	// Dairesel bagli listenin baslatilmasi
 	public DaireselBagliListe() {
-		bas = null;
+		ilk = null;
 		son = null;
 	}
 
-	//Listeye yeni bir düğüm ekleme
+	//Listeye yeni bir dugum ekleme
 	public void ekle(int veri) {
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri); // Yeni bir düğüm oluştur
+		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri); // Yeni bir dugum olustur
 
-		if (bas == null) {
-			bas = yeniDugum;         // Liste boşsa, yeni düğümü baş olarak ayarla
-			son = yeniDugum;         // Liste boşsa, yeni düğümü son olarak ayarla
-			yeniDugum.sonraki = bas; // Dairesel bağlantıyı oluşturmak için son düğümü başa bağla
+		if (ilk == null) {
+			ilk = yeniDugum;         // Liste bossa, yeni dugumu ilk olarak ayarla
+			son = yeniDugum;         // Liste bossa, yeni dugumu son olarak ayarla
+			yeniDugum.sonraki = ilk; // Dairesel baglantiyi olusturmak icin son dugumu basa bagla
 		} else {
-			yeniDugum.sonraki = bas;   // Yeni düğümün sonraki referansını başa bağla
-			son.sonraki = yeniDugum;   // Listenin sonundaki düğümün sonraki referansını yeni düğümü bağla
-			son = yeniDugum;           // Yeni düğümü son olarak ayarla
+			yeniDugum.sonraki = ilk;   // Yeni dugumun sonraki referansini basa bagla
+			son.sonraki = yeniDugum;   // Listenin sonundaki dugumun sonraki referansini yeni dugumu bagla
+			son = yeniDugum;           // Yeni dugumu son olarak ayarla
 		}
 	}
 
 
-	//Verilen bir düğümü dairesel bağlı listeden silme
-	public void elemanSil(int hedef) {
-		if (bas == null) {
-			System.out.println("Liste boş. Düğüm kaldırma işlemi yapılamaz.");
+	//Verilen bir dugumu dairesel bagli listeden silme
+	public void sil(int hedef) {
+		if (ilk == null) {
+			System.out.println("Liste bos. Dugum kaldirma islemi yapilamaz.");
 			return;
 		}
 
 		TekYonluDugum<Integer> onceki = null;
-		TekYonluDugum<Integer> gecici = bas;
+		TekYonluDugum<Integer> gecici = ilk;
 
 		do {
 			if (gecici.veri == hedef) {
 				if (onceki != null) {
 					onceki.sonraki = gecici.sonraki;
-					if (gecici == bas) {
-						bas = gecici.sonraki; // Baş düğümü kaldırıyorsak başı güncelle
+					if (gecici == ilk) {
+						ilk = gecici.sonraki; // Bas dugumu kaldiriyorsak ilki guncelle
 					}
 					return;
 				} else {
-					TekYonluDugum<Integer> son = bas;
-					while (son.sonraki != bas) {
+					TekYonluDugum<Integer> son = ilk;
+					while (son.sonraki != ilk) {
 						son = son.sonraki;
 					}
-					if (bas == son) {
-						bas = null;
+					if (ilk == son) {
+						ilk = null;
 					} else {
-						son.sonraki = bas.sonraki;
-						bas = bas.sonraki; // Baş düğümü kaldırıyorsak başı güncelle
+						son.sonraki = ilk.sonraki;
+						ilk = ilk.sonraki; // Bas dugumu kaldiriyorsak ilki guncelle
 					}
 					return;
 				}
@@ -61,26 +61,26 @@ public class DaireselBagliListe {
 
 			onceki = gecici;
 			gecici = gecici.sonraki;
-		} while (gecici != bas);
+		} while (gecici != ilk);
 
-		System.out.println("Verilen anahtar ile eleman bulunamadı.");
+		System.out.println("Verilen anahtar ile eleman bulunamadi.");
 	}
 
 
-	//Dairesel bağlı listeyi yazdırma
-	public void listeyiYazdir() {
-		if (bas == null) {
-			System.out.println("Boş Dairesel Bağlı Liste"); // Liste boşsa bildir
+	//Dairesel bagli listeyi yazdirma
+	public void yazdir() {
+		if (ilk == null) {
+			System.out.println("Bos Dairesel Bagli Liste"); // Liste bossa bildir
 			return;
 		}
 
-		TekYonluDugum<Integer> simdiki = bas; // Başlangıç düğümü ile başla
-		System.out.print("Dairesel Bağlı Liste: ");
+		TekYonluDugum<Integer> simdiki = ilk; // Baslangic dugumu ile basla
+		System.out.print("Dairesel Bagli Liste: ");
 		do {
-			System.out.print(simdiki.veri + " -> "); // Düğümün verisini yazdır
-			simdiki = simdiki.sonraki; // Bir sonraki düğüme geç
-		} while (simdiki != bas); // Başa dönene kadar döngüyü devam ettir
-		System.out.println("Başa Dön"); // Liste döngüyü tamamladığında başa dönüldüğünü belirt
+			System.out.print(simdiki.veri + " -> "); // Dugumun verisini yazdir
+			simdiki = simdiki.sonraki; // Bir sonraki dugume gec
+		} while (simdiki != ilk); // Basa donene kadar donguyu devam ettir
+		System.out.println("Basa Don"); // Liste donguyu tamamladiginda basa donuldugunu belirt
 	}
 
 
@@ -91,12 +91,12 @@ public class DaireselBagliListe {
 		liste.ekle(10);
 		liste.ekle(20);
 		liste.ekle(30);
-		liste.listeyiYazdir(); //Dairesel Bağlı Liste: 10 -> 20 -> 30 -> Başa Dön
+		liste.yazdir(); //Dairesel Bagli Liste: 10 -> 20 -> 30 -> Basa Don
 		
-		liste.elemanSil(20); 
-		liste.listeyiYazdir(); //Dairesel Bağlı Liste: 10 -> 30 -> Başa Dön
+		liste.sil(20); 
+		liste.yazdir(); //Dairesel Bagli Liste: 10 -> 30 -> Basa Don
 		
-		liste.elemanSil(25); //Verilen anahtar ile eleman bulunamadı.
-		liste.listeyiYazdir(); //Dairesel Bağlı Liste: 10 -> 30 -> Başa Dön
+		liste.sil(25); //Verilen anahtar ile eleman bulunamadi.
+		liste.yazdir(); //Dairesel Bagli Liste: 10 -> 30 -> Basa Don
 	}
 }

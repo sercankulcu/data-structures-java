@@ -1,50 +1,69 @@
+// Bagli liste dugumu
+class MatrisDugum<E> {
+	
+	E veri; // Dugumde saklanan veri
+	MatrisDugum<E> sag; // Sag dugume referans
+	MatrisDugum<E> asagi; // Asagi dugume referans
+	
+	// Dugumun baslatilmasi
+	MatrisDugum(E veri) {
+		this.veri = veri;
+		this.sag = null;
+		this.asagi = null;
+	}
+}
 
 public class IkiBoyutluMatristenBagliListe {
 
-	// 2D matristen oluşturulan bağlı listenin başlangıç işaretçisini döndürür
+	// 2D matristen olusturulan bagli listenin baslangic isaretcisini dondurur
 	MatrisDugum<Integer> olustur(int[][] matris, int i, int j)
 	{
-		// i veya j sınırları aşıldıysa dön
+		// i veya j sinirlari asildiysa don
 		if (i > matris.length - 1 || j > matris[0].length - 1)
 			return null;
-		// Geçerli i ve j için yeni bir düğüm oluştur ve
-		// alt ve sağ işaretçilerini sırasıyla ayarla
+		
+		// Gecerli i ve j icin yeni bir dugum olustur ve
+		// alt ve sag isaretcilerini sirayla ayarla
 		MatrisDugum<Integer> temp = new MatrisDugum<>(matris[i][j]);
-		temp.sag = olustur(matris, i, j + 1);
-		temp.asagi = olustur(matris, i + 1, j);
+		temp.sag = olustur(matris, i, j + 1); // Sag dugumu ayarla
+		temp.asagi = olustur(matris, i + 1, j); // Asagi dugumu ayarla
 		return temp;
 	}
 	
-	// Bağlı liste verilerini görüntüleme
+	// Bagli liste verilerini goruntuleme
 	void goruntule(MatrisDugum<Integer> baslangic)
 	{
-		// Sağa doğru hareket etmek için işaretçi
+		// Saga dogru hareket etmek icin isaretci
 		MatrisDugum<Integer> sag;
-		// Aşağı doğru hareket etmek için işaretçi
+		// Asagi dogru hareket etmek icin isaretci
 		MatrisDugum<Integer> asagi = baslangic;
 
-		int sayac = 0;
-		// Aşağıdaki düğüm NULL olana kadar dön
+		int sayac = 0; // Her satirdaki dugum sayisini saklar
+		// Asagidaki dugum NULL olana kadar dongu
 		while (asagi != null) {
 			sayac = 0;
 			sag = asagi;
-			// Sağa doğru hareket ederken düğüm sağ NULL olana kadar dön
+			// Sag dugum NULL olana kadar saga hareket et
 			while (sag != null) {
-				System.out.print(sag.veri + " --> ");
+				System.out.print(sag.veri + " --> "); // Dugum verisini yazdir
 				sayac++;
 				sag = sag.sag;
 			}
-			System.out.print("null");
+			System.out.print("null"); // Son dugum isaretcisi
 			System.out.println();
-			asagi = asagi.asagi;
+			asagi = asagi.asagi; // Bir sonraki satira gec
 
+			// Cizgiler ve oklar ile baglantilari yazdir
 			for(int i = 0; i < sayac; i++) {
 				System.out.print("|     ");
-			}System.out.println();
+			}
+			System.out.println();
 			for(int i = 0; i < sayac; i++) {
 				System.out.print("v     ");
-			}System.out.println();
+			}
+			System.out.println();
 		}
+		// Alt satirdaki NULL degerlerini yazdir
 		for(int i = 0; i < sayac; i++) {
 			System.out.print("null  ");
 		}
@@ -54,11 +73,13 @@ public class IkiBoyutluMatristenBagliListe {
 	public static void main(String[] args)
 	{
 		IkiBoyutluMatristenBagliListe matristenBagliListe = new IkiBoyutluMatristenBagliListe();
-		// İki boyutlu matris
+		// Iki boyutlu matris
 		int[][] matris = { 	{1, 2, 13},
 							{14, 5, 6},
 							{7, 18, 9} };
+		// Bagli listeyi olustur
 		MatrisDugum<Integer> baslangic = matristenBagliListe.olustur(matris, 0, 0);
+		// Bagli listeyi goruntule
 		matristenBagliListe.goruntule(baslangic);
 	}
 }
