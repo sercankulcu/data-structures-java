@@ -1,72 +1,73 @@
-import java.util.Arrays;
+import java.util.Arrays; 
 import java.util.Stack;
 
 /*
- * "Stock Span Problem" veya Türkçe adıyla "Hisse Senedi Sıçrama Problemi," 
- * hisse senedi veya finansal veri analizinde kullanılan bir problemdir. 
+ * "Stock Span Problem" veya diger bir ifadeyle "Hisse Senedi Sicrama Problemi," 
+ * finansal analizde kullanilan bir problemdir. 
  * 
- * Bu problem, belirli bir süre içindeki hisse senedi fiyatlarını inceleyerek, 
- * her bir günün hangi günlerden daha yüksek bir kapanış fiyatına sahip olduğunu 
- * bulmayı amaçlar. Yani, her günün o ana kadar kaç ardışık gün boyunca kapanış 
- * fiyatının arttığını hesaplar. 
+ * Problem, belirli bir sure boyunca hisse senedi fiyatlarini inceleyerek her gunun 
+ * fiyatinin kac ardısık gun boyunca daha yuksek veya es oldugunu bulmayi hedefler. 
  * 
- * Problem şu şekilde açıklanabilir: 
+ * Problem aciklamasi:
+ * Verilen bir dizi hisse senedi fiyatindan, her bir gun icin ardısık fiyatin 
+ * kac gun boyunca daha yuksek/es oldugu hesaplanir. 
  * 
- * Verilen bir dizi hisse senedi fiyatı var. Her günün kapanış fiyatı sırasıyla 
- * dizi içinde bulunuyor. Her gün için, o güne kadar olan en uzun ardışık gün 
- * sayısını hesaplamamız gerekiyor, bu günün fiyatı, tüm önceki günlerin fiyatlarından 
- * yüksek veya eşitse. 
+ * Ornek: 
+ * Dizi: [100, 80, 60, 70, 60, 75, 85]
+ * Sicrama degerleri: [1, 1, 1, 2, 1, 4, 6]
  * 
- * Örnek: Diyelim ki elimizde aşağıdaki hisse senedi fiyatları bulunuyor: 
+ * Aciklamasi:
+ * - Gun 1: Ilk gun oldugu icin sicrama = 1.
+ * - Gun 2: 80 > 100 degil, sicrama = 1.
+ * - Gun 3: 60 > 80 degil, sicrama = 1.
+ * - Gun 4: 70 > 60, sicrama = 2.
+ * - Gun 5: 60 > 70 degil, sicrama = 1.
+ * - Gun 6: 75 > 60, 70, 60; sicrama = 4.
+ * - Gun 7: 85 > 75, 60, 70, 60; sicrama = 6.
  * 
- * [100, 80, 60, 70, 60, 75, 85] 
- * 
- * Bu verilere göre, her günün ardışık gün sayısı şu şekilde hesaplanabilir:
- * 
- * gün: 1 (ilk gün olduğu için)
- * gün: 1 (80 > 100 değil)
- * gün: 1 (60 > 80 değil)
- * gün: 2 (70 > 60)
- * gün: 1 (60 > 70 değil)
- * gün: 4 (75 > 60, 70, 60)
- * gün: 6 (85 > 75, 60, 70, 60)
- * 
- * Bu problemin amacı, hisse senedi fiyatlarının geçmiş performansını anlamak ve 
- * gelecekteki yatırım kararlarına yardımcı olmaktır. Ayrıca, teknik analizde ve 
- * finansal piyasa analizinde kullanılan bir önemli ölçümdür. 
- * 
- * */
+ * Bu problem, gecmis performansi analiz etmek ve karar alma sureclerinde 
+ * fayda saglamak icin kullanilir. 
+ */
 
 public class HisseSenediSicrama {
 
+    // Sicrama hesaplama fonksiyonu
 	public static int[] hesaplaSicrama(int[] fiyatlar) {
-		int[] sicrama = new int[fiyatlar.length];
-		Stack<Integer> yigin = new Stack<>();
+		int[] sicrama = new int[fiyatlar.length]; // Sicrama degerlerini tutar
+		Stack<Integer> yigin = new Stack<>();    // Gecici hesaplama icin bir yigin kullanilir
 
+		// Ilk gun, sicrama her zaman 1'dir
 		yigin.push(0); 
-		System.out.println("Yığına ekle " + 0);
+		System.out.println("Yigina ekle " + 0);
 		sicrama[0] = 1;
 
+		// Tum fiyatlari tek tek incele
 		for (int i = 1; i < fiyatlar.length; i++) {
-			System.out.println("Adım " + i);
+			System.out.println("Adim " + i);
+			
+			// Yigin bos degilse ve mevcut fiyat, yigindaki fiyatlardan yuksekse yigindan cikar
 			while (!yigin.isEmpty() && fiyatlar[i] >= fiyatlar[yigin.peek()]) {
-				System.out.println("Yığından al " + yigin.peek());
+				System.out.println("Yigindan al " + yigin.peek());
 				yigin.pop();
 			}
 
+			// Sicrama degerini hesapla
 			sicrama[i] = yigin.isEmpty() ? (i + 1) : (i - yigin.peek());
-			System.out.println("Yığına ekle " + i + ", sicrama[" + i + "] " + sicrama[i]);
+			System.out.println("Yigina ekle " + i + ", sicrama[" + i + "] " + sicrama[i]);
+
+			// Mevcut indeksi yigina ekle
 			yigin.push(i);
 		}
 
-		return sicrama;
+		return sicrama; // Sicrama degerlerini dondur
 	}
 
 	public static void main(String[] args) {
-		int[] fiyatlar = {100, 80, 60, 70, 60, 75, 85};
-		int[] sicrama = hesaplaSicrama(fiyatlar);
+		int[] fiyatlar = {100, 80, 60, 70, 60, 75, 85}; // Hisse senedi fiyatlari
+		int[] sicrama = hesaplaSicrama(fiyatlar);       // Sicrama hesaplama
 
-		System.out.println("Hisse Senedi Fiyatları: " + Arrays.toString(fiyatlar));
-		System.out.println("Sıçrama Değerleri: " + Arrays.toString(sicrama));
+		// Sonuclari ekrana yazdir
+		System.out.println("Hisse Senedi Fiyatlari: " + Arrays.toString(fiyatlar));
+		System.out.println("Sicrama Degerleri: " + Arrays.toString(sicrama));
 	}
 }

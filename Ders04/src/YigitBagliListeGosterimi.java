@@ -1,72 +1,89 @@
-
 public class YigitBagliListeGosterimi {
-	
-	class Dugum {
-		int veri;
-		Dugum sonraki;
 
-		public Dugum(int veri) {
-			this.veri = veri;
-			this.sonraki = null;
-		}
-	}
+    // Dugum sinifi, yigin elemanlarini temsil eder.
+    class Dugum {
+        int veri; // Dugumun tasidigi deger.
+        Dugum sonraki; // Bir sonraki dugumu isaret eder.
 
-	private Dugum tepe;
+        // Dugum constructor - Veriyi alir ve sonraki'yi null olarak ayarlar.
+        public Dugum(int veri) {
+            this.veri = veri;
+            this.sonraki = null;
+        }
+    }
 
-	public YigitBagliListeGosterimi() {
-		tepe = null; // Boş yığını temsil etmek için tepe başlangıçta null'dır.
-	}
+    private Dugum tepe; // Yiginin tepe elemanini temsil eder.
 
-	public boolean bosMu() {
-		return (tepe == null);
-	}
+    // Constructor - Bos bir yigin olusturur.
+    public YigitBagliListeGosterimi() {
+        tepe = null; // Baslangicta tepe null olarak ayarlanir.
+    }
 
-	public void ekle(int veri) {
-		Dugum yeniDugum = new Dugum(veri);
-		yeniDugum.sonraki = tepe;
-		tepe = yeniDugum;
-		System.out.println(veri + " yığına eklenmiştir.");
-	}
+    // Yiginin bos olup olmadigini kontrol eder.
+    public boolean bosMu() {
+        return (tepe == null); // Tepe null ise yigin bostur.
+    }
 
-	public int cikar() {
-		if (bosMu()) {
-			System.out.println("Yığın boş. Çıkarma yapılamaz.");
-			return -1; // Boş yığın için belirleyici bir değer döndürün.
-		} else {
-			int cikarilanDeger = tepe.veri;
-			tepe = tepe.sonraki;
-			System.out.println(cikarilanDeger + " yığından çıkarılmıştır.");
-			return cikarilanDeger;
-		}
-	}
+    // Yigina yeni bir eleman ekler.
+    public void ekle(int veri) {
+        Dugum yeniDugum = new Dugum(veri); // Yeni bir dugum olustur.
+        yeniDugum.sonraki = tepe; // Yeni dugumun sonraki'si eski tepeyi isaret eder.
+        tepe = yeniDugum; // Tepeyi yeni dugum olarak ayarla.
+        System.out.println(veri + " yigina eklenmistir.");
+    }
 
-	public int bak() {
-		if (bosMu()) {
-			System.out.println("Yığın boş. Bakma yapılamaz.");
-			return -1; // Boş yığın için belirleyici bir değer döndürün.
-		} else {
-			return tepe.veri;
-		}
-	}
+    // Yigindan bir eleman cikarir.
+    public int cikar() {
+        if (bosMu()) {
+            // Yigin bos ise bilgi mesaji yazdirir ve belirleyici bir deger dondurur.
+            System.out.println("Yigin bos. Cikarma yapilamaz.");
+            return -1;
+        } else {
+            int cikarilanDeger = tepe.veri; // Tepedeki degeri al.
+            tepe = tepe.sonraki; // Tepeyi bir sonraki dugume kaydir.
+            System.out.println(cikarilanDeger + " yigindan cikarilmistir.");
+            return cikarilanDeger;
+        }
+    }
 
-	public static void main(String[] args) {
-		
-		YigitBagliListeGosterimi yigin = new YigitBagliListeGosterimi();
+    // Yigindaki tepe elemanini goruntuler.
+    public int bak() {
+        if (bosMu()) {
+            // Yigin bos ise bilgi mesaji yazdirir ve belirleyici bir deger dondurur.
+            System.out.println("Yigin bos. Bakma yapilamaz.");
+            return -1;
+        } else {
+            return tepe.veri; // Tepedeki elemani dondur.
+        }
+    }
 
-		yigin.ekle(10);
-		yigin.ekle(20);
-		yigin.ekle(30);
+    public static void main(String[] args) {
 
-		System.out.println("Tepe öğe: " + yigin.bak());
+        // Yeni bir yigin olustur.
+        YigitBagliListeGosterimi yigin = new YigitBagliListeGosterimi();
 
-		yigin.cikar();
-		yigin.cikar();
+        // Yigina elemanlar ekle.
+        yigin.ekle(10);
+        yigin.ekle(20);
+        yigin.ekle(30);
 
-		System.out.println("Yığın boş mu? " + yigin.bosMu());
+        // Tepedeki elemani goruntule.
+        System.out.println("Tepe oge: " + yigin.bak());
 
-		yigin.cikar();
-		yigin.cikar(); // Boş yığından çıkarmaya çalışma.
+        // Yigindan elemanlar cikar.
+        yigin.cikar();
+        yigin.ekle(40);
+        yigin.cikar();
+        yigin.cikar();
 
-		System.out.println("Yığın boş mu? " + yigin.bosMu());
-	}
+        // Yiginin bos olup olmadigini kontrol et.
+        System.out.println("Yigin bos mu? " + yigin.bosMu());
+
+        // Bos yigindan eleman cikarma denemesi.
+        yigin.cikar();
+        yigin.cikar();
+
+        // Yiginin bos olup olmadigini bir kez daha kontrol et.
+        System.out.println("Yigin bos mu? " + yigin.bosMu());
+    }
 }

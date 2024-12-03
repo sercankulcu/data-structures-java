@@ -1,32 +1,31 @@
-/*
- * "Hanoi Kuleleri," matematik ve bilgisayar bilimlerinde önemli bir problem olan 
- * ve oyun olarak da bilinen bir bulmacadır. Hanoi Kuleleri problemi, birçok diski 
- * farklı boyutlarda ve büyükten küçüğe sıralı bir şekilde bir çubuktan diğerine 
- * taşıma problemi olarak tanımlanır. Bu problem genellikle üç çubuk veya direk 
- * aracılığıyla modellemektedir.
+/* 
+ * "Hanoi Kuleleri," matematik ve bilgisayar bilimlerinde onemli bir problem ve 
+ * ayni zamanda bir bulmaca oyunudur. Hanoi Kuleleri problemi, farkli boyutlardaki 
+ * diskleri bir cubuktan digerine tasima problemi olarak tanimlanir. Bu problem 
+ * genellikle uc cubuk veya direk kullanilarak modellestirilir.
  * 
- * Hanoi Kuleleri problemi şu temel kurallarla tanımlanır:
+ * Hanoi Kuleleri probleminin kurallari:
  * 
- * Başlangıçta, diskler büyükten küçüğe sıralı bir şekilde bir çubuk üzerindedir.
- * Disksiz olan çubuklardan birini yardımcı çubuk olarak kullanabilirsiniz.
- * Sadece en üstteki diski bir çubuktan diğerine taşıma yeteneğiniz vardır.
- * Her adımda, daha büyük bir disk daha küçük bir diskin üzerine konulamaz.
+ * 1. Diskler baslangicta buyukten kucuge sirali olarak bir cubuk uzerindedir.
+ * 2. Diskleri tasirken bos bir cubugu yardimci olarak kullanabilirsiniz.
+ * 3. Her adimda sadece en ustteki disk bir cubuktan digerine tasinabilir.
+ * 4. Buyuk bir disk, kucuk bir diskin uzerine koyulamaz.
  * 
- * Problem, tüm diskleri birinci çubuktan üçüncü çubuğa taşımanın nasıl yapılabileceğini 
- * ve kaç adım gerektiğini bulmayı amaçlar. İdeal olarak, minimum adımda tüm diskleri 
- * taşımak istenir. Hanoi Kuleleri probleminin en basit hali üç çubuk kullanılarak 
+ * Bu problem, tum diskleri birinci cubuktan ucuncu cubuga minimum adimda 
+ * tasima islemini bulmayi hedefler. En basit haliyle, uc cubuk kullanilarak 
  * ifade edilir.
- * 
- * */
+ */
 
 import java.util.Stack;
 
+// Disk sınıfı, diskin bilgilerini tutar
 class Disk {
-	int diskSayisi;
-	char kaynak;
-	char yardimci;
-	char hedef;
+	int diskSayisi;  // Disk sayisi
+	char kaynak;     // Kaynak cubuk
+	char yardimci;   // Yardimci cubuk
+	char hedef;      // Hedef cubuk
 
+	// Constructor - Disk bilgilerini alir
 	Disk(int diskSayisi, char kaynak, char yardimci, char hedef) {
 		this.diskSayisi = diskSayisi;
 		this.kaynak = kaynak;
@@ -37,32 +36,38 @@ class Disk {
 
 public class HanoiKulesi {
 
-	// Hanoi Kulesi işlemini yapan fonksiyon
+	// Hanoi Kulesi isleminde diskleri tasir
 	static void hanoi(int diskSayisi) {
-		Stack<Disk> yigin = new Stack<>();
+		Stack<Disk> yigin = new Stack<>(); // Diskleri tutacak bir yigin olustur
 
-		// Başlangıç durumu
+		// Baslangic durumu - Tum diskleri yiginin ustune ekler
 		yigin.push(new Disk(diskSayisi, 'A', 'B', 'C'));
-		System.out.println("Yığına ekle 3 A B C");
+		System.out.println("Yigina ekle " + diskSayisi + " A B C");
+
+		// Yigin bosalana kadar isleme devam et
 		while (!yigin.isEmpty()) {
-			Disk disk = yigin.pop();
-			System.out.println("Yığından al " + disk.diskSayisi + " " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef + " ");
+			Disk disk = yigin.pop(); // Yigindan bir disk cikar
+			System.out.println("Yigindan al " + disk.diskSayisi + " " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef);
+
+			// Tek disk varsa direk tasima yap
 			if (disk.diskSayisi == 1) {
-				System.out.println("Diski " + disk.kaynak + " çubuğundan " + disk.hedef + " çubuğuna taşı.");
+				System.out.println("Diski " + disk.kaynak + " cubugundan " + disk.hedef + " cubuguna tasi.");
 			} else {
-				// Yardımcı çubuğu kullanarak diskleri geçici olarak taşı
+				// Daha buyuk problemleri kucuk parcalara ayir
 				yigin.push(new Disk(disk.diskSayisi - 1, disk.yardimci, disk.kaynak, disk.hedef));
-				System.out.println("Yığına ekle " + (disk.diskSayisi - 1) + " " + disk.yardimci + " " + disk.kaynak + " " + disk.hedef + " ");
+				System.out.println("Yigina ekle " + (disk.diskSayisi - 1) + " " + disk.yardimci + " " + disk.kaynak + " " + disk.hedef);
+
 				yigin.push(new Disk(1, disk.kaynak, disk.yardimci, disk.hedef));
-				System.out.println("Yığına ekle " + (1) + " " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef + " ");
+				System.out.println("Yigina ekle 1 " + disk.kaynak + " " + disk.yardimci + " " + disk.hedef);
+
 				yigin.push(new Disk(disk.diskSayisi - 1, disk.kaynak, disk.hedef, disk.yardimci));
-				System.out.println("Yığına ekle " + (disk.diskSayisi - 1) + " " + disk.kaynak + " " + disk.hedef + " " + disk.yardimci + " ");
+				System.out.println("Yigina ekle " + (disk.diskSayisi - 1) + " " + disk.kaynak + " " + disk.hedef + " " + disk.yardimci);
 			}
 		}
 	}
 
 	public static void main(String[] args) {
-		int diskSayisi = 3;
-		hanoi(diskSayisi);
+		int diskSayisi = 3; // Toplam disk sayisi
+		hanoi(diskSayisi);  // Hanoi Kulesi islemine basla
 	}
 }

@@ -1,25 +1,24 @@
-
 import java.util.Stack;
 
 public class PalindromKontrol {
 
 	public static boolean palindromKontrol(String metin) {
-		// Boşlukları ve noktalama işaretlerini kaldırın ve metni küçük harfe çevirin
+		// Bosluklari ve noktalama isaretlerini kaldirin ve metni kucuk harfe cevirin
 		metin = metin.replaceAll("[\\s.,?!]", "").toLowerCase();
 
-		// Bir yığın (stack) oluşturun
+		// Bir yigin (stack) olusturun
 		Stack<Character> yigin = new Stack<>();
 		int uzunluk = metin.length();
 
-		// Metnin ilk yarısını yığına ekle
+		// Metnin ilk yarisini yigina ekle
 		for (int i = 0; i < uzunluk / 2; i++) {
 			yigin.push(metin.charAt(i));
 		}
 
-		// Metnin kalan kısmını yığından alınanla karşılaştır
+		// Metnin kalan kismini yigindan alinanla karsilastir
 		for (int i = (uzunluk / 2) + (uzunluk % 2); i < uzunluk; i++) {
 			if(metin.charAt(i) != yigin.pop()) {
-				System.out.println("Bu bir palindrom değildir.");
+				System.out.println("Bu bir palindrom degildir.");
 				return false;
 			}
 		}
@@ -35,5 +34,6 @@ public class PalindromKontrol {
 		palindromKontrol("abcba");
 		palindromKontrol("ey edip adanada pide ye");
 		palindromKontrol("ey edip adanada pide ye!");
+		palindromKontrol("ey edip adanade pide ye!");
 	}
 }

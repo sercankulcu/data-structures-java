@@ -1,71 +1,89 @@
-
 public class YigitDiziGosterimi {
-	
-	private int kapasite;
-	private int tepe;
-	private int[] dizi;
 
-	public YigitDiziGosterimi(int boyut) {
-		kapasite = boyut;
-		dizi = new int[kapasite];
-		tepe = -1; // Tepe işaretçisini (-1 boş yığın) başlangıçta tanımla.
-	}
+    private int kapasite; // Yiginin maksimum kapasitesini belirtir.
+    private int tepe; // Yiginin tepe elemanini isaret eder.
+    private int[] dizi; // Yiginin elemanlarini saklayan dizi.
 
-	public boolean bosMu() {
-		return (tepe == -1);
-	}
+    // Constructor - Belirtilen boyutta bir yigin olusturur.
+    public YigitDiziGosterimi(int boyut) {
+        kapasite = boyut; // Yiginin kapasitesini ayarla.
+        dizi = new int[kapasite]; // Elemanlari saklamak icin bir dizi olustur.
+        tepe = -1; // Baslangicta yigin bos oldugu icin tepeyi -1 olarak ayarla.
+    }
 
-	public boolean doluMu() {
-		return (tepe == kapasite - 1);
-	}
+    // Yiginin bos olup olmadigini kontrol eder.
+    public boolean bosMu() {
+        return (tepe == -1); // Tepe -1 ise yigin bostur.
+    }
 
-	public void ekle(int deger) {
-		if (doluMu()) {
-			System.out.println("Yığın dolu. " + deger + " eklenemedi.");
-		} else {
-			dizi[++tepe] = deger;
-			System.out.println(deger + " yığına eklenmiştir.");
-		}
-	}
+    // Yiginin dolu olup olmadigini kontrol eder.
+    public boolean doluMu() {
+        return (tepe == kapasite - 1); // Tepe kapasite - 1 ise yigin doludur.
+    }
 
-	public int cikar() {
-		if (bosMu()) {
-			System.out.println("Yığın boş. Çıkarma yapılamaz.");
-			return -1; // Boş yığın için bir belirleyici değer döndürün.
-		} else {
-			int cikarilanDeger = dizi[tepe--];
-			System.out.println(cikarilanDeger + " yığından çıkarılmıştır.");
-			return cikarilanDeger;
-		}
-	}
+    // Yigina yeni bir deger ekler.
+    public void ekle(int deger) {
+        if (doluMu()) {
+            // Ekleme yapilamazsa bilgi mesaji yazdirir.
+            System.out.println("Yigin dolu. " + deger + " eklenemedi.");
+        } else {
+            dizi[++tepe] = deger; // Yeni degeri tepeye ekle ve tepeyi arttir.
+            System.out.println(deger + " yigina eklenmistir.");
+        }
+    }
 
-	public int bak() {
-		if (bosMu()) {
-			System.out.println("Yığın boş. Bakma yapılamaz.");
-			return -1; // Boş yığın için bir belirleyici değer döndürün.
-		} else {
-			return dizi[tepe];
-		}
-	}
+    // Yigindan bir deger cikarir.
+    public int cikar() {
+        if (bosMu()) {
+            // Cikarma yapilamazsa bilgi mesaji yazdirir ve belirleyici bir deger dondurur.
+            System.out.println("Yigin bos. Cikarma yapilamaz.");
+            return -1;
+        } else {
+            // Tepedeki elemani cikar ve tepeyi azalt.
+            int cikarilanDeger = dizi[tepe--];
+            System.out.println(cikarilanDeger + " yigindan cikarilmistir.");
+            return cikarilanDeger;
+        }
+    }
 
-	public static void main(String[] args) {
-		
-		YigitDiziGosterimi yigin = new YigitDiziGosterimi(5); // Maksimum 5 öğeli bir yığın oluşturun.
+    // Yigindaki tepe elemani dondurur.
+    public int bak() {
+        if (bosMu()) {
+            // Yigin bos ise bilgi mesaji yazdirir ve belirleyici bir deger dondurur.
+            System.out.println("Yigin bos. Bakma yapilamaz.");
+            return -1;
+        } else {
+            return dizi[tepe]; // Tepedeki elemani dondur.
+        }
+    }
 
-		yigin.ekle(10);
-		yigin.ekle(20);
-		yigin.ekle(30);
+    public static void main(String[] args) {
 
-		System.out.println("Tepe öğe: " + yigin.bak());
+        // Maksimum 5 eleman kapasitesine sahip bir yigin olustur.
+        YigitDiziGosterimi yigin = new YigitDiziGosterimi(5);
 
-		yigin.cikar();
-		yigin.cikar();
+        // Yigina elemanlar ekle.
+        yigin.ekle(10);
+        yigin.ekle(20);
+        yigin.ekle(30);
 
-		System.out.println("Yığın boş mu? " + yigin.bosMu());
+        // Tepedeki elemani goruntule.
+        System.out.println("Tepe oge: " + yigin.bak());
 
-		yigin.cikar();
-		yigin.cikar(); // Boş yığından çıkarmaya çalışma.
+        // Yigindan elemanlar cikar.
+        yigin.cikar();
+        yigin.ekle(40);
+        yigin.cikar();
+        yigin.cikar();
 
-		System.out.println("Yığın dolu mu? " + yigin.doluMu());
-	}
+        // Yiginin bos olup olmadigini kontrol et.
+        System.out.println("Yigin bos mu? " + yigin.bosMu());
+
+        // Bos yigindan eleman cikarma denemesi.
+        yigin.cikar();
+        yigin.cikar();
+
+        // Yiginin dolu olup olmadigini kontrol et.
+        System.out.println("Yigin dolu mu? " + yigin.doluMu());
+    }
 }
