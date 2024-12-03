@@ -2,40 +2,61 @@ import java.util.LinkedList;
 
 public class LinkedListOrnegi {
 	public static void main(String[] args) {
-		// LinkedList oluşturma
+		// LinkedList olusturuluyor
 		LinkedList<String> sehirler = new LinkedList<>();
 
-		// Elemanlar ekleme
+		// Listeye eleman ekleniyor
 		sehirler.add("Ankara");
 		sehirler.add("İstanbul");
 		sehirler.add("İzmir");
 		sehirler.add("Bursa");
 
-		// Liste içeriğini görüntüleme
-		System.out.println("Şehirler: " + sehirler);
+		// Liste iceriği ekrana yazdiriliyor
+		System.out.println("Sehirler: " + sehirler);
 
-		// Eleman sayısını alma
+		// Liste boyutu (eleman sayısı) alınıyor
 		int elemanSayisi = sehirler.size();
-		System.out.println("Şehir Sayısı: " + elemanSayisi);
+		System.out.println("Sehir Sayisi: " + elemanSayisi);
 
-		// Belirli bir indeksteki elemana erişim
+		// Belirli bir indeksteki elemana erisim sağlanıyor
 		String ikinciSehir = sehirler.get(1);
-		System.out.println("İkinci Şehir: " + ikinciSehir);
+		System.out.println("İkinci Sehir: " + ikinciSehir);
 
-		// Belirli bir elemanı değiştirme
+		// Belirli bir eleman degistiriliyor (İzmir -> Antalya)
 		sehirler.set(2, "Antalya");
-		System.out.println("Değiştirilmiş Şehirler: " + sehirler);
+		System.out.println("Degistirilmis Sehirler: " + sehirler);
 
-		// Belirli bir elemanı kaldırma
-		sehirler.remove(0);
-		System.out.println("Ankara Kaldırıldı: " + sehirler);
+		// Belirli bir eleman (Ankara) listeden kaldiriliyor
+		sehirler.remove(0); 
+		System.out.println("Ankara Kaldirildi: " + sehirler);
 
-		// Bir elemanın varlığını kontrol etme
+		// Listede bir eleman var mi kontrol ediliyor (İstanbul)
 		boolean istanbulVarMi = sehirler.contains("İstanbul");
-		System.out.println("İstanbul Var Mı? " + istanbulVarMi);
+		System.out.println("İstanbul Var Mi? " + istanbulVarMi);
 
-		// Liste boş mu?
+		// Liste bos mu kontrol ediliyor
 		boolean bosMu = sehirler.isEmpty();
-		System.out.println("Liste Boş Mu? " + bosMu);
+		System.out.println("Liste Bos Mu? " + bosMu);
+
+		// Liste basina bir eleman ekleyelim
+		sehirler.addFirst("Adana");
+		System.out.println("Listeye Adana Eklendi: " + sehirler);
+
+		// Liste sonuna bir eleman ekleyelim
+		sehirler.addLast("Trabzon");
+		System.out.println("Listeye Trabzon Eklendi: " + sehirler);
+
+		// Listeden son eleman kaldirilabilir
+		String sonEleman = sehirler.removeLast();
+		System.out.println("Son Eleman Kaldirildi: " + sonEleman);
+		System.out.println("Guncellenmis Sehirler: " + sehirler);
+
+		// Listeden basit bir eleman kaldiralim
+		sehirler.remove("Bursa");
+		System.out.println("Bursa Kaldirildi: " + sehirler);
+
+		// Listeyi temizleyelim
+		sehirler.clear();
+		System.out.println("Liste Temizlendi: " + sehirler);
 	}
 }

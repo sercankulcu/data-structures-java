@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class ArrayVsArrayListPerformance {
 	
 	// TODO: try with different SIZE values
-	final static int SIZE = 1000000;
+	final static int SIZE = 10000000;
 
 	public static void main(String[] args) {
 		// Create an array and an ArrayList with the same number of elements.
