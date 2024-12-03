@@ -1,110 +1,108 @@
-
 public class IkiliAgacOzYinelemeli {
 
-	private Dugum<Integer> kok;
+    private Dugum<Integer> kok;
 
-	public void ikiliAgacOlustur() {
+    // Ikili agac olusturma islemi
+    public void ikiliAgacOlustur() {
 
-		Dugum<Integer> birinci = new Dugum<>(9);   // Birinci düğümü oluştur (kök düğüm)
-		Dugum<Integer> ikinci = new Dugum<>(2);    // İkinci düğümü oluştur
-		Dugum<Integer> ucuncu = new Dugum<>(3);    // Üçüncü düğümü oluştur
-		Dugum<Integer> dorduncu = new Dugum<>(4);  // Dördüncü düğümü oluştur
-		Dugum<Integer> besinci = new Dugum<>(7);  // Dördüncü düğümü oluştur
-		Dugum<Integer> altinci = new Dugum<>(5);  // Dördüncü düğümü oluştur
+        // Dugumler olusturuluyor
+        Dugum<Integer> birinci = new Dugum<>(9);   // Kok dugum
+        Dugum<Integer> ikinci = new Dugum<>(2);    // Sol cocuk dugum
+        Dugum<Integer> ucuncu = new Dugum<>(3);    // Sag cocuk dugum
+        Dugum<Integer> dorduncu = new Dugum<>(4);  // Ikincinin solu
+        Dugum<Integer> besinci = new Dugum<>(7);   // Dorduncunun sagi
+        Dugum<Integer> altinci = new Dugum<>(5);   // Ucuncunun solu
 
-		//     9
-		//    / \
-		//   2   3
-		//  /   /
-		// 4   5
-		//  \
-		//   7
+        // Agacin yapisi tanimlaniyor
+        kok = birinci;                // Kok dugumu tanimla
+        birinci.sol = ikinci;         // Kokun sol cocugu
+        birinci.sag = ucuncu;         // Kokun sag cocugu
+        ikinci.sol = dorduncu;        // Ikincinin sol cocugu
+        dorduncu.sag = besinci;       // Dorduncunun sag cocugu
+        ucuncu.sol = altinci;         // Ucuncunun sol cocugu
+    }
 
-		kok = birinci;                 // Kök düğümü belirle
-		birinci.sol = ikinci;          // Birinci düğümün sol alt düğümünü ayarla
-		birinci.sag = ucuncu;          // Birinci düğümün sağ alt düğümünü ayarla
-		ikinci.sol = dorduncu;         // İkinci düğümün sol alt düğümünü ayarla
-		dorduncu.sag = besinci;
-		ucuncu.sol = altinci;
-	}
+    // Kok basta dolasma (preorder traversal)
+    public void kokBastaDolas(Dugum<Integer> kok) {
+        if (kok != null) {
+            System.out.print(kok.veri + " ");  // Dugumun degerini yazdir
+            kokBastaDolas(kok.sol);  // Sol alt agaci dolas
+            kokBastaDolas(kok.sag);  // Sag alt agaci dolas
+        }
+    }
 
-	public void kokBastaDolas(Dugum<Integer> kok) {
-		if (kok != null) {
-			System.out.print(kok.veri + " ");  // Kök düğümün verisini ekrana yazdır
-			kokBastaDolas(kok.sol);  // Sol alt ağacı kökten başlayarak dolaş
-			kokBastaDolas(kok.sag);  // Sağ alt ağacı kökten başlayarak dolaş
-		}
-	}
+    // Kok ortada dolasma (inorder traversal)
+    public void kokOrtadaDolas(Dugum<Integer> kok) {
+        if (kok == null) {
+            return;  // Eger dugum bos ise islemi sonlandir
+        }
+        kokOrtadaDolas(kok.sol);   // Sol alt agaci dolas
+        System.out.print(kok.veri + " ");  // Dugumun degerini yazdir
+        kokOrtadaDolas(kok.sag);   // Sag alt agaci dolas
+    }
 
-	public void kokOrtadaDolas(Dugum<Integer> kok) {
-		if (kok == null) {
-			return;  // Eğer düğüm null ise, işlem sonlandırılır (temel durum)
-		}
+    // Kok sonda dolasma (postorder traversal)
+    public void kokSondaDolas(Dugum<Integer> kok) {
+        if (kok != null) {
+            kokSondaDolas(kok.sol); // Sol alt agaci dolas
+            kokSondaDolas(kok.sag); // Sag alt agaci dolas
+            System.out.print(kok.veri + " "); // Dugumun degerini yazdir
+        }
+    }
 
-		kokOrtadaDolas(kok.sol);   // Sol alt ağacı kökten başlayarak dolaş
-		System.out.print(kok.veri + " ");  // Kök düğümün verisini ekrana yazdır
-		kokOrtadaDolas(kok.sag);   // Sağ alt ağacı kökten başlayarak dolaş
-	}
+    // Seviye sirali dolas (level-order traversal)
+    public void seviyeSiraliDolas(Dugum<Integer> kok) {
+        int derinlik = agacDerinligi(kok); // Agacin derinligini hesapla
+        for (int seviye = 0; seviye <= derinlik; seviye++) {
+            seviyeSiraliDolas(kok, seviye); // Her seviyeyi sirayla dolas
+        }
+    }
 
-	public void kokSondaDolas(Dugum<Integer> kok) {
-		if (kok != null) {
-			kokSondaDolas(kok.sol);
-			kokSondaDolas(kok.sag);
-			System.out.print(kok.veri + " ");
-		}
-	}
+    // Belirli bir seviyedeki dugumleri dolas
+    private void seviyeSiraliDolas(Dugum<Integer> dugum, int hedefSeviye) {
+        if (dugum == null) {
+            return; // Dugum bos ise islem sonlandirilir
+        }
+        if (hedefSeviye == 0) {
+            System.out.print(dugum.veri + " "); // Hedef seviyedeki dugumu yazdir
+        } else {
+            seviyeSiraliDolas(dugum.sol, hedefSeviye - 1); // Sol cocuk icin seviyeyle azalt
+            seviyeSiraliDolas(dugum.sag, hedefSeviye - 1); // Sag cocuk icin seviyeyle azalt
+        }
+    }
 
-	public void seviyeSiraliDolas(Dugum<Integer> kok) {
-		int derinlik = agacDerinligi(kok);
-		for (int seviye = 0; seviye <= derinlik; seviye++) {
-			seviyeSiraliDolas(kok, seviye);
-		}
-	}
+    // Agacin derinligini hesapla
+    private int agacDerinligi(Dugum<Integer> dugum) {
+        if (dugum == null) {
+            return 0; // Bos agacin derinligi 0'dır
+        } else {
+            int solDerinlik = agacDerinligi(dugum.sol); // Sol alt agacin derinligi
+            int sagDerinlik = agacDerinligi(dugum.sag); // Sag alt agacin derinligi
+            return 1 + Math.max(solDerinlik, sagDerinlik); // Maksimum derinlik + 1
+        }
+    }
 
-	private void seviyeSiraliDolas(Dugum<Integer> dugum, int hedefSeviye) {
-		if (dugum == null) {
-			return; // Düğüm boşsa işlemi sonlandır
-		}
-		if (hedefSeviye == 0) {
-			System.out.print(dugum.veri + " "); // Hedef seviyeye ulaşıldığında düğüm değerini yazdır
-		} else {
-			seviyeSiraliDolas(dugum.sol, hedefSeviye - 1); // Sol ağacı hedef seviyeye kadar dolaş
-			seviyeSiraliDolas(dugum.sag, hedefSeviye - 1); // Sağ ağacı hedef seviyeye kadar dolaş
-		}
-	}
+    public static void main(String[] args) {
 
-	private int agacDerinligi(Dugum<Integer> dugum) {
-		if (dugum == null) {
-			return 0; // Boş bir ağacın derinliği 0'dır
-		} else {
-			int solDerinlik = agacDerinligi(dugum.sol); // Sol alt ağacın derinliği hesaplanır
-			int sagDerinlik = agacDerinligi(dugum.sag); // Sağ alt ağacın derinliği hesaplanır
+        IkiliAgacOzYinelemeli ia = new IkiliAgacOzYinelemeli();
+        ia.ikiliAgacOlustur(); // Agaci olustur
 
-			return 1 + Math.max(solDerinlik, sagDerinlik); // Sol ve sağ alt ağaçların derinliği karşılaştırılıp, maksimum alınır
-		}
-	}
+        System.out.print("Kok basta: ");
+        ia.kokBastaDolas(ia.kok); // Kok basta dolas
+        System.out.println();
 
-	public static void main(String[] args) {
+        System.out.print("Kok ortada: ");
+        ia.kokOrtadaDolas(ia.kok); // Kok ortada dolas
+        System.out.println();
 
-		IkiliAgacOzYinelemeli ia = new IkiliAgacOzYinelemeli();
-		ia.ikiliAgacOlustur();
+        System.out.print("Kok sonda: ");
+        ia.kokSondaDolas(ia.kok); // Kok sonda dolas
+        System.out.println();
 
-		System.out.print("Kök başta: ");
-		ia.kokBastaDolas(ia.kok);
-		System.out.println();
+        System.out.print("Seviye sirali: ");
+        ia.seviyeSiraliDolas(ia.kok); // Seviye sirali dolas
+        System.out.println();
 
-		System.out.print("Kök ortada: ");
-		ia.kokOrtadaDolas(ia.kok);
-		System.out.println();
-
-		System.out.print("Kök sonda: ");
-		ia.kokSondaDolas(ia.kok);
-		System.out.println();
-
-		System.out.print("Seviye sıralı: ");
-		ia.seviyeSiraliDolas(ia.kok);
-		System.out.println();
-
-		System.out.println("Ağaç derinliği: " + ia.agacDerinligi(ia.kok));
-	}
+        System.out.println("Agac derinligi: " + ia.agacDerinligi(ia.kok)); // Agacin derinligini yazdir
+    }
 }
