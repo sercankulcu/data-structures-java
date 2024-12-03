@@ -1,106 +1,111 @@
 
 public class KuyrukDiziGosterimi {
 
-	private int kapasite; // Kuyruğun maksimum boyutu
-	private int[] kuyrukDizi; // Kuyruğu temsil eden dizi
-	private int on; // Kuyruğun başı
-	private int arka; // Kuyruğun sonu
-	private int boyut; // Kuyruktaki eleman sayısı
+	private int kapasite; // Kuyrugun maksimum boyutu
+	private int[] kuyrukDizi; // Kuyrugu temsil eden dizi
+	private int on; // Kuyrugun basi
+	private int arka; // Kuyrugun sonu
+	private int boyut; // Kuyruktaki eleman sayisi
 
-	//Bu metod, bir kuyruğu bir dizi üzerinde temsil etmek için kullanılır.
+	//Bu metod, bir kuyrugu bir dizi uzerinde temsil etmek için kullanilir.
 	public KuyrukDiziGosterimi(int boyut) {
-		// Kuyruğun kapasitesini belirlemek için kullanıcının verdiği boyutu alır
+		// Kuyrugun kapasitesini belirlemek için kullanicinin verdigi boyutu alir
 		kapasite = boyut;
 
-		// Kuyruğu temsil edecek yeni bir dizi oluştur
+		// Kuyrugu temsil edecek yeni bir dizi olustur
 		kuyrukDizi = new int[kapasite];
 
-		// Kuyruğun başı ve sonunu işaretleyen indisleri başlangıç değerlerine ayarla
-		on = 0;     // Kuyruğun önü, başlangıçta dizinin ilk elemanını işaret eder.
-		arka = -1;  // Kuyruğun sonu, başlangıçta boş bir kuyruğu gösterir.
+		// Kuyrugun basi ve sonunu isaretleyen indisleri baslangiç degerlerine ayarla
+		on = 0;     // Kuyrugun onu, baslangiçta dizinin ilk elemanini isaret eder.
+		arka = -1;  // Kuyrugun sonu, baslangiçta bos bir kuyrugu gosterir.
 
-		// Kuyruğun boyutunu, başlangıçta 0 olarak belirle, çünkü kuyruk boş
+		// Kuyrugun boyutunu, baslangiçta 0 olarak belirle, çunku kuyruk bos
 		boyut = 0;
 	}
 
-	//Kuyruğa yeni bir eleman ekleme
+	//Kuyruga yeni bir eleman ekleme
 	public void ekle(int deger) {
-		// Eğer kuyruğun sonu, dizinin sonuna ulaştıysa, arka işaretçisini sıfırla
+		// Eger kuyrugun sonu, dizinin sonuna ulastiysa, arka isaretçisini sifirla
 		if (arka == kapasite - 1) {
 			arka = -1;
 		}
 
-		// Diziye yeni bir eleman eklemek için arka işaretçisini artır ve bu yere veriyi ekle
+		// Diziye yeni bir eleman eklemek için arka isaretçisini artir ve bu yere veriyi ekle
 		kuyrukDizi[++arka] = deger;
 
-		// Kuyruğun boyutunu bir artır çünkü yeni bir eleman eklendi
+		// Kuyrugun boyutunu bir artir çunku yeni bir eleman eklendi
 		boyut++;
 	}
 
-	//Kuyruktan bir eleman çıkarma
+	//Kuyruktan bir eleman çikarma
 	public int cikar() {
-		// Kuyruğun başındaki elemanı geçici bir değişkende sakla ve baş işaretçisini bir artır
+		// Kuyrugun basindaki elemani geçici bir degiskende sakla ve bas isaretçisini bir artir
 		int gecici = kuyrukDizi[on++];
 
-		// Eğer baş işareti dizinin sonuna ulaştıysa, baş işaretçisini sıfırla
+		// Eger bas isareti dizinin sonuna ulastiysa, bas isaretçisini sifirla
 		if (on == kapasite) {
 			on = 0;
 		}
 
-		// Kuyruğun boyutunu bir azalt çünkü bir eleman çıkarıldı
+		// Kuyrugun boyutunu bir azalt çunku bir eleman çikarildi
 		boyut--;
 
-		// Çıkarılan elemanı döndür
+		// Çikarilan elemani dondur
 		return gecici;
 	}
 
-	//Kuyruğun başındaki elemana bakma
+	//Kuyrugun basindaki elemana bakma
 	public int basaBak() {
-		// Kuyruğun başındaki elemanı döndür
+		// Kuyrugun basindaki elemani dondur
 		return kuyrukDizi[on];
 	}
 
-	//Kuyruğun boş olup olmadığını kontrol etme
+	//Kuyrugun bos olup olmadigini kontrol etme
 	public boolean bosMu() {
-		// Kuyruğun boyutu 0 ise, kuyruk boştur ve true değeri döndür
+		// Kuyrugun boyutu 0 ise, kuyruk bostur ve true degeri dondur
 		return boyut == 0;
 	}
 
-	//Kuyruğun dolu olup olmadığını kontrol etme
+	//Kuyrugun dolu olup olmadigini kontrol etme
 	public boolean doluMu() {
-		// Kuyruğun boyutu kapasiteye eşitse, kuyruk doludur ve true değeri döndür
+		// Kuyrugun boyutu kapasiteye esitse, kuyruk doludur ve true degeri dondur
 		return boyut == kapasite;
 	}
 
-	//Kuyruğun boyutunu döndürme
+	//Kuyrugun boyutunu dondurme
 	public int boyut() {
-		// Kuyruğun mevcut boyutunu döndür
+		// Kuyrugun mevcut boyutunu dondur
 		return boyut;
 	}
 
-	//Ana program başlangıcı
+	//Ana program baslangici
 	public static void main(String[] args) {
-		// 5 elemanlı bir kuyruk oluştur
+		// 5 elemanli bir kuyruk olustur
 		KuyrukDiziGosterimi kuyruk = new KuyrukDiziGosterimi(5);
 
-		// Kuyruğa elemanları ekle
+		// Kuyruga elemanlari ekle
 		kuyruk.ekle(10);
 		kuyruk.ekle(20);
 		kuyruk.ekle(30);
 		kuyruk.ekle(40);
 
-		// Kuyruğun başındaki elemanı ekrana yazdır
-		System.out.println("Kuyruğun Başındaki Eleman: " + kuyruk.basaBak());
+		// Kuyrugun basindaki elemani ekrana yazdir
+		System.out.println("Kuyrugun Basindaki Eleman: " + kuyruk.basaBak());
 
-		// Kuyruktan eleman çıkar
-		System.out.println("Kuyruktan Çıkan Eleman: " + kuyruk.cikar());
-		System.out.println("Kuyruktan Çıkan Eleman: " + kuyruk.cikar());
+		// Kuyruktan eleman çikar
+		System.out.println("Kuyruktan Çikan Eleman: " + kuyruk.cikar());
+		System.out.println("Kuyruktan Çikan Eleman: " + kuyruk.cikar());
 
-		// Kuyruğun boş ve dolu olup olmadığını kontrol et ve sonuçları ekrana yazdır
-		System.out.println("Kuyruk Boş mu? " + kuyruk.bosMu());
+		// Kuyrugun bos ve dolu olup olmadigini kontrol et ve sonuçlari ekrana yazdir
+		System.out.println("Kuyruk Bos mu? " + kuyruk.bosMu());
 		System.out.println("Kuyruk Dolu mu? " + kuyruk.doluMu());
 
-		// Kuyruğun mevcut boyutunu ekrana yazdır
+		// Kuyrugun mevcut boyutunu ekrana yazdir
 		System.out.println("Kuyruk Boyutu: " + kuyruk.boyut());
+		
+		System.out.println("Kuyruktan Çikan Eleman: " + kuyruk.cikar());
+		System.out.println("Kuyruktan Çikan Eleman: " + kuyruk.cikar());
+		
+		System.out.println("Kuyruk Bos mu? " + kuyruk.bosMu());
 	}
 }

@@ -1,11 +1,7 @@
 eclipse.preferences.version=1
-encoding//src/CiftYonluDugum.java=UTF-8
-encoding//src/DaireselKuyruk.java=UTF-8
-encoding//src/Deque.java=UTF-8
+encoding//src/DaireselKuyrukDizi.java=UTF-8
+encoding//src/DequeBagliListe.java=UTF-8
 encoding//src/KuyrukBagliListeGosterimi.java=UTF-8
 encoding//src/KuyrukDiziGosterimi.java=UTF-8
 encoding//src/KuyrukOrnegi.java=UTF-8
-encoding//src/OncelikliKuyruk.java=UTF-8
-encoding//src/OncelikliKuyrukEleman.java=UTF-8
-encoding//src/QueueArrayImplementation.java=UTF-8
-encoding//src/TekYonluDugum.java=UTF-8
+encoding//src/OncelikliKuyrukDizi.java=UTF-8

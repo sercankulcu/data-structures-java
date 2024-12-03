@@ -1,43 +1,43 @@
-import java.util.LinkedList;
+import java.util.LinkedList; 
 import java.util.Queue;
 
 public class KuyrukOrnegi {
 
 	public static void main(String[] args) {
-		// Bir Queue oluşturalım
+		// Bir Queue olusturalim (Kuyruk yapisi)
 		Queue<String> kuyruk = new LinkedList<>();
 		
-		// Kuyruğa eleman ekleyelim
+		// Kuyruga eleman ekleyelim
 		kuyruk.offer("Eleman 1");
 		kuyruk.offer("Eleman 2");
 		kuyruk.offer("Eleman 3");
 		kuyruk.offer("Eleman 4");
 		kuyruk.offer("Eleman 5");
 
-		// Kuyruğun içeriğini gösterelim
-		System.out.println("Kuyruğun İçeriği: " + kuyruk);
+		// Kuyrugun icerigini gosterelim
+		System.out.println("Kuyrugun Icerigi: " + kuyruk);
 
-		// Kuyruğun başındaki elemanı alalım
+		// Kuyrugun basindaki elemani alalim (poll metodu)
 		String basindakiEleman = kuyruk.poll();
-		System.out.println("Kuyruğun Başındaki Eleman: " + basindakiEleman);
+		System.out.println("Kuyrugun Basindaki Eleman: " + basindakiEleman);
 
-		// Kuyruğun içeriğini tekrar gösterelim
-		System.out.println("Güncellenmiş Kuyruk İçeriği: " + kuyruk);
+		// Kuyrugun icerigini tekrar gosterelim
+		System.out.println("Guncellenmis Kuyruk Icerigi: " + kuyruk);
 
-		// Kuyruğun başındaki elemana erişelim, ancak kuyruktan çıkarmadan
+		// Kuyrugun basindaki elemana erisim saglayalim, ancak kuyruktan cikarmadan (peek metodu)
 		basindakiEleman = kuyruk.peek();
-		System.out.println("Kuyruğun Başındaki Eleman (Çıkarılmadan): " + basindakiEleman);
+		System.out.println("Kuyrugun Basindaki Eleman (Cikarmadan): " + basindakiEleman);
 
-		// Kuyruğun boyutunu alalım
+		// Kuyrugun boyutunu alalim
 		int kuyrukBoyutu = kuyruk.size();
-		System.out.println("Kuyruğun Boyutu: " + kuyrukBoyutu);
+		System.out.println("Kuyrugun Boyutu: " + kuyrukBoyutu);
 
-		// Kuyruğu boşaltalım
+		// Kuyrugu bosaltalim
 		kuyruk.clear();
 		System.out.println("Kuyruk Temizlendi");
 
-		// Kuyruğun boş olduğunu kontrol edelim
+		// Kuyrugun bos olup olmadigini kontrol edelim
 		boolean kuyrukBosMu = kuyruk.isEmpty();
-		System.out.println("Kuyruk Boş mu? " + kuyrukBosMu);
+		System.out.println("Kuyruk Bos mu? " + kuyrukBosMu);
 	}
 }

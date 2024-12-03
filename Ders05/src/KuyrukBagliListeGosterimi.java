@@ -1,3 +1,14 @@
+// Dugum sinifi - Tek yonlu bagli liste dugumlerini temsil eden ic sinif.
+class TekYonluDugum<E> {
+	
+	E veri;      // Dugumun icinde saklanan veri.
+	TekYonluDugum<E> sonraki;  // Dugumun bir sonraki dugumune isaret eden referans.
+
+	TekYonluDugum(E veri) {
+		this.veri = veri;
+		this.sonraki = null;
+	}
+}
 
 public class KuyrukBagliListeGosterimi<E> {
 
@@ -6,73 +17,73 @@ public class KuyrukBagliListeGosterimi<E> {
 	private int boyut;
 
 	public void ekle(E oge) {
-		// Yeni bir TekYonluDugum öğesi oluştur
+		// Yeni bir TekYonluDugum ogesi olustur
 		TekYonluDugum<E> yeniDugum = new TekYonluDugum<>(oge);
 
-		// Eğer liste boşsa (baş değişkeni null ise), yeni düğümü başa ekle
+		// Eger liste bossa (bas degiskeni null ise), yeni dugumu basa ekle
 		if (bosMu()) {
 			bas = yeniDugum;
 			son = yeniDugum;
 		} else {
-			// Eğer liste boş değilse, son düğümün sonraki referansını yeni düğüme bağla ve son düğümü güncelle
+			// Eger liste bos degilse, son dugumun sonraki referansini yeni dugume bagla ve son dugumu guncelle
 			son.sonraki = yeniDugum;
 			son = yeniDugum;
 		}
-		// Liste boyutunu bir artır
+		// Liste boyutunu bir artir
 		boyut++;
 	}
 
 	public E cikar() {
-		// Eğer kuyruk boşsa, bir beklenmeyen hata fırlat
+		// Eger kuyruk bossa, bir beklenmeyen hata firlat
 		if (bosMu()) {
-			throw new IllegalStateException("Kuyruk boş");
+			throw new IllegalStateException("Kuyruk bos");
 		}
 
-		// Öğe çıkarma işlemi: Baş düğümdeki veriyi al
+		// oge cikarma islemi: Bas dugumdeki veriyi al
 		E veri = bas.veri;
 
-		// Baş düğümünü bir sonraki düğüme taşıyarak öğeyi kuyruktan çıkar
+		// Bas dugumunu bir sonraki dugume tasiyarak ogeyi kuyruktan cikar
 		bas = bas.sonraki;
 
-		// Kuyruktaki öğe sayısını azalt
+		// Kuyruktaki oge sayisini azalt
 		boyut--;
 
-		// Çıkarılan öğeyi döndür
+		// cikarilan ogeyi dondur
 		return veri;
 	}
 
 	public E oneBak() {
-		// Eğer kuyruk boşsa, bir beklenmeyen hata fırlat
+		// Eger kuyruk bossa, bir beklenmeyen hata firlat
 		if (bosMu()) {
-			throw new IllegalStateException("Kuyruk boş");
+			throw new IllegalStateException("Kuyruk bos");
 		}
 
-		// Kuyruğun başındaki öğeyi döndür
+		// Kuyrugun basindaki ogeyi dondur
 		return bas.veri;
 	}
 
 	public boolean bosMu() {
-		// Kuyruğun boş olup olmadığını kontrol et
+		// Kuyrugun bos olup olmadigini kontrol et
 		return boyut == 0;
 	}
 
 	public int boyut() {
-		// Kuyruktaki öğe sayısını döndür
+		// Kuyruktaki oge sayisini dondur
 		return boyut;
 	}
 
 	public void kuyruguGoster() {
-		// Başlangıç düğümünü şu anki düğüm olarak ayarla
+		// Baslangic dugumunu su anki dugum olarak ayarla
 		TekYonluDugum<E> simdiki = bas;
 
-		// Kuyruğun öğelerini ekrana yazdır
-		System.out.print("Kuyruk Öğeleri: ");
+		// Kuyrugun ogelerini ekrana yazdir
+		System.out.print("Kuyruk ogeleri: ");
 		while (simdiki != null) {
-			System.out.print(simdiki.veri + " "); // Şu anki düğümün verisini yazdır
-			simdiki = simdiki.sonraki; // Sonraki düğüme geç
+			System.out.print(simdiki.veri + " "); // su anki dugumun verisini yazdir
+			simdiki = simdiki.sonraki; // Sonraki dugume gec
 		}
 
-		// Kuyruğun tüm öğeleri yazdırıldığında, bir satır sonu yap
+		// Kuyrugun tum ogeleri yazdirildiginda, bir satir sonu yap
 		System.out.println();
 	}
 
@@ -80,32 +91,41 @@ public class KuyrukBagliListeGosterimi<E> {
 
 		KuyrukBagliListeGosterimi<String> kuyruk = new KuyrukBagliListeGosterimi<>();
 
-		// Kuyruğa (queue) öğeleri ekle (enqueue)
-		kuyruk.ekle("Öğe 1");
-		kuyruk.ekle("Öğe 2");
-		kuyruk.ekle("Öğe 3");
-		kuyruk.ekle("Öğe 4");
+		// Kuyruga (queue) ogeleri ekle (enqueue)
+		kuyruk.ekle("oge 1");
+		kuyruk.ekle("oge 2");
+		kuyruk.ekle("oge 3");
+		kuyruk.ekle("oge 4");
 
-		// Kuyruktaki öğeleri göster
+		// Kuyruktaki ogeleri goster
 		kuyruk.kuyruguGoster();
 
-		// Kuyruktan (queue) öğeleri çıkar (dequeue)
+		// Kuyruktan (queue) ogeleri cikar (dequeue)
 		String cikarilanOge = kuyruk.cikar();
-		System.out.println("Çıkarılan Öğe: " + cikarilanOge);
+		System.out.println("cikarilan oge: " + cikarilanOge);
 
-		// Kuyruktaki güncel öğeleri göster
+		// Kuyruktaki guncel ogeleri goster
 		kuyruk.kuyruguGoster();
 
-		// Kuyruğun önündeki öğeyi çıkartmadan bak (peek) 
+		// Kuyrugun onundeki ogeyi cikartmadan bak (peek) 
 		String onOge = kuyruk.oneBak();
-		System.out.println("Ön Öğe: " + onOge);
+		System.out.println("on oge: " + onOge);
 
-		// Kuyruğun boş olup olmadığını kontrol et
+		// Kuyrugun bos olup olmadigini kontrol et
 		boolean bosMu = kuyruk.bosMu();
-		System.out.println("Kuyruk Boş mu? " + bosMu);
+		System.out.println("Kuyruk Bos mu? " + bosMu);
 
-		// Kuyruğun boyutunu al
+		// Kuyrugun boyutunu al
 		int boyut = kuyruk.boyut();
 		System.out.println("Kuyruk Boyutu: " + boyut);
+		
+		System.out.println("Kuyruktan cikan Eleman: " + kuyruk.cikar());
+		System.out.println("Kuyruktan cikan Eleman: " + kuyruk.cikar());
+		
+		System.out.println("Kuyruk Bos mu? " + kuyruk.bosMu());
+		
+		System.out.println("Kuyruktan cikan Eleman: " + kuyruk.cikar());
+		
+		System.out.println("Kuyruk Bos mu? " + kuyruk.bosMu());
 	}
 }
