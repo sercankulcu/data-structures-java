@@ -1,9 +1,10 @@
-
+// Dugum sinifi: Her bir dugumun veri, oncelik ve bir sonraki dugum bilgilerini tutar
 class Dugum {
-	int veri;
-	int oncelik;
-	Dugum sonraki;
+	int veri; // Dugumdeki veri
+	int oncelik; // Dugumun oncelik degeri
+	Dugum sonraki; // Bir sonraki dugume isaretci
 
+	// Dugum yapici metodu: Veri ve oncelik atanir, sonraki baslangicta null olur
 	public Dugum(int veri, int oncelik) {
 		this.veri = veri;
 		this.oncelik = oncelik;
@@ -11,56 +12,69 @@ class Dugum {
 	}
 }
 
+// Oncelikli kuyruğu bagli liste yapisi ile gerceklestiren sinif
 public class OncelikliKuyrukBagliListe {
-	private Dugum bas;
+	private Dugum bas; // Kuyrugun basini temsil eder
 
+	// Kuyruk yapici metodu: Baslangicta kuyruk bos
 	public OncelikliKuyrukBagliListe() {
 		bas = null;
 	}
 
+	// Kuyruga eleman ekler
 	public void ekle(int veri, int oncelik) {
 		Dugum yeniDugum = new Dugum(veri, oncelik);
 
+		// Kuyruk bos veya yeni elemanin onceligi mevcut bastan daha dusukse
 		if (bas == null || oncelik < bas.oncelik) {
 			yeniDugum.sonraki = bas;
 			bas = yeniDugum;
 		} else {
-			Dugum current = bas;
-			while (current.sonraki != null && current.sonraki.oncelik <= oncelik) {
-				current = current.sonraki;
+			Dugum simdiki = bas;
+
+			// Mevcut listeyi dolasarak yeni dugumun yerini bulur
+			while (simdiki.sonraki != null && simdiki.sonraki.oncelik <= oncelik) {
+				simdiki = simdiki.sonraki;
 			}
-			yeniDugum.sonraki = current.sonraki;
-			current.sonraki = yeniDugum;
+
+			// Yeni dugum uygun yere yerlestirilir
+			yeniDugum.sonraki = simdiki.sonraki;
+			simdiki.sonraki = yeniDugum;
 		}
 	}
 
+	// Kuyruktan en yuksek oncelikli elemani cikarir
 	public int cikar() {
 		if (bosMu()) {
-			System.out.println("Kuyruk boş, eleman çıkarılamaz.");
-			return -1; // Hata durumu, -1 döndürülüyor.
+			System.out.println("Kuyruk bos, eleman cikartilamaz.");
+			return -1; // Hata durumu, -1 donderilir
 		}
 
-		int cikanVeri = bas.veri;
-		bas = bas.sonraki;
+		int cikanVeri = bas.veri; // En yuksek oncelikli eleman
+		bas = bas.sonraki; // Bas dugumu guncelle
 		return cikanVeri;
 	}
 
+	// Kuyrugun bos olup olmadigini kontrol eder
 	public boolean bosMu() {
 		return bas == null;
 	}
 
+	// Kuyruktaki elemanlari yazdirir
 	public void yazdir() {
-		Dugum current = bas;
-		while (current != null) {
-			System.out.print("(" + current.veri + "," + current.oncelik + ") ");
-			current = current.sonraki;
+		Dugum simdiki = bas;
+		while (simdiki != null) {
+			System.out.print("(" + simdiki.veri + "," + simdiki.oncelik + ") ");
+			simdiki = simdiki.sonraki;
 		}
 		System.out.println();
 	}
 
+	// Ana metot: Programin giris noktasi
 	public static void main(String[] args) {
 		OncelikliKuyrukBagliListe kuyruk = new OncelikliKuyrukBagliListe();
 
+		// Kuyruga elemanlar eklenir
 		kuyruk.ekle(4, 2);
 		kuyruk.ekle(5, 1);
 		kuyruk.ekle(2, 3);
@@ -68,12 +82,13 @@ public class OncelikliKuyrukBagliListe {
 		kuyruk.ekle(1, 4);
 		kuyruk.ekle(3, 2);
 
-		System.out.println("Kuyruğun Elemanları:");
+		// Kuyruktaki elemanlari yazdir
+		System.out.println("Kuyrugun Elemanlari:");
 		kuyruk.yazdir();
 
-		System.out.println("En Yüksek Öncelikli Eleman Çıkarıldı: " + kuyruk.cikar());
-		System.out.println("Kuyruğun Elemanları:");
+		// En yuksek oncelikli elemani cikart ve yazdir
+		System.out.println("En Yuksek Oncelikli Eleman Cikartildi: " + kuyruk.cikar());
+		System.out.println("Kuyrugun Elemanlari:");
 		kuyruk.yazdir();
 	}
 }
-
