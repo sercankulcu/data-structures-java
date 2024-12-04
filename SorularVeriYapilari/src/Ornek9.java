@@ -1,37 +1,45 @@
-
 public class Ornek9 {
 
-	static class Node {
-		int data;
-		Node next;
+    // Node sinifi, her bir dugumu temsil eder
+    static class Node {
+        int veri;
+        Node sonraki;
 
-		Node(int data) {
-			this.data = data;
-			this.next = null;
-		}
-	}
+        Node(int veri) {
+            this.veri = veri;
+            this.sonraki = null;
+        }
+    }
 
-	public static int fonksiyon(Node head, Node curr) {
-		
-		if (head == null)
-			return 1;
-		
-		if(curr == null)
-			return 0;
-		
-		if(head == curr)
-			return 1;
-		
-		return fonksiyon(head, curr.next);
-	}
+    // Listeyi dolasarak, verilen dugumun basa ulasip ulasmadigini kontrol eden fonksiyon
+    public static int fonksiyon(Node baslangic, Node suanki) {
+        
+        // Eger liste bossa 1 döndur, yani basa ulasilamaz
+        if (baslangic == null)
+            return 1;
+        
+        // Eger suanki dugum null ise 0 döndur, yani sona ulasilmistir
+        if(suanki == null)
+            return 0;
+        
+        // Eger suanki dugum basa esitse, 1 döndur
+        if(baslangic == suanki)
+            return 1;
+        
+        // Dugumun sonraki elemanina gec ve tekrar kontrol et
+        return fonksiyon(baslangic, suanki.sonraki);
+    }
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-		Node head = new Node(1);
-		head.next = new Node(2);
-		head.next.next = new Node(3);
-		head.next.next.next = new Node(4);
-		head.next.next.next.next = head;
-		System.out.println(fonksiyon(head, head.next));
-	}
+        // Baglantili listeyi baslatiyoruz
+        Node baslangic = new Node(1);
+        baslangic.sonraki = new Node(2);
+        baslangic.sonraki.sonraki = new Node(3);
+        baslangic.sonraki.sonraki.sonraki = new Node(4);
+        baslangic.sonraki.sonraki.sonraki.sonraki = baslangic; // Listeyi dairesel yapiyoruz
+
+        // Baslangic dugumu ile, ikinci dugumun ayni olup olmadigini kontrol et
+        System.out.println(fonksiyon(baslangic, baslangic.sonraki));
+    }
 }
