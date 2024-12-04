@@ -1,7 +1,11 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 
-import java.util.*;
-
-public class AgirliksizCizgeEnKisaYol {
+public class AgirliksizCizge {
 
 	public static Map<Integer, List<Integer>> cizge = new HashMap<>();
 
@@ -11,16 +15,16 @@ public class AgirliksizCizgeEnKisaYol {
 		Queue<Integer> kuyruk = new LinkedList<>();
 		
 		for (int dugum : cizge.keySet()) {
-			mesafeler.put(dugum, Integer.MAX_VALUE); // sonsuz değeri ata
+			mesafeler.put(dugum, Integer.MAX_VALUE); // kenar eklenmeden once tumune sonsuz degeri ata
 		}
-		mesafeler.put(baslangic, 0); // ilk düğüm mesafe 0
+		mesafeler.put(baslangic, 0); // ilk dugum mesafe 0
 		kuyruk.offer(baslangic);
 		
-		while (!kuyruk.isEmpty()) { // tüm düğümler ziyaret edilene kadar
+		while (!kuyruk.isEmpty()) { // tum dugumler ziyaret edilene kadar
 			int mevcutDugum = kuyruk.poll();
-			for (int komsu : cizge.get(mevcutDugum)) { // tüm komşuları için dene
+			for (int komsu : cizge.get(mevcutDugum)) { // tum komsulari icin dene
 				if (mesafeler.get(komsu) == Integer.MAX_VALUE) {
-					mesafeler.put(komsu, mesafeler.get(mevcutDugum) + 1); // ağırlıksız olduğu için 1 arttır
+					mesafeler.put(komsu, mesafeler.get(mevcutDugum) + 1); // agirliksiz oldugu icin 1 arttir
 					kuyruk.offer(komsu);
 				}
 			}
@@ -29,7 +33,7 @@ public class AgirliksizCizgeEnKisaYol {
 	}
 
 	public static void main(String[] args) {
-		// Çizgeyi oluştur
+		// cizgeyi olustur
 		cizge.put(1, Arrays.asList(2, 3));
 		cizge.put(2, Arrays.asList(1, 4, 5));
 		cizge.put(3, Arrays.asList(1, 6));
@@ -39,15 +43,15 @@ public class AgirliksizCizgeEnKisaYol {
 		cizge.put(7, Arrays.asList(5));
 		cizge.put(8, Arrays.asList(6));
 
-		// Başlangıç düğümü
+		// Baslangic dugumu
 		int baslangicDugumu = 1;
 
-		// Ağırlıksız en kısa yolu hesapla
+		// Agirliksiz en kisa yolu hesapla
 		Map<Integer, Integer> mesafeler = agirliksizEnKisaYol(baslangicDugumu);
 
-		// Sonuçları yazdır
+		// Sonuclari yazdir
 		for (int dugum : mesafeler.keySet()) {
-			System.out.println("Düğüm " + dugum + " ile " + baslangicDugumu + " arasındaki mesafe: " + mesafeler.get(dugum));
+			System.out.println("Dugum " + dugum + " ile " + baslangicDugumu + " arasindaki mesafe: " + mesafeler.get(dugum));
 		}
 	}
 }

@@ -1,75 +1,81 @@
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class AgirlikliCizge {
-	
-	private class Kenar {
-		private String kaynak;
-		private String hedef;
-		private int agirlik;
 
-		public Kenar(String kaynak, String hedef, int agirlik) {
-			this.kaynak = kaynak;
-			this.hedef = hedef;
-			this.agirlik = agirlik;
-		}
+    // Kenar sinifi bir kaynaktan hedefe bir agirlikla baglanti kurar
+    private class Kenar {
+        private String kaynak; // Baglantinin basladigi dugum
+        private String hedef;  // Baglantinin bittigi dugum
+        private int agirlik;   // Baglantinin agirligi
 
-		public String toString() {
-			return "(" + kaynak + " -> " + hedef + ", w: " + agirlik + ")";
-		}
-	}
-	
-	private List<String> dugumler;
-	private List<Kenar> kenarlar;
+        // Kenar olusturucu metodu
+        public Kenar(String kaynak, String hedef, int agirlik) {
+            this.kaynak = kaynak;
+            this.hedef = hedef;
+            this.agirlik = agirlik;
+        }
 
-	public AgirlikliCizge() {
-		dugumler = new ArrayList<>();
-		kenarlar = new ArrayList<>();
-	}
+        // Kenari string olarak dondur
+        public String toString() {
+            return "(" + kaynak + " -> " + hedef + ", w: " + agirlik + ")";
+        }
+    }
 
-	public void dugumEkle(String dugum) {
-		dugumler.add(dugum);
-	}
+    private List<String> dugumler; // Cizgedeki tum dugumleri saklar
+    private List<Kenar> kenarlar; // Cizgedeki tum kenarlari saklar
 
-	public void kenarEkle(String kaynak, String hedef, int agirlik) {
-		if (!dugumler.contains(kaynak) || !dugumler.contains(hedef)) {
-			throw new IllegalArgumentException("Başlangıç ve hedef düğümler grafiğe eklenmeli.");
-		}
-		Kenar yeniKenar = new Kenar(kaynak, hedef, agirlik);
-		kenarlar.add(yeniKenar);
-	}
+    // AgirlikliCizge yapici metodu
+    public AgirlikliCizge() {
+        dugumler = new ArrayList<>(); // Dugumler icin bos liste olustur
+        kenarlar = new ArrayList<>(); // Kenarlar icin bos liste olustur
+    }
 
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("Düğümler: ");
-		sb.append(String.join(", ", dugumler));
-		sb.append("\nKenarlar: ");
-		for (Kenar kenar : kenarlar) {
-			sb.append(kenar.toString());
-			sb.append(", ");
-		}
-		return sb.toString();
-	}
-	
-	public static void main(String[] args) {
-		
-		AgirlikliCizge cizge = new AgirlikliCizge();
-		cizge.dugumEkle("A");
-		cizge.dugumEkle("B");
-		cizge.dugumEkle("C");
-		cizge.dugumEkle("D");
-		cizge.dugumEkle("E");
+    // Yeni dugum ekleme metodu
+    public void dugumEkle(String dugum) {
+        dugumler.add(dugum); // Listeye yeni dugum ekle
+    }
 
-		cizge.kenarEkle("A", "B", 2);
-		cizge.kenarEkle("B", "C", 3);
-		cizge.kenarEkle("A", "C", 1);
-		cizge.kenarEkle("A", "D", 4);
-		cizge.kenarEkle("B", "E", 5);
+    // Yeni kenar ekleme metodu
+    public void kenarEkle(String kaynak, String hedef, int agirlik) {
+        // Kaynak veya hedef cizgede yoksa hata firlat
+        if (!dugumler.contains(kaynak) || !dugumler.contains(hedef)) {
+            throw new IllegalArgumentException("Baslangic ve hedef dugumler cizgeye eklenmeli.");
+        }
+        // Yeni kenar olustur ve listeye ekle
+        Kenar yeniKenar = new Kenar(kaynak, hedef, agirlik);
+        kenarlar.add(yeniKenar);
+    }
 
-		System.out.println(cizge);
-		System.out.println(cizge.kenarlar);
-	}
+    // Cizgeyi string olarak yazdirma metodu
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Dugumler: "); // Dugumler listesini yaz
+        sb.append(String.join(", ", dugumler));
+        sb.append("\nKenarlar: "); // Kenarlar listesini yaz
+        for (Kenar kenar : kenarlar) {
+            sb.append(kenar.toString());
+            sb.append(", ");
+        }
+        return sb.toString();
+    }
+
+    // Ana metod: Ornek bir cizge yapisi olustur ve yazdir
+    public static void main(String[] args) {
+
+        AgirlikliCizge cizge = new AgirlikliCizge();
+        cizge.dugumEkle("A"); // Dugum A ekle
+        cizge.dugumEkle("B"); // Dugum B ekle
+        cizge.dugumEkle("C"); // Dugum C ekle
+        cizge.dugumEkle("D"); // Dugum D ekle
+        cizge.dugumEkle("E"); // Dugum E ekle
+
+        cizge.kenarEkle("A", "B", 2); // A'dan B'ye agirlik 2 olan kenar ekle
+        cizge.kenarEkle("B", "C", 3); // B'den C'ye agirlik 3 olan kenar ekle
+        cizge.kenarEkle("A", "C", 1); // A'dan C'ye agirlik 1 olan kenar ekle
+        cizge.kenarEkle("A", "D", 4); // A'dan D'ye agirlik 4 olan kenar ekle
+        cizge.kenarEkle("B", "E", 5); // B'den E'ye agirlik 5 olan kenar ekle
+
+        System.out.println(cizge); // Cizgeyi konsola yazdir
+    }
 }
-
-
