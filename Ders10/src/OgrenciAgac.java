@@ -1,5 +1,5 @@
 class Ogrenci {
-	
+
 	int ogrenciNo;
 	String adSoyad;
 
@@ -11,7 +11,7 @@ class Ogrenci {
 }
 
 class OgrenciDugum {
-	
+
 	Ogrenci ogr;                // Dugumun icerigindeki veri
 	OgrenciDugum solCocuk;      // Sol cocuk dugum referansi
 	OgrenciDugum sagCocuk;      // Sag cocuk dugum referansi
@@ -25,6 +25,7 @@ class OgrenciDugum {
 }
 
 public class OgrenciAgac {
+	
 	OgrenciDugum kok;           // Agacin kok dugumu
 
 	// Constructor, bos bir agac olusturur
@@ -53,30 +54,32 @@ public class OgrenciAgac {
 	}
 
 	// Dugumu silme islemi
-		OgrenciDugum sil(OgrenciDugum kok, int numara) {
-			if (kok == null) {
-				System.out.println("Agactan silinemedi: " + numara);  // Dugum bulunamadiginda mesaj
-				return kok;
-			}
-			if (kok.ogr.ogrenciNo > numara) {
-				kok.solCocuk = sil(kok.solCocuk, numara);  // Sol alt agacta silme islemi
-			} else if (kok.ogr.ogrenciNo < numara) {
-				kok.sagCocuk = sil(kok.sagCocuk, numara);  // Sag alt agacta silme islemi
-			} else if (kok.solCocuk != null && kok.sagCocuk != null) {
-				Ogrenci gecici = minDeger(kok.sagCocuk);  // Sag alt agacin en kucuk degeri
-				kok.ogr.adSoyad = gecici.adSoyad;   // Dugumun verisini guncelle
-				kok.ogr.ogrenciNo = gecici.ogrenciNo;
-				kok.sagCocuk = sil(kok.sagCocuk, kok.ogr.ogrenciNo);  // Sag alt agactan en kucuk dugumu sil
-				System.out.println("Agactan silindi: " + numara);
-			} else if (kok.solCocuk == null) {
-				System.out.println("Agactan silindi sol null: " + kok.ogr.ogrenciNo);
-				return kok.sagCocuk;  // Sol cocuk yoksa sag cocugu geri dondur
-			} else if (kok.sagCocuk == null) {
-				System.out.println("Agactan silindi sag null: " + kok.ogr.ogrenciNo);
-				return kok.solCocuk;  // Sag cocuk yoksa sol cocugu geri dondur
-			}
+	OgrenciDugum sil(OgrenciDugum kok, int numara, boolean yazdir) {
+		if (kok == null) {
+			System.out.println("Agactan silinemedi: " + numara);  // Dugum bulunamadiginda mesaj
 			return kok;
 		}
+		if (kok.ogr.ogrenciNo > numara) {
+			kok.solCocuk = sil(kok.solCocuk, numara, true);  // Sol alt agacta silme islemi
+		} else if (kok.ogr.ogrenciNo < numara) {
+			kok.sagCocuk = sil(kok.sagCocuk, numara, true);  // Sag alt agacta silme islemi
+		} else if (kok.solCocuk != null && kok.sagCocuk != null) {
+			Ogrenci gecici = minDeger(kok.sagCocuk);  // Sag alt agacin en kucuk degeri
+			kok.ogr.adSoyad = gecici.adSoyad;   // Dugumun verisini guncelle
+			kok.ogr.ogrenciNo = gecici.ogrenciNo;
+			System.out.println("Agactan silindi: " + numara);
+			kok.sagCocuk = sil(kok.sagCocuk, kok.ogr.ogrenciNo, false);  // Sag alt agactan en kucuk dugumu sil
+		} else if (kok.solCocuk == null) {
+			if(yazdir)
+				System.out.println("Agactan silindi sol null: " + kok.ogr.ogrenciNo);
+			return kok.sagCocuk;  // Sol cocuk yoksa sag cocugu geri dondur
+		} else if (kok.sagCocuk == null) {
+			if(yazdir)
+				System.out.println("Agactan silindi sag null: " + kok.ogr.ogrenciNo);
+			return kok.solCocuk;  // Sag cocuk yoksa sol cocugu geri dondur
+		}
+		return kok;
+	}
 
 	// Agactaki en kucuk degeri bulma
 	Ogrenci minDeger(OgrenciDugum dugum) {
@@ -140,48 +143,49 @@ public class OgrenciAgac {
 
 		System.out.print("Kok Basta Dolasma: ");
 		agac.kokBastaDolas(agac.kok);  // Kokten baslayarak agaci dolas
-		System.out.println();
+		System.out.println(); // Kok Basta Dolasma: 123 101 93 105 133 143 173
 
 		System.out.print("Kok Ortada Dolasma: ");
 		agac.kokOrtadaDolas(agac.kok);  // Kok ortada baslayarak agaci dolas
-		System.out.println();
+		System.out.println(); // Kok Ortada Dolasma: 93 101 105 123 133 143 173
 
 		System.out.print("Kok Sonda Dolasma: ");
 		agac.kokSondaDolas(agac.kok);  // Kokten baslayarak agaci dolas
-		System.out.println();
+		System.out.println(); // Kok Sonda Dolasma: 93 105 101 173 143 133 123 
 
-		agac.ara(agac.kok, 101);  // Agacta bir degeri ara
+		agac.ara(agac.kok, 101);  // Agacta 101 bulundu.
 		agac.ara(agac.kok, 45);  // Agacta 45 bulunamadi.
 
-		agac.kok = agac.sil(agac.kok, 101);  // Agactan bir degeri sil
-		agac.kokOrtadaDolas(agac.kok);  // Kok ortada baslayarak agaci dolas
+		agac.kok = agac.sil(agac.kok, 101, true);  // Agactan silindi: 101
+		System.out.print("Kok Ortada Dolasma: ");
+		agac.kokOrtadaDolas(agac.kok);  // Kok Ortada Dolasma: 93 105 123 133 143 173
 		System.out.println();
-		agac.kok = agac.sil(agac.kok, 173);
-		agac.kokOrtadaDolas(agac.kok);  // Kok ortada baslayarak agaci dolas
+		agac.kok = agac.sil(agac.kok, 173, true); // Agactan silindi sol null: 173
+		System.out.print("Kok Ortada Dolasma: ");
+		agac.kokOrtadaDolas(agac.kok);  // Kok Ortada Dolasma: 93 105 123 133 143
 		System.out.println();
-		agac.kok = agac.sil(agac.kok, 123);
-		agac.kokOrtadaDolas(agac.kok);  // Kok ortada baslayarak agaci dolas
+		agac.kok = agac.sil(agac.kok, 123, true); // Agactan silindi: 123
+		System.out.print("Kok Ortada Dolasma: ");
+		agac.kokOrtadaDolas(agac.kok);  // Kok Ortada Dolasma: 93 105 133 143
 		System.out.println();
-		agac.kok = agac.sil(agac.kok, 133);
+		agac.kok = agac.sil(agac.kok, 133, true); // Agactan silindi: 133
 
 		System.out.print("Kok Ortada Dolasma: ");
-		agac.kokOrtadaDolas(agac.kok);  // Kok ortada baslayarak agaci dolas
+		agac.kokOrtadaDolas(agac.kok);  // Kok Ortada Dolasma: 93 105 143
 		System.out.println();
 
-		agac.kok = agac.sil(agac.kok, 105);
-		agac.kok = agac.sil(agac.kok, 93);
-
+		agac.kok = agac.sil(agac.kok, 105, true); // Agactan silindi sag null: 105
+		agac.kok = agac.sil(agac.kok, 93, true); // Agactan silindi sol null: 93
 
 		System.out.print("Kok Ortada Dolasma: ");
-		agac.kokOrtadaDolas(agac.kok);  // Kok ortada baslayarak agaci dolas
+		agac.kokOrtadaDolas(agac.kok);  // Kok Ortada Dolasma: 143
 		System.out.println();
 
-		agac.kok = agac.sil(agac.kok, 143);
-		agac.kok = agac.sil(agac.kok, 22);  //Agactan silinemedi: 22
-
+		agac.kok = agac.sil(agac.kok, 143, true); // Agactan silindi sol null: 143
+		agac.kok = agac.sil(agac.kok, 22, true);  //Agactan silinemedi: 22
 
 		System.out.print("Kok Ortada Dolasma: ");
-		agac.kokOrtadaDolas(agac.kok);  // Kok ortada baslayarak agaci dolas
+		agac.kokOrtadaDolas(agac.kok);  // Kok Ortada Dolasma: 
 		System.out.println();
 	}
 }

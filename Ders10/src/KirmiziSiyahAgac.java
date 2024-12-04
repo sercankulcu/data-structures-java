@@ -1,15 +1,19 @@
 
-// Kırmızı-Siyah Ağaç (Red-Black Tree) düğüm yapısı
+// Kirmizi-Siyah Agac (Red-Black Tree) dugum yapisi
 class KirmiziSiyahDugum {
   
-    int anahtar; // Düğümün anahtar değeri
-    KirmiziSiyahDugum solCocuk; // Sol çocuk düğümü
-    KirmiziSiyahDugum sagCocuk; // Sağ çocuk düğümü
-    KirmiziSiyahDugum ebeveyn; // Ebeveyn düğüm
-    int renk; // Renk değeri (0: siyah, 1: kırmızı)
+    int anahtar; // Dugumun anahtar degeri
+    KirmiziSiyahDugum solCocuk; // Sol cocuk dugumu
+    KirmiziSiyahDugum sagCocuk; // Sag cocuk dugumu
+    KirmiziSiyahDugum ata; // ata dugum
+    int renk; // Renk degeri (0: siyah, 1: kirmizi)
 
     public KirmiziSiyahDugum(int anahtar) {
         this.anahtar = anahtar;
+        this.solCocuk = null;
+        this.sagCocuk = null;
+        this.ata = null;
+        this.renk = 0;
     }
 }
 
@@ -20,163 +24,160 @@ public class KirmiziSiyahAgac {
 
 	KirmiziSiyahDugum kok;
 
-	//Belirli bir anahtarı aramak için Kırmızı-Siyah Ağaç (Red-Black Tree) üzerinde gezinme işlemi
+	//Belirli bir anahtari arama 
 	public KirmiziSiyahDugum ara(int anahtar) {
-		KirmiziSiyahDugum dugum = kok; // Kök düğümden başlanarak gezinme işlemi
+		
+		KirmiziSiyahDugum dugum = kok; // Kok dugumden basla
 		while (dugum != null) {
 			if (anahtar == dugum.anahtar) {
-				System.out.println("Ağaçta bulundu: " + anahtar); // Anahtar değeri ağaçta bulunduğunda bildirim
-				return dugum; // Düğümü döndür
+				System.out.println("Agacta bulundu: " + anahtar); // Anahtar degeri agacta bulundugunda bildirim
+				return dugum; // Dugumu dondur
 			} else if (anahtar < dugum.anahtar) {
-				dugum = dugum.solCocuk; // Anahtar değeri düğümün anahtarından küçükse sola git
+				dugum = dugum.solCocuk; // Anahtar degeri dugumun anahtarindan kucukse sola git
 			} else {
-				dugum = dugum.sagCocuk; // Anahtar değeri düğümün anahtarından büyükse sağa git
+				dugum = dugum.sagCocuk; // Anahtar degeri dugumun anahtarindan buyukse saga git
 			}
 		}
 
-		System.out.println("Ağaçta bulunamadı: " + anahtar); // Anahtar değeri ağaçta bulunamadığında bildirim
-		return null; // Düğüm bulunamazsa null değer döndür
+		System.out.println("Agacta bulunamadi: " + anahtar); // Anahtar degeri agacta bulunamadiginda bildirim
+		return null; // Dugum bulunamazsa null deger dondur
 	}
 
-
-	//Yeni bir düğüm eklemek için Kırmızı-Siyah Ağaç (Red-Black Tree) üzerinde gezinme işlemi
+	//Yeni bir dugum ekleme
 	public void ekle(int anahtar) {
-		KirmiziSiyahDugum dugum = kok; // Kök düğümden başlanarak gezinme işlemi
-		KirmiziSiyahDugum ebeveyn = null;
+		KirmiziSiyahDugum dugum = kok; // Kok dugumden basla
+		KirmiziSiyahDugum ata = null;
 
-		// Anahtarı ağaçta uygun konuma yerleştirmek için ağaçta gezinme
+		// Anahtari agacta uygun konuma yerlestirmek icin agacta gezinme
 		while (dugum != null) {
-			ebeveyn = dugum;
+			ata = dugum;
 			if (anahtar < dugum.anahtar) {
-				dugum = dugum.solCocuk; // Anahtar değeri düğümün anahtarından küçükse sola git
+				dugum = dugum.solCocuk; // Anahtar degeri dugumun anahtarindan kucukse sola git
 			} else if (anahtar > dugum.anahtar) {
-				dugum = dugum.sagCocuk; // Anahtar değeri düğümün anahtarından büyükse sağa git
+				dugum = dugum.sagCocuk; // Anahtar degeri dugumun anahtarindan buyukse saga git
 			} else {
-				System.out.println("Ağaçta bulunduğu için eklenemedi: " + anahtar); // Anahtar zaten ağaçta bulunuyorsa bildirim
+				System.out.println("Agacta bulundugu icin eklenemedi: " + anahtar); // Anahtar zaten agacta bulunuyorsa bildirim
 				return;
 			}
 		}
 
-		// Yeni düğümü ekleyin
+		// Yeni dugumu ekleyin
 		KirmiziSiyahDugum yeni = new KirmiziSiyahDugum(anahtar);
 		yeni.renk = RED;
-		if (ebeveyn == null) {
-			kok = yeni; // Eğer ağaç boşsa yeni düğümü kök yap
-		} else if (anahtar < ebeveyn.anahtar) {
-			ebeveyn.solCocuk = yeni; // Anahtar, ebeveynin anahtarından küçükse sol çocuk olarak ekle
+		if (ata == null) {
+			kok = yeni; // Eger agac bossa yeni dugumu kok yap
+		} else if (anahtar < ata.anahtar) {
+			ata.solCocuk = yeni; // Anahtar, atasinin anahtarindan kucukse sol cocuk olarak ekle
 		} else {
-			ebeveyn.sagCocuk = yeni; // Anahtar, ebeveynin anahtarından büyükse sağ çocuk olarak ekle
+			ata.sagCocuk = yeni; // Anahtar, atasinin anahtarindan buyukse sag cocuk olarak ekle
 		}
-		yeni.ebeveyn = ebeveyn;
+		yeni.ata = ata;
 
-		eklemeSonrasiDuzelt(yeni); // Eklemenin ardından kırmızı-siyah düzeltilmesi işlemi
-		System.out.println("Ağaca eklendi: " + yeni.anahtar + " " + (yeni.renk == RED ? "[R]" : "[B]")); // Eklenen düğümün bildirimi
+		eklemeSonrasiDuzelt(yeni); // Eklemenin ardindan kirmizi-siyah duzeltilmesi islemi
+		System.out.println("Agaca eklendi: " + yeni.anahtar + " " + (yeni.renk == RED ? "[R]" : "[B]")); // Eklenen dugumun bildirimi
 	}
 
-
-	//Düğüm eklemesi sonrasında Kırmızı-Siyah ağacın uygunluğunu sağlama işlemi
+	//Dugum eklemesi sonrasinda Kirmizi-Siyah agacin uygunlugunu saglama islemi
 	private void eklemeSonrasiDuzelt(KirmiziSiyahDugum dugum) {
-		KirmiziSiyahDugum ebeveyn = dugum.ebeveyn;
+		KirmiziSiyahDugum ata = dugum.ata;
 
-		// Durum 1: Ebeveyn null ise, köke ulaştık, özyinelemeli işlemin sonuna geldik
-		if (ebeveyn == null) {
-			// Kökün siyah olmasını zorlamak için aşağıdaki satır (kural 2):
+		// Durum 1: ata null ise, koke ulastik, ozyinelemeli islemin sonuna geldik
+		if (ata == null) {
+			// Kokun siyah olmasini zorla (kural 2):
 			dugum.renk = BLACK;
 			return;
 		}
 
-		// Ebeveyn siyahsa, yapılacak bir şey yok
-		if (ebeveyn.renk == BLACK) {
+		// ata dugum siyahsa, yapilacak bir sey yok
+		if (ata.renk == BLACK) {
 			return;
 		}
 
-		// Buradan itibaren ebeveyn kırmızı
-		KirmiziSiyahDugum dede = ebeveyn.ebeveyn;
+		// Buradan itibaren ata kirmizi
+		KirmiziSiyahDugum dede = ata.ata;
 
 		// Durum 2:
-		// Dede olmaması, ebeveynin kök olduğu anlamına gelir. Kökün siyah olmasını zorlamak için
-		// (kural 2), dedenin hiçbir zaman null olmayacağı bir durumda aşağıdaki if-then bloğu kaldırılabilir.
+		// Dede olmamasi, atanin kok oldugu anlamina gelir. Kokun siyah olmasini zorlamak icin
+		// (kural 2), dedenin hicbir zaman null olmayacagi bir durumda asagidaki if-then blogu kaldirilabilir.
 		if (dede == null) {
-			// Bu metod yalnızca kırmızı düğümler üzerinde çağrıldığı için yapmamız gereken tek şey kökü siyah yapmaktır.
-			ebeveyn.renk = BLACK;
+			// Bu metod yalnizca kirmizi dugumler uzerinde cagrildigi icin yapmamiz gereken tek sey koku siyah yapmaktir.
+			ata.renk = BLACK;
 			return;
 		}
 
-		// Amca düğümünü al (null/nil olabilir, bu durumda rengi siyahtır)
-		KirmiziSiyahDugum amca = getirAmca(ebeveyn);
+		// Amca dugumunu al (null/nil olabilir, bu durumda rengi siyahtir)
+		KirmiziSiyahDugum amca = getirAmca(ata);
 
-		// Durum 3: Amca kırmızıysa -> ebeveyn, dede ve amca renklerini değiştir
+		// Durum 3: Amca kirmiziysa -> ata, dede ve amca renklerini degistir
 		if (amca != null && amca.renk == RED) {
-			ebeveyn.renk = BLACK;
+			ata.renk = BLACK;
 			dede.renk = RED;
 			amca.renk = BLACK;
 
-			// Şimdi kırmızı olan dedeyi tekrar kontrol etmek için özyinelemeli olarak çağır
-			// Dede kök olabilir veya kırmızı bir ebeveyni olabilir, bu durumda daha fazla düzeltme gerekebilir...
+			// simdi kirmizi olan dedeyi tekrar kontrol etmek icin ozyinelemeli olarak cagir
+			// Dede kok olabilir veya kirmizi bir atasi olabilir, bu durumda daha fazla duzeltme gerekebilir...
 			eklemeSonrasiDuzelt(dede);
 		}
 
-		// Ebeveyn, dedenin sol çocuğu ise
-		else if (ebeveyn == dede.solCocuk) {
-			// Durum 4a: Amca siyah ve düğüm ebeveyninin sağ çocuğu (iç çocuğu) ise
-			if (dugum == ebeveyn.sagCocuk) {
-				solaDondur(ebeveyn);
+		// ata, dedenin sol cocugu ise
+		else if (ata == dede.solCocuk) {
+			// Durum 4a: Amca siyah ve dugum atasinin sag cocugu (ic cocugu) ise
+			if (dugum == ata.sagCocuk) {
+				solaDondur(ata);
 
-				// "Ebeveyn"i dönen alt ağacın yeni kök düğümüne işaret etmesi için
-				// Bu adımda rengini değiştirmeliyiz.
-				ebeveyn = dugum;
+				// atasi donen alt agacin yeni kok dugumune isaret etmesi icin
+				// Bu adimda rengini degistirmeliyiz.
+				ata = dugum;
 			}
 
-			// Durum 5a: Amca siyah ve düğüm ebeveyninin sol çocuğu (dış çocuğu) ise
+			// Durum 5a: Amca siyah ve dugum atasinin sol cocugu (dis cocugu) ise
 			sagaDondur(dede);
 
-			// Orijinal ebeveyn ve dedenin renklerini değiştir
-			ebeveyn.renk = BLACK;
+			// Orijinal ata ve dedenin renklerini degistir
+			ata.renk = BLACK;
 			dede.renk = RED;
 		}
 
-		// Ebeveyn, dedenin sağ çocuğu ise
+		// ata, dedenin sag cocugu ise
 		else {
-			// Durum 4b: Amca siyah ve düğüm ebeveyninin sol çocuğu (iç çocuğu) ise
-			if (dugum == ebeveyn.solCocuk) {
-				sagaDondur(ebeveyn);
+			// Durum 4b: Amca siyah ve dugum atasinin sol cocugu (ic cocugu) ise
+			if (dugum == ata.solCocuk) {
+				sagaDondur(ata);
 
-				// "Ebeveyn"i dönen alt ağacın yeni kök düğümüne işaret etmesi için
-				// Bu adımda rengini değiştirmeliyiz.
-				ebeveyn = dugum;
+				// atasi donen alt agacin yeni kok dugumune isaret etmesi icin
+				// Bu adimda rengini degistirmeliyiz.
+				ata = dugum;
 			}
 
-			// Durum 5b: Amca siyah ve düğüm ebeveyninin sağ çocuğu (dış çocuğu) ise
+			// Durum 5b: Amca siyah ve dugum atasinin sag cocugu (dis cocugu) ise
 			solaDondur(dede);
 
-			// Orijinal ebeveyn ve dedenin renklerini değiştir
-			ebeveyn.renk = BLACK;
+			// Orijinal ata ve dedenin renklerini degistir
+			ata.renk = BLACK;
 			dede.renk = RED;
 		}
 	}
 
-
-	//Verilen ebeveyn düğümünün amcasını döndüren yardımcı fonksiyon
-	private KirmiziSiyahDugum getirAmca(KirmiziSiyahDugum ebeveyn) {
-		KirmiziSiyahDugum dede = ebeveyn.ebeveyn;
-		if (dede.solCocuk == ebeveyn) {
+	//Verilen ata dugumunun amcasini donduren yardimci fonksiyon
+	private KirmiziSiyahDugum getirAmca(KirmiziSiyahDugum ata) {
+		KirmiziSiyahDugum dede = ata.ata;
+		if (dede.solCocuk == ata) {
 			return dede.sagCocuk;
-		} else if (dede.sagCocuk == ebeveyn) {
+		} else if (dede.sagCocuk == ata) {
 			return dede.solCocuk;
 		} else {
-			System.out.println("Ebeveyn, dedesinin bir çocuğu değil");
+			System.out.println("ata, dedesinin bir cocugu degil");
 			return null;
 		}
 	}
 
-
-	//Belirtilen anahtarı içeren düğümü ağaçtan silen fonksiyon
+	//Belirtilen anahtari iceren dugumu agactan silen fonksiyon
 	public void sil(int anahtar) {
 		KirmiziSiyahDugum dugum = kok;
 
-		// Silinecek düğümü bul
+		// Silinecek dugumu bul
 		while (dugum != null && dugum.anahtar != anahtar) {
-			// Anahtara göre ağacı sol veya sağ yönde tara
+			// Anahtara gore agaci sol veya sag yonde tara
 			if (anahtar < dugum.anahtar) {
 				dugum = dugum.solCocuk;
 			} else {
@@ -184,33 +185,33 @@ public class KirmiziSiyahAgac {
 			}
 		}
 
-		// Düğüm bulunamadı mı?
+		// Dugum bulunamadi mi?
 		if (dugum == null) {
-			System.out.println("Ağaçta bulunamadı: " + anahtar);
+			System.out.println("Agacta bulunamadi: " + anahtar);
 			return;
 		}
 
-		// Bu noktada, "düğüm" silinecek düğümdür
+		// Bu noktada, "dugum" silinecek dugumdur
 
-		// Bu değişkeni kullanarak, bir düğümü sildikten sonra Kırmızı-Siyah ağaç özelliklerini düzeltmeye başlanacak düğümü sakla.
+		// Bu degiskeni kullanarak, bir dugumu sildikten sonra Kirmizi-Siyah agac ozelliklerini duzeltmeye baslanacak dugumu sakla.
 		KirmiziSiyahDugum yukariTasinanDugum;
 		int silinenDugumRengi;
 
-		// Düğümün hiç veya bir çocuğu var
+		// Dugumun hic veya bir cocugu var
 		if (dugum.solCocuk == null || dugum.sagCocuk == null) {
 			yukariTasinanDugum = sifirVeyaBirCocukluDugumuSil(dugum);
 			silinenDugumRengi = dugum.renk;
 		}
 
-		// Düğümün iki çocuğu var
+		// Dugumun iki cocugu var
 		else {
-			// Sağ alt ağacın minimum düğümünü bul ("inorder successor" veya siradaki düğüm)
+			// Sag alt agacin minimum dugumunu bul ("inorder successor" veya siradaki dugum)
 			KirmiziSiyahDugum siradakiDugum = minimumBul(dugum.sagCocuk);
 
-			// Siradaki düğümün verisini mevcut düğüme kopyala (rengini koru!)
+			// Siradaki dugumun verisini mevcut dugume kopyala (rengini koru!)
 			dugum.anahtar = siradakiDugum.anahtar;
 
-			// Siradaki düğümü, 0 veya 1 çocuğu olan bir düğümü siler gibi sil
+			// Siradaki dugumu, 0 veya 1 cocugu olan bir dugumu siler gibi sil
 			yukariTasinanDugum = sifirVeyaBirCocukluDugumuSil(siradakiDugum);
 			silinenDugumRengi = siradakiDugum.renk;
 		}
@@ -218,41 +219,40 @@ public class KirmiziSiyahAgac {
 		if (silinenDugumRengi == BLACK) {
 			silmeSonrasiDuzelt(yukariTasinanDugum);
 
-			// Geçici NIL düğümünü kaldır
+			// Gecici NiL dugumunu kaldir
 			if (yukariTasinanDugum.getClass() == NilDugum.class) {
-				cocuklariYerDegistir(yukariTasinanDugum.ebeveyn, yukariTasinanDugum, null);
+				cocuklariYerDegistir(yukariTasinanDugum.ata, yukariTasinanDugum, null);
 			}
 		}
-		System.out.println("Ağaçta silindi: " + anahtar);
+		System.out.println("Agacta silindi: " + anahtar);
 	}
 
 
-	//Yalnızca bir sol veya sağ çocuğu olan bir düğümü silen fonksiyon
+	//Yalnizca bir sol veya sag cocugu olan bir dugumu silen fonksiyon
 	private KirmiziSiyahDugum sifirVeyaBirCocukluDugumuSil(KirmiziSiyahDugum dugum) {
-		// Düğümün SADECE sol çocuğu varsa --> sol çocuğu ile değiştirilir
+		// Dugumun SADECE sol cocugu varsa --> sol cocugu ile degistirilir
 		if (dugum.solCocuk != null) {
-			cocuklariYerDegistir(dugum.ebeveyn, dugum, dugum.solCocuk);
-			return dugum.solCocuk; // yukarı taşınan düğüm
+			cocuklariYerDegistir(dugum.ata, dugum, dugum.solCocuk);
+			return dugum.solCocuk; // yukari tasinan dugum
 		}
 
-		// Düğümün SADECE sağ çocuğu varsa --> sağ çocuğu ile değiştirilir
+		// Dugumun SADECE sag cocugu varsa --> sag cocugu ile degistirilir
 		else if (dugum.sagCocuk != null) {
-			cocuklariYerDegistir(dugum.ebeveyn, dugum, dugum.sagCocuk);
-			return dugum.sagCocuk; // yukarı taşınan düğüm
+			cocuklariYerDegistir(dugum.ata, dugum, dugum.sagCocuk);
+			return dugum.sagCocuk; // yukari tasinan dugum
 		}
 
-		// Düğümün hiç çocuğu yoksa -->
-		// * Düğüm kırmızı ise --> sadece kaldırılır
-		// * Düğüm siyah ise --> geçici bir NIL düğüm ile değiştirilir (Kırmızı-Siyah kurallarını düzeltmek için gereklidir)
+		// Dugumun hic cocugu yoksa -->
+		// * Dugum kirmizi ise --> sadece kaldirilir
+		// * Dugum siyah ise --> gecici bir NiL dugum ile degistirilir (Kirmizi-Siyah kurallarini duzeltmek icin gereklidir)
 		else {
 			KirmiziSiyahDugum yeniCocuk = dugum.renk == BLACK ? new NilDugum() : null;
-			cocuklariYerDegistir(dugum.ebeveyn, dugum, yeniCocuk);
+			cocuklariYerDegistir(dugum.ata, dugum, yeniCocuk);
 			return yeniCocuk;
 		}
 	}
 
-
-	//Alt ağacın en küçük düğümünü bulan fonksiyon
+	//Alt agacin en kucuk dugumunu bulan fonksiyon
 	private KirmiziSiyahDugum minimumBul(KirmiziSiyahDugum dugum) {
 		while (dugum.solCocuk != null) {
 			dugum = dugum.solCocuk;
@@ -260,220 +260,219 @@ public class KirmiziSiyahAgac {
 		return dugum;
 	}
 
-
-	//Silme işleminden sonra Kırmızı-Siyah Ağacın (Red-Black Tree) özelliklerini düzeltmek için kullanılan işlev
+	//Silme isleminden sonra Kirmizi-Siyah Agacin (Red-Black Tree) ozelliklerini duzeltmek icin kullanilan islev
 	private void silmeSonrasiDuzelt(KirmiziSiyahDugum dugum) {
-		// Durum 1: İncelenen düğüm kök düğümse, işlemin sonu
+		// Durum 1: incelenen dugum kok dugumse, islemin sonu
 		if (dugum == kok) {
-			// Kök düğümün siyah olmasını zorlamak için aşağıdaki satır (kural 2):
+			// Kok dugumun siyah olmasini zorlamak icin asagidaki satir (kural 2):
 			dugum.renk = BLACK;
 			return;
 		}
 
 		KirmiziSiyahDugum kardes = getirKardes(dugum);
 
-		// Durum 2: Kırmızı kardeş
+		// Durum 2: Kirmizi kardes
 		if (kardes.renk == RED) {
 			kirmiziKardesEleAl(dugum, kardes);
-			kardes = getirKardes(dugum); // Yeni kardeşi almak için, durum 3-6'ya geçmek için
+			kardes = getirKardes(dugum); // Yeni kardesi almak icin, durum 3-6'ya gecmek icin
 		}
 
-		// Durum 3+4: İki siyah çocuğa sahip siyah kardeş
+		// Durum 3+4: iki siyah cocuga sahip siyah kardes
 		if (siyahMi(kardes.solCocuk) && siyahMi(kardes.sagCocuk)) {
 			kardes.renk = RED;
 
-			// Durum 3: İki siyah çocuğa sahip siyah kardeş + kırmızı ebeveyn
-			if (dugum.ebeveyn.renk == RED) {
-				dugum.ebeveyn.renk = BLACK;
+			// Durum 3: iki siyah cocuga sahip siyah kardes + kirmizi ata
+			if (dugum.ata.renk == RED) {
+				dugum.ata.renk = BLACK;
 			}
 
-			// Durum 4: İki siyah çocuğa sahip siyah kardeş + siyah ebeveyn
+			// Durum 4: iki siyah cocuga sahip siyah kardes + siyah ata
 			else {
-				silmeSonrasiDuzelt(dugum.ebeveyn);
+				silmeSonrasiDuzelt(dugum.ata);
 			}
 		}
 
-		// Durum 5+6: En az bir kırmızı çocuğa sahip siyah kardeş
+		// Durum 5+6: En az bir kirmizi cocuga sahip siyah kardes
 		else {
 			enAzBirKirmiziCocugaSahipSiyahKardesiEleAl(dugum, kardes);
 		}
 	}
 
 
-	//Kırmızı kardeşi ele alma işlemi: Kardeş düğümü siyah hale getirir ve döndürür
+	//Kirmizi kardesi ele alma islemi: Kardes dugumu siyah hale getirir ve dondurur
 	private void kirmiziKardesEleAl(KirmiziSiyahDugum dugum, KirmiziSiyahDugum kardes) {
 		// Yeniden renklendirme...
 		kardes.renk = BLACK;
-		dugum.ebeveyn.renk = RED;
+		dugum.ata.renk = RED;
 
-		// ... ve döndürme işlemi
-		if (dugum == dugum.ebeveyn.solCocuk) {
-			solaDondur(dugum.ebeveyn);
+		// ... ve dondurme islemi
+		if (dugum == dugum.ata.solCocuk) {
+			solaDondur(dugum.ata);
 		} else {
-			sagaDondur(dugum.ebeveyn);
+			sagaDondur(dugum.ata);
 		}
 	}
 
 
-	//En az bir kırmızı çocuğa sahip siyah kardeşi ele alma işlemi:
-	//Eğer kırmızı-siyah ağaç özelliklerini bozan bir durum varsa bu işlev kullanılır.
+	//En az bir kirmizi cocuga sahip siyah kardesi ele alma islemi:
+	//Eger kirmizi-siyah agac ozelliklerini bozan bir durum varsa bu islev kullanilir.
 	private void enAzBirKirmiziCocugaSahipSiyahKardesiEleAl(KirmiziSiyahDugum dugum, KirmiziSiyahDugum kardes) {
-		boolean solCocukMu = dugum == dugum.ebeveyn.solCocuk;
+		boolean solCocukMu = dugum == dugum.ata.solCocuk;
 
-		// Durum 5: En az bir kırmızı çocuğa sahip siyah kardeş + "dış yeğeni" siyah
-		// --> Kardeşi ve kardeşin çocuğunu tekrar renklendir, ardından kardeş etrafında döndürme yapılır
+		// Durum 5: En az bir kirmizi cocuga sahip siyah kardes + "dis yegeni" siyah
+		// --> Kardesi ve kardesin cocugunu tekrar renklendir, ardindan kardes etrafinda dondurme yapilir
 		if (solCocukMu && siyahMi(kardes.sagCocuk)) {
 			kardes.solCocuk.renk = BLACK;
 			kardes.renk = RED;
 			sagaDondur(kardes);
-			kardes = dugum.ebeveyn.sagCocuk;
+			kardes = dugum.ata.sagCocuk;
 		} else if (!solCocukMu && siyahMi(kardes.solCocuk)) {
 			kardes.sagCocuk.renk = BLACK;
 			kardes.renk = RED;
 			solaDondur(kardes);
-			kardes = dugum.ebeveyn.solCocuk;
+			kardes = dugum.ata.solCocuk;
 		}
 
-		// Durum 6: En az bir kırmızı çocuğa sahip siyah kardeş + "dış yeğeni" kırmızı
-		// --> Kardeşi, ebeveyni ve kardeşin çocuğunu tekrar renklendir, ardından ebeveyn etrafında döndürme yapılır
-		kardes.renk = dugum.ebeveyn.renk;
-		dugum.ebeveyn.renk = BLACK;
+		// Durum 6: En az bir kirmizi cocuga sahip siyah kardes + "dis yegeni" kirmizi
+		// --> Kardesi, atasi ve kardesin cocugunu tekrar renklendir, ardindan atasi etrafinda dondurme yapilir
+		kardes.renk = dugum.ata.renk;
+		dugum.ata.renk = BLACK;
 		if (solCocukMu) {
 			kardes.sagCocuk.renk = BLACK;
-			solaDondur(dugum.ebeveyn);
+			solaDondur(dugum.ata);
 		} else {
 			kardes.solCocuk.renk = BLACK;
-			sagaDondur(dugum.ebeveyn);
+			sagaDondur(dugum.ata);
 		}
 	}
 
 
-	//Kardeşi getirme işlemi:
-	//Verilen düğümün ebeveyninden kardeş düğümünü döndürür.
+	//Kardesi getirme islemi:
+	//Verilen dugumun atasindan kardes dugumunu dondurur.
 	private KirmiziSiyahDugum getirKardes(KirmiziSiyahDugum dugum) {
-		KirmiziSiyahDugum ebeveyn = dugum.ebeveyn;
-		if (dugum == ebeveyn.solCocuk) {
-			return ebeveyn.sagCocuk;
-		} else if (dugum == ebeveyn.sagCocuk) {
-			return ebeveyn.solCocuk;
+		KirmiziSiyahDugum ata = dugum.ata;
+		if (dugum == ata.solCocuk) {
+			return ata.sagCocuk;
+		} else if (dugum == ata.sagCocuk) {
+			return ata.solCocuk;
 		} else {
-			System.out.println("Ebeveyn, büyükbaba düğümün bir çocuğu değil");
+			System.out.println("ata, dede dugumun bir cocugu degil");
 			return null;
 		}
 	}
 
 
-	//Belirtilen düğümün siyah olup olmadığını kontrol eder.
-	//Siyah bir düğüm, null (NIL düğüm) veya siyah renkte bir düğüm olabilir.
+	//Belirtilen dugumun siyah olup olmadigini kontrol eder.
+	//Siyah bir dugum, null (NiL dugum) veya siyah renkte bir dugum olabilir.
 	private boolean siyahMi(KirmiziSiyahDugum dugum) {
 		return dugum == null || dugum.renk == BLACK;
 	}
 
-	//Kırmızı-Siyah ağaç yapısının önemli bir bileşeni olan NIL düğümünü temsil eden alt sınıf.
+	//Kirmizi-Siyah agac yapisinin onemli bir bileseni olan NiL dugumunu temsil eden alt sinif.
 	private static class NilDugum extends KirmiziSiyahDugum {
 		private NilDugum() {
-			super(0);  // NIL düğümünün anahtar değeri genellikle kullanılmaz, bu nedenle 0 olarak ayarlanabilir.
-			this.renk = BLACK;  // Tüm NIL düğümleri siyahtır.
+			super(0);  // NiL dugumunun anahtar degeri genellikle kullanilmaz, bu nedenle 0 olarak ayarlanabilir.
+			this.renk = BLACK;  // Tum NiL dugumleri siyahtir.
 		}
 	}
 
-	//Belirtilen düğümü sağa döndürme işlemini gerçekleştirir.
-	//Döndürme işlemi, düğümlerin ebeveynlerini, çocuklarını ve bağlantılarını günceller.
+	//Belirtilen dugumu saga dondurme islemini gerceklestirir.
+	//Dondurme islemi, dugumlerin atalarini, cocuklarini ve baglantilarini gunceller.
 	private void sagaDondur(KirmiziSiyahDugum dugum) {
-		KirmiziSiyahDugum ebeveyn = dugum.ebeveyn;
+		KirmiziSiyahDugum ata = dugum.ata;
 		KirmiziSiyahDugum solCocuk = dugum.solCocuk;
 
-		// Düğümün sol çocuğunu güncelle
+		// Dugumun sol cocugunu guncelle
 		dugum.solCocuk = solCocuk.sagCocuk;
 		if (solCocuk.sagCocuk != null) {
-			solCocuk.sagCocuk.ebeveyn = dugum;
+			solCocuk.sagCocuk.ata = dugum;
 		}
 
-		// Sol çocuğun sağ çocuğunu ayarla ve ebeveynleri güncelle
+		// Sol cocugun sag cocugunu ayarla ve atalari guncelle
 		solCocuk.sagCocuk = dugum;
-		dugum.ebeveyn = solCocuk;
+		dugum.ata = solCocuk;
 
-		// Ebeveyn düğümün çocuklarını güncelle
-		cocuklariYerDegistir(ebeveyn, dugum, solCocuk);
+		// ata dugumun cocuklarini guncelle
+		cocuklariYerDegistir(ata, dugum, solCocuk);
 	}
 
 
-	//Belirtilen düğümü sola döndürme işlemini gerçekleştirir.
-	//Döndürme işlemi, düğümlerin ebeveynlerini, çocuklarını ve bağlantılarını günceller.
+	//Belirtilen dugumu sola dondurme islemini gerceklestirir.
+	//Dondurme islemi, dugumlerin atalarini, cocuklarini ve baglantilarini gunceller.
 	private void solaDondur(KirmiziSiyahDugum dugum) {
-		KirmiziSiyahDugum ebeveyn = dugum.ebeveyn;
+		KirmiziSiyahDugum ata = dugum.ata;
 		KirmiziSiyahDugum sagCocuk = dugum.sagCocuk;
 
-		// Düğümün sağ çocuğunu güncelle
+		// Dugumun sag cocugunu guncelle
 		dugum.sagCocuk = sagCocuk.solCocuk;
 		if (sagCocuk.solCocuk != null) {
-			sagCocuk.solCocuk.ebeveyn = dugum;
+			sagCocuk.solCocuk.ata = dugum;
 		}
 
-		// Sağ çocuğun sol çocuğunu ayarla ve ebeveynleri güncelle
+		// Sag cocugun sol cocugunu ayarla ve atalari guncelle
 		sagCocuk.solCocuk = dugum;
-		dugum.ebeveyn = sagCocuk;
+		dugum.ata = sagCocuk;
 
-		// Ebeveyn düğümün çocuklarını güncelle
-		cocuklariYerDegistir(ebeveyn, dugum, sagCocuk);
+		// ata dugumun cocuklarini guncelle
+		cocuklariYerDegistir(ata, dugum, sagCocuk);
 	}
 
 
-	//Ebeveyn düğümün belirli bir çocuğunu başka bir düğümle değiştirme işlemini gerçekleştirir.
-	//Bu işlev, ağaç yapısındaki bağlantıları günceller.
-	private void cocuklariYerDegistir(KirmiziSiyahDugum ebeveyn, KirmiziSiyahDugum eskiCocuk, KirmiziSiyahDugum yeniCocuk) {
-		if (ebeveyn == null) {
-			// Eğer ebeveyn düğüm yoksa, yeni çocuk yeni kök olur
+	//ata dugumun belirli bir cocugunu baska bir dugumle degistirme islemini gerceklestirir.
+	//Bu islev, agac yapisindaki baglantilari gunceller.
+	private void cocuklariYerDegistir(KirmiziSiyahDugum ata, KirmiziSiyahDugum eskiCocuk, KirmiziSiyahDugum yeniCocuk) {
+		if (ata == null) {
+			// Eger ata dugum yoksa, yeni cocuk yeni kok olur
 			kok = yeniCocuk;
-		} else if (ebeveyn.solCocuk == eskiCocuk) {
-			// Ebeveynin sol çocuğu eski çocuk ise, sol çocuğu yeni çocuk ile değiştir
-			ebeveyn.solCocuk = yeniCocuk;
-		} else if (ebeveyn.sagCocuk == eskiCocuk) {
-			// Ebeveynin sağ çocuğu eski çocuk ise, sağ çocuğu yeni çocuk ile değiştir
-			ebeveyn.sagCocuk = yeniCocuk;
+		} else if (ata.solCocuk == eskiCocuk) {
+			// atanin sol cocugu eski cocuk ise, sol cocugu yeni cocuk ile degistir
+			ata.solCocuk = yeniCocuk;
+		} else if (ata.sagCocuk == eskiCocuk) {
+			// atanin sag cocugu eski cocuk ise, sag cocugu yeni cocuk ile degistir
+			ata.sagCocuk = yeniCocuk;
 		} else {
-			// Eski çocuk, belirtilen ebeveyn düğümün çocuğu değilse hata mesajı ver
-			System.out.println("Düğüm, ebeveyninin çocuğu değil.");
+			// Eski cocuk, belirtilen ata dugumun cocugu degilse hata mesaji ver
+			System.out.println("Dugum, atanin cocugu degil.");
 			return;
 		}
 
 		if (yeniCocuk != null) {
-			// Eğer yeni çocuk varsa, onun ebeveynini belirtilen ebeveyn olarak ayarla
-			yeniCocuk.ebeveyn = ebeveyn;
+			// Eger yeni cocuk varsa, onun atasini belirtilen ata olarak ayarla
+			yeniCocuk.ata = ata;
 		}
 	}
 
 	void kokBastaDolas(KirmiziSiyahDugum kok) {
 		if (kok != null) {
 			System.out.print("{" + kok.anahtar + (kok.renk == RED ? "[R]" : "[B]") + 
-					(kok.ebeveyn != null ? kok.ebeveyn.anahtar : "null") + "} ");  // Düğümün verisini yazdır
-			kokBastaDolas(kok.solCocuk);    // Sol çocuğu ziyaret et
-			kokBastaDolas(kok.sagCocuk);    // Sağ çocuğu ziyaret et
+					(kok.ata != null ? kok.ata.anahtar : "null") + "} ");  // Dugumun verisini yazdir
+			kokBastaDolas(kok.solCocuk);    // Sol cocugu ziyaret et
+			kokBastaDolas(kok.sagCocuk);    // Sag cocugu ziyaret et
 		}
 	}
 
 	void kokOrtadaDolas(KirmiziSiyahDugum kok) {
 		if (kok != null) {
-			kokOrtadaDolas(kok.solCocuk);    // Sol çocuğu ziyaret et
+			kokOrtadaDolas(kok.solCocuk);    // Sol cocugu ziyaret et
 			System.out.print("{" + kok.anahtar + (kok.renk == RED ? "[R]" : "[B]") + 
-					(kok.ebeveyn != null ? kok.ebeveyn.anahtar : "null") + "} ");  // Düğümün verisini yazdır
-			kokOrtadaDolas(kok.sagCocuk);    // Sağ çocuğu ziyaret et
+					(kok.ata != null ? kok.ata.anahtar : "null") + "} ");  // Dugumun verisini yazdir
+			kokOrtadaDolas(kok.sagCocuk);    // Sag cocugu ziyaret et
 		}
 	}
 
 	void kokSondaDolas(KirmiziSiyahDugum kok) {
 		if (kok != null) {
-			kokSondaDolas(kok.solCocuk);    // Sol çocuğu ziyaret et
-			kokSondaDolas(kok.sagCocuk);    // Sağ çocuğu ziyaret et
+			kokSondaDolas(kok.solCocuk);    // Sol cocugu ziyaret et
+			kokSondaDolas(kok.sagCocuk);    // Sag cocugu ziyaret et
 			System.out.print("{" + kok.anahtar + (kok.renk == RED ? "[R]" : "[B]") + 
-					(kok.ebeveyn != null ? kok.ebeveyn.anahtar : "null") + "} ");  // Düğümün verisini yazdır
+					(kok.ata != null ? kok.ata.anahtar : "null") + "} ");  // Dugumun verisini yazdir
 		}
 	}
 	
 	public static void main(String[] args) {
 		KirmiziSiyahAgac agac = new KirmiziSiyahAgac();
 
-		agac.ekle(50);   // Ağaca düğümleri ekle
+		agac.ekle(50);   // Agaca dugumleri ekle
 		agac.kokOrtadaDolas(agac.kok);
 		System.out.println();
 
@@ -508,12 +507,27 @@ public class KirmiziSiyahAgac {
 		System.out.println();
 
 		agac.ara(60);  
-		agac.ara(32);  
+		agac.ara(50);  
 
 		agac.sil(50);
 
-		agac.ara(60);
+		agac.ara(50);
 
+		agac.kokOrtadaDolas(agac.kok);
+		System.out.println();
+		agac.sil(80);
+		agac.kokOrtadaDolas(agac.kok);
+		System.out.println();
+		agac.sil(20);
+		agac.kokOrtadaDolas(agac.kok);
+		System.out.println();
+		agac.sil(30);
+		agac.kokOrtadaDolas(agac.kok);
+		System.out.println();
+		agac.sil(40);
+		agac.kokOrtadaDolas(agac.kok);
+		System.out.println();
+		agac.sil(60);
 		agac.kokOrtadaDolas(agac.kok);
 		System.out.println();
 	}
