@@ -74,7 +74,7 @@ public class IkiliAgacOzYinelemeli {
     // Agacin derinligini hesapla
     private int agacDerinligi(Dugum<Integer> dugum) {
         if (dugum == null) {
-            return 0; // Bos agacin derinligi 0'dır
+            return 0; // Bos agacin derinligi 0'dir
         } else {
             int solDerinlik = agacDerinligi(dugum.sol); // Sol alt agacin derinligi
             int sagDerinlik = agacDerinligi(dugum.sag); // Sag alt agacin derinligi

@@ -1,7 +1,7 @@
 public class AyrikKumeDizi {
 
     private int[] ata; // Her elemanin kendi atasini tutan dizi
-    private int[] sira; // Ağaçların derinliklerini tutan dizi
+    private int[] sira; // Agaclarin derinliklerini tutan dizi
 
     public AyrikKumeDizi(int boyut) {
         ata = new int[boyut]; // Ata dizisi olusturuluyor

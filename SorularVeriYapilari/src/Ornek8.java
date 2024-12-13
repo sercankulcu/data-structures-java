@@ -17,7 +17,7 @@ public class Ornek8 {
         }
     }
 
-    // Kuyrugun ilk elemanini görup silen metot
+    // Kuyrugun ilk elemanini gorup silen metot
     public static String gorVeSil(Queue<String> kuyruk) {
         String eleman = kuyruk.peek();
         kuyruk.poll();  // Elemani sil
@@ -51,8 +51,8 @@ public class Ornek8 {
         kuyruguTersCevir(kuyruk);
         System.out.println("Tersine cevrilmis Kuyruk: " + kuyruk);
 
-        // Kuyrugun ilk elemanini gör ve sil
-        System.out.println("\nilk elemani görup siliyoruz...");
+        // Kuyrugun ilk elemanini gor ve sil
+        System.out.println("\nilk elemani gorup siliyoruz...");
         String silinenEleman = gorVeSil(kuyruk);
         System.out.println("Silinen Eleman: " + silinenEleman);
         System.out.println("ilk eleman silindikten sonraki Kuyruk: " + kuyruk);

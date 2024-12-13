@@ -5,14 +5,14 @@ public class LinkedListOrnegi {
 	
     public static void main(String[] args) {
     	
-        // LinkedList oluşturuluyor
+        // LinkedList olusturuluyor
         LinkedList<String> sepet = new LinkedList<>();
 
         // LinkedList'e elemanlar ekleniyor
         sepet.add("Elma");
         sepet.add("Armut");
         sepet.add("Muz");
-        sepet.add("Çilek");
+        sepet.add("Cilek");
 
         // Elemanlari ekrana yazdirma
         System.out.print("Sepettekiler : ");

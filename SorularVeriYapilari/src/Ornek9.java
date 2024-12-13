@@ -14,15 +14,15 @@ public class Ornek9 {
     // Listeyi dolasarak, verilen dugumun basa ulasip ulasmadigini kontrol eden fonksiyon
     public static int fonksiyon(Node baslangic, Node suanki) {
         
-        // Eger liste bossa 1 döndur, yani basa ulasilamaz
+        // Eger liste bossa 1 dondur, yani basa ulasilamaz
         if (baslangic == null)
             return 1;
         
-        // Eger suanki dugum null ise 0 döndur, yani sona ulasilmistir
+        // Eger suanki dugum null ise 0 dondur, yani sona ulasilmistir
         if(suanki == null)
             return 0;
         
-        // Eger suanki dugum basa esitse, 1 döndur
+        // Eger suanki dugum basa esitse, 1 dondur
         if(baslangic == suanki)
             return 1;
         

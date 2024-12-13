@@ -52,7 +52,7 @@ public class HashTablosu {
 		// Kova indeksindeki ilk dugum alinir.
 		HashDugumu ilk = kovalar[kovaIndeksi];
 
-		// Kova icindeki dugumler üzerinde gezilir.
+		// Kova icindeki dugumler uzerinde gezilir.
 		while(ilk != null) {
 			// Eger anahtar eslesirse, degeri guncelle
 			if(ilk.anahtar.equals(anahtar)) {
@@ -84,7 +84,7 @@ public class HashTablosu {
 		// Kova indeksindeki ilk dugum alinir.
 		HashDugumu ilk = kovalar[kovaIndeksi];
 
-		// Kova icindeki dugumler üzerinde gezilir
+		// Kova icindeki dugumler uzerinde gezilir
 		while(ilk != null) {
 			// Eger anahtar eslesirse, ilgili degeri dondur
 			if(ilk.anahtar.equals(anahtar)) {
@@ -100,14 +100,14 @@ public class HashTablosu {
 	}
 
 	public String sil(Integer anahtar) {
-		// Anahtarın kova indeksini al
+		// Anahtarin kova indeksini al
 		int kovaIndeksi = getKovaIndeksi(anahtar);
 
 		// Kova indeksindeki ilk dugumu al, onceki dugumu null olarak ata.
 		HashDugumu ilk = kovalar[kovaIndeksi];
 		HashDugumu onceki = null;
 
-		// Kova icindeki dugumler üzerinde gez
+		// Kova icindeki dugumler uzerinde gez
 		while(ilk != null) {
 			// Eger anahtar eslesirse, donguden cik
 			if(ilk.anahtar.equals(anahtar)) {

@@ -18,7 +18,7 @@
 
 import java.util.Stack;
 
-// Disk sınıfı, diskin bilgilerini tutar
+// Disk sinifi, diskin bilgilerini tutar
 class Disk {
 	int diskSayisi;  // Disk sayisi
 	char kaynak;     // Kaynak cubuk

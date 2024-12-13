@@ -12,7 +12,7 @@ class Dugum {
 	}
 }
 
-// Oncelikli kuyruğu bagli liste yapisi ile gerceklestiren sinif
+// Oncelikli kuyrugu bagli liste yapisi ile gerceklestiren sinif
 public class OncelikliKuyrukBagliListe {
 	private Dugum bas; // Kuyrugun basini temsil eder
 

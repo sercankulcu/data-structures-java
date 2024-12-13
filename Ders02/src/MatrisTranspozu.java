@@ -39,7 +39,7 @@ public class MatrisTranspozu {
 			}
 		}
 
-		// Transpoze matrisi geri döndürüyoruz
+		// Transpoze matrisi geri donduruyoruz
 		return transpozeMatris;
 	}
 

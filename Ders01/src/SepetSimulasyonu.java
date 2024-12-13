@@ -15,7 +15,7 @@ class Urun {
 	// equals metodu: Iki urunun esit olup olmadigini kontrol eder
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) { // Aynı referans ise esit
+		if (this == obj) { // Ayni referans ise esit
 			return true;
 		}
 		if (obj == null || getClass() != obj.getClass()) { // Sinif farkli ise esit degil

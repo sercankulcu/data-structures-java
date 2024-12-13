@@ -7,22 +7,22 @@ public class LinkedListOrnegi {
 
 		// Listeye eleman ekleniyor
 		sehirler.add("Ankara");
-		sehirler.add("İstanbul");
-		sehirler.add("İzmir");
+		sehirler.add("Istanbul");
+		sehirler.add("Izmir");
 		sehirler.add("Bursa");
 
-		// Liste iceriği ekrana yazdiriliyor
+		// Liste icerigi ekrana yazdiriliyor
 		System.out.println("Sehirler: " + sehirler);
 
-		// Liste boyutu (eleman sayısı) alınıyor
+		// Liste boyutu (eleman sayisi) aliniyor
 		int elemanSayisi = sehirler.size();
 		System.out.println("Sehir Sayisi: " + elemanSayisi);
 
-		// Belirli bir indeksteki elemana erisim sağlanıyor
+		// Belirli bir indeksteki elemana erisim saglaniyor
 		String ikinciSehir = sehirler.get(1);
-		System.out.println("İkinci Sehir: " + ikinciSehir);
+		System.out.println("Ikinci Sehir: " + ikinciSehir);
 
-		// Belirli bir eleman degistiriliyor (İzmir -> Antalya)
+		// Belirli bir eleman degistiriliyor (Izmir -> Antalya)
 		sehirler.set(2, "Antalya");
 		System.out.println("Degistirilmis Sehirler: " + sehirler);
 
@@ -30,9 +30,9 @@ public class LinkedListOrnegi {
 		sehirler.remove(0); 
 		System.out.println("Ankara Kaldirildi: " + sehirler);
 
-		// Listede bir eleman var mi kontrol ediliyor (İstanbul)
-		boolean istanbulVarMi = sehirler.contains("İstanbul");
-		System.out.println("İstanbul Var Mi? " + istanbulVarMi);
+		// Listede bir eleman var mi kontrol ediliyor (Istanbul)
+		boolean istanbulVarMi = sehirler.contains("Istanbul");
+		System.out.println("Istanbul Var Mi? " + istanbulVarMi);
 
 		// Liste bos mu kontrol ediliyor
 		boolean bosMu = sehirler.isEmpty();

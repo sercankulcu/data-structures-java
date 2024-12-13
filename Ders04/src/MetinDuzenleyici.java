@@ -6,7 +6,7 @@ public class MetinDuzenleyici {
 	private Stack<String> geriAlYigin;
 	private Stack<String> yenidenUygulaYigin;
 
-	// Yapıcı metod: MetinDuzenleyici nesnesi olusturuluyor
+	// Yapici metod: MetinDuzenleyici nesnesi olusturuluyor
 	public MetinDuzenleyici() {
 		metin = new StringBuilder(); // Metin alanini baslat
 		geriAlYigin = new Stack<>(); // Geri alma islemleri icin yigin
@@ -48,7 +48,7 @@ public class MetinDuzenleyici {
 		// Metin ekleme islemleri
 		System.out.println("Metin Ekleme Islemleri:");
 		duzenleyici.metinEkle("Merhaba, "); // "Merhaba, " metnini ekle
-		duzenleyici.metinEkle("Dünya!"); // "Dünya!" metnini ekle
+		duzenleyici.metinEkle("Dunya!"); // "Dunya!" metnini ekle
 		System.out.println("Metin: " + duzenleyici.getMetin()); // Metni yazdir
 
 		// Geri alma islemi

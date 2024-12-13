@@ -13,7 +13,7 @@ public class PostfixHesaplayici {
 			if (Character.isDigit(sembol)) {
 				islenenlerYigini.push(Double.parseDouble(String.valueOf(sembol)));
 			} else if (isOperator(sembol)) {
-				// Eger karakter bir isleç ise, stack'ten islenenleri cikar,
+				// Eger karakter bir islec ise, stack'ten islenenleri cikar,
 				// islemi gerceklestirip sonucu tekrar stack'e ekle
 				double islenen2 = islenenlerYigini.pop();
 				double islenen1 = islenenlerYigini.pop();
@@ -26,7 +26,7 @@ public class PostfixHesaplayici {
 		return islenenlerYigini.pop();
 	}
 
-	// Karakterin bir isleç olup olmadigini kontrol eder
+	// Karakterin bir islec olup olmadigini kontrol eder
 	private static boolean isOperator(char karakter) {
 		return karakter == '+' || karakter == '-' || karakter == '*' || karakter == '/';
 	}
@@ -47,7 +47,7 @@ public class PostfixHesaplayici {
 				throw new ArithmeticException("Sifira bolme hatasi");
 			}
 		default:
-			throw new IllegalArgumentException("Gecersiz isleç: " + islec);
+			throw new IllegalArgumentException("Gecersiz islec: " + islec);
 		}
 	}
 

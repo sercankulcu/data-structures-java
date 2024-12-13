@@ -26,7 +26,7 @@ public class IkiliAgacIlerlemeli {
         ucuncu.sag = yedinci;        // Ucuncu dugumun sag alt dugumunu ayarla
     }
 
-    // Kök basta dolas (preorder traversal)
+    // Kok basta dolas (preorder traversal)
     public void kokBastaDolas(Dugum<Integer> kok) {
         if (kok == null) {
             return; // Eger kok null ise islem sonlandirilir
@@ -110,7 +110,7 @@ public class IkiliAgacIlerlemeli {
         
         // Seviye sirali dolasma icin bir kuyruk (queue) olustur
         Queue<Dugum<Integer>> kuyruk = new LinkedList<>();
-        kuyruk.add(kok); // Kok dugumu kuyruğa ekle
+        kuyruk.add(kok); // Kok dugumu kuyruga ekle
 
         // Kuyruk bosalana kadar islem devam eder
         while (!kuyruk.isEmpty()) {
@@ -118,11 +118,11 @@ public class IkiliAgacIlerlemeli {
             Dugum<Integer> tempDugum = kuyruk.poll();
             System.out.print(tempDugum.veri + " "); 
 
-            // Eger sol alt dugum varsa, onu kuyruğa ekle
+            // Eger sol alt dugum varsa, onu kuyruga ekle
             if (tempDugum.sol != null) 
                 kuyruk.offer(tempDugum.sol); 
 
-            // Eger sag alt dugum varsa, onu kuyruğa ekle
+            // Eger sag alt dugum varsa, onu kuyruga ekle
             if (tempDugum.sag != null) 
                 kuyruk.offer(tempDugum.sag); 
         }

@@ -5,11 +5,11 @@ public class ParantezUyumsuzluguKontrol {
 	public static void main(String[] args) {
 
 		// Farkli ifadeler tanimlanir ve uyumluluk kontrolleri yapilir
-		String ifade1 = "Merhaba (Dünya)"; // Uyumlu ifade
-		String ifade2 = "Merhaba [Dünya"; // Uyumsuz ifade
-		String ifade3 = "Merhaba [Dünya(2)]"; // Uyumlu ifade
-		String ifade4 = "Merhaba [Dünya(])"; // Uyumsuz ifade
-		String ifade5 = "{(Merhaba) [Dünya]}"; // Uyumlu ifade
+		String ifade1 = "Merhaba (Dunya)"; // Uyumlu ifade
+		String ifade2 = "Merhaba [Dunya"; // Uyumsuz ifade
+		String ifade3 = "Merhaba [Dunya(2)]"; // Uyumlu ifade
+		String ifade4 = "Merhaba [Dunya(])"; // Uyumsuz ifade
+		String ifade5 = "{(Merhaba) [Dunya]}"; // Uyumlu ifade
 
 		// Her ifade icin uyumluluk sonucu ekrana yazdirilir
 		System.out.println(ifade1 + " ifadesinin uyumsuzlugu: " + parantezUyumsuzluguKontrol(ifade1));
@@ -47,7 +47,7 @@ public class ParantezUyumsuzluguKontrol {
 			}
 		}
 
-		// Tüm karakterler kontrol edildikten sonra stack hala dolu ise uyumsuzluk vardir
+		// Tum karakterler kontrol edildikten sonra stack hala dolu ise uyumsuzluk vardir
 		return parantezStack.isEmpty();
 	}
 

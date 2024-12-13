@@ -15,7 +15,7 @@ public class CizgeBagliListe {
         ziyaretEdildi = new ArrayList<>(); // Her dugumun ziyaret edilip edilmedigini tutan listeyi olusturur
     }
 
-    // Ziyaret edilen dugumlerin durumunu temizler (Tüm dugumleri ziyaret edilmemis olarak isaretler)
+    // Ziyaret edilen dugumlerin durumunu temizler (Tum dugumleri ziyaret edilmemis olarak isaretler)
     public void temizle() {
         for (int i = 0; i < ziyaretEdildi.size(); i++) {
             ziyaretEdildi.set(i, false); // Her dugumu ziyaret edilmemis olarak ayarlar
@@ -33,7 +33,7 @@ public class CizgeBagliListe {
     // Yeni bir kenar ekler. (Her iki dugumu de komsu listelerine ekler)
     public void kenarEkle(int dugum, int komsu) {
         kapasiteKontrolEt(dugum); // Dugum ve komsu listesinin yeterli kapasiteye sahip oldugundan emin ol
-        kapasiteKontrolEt(komsu); // Aynı işlemi komsu dugumu için de yap
+        kapasiteKontrolEt(komsu); // Ayni islemi komsu dugumu icin de yap
         komsuListesi.get(dugum).add(komsu); // Dugumun komsu listesine komsu dugumunu ekler
         komsuListesi.get(komsu).add(dugum); // Komsu dugumun komsu listesine ana dugumu ekler
     }
@@ -41,7 +41,7 @@ public class CizgeBagliListe {
     // Genislik Oncelikli Arama (BFS): Girilen dugumden baslayarak, komsulari gezer
     public void BFS(int dugum) {
         temizle(); // Ziyaret edilmis dugumleri temizle
-        LinkedList<Integer> kuyruk = new LinkedList<>(); // Genişlik öncelikli arama için kuyruk olusturulur
+        LinkedList<Integer> kuyruk = new LinkedList<>(); // Genislik oncelikli arama icin kuyruk olusturulur
 
         ziyaretEdildi.set(dugum, true); // Baslangic dugumunu ziyaret edildi olarak isaretle
         kuyruk.add(dugum); // Baslangic dugumunu kuyruga ekle

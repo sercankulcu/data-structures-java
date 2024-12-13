@@ -13,7 +13,7 @@ public class DijkstraDemo {
 
         // Kenar ekler: Kaynak ve hedef arasindaki agirligi belirler
         public void kenarEkle(int kaynak, int hedef, int agirlik) {
-            // Yönsüz cizge oldugu icin her iki tarafa da kenar eklenir
+            // Yonsuz cizge oldugu icin her iki tarafa da kenar eklenir
             dugumler.computeIfAbsent(kaynak, k -> new HashMap<>()).put(hedef, agirlik);
             dugumler.computeIfAbsent(hedef, k -> new HashMap<>()).put(kaynak, agirlik);
         }

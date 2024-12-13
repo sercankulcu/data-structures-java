@@ -21,7 +21,7 @@ public class CopyOnWriteArrayListOrnegi {
 		System.out.println();
 
 		// Eleman ekleme (bu islem kopya bir liste olusturur)
-		liste.add("Çilek");  // Bu ekleme, mevcut listeyi degistirip yeni bir liste kopyası olusturur.
+		liste.add("Cilek");  // Bu ekleme, mevcut listeyi degistirip yeni bir liste kopyasi olusturur.
 
 		// Liste icerigini tekrar goruntuleme
 		System.out.println("Guncellenmis Meyveler: " + liste);

@@ -10,10 +10,10 @@ public class StackOrnegi {
 		stack.push("Eleman 2");
 		stack.push("Eleman 3");
 
-		// Stack'in iceriğini ekrana yazdırma
+		// Stack'in icerigini ekrana yazdirma
 		System.out.println("Stack: " + stack);
 
-		// Stack'ten eleman cikarma (çekme - pop)
+		// Stack'ten eleman cikarma (cekme - pop)
 		String eleman = stack.pop();
 		System.out.println("Cikartilan Eleman: " + eleman);
 		System.out.println("Guncellenmis Stack: " + stack);
@@ -21,9 +21,9 @@ public class StackOrnegi {
 		// Stack'ten eleman cikarmadan sadece en tepedeki elemana erisim (peek)
 		String tepeEleman = stack.peek();
 		System.out.println("Tepe Eleman: " + tepeEleman);
-		System.out.println("Stack Hala Aynı: " + stack);
+		System.out.println("Stack Hala Ayni: " + stack);
 
-		// Stack boş mu? Kontrol ediliyor
+		// Stack bos mu? Kontrol ediliyor
 		boolean bosMu = stack.isEmpty();
 		System.out.println("Stack Bos Mu? " + bosMu);
 
@@ -32,7 +32,7 @@ public class StackOrnegi {
 		stack.push("Eleman 5");
 		System.out.println("Yeni Elemanlar Eklendi: " + stack);
 
-		// Stack'ten bir eleman daha çıkartılıyor
+		// Stack'ten bir eleman daha cikartiliyor
 		eleman = stack.pop();
 		System.out.println("Cikartilan Son Eleman: " + eleman);
 		System.out.println("Guncellenmis Stack: " + stack);
@@ -41,7 +41,7 @@ public class StackOrnegi {
 		int stackBoyutu = stack.size();
 		System.out.println("Stack Boyutu: " + stackBoyutu);
 
-		// Stack'teki elemanlar tek tek yazdırılıyor
+		// Stack'teki elemanlar tek tek yazdiriliyor
 		System.out.print("Stack'teki Elemanlar: ");
 		for (String s : stack) {
 			System.out.print(s + " ");

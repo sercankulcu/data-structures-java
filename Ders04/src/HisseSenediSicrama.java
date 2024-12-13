@@ -6,10 +6,10 @@ import java.util.Stack;
  * finansal analizde kullanilan bir problemdir. 
  * 
  * Problem, belirli bir sure boyunca hisse senedi fiyatlarini inceleyerek her gunun 
- * fiyatinin kac ardısık gun boyunca daha yuksek veya es oldugunu bulmayi hedefler. 
+ * fiyatinin kac ardisik gun boyunca daha yuksek veya es oldugunu bulmayi hedefler. 
  * 
  * Problem aciklamasi:
- * Verilen bir dizi hisse senedi fiyatindan, her bir gun icin ardısık fiyatin 
+ * Verilen bir dizi hisse senedi fiyatindan, her bir gun icin ardisik fiyatin 
  * kac gun boyunca daha yuksek/es oldugu hesaplanir. 
  * 
  * Ornek: 

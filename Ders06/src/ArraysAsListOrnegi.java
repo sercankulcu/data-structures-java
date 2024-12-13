@@ -5,7 +5,7 @@ import java.util.List;
 public class ArraysAsListOrnegi {
 	public static void main(String[] args) {
 		// Diziyi List'e donusturme (Array'i List'e ceviriyoruz)
-		String[] sehirDizisi = {"Ankara", "İstanbul", "İzmir", "Bursa"};
+		String[] sehirDizisi = {"Ankara", "Istanbul", "Izmir", "Bursa"};
 		List<String> sehirListesi = Arrays.asList(sehirDizisi);
 
 		// Liste icerigini goruntuleme
@@ -26,9 +26,9 @@ public class ArraysAsListOrnegi {
 		// sehirListesi.add("Konya"); // UnsupportedOperationException hatasi
 
 		// List'e eleman eklenemez, cunku Arrays.asList() sabit uzunlukta bir liste olusturur
-		// Bu durumun farkinda olarak, ArrayList'e dönüştürme işlemi yapılabilir:
+		// Bu durumun farkinda olarak, ArrayList'e donusturme islemi yapilabilir:
 		List<String> sehirListesi2 = new ArrayList<>(Arrays.asList(sehirDizisi));
-		sehirListesi2.add("Konya");  // Şimdi eleman eklenebilir
+		sehirListesi2.add("Konya");  // Simdi eleman eklenebilir
 		System.out.println("Yeni Sehirler: " + sehirListesi2);
 	}
 }

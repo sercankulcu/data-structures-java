@@ -22,7 +22,7 @@ public class Ornek7<E> {
             capacity /= 2;
             items = Arrays.copyOf(items, capacity);
         } else if (N > capacity / 2) {
-            // Boyut kapasitenin yarısından buyukse, boyut arttirma
+            // Boyut kapasitenin yarisindan buyukse, boyut arttirma
             capacity *= 2;
             items = Arrays.copyOf(items, capacity);
         }

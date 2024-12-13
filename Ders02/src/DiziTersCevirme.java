@@ -10,73 +10,73 @@ public class DiziTersCevirme {
 		System.out.println("Orijinal Dizi:");
 		diziYazdir(dizi); // Orijinal diziyi ekrana yazdiran fonksiyon
 
-		// Dizi ters çevrilir ve ekrana yazdirilir
+		// Dizi ters cevrilir ve ekrana yazdirilir
 		int[] tersDizi = diziTersCevir(dizi);
-		System.out.println("\nTers Çevrilmiş Dizi:");
-		diziYazdir(tersDizi); // Ters çevrilmiş diziyi yazdir
+		System.out.println("\nTers Cevrilmis Dizi:");
+		diziYazdir(tersDizi); // Ters cevrilmis diziyi yazdir
 
-		// Farkli bir yöntemle diziyi ters çevir ve yazdir
+		// Farkli bir yontemle diziyi ters cevir ve yazdir
 		tersDizi = diziTersCevirInPlace(dizi);
-		System.out.println("\nTers Çevrilmiş Dizi (in-place):");
-		diziYazdir(tersDizi); // In-place ters çevirme ile diziyi yazdir
+		System.out.println("\nTers Cevrilmis Dizi (in-place):");
+		diziYazdir(tersDizi); // In-place ters cevirme ile diziyi yazdir
 
-		// Stack kullanarak diziyi ters çevir ve yazdir
+		// Stack kullanarak diziyi ters cevir ve yazdir
 		tersDizi = diziTersCevirStack(dizi);
-		System.out.println("\nTers Çevrilmiş Dizi (Stack kullanarak):");
-		diziYazdir(tersDizi); // Stack yöntemi ile ters çevrilmiş diziyi yazdir
+		System.out.println("\nTers Cevrilmis Dizi (Stack kullanarak):");
+		diziYazdir(tersDizi); // Stack yontemi ile ters cevrilmis diziyi yazdir
 	}
 
-	// Tüm diziyi ters çeviren fonksiyon
+	// Tum diziyi ters ceviren fonksiyon
 	public static int[] diziTersCevir(int[] dizi) {
-		// Yeni bir dizi oluşturuluyor
+		// Yeni bir dizi olusturuluyor
 		int[] tersDizi = new int[dizi.length];
 		
-		// Dizinin elemanları ters sırayla yeni diziye ekleniyor
+		// Dizinin elemanlari ters sirayla yeni diziye ekleniyor
 		for (int i = 0; i < dizi.length; i++) {
 			tersDizi[i] = dizi[dizi.length - 1 - i];
 		}
 
-		return tersDizi; // Ters çevrilmiş diziyi döndür
+		return tersDizi; // Ters cevrilmis diziyi dondur
 	}
 
-	// Diziyi in-place (yerinde) ters çeviren fonksiyon
+	// Diziyi in-place (yerinde) ters ceviren fonksiyon
 	public static int[] diziTersCevirInPlace(int[] dizi) {
 		int uzunluk = dizi.length;
 
-		// Dizinin ilk yarısını ve ikinci yarısını yer değiştirerek ters çevir
+		// Dizinin ilk yarisini ve ikinci yarisini yer degistirerek ters cevir
 		for (int i = 0; i < uzunluk / 2; i++) {
 			int gecici = dizi[i];
 			dizi[i] = dizi[uzunluk - 1 - i];
 			dizi[uzunluk - 1 - i] = gecici;
 		}
 
-		return dizi; // Ters çevrilmiş diziyi döndür
+		return dizi; // Ters cevrilmis diziyi dondur
 	}
 
-	// Stack kullanarak diziyi ters çeviren fonksiyon
+	// Stack kullanarak diziyi ters ceviren fonksiyon
 	public static int[] diziTersCevirStack(int[] dizi) {
-		// Stack veri yapisini kullanarak diziyi ters çeviriyoruz
+		// Stack veri yapisini kullanarak diziyi ters ceviriyoruz
 		Stack<Integer> stack = new Stack<>();
 		
-		// Dizinin tüm elemanlarini stack'e ekle
+		// Dizinin tum elemanlarini stack'e ekle
 		for (int i = 0; i < dizi.length; i++) {
 			stack.push(dizi[i]);
 		}
 		
-		// Stack'ten elemanlari alarak diziyi ters sırayla doldur
+		// Stack'ten elemanlari alarak diziyi ters sirayla doldur
 		for (int i = 0; i < dizi.length; i++) {
 			dizi[i] = stack.pop();
 		}
 
-		return dizi; // Stack ile ters çevrilmiş diziyi döndür
+		return dizi; // Stack ile ters cevrilmis diziyi dondur
 	}
 
-	// Diziyi ekrana yazdıran fonksiyon
+	// Diziyi ekrana yazdiran fonksiyon
 	public static void diziYazdir(int[] dizi) {
 		// Dizinin her elemanini ekrana yazdir
 		for (int eleman : dizi) {
 			System.out.print(eleman + " ");
 		}
-		System.out.println(); // Satır atlamak için
+		System.out.println(); // Satir atlamak icin
 	}
 }
