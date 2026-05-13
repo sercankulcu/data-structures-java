@@ -41,7 +41,7 @@ public class TicTacToe {
 
     // Oyuncudan hamle alir ve tahtayi gunceller
     public static void hamleYap(char[][] tahta, char oyuncu) {
-        try (Scanner scanner = new Scanner(System.in)) {
+        Scanner scanner = new Scanner(System.in);
 			int satir;
 			int sutun;
 			do {
@@ -52,7 +52,7 @@ public class TicTacToe {
 			} while (satir < 0 || satir > 2 || sutun < 0 || sutun > 2 || tahta[satir][sutun] != ' '); // Gecersiz veya dolu alan kontrolu
 			tahta[satir][sutun] = oyuncu; // Hamle yapilir
 		}
-    }
+    
 
     // Oyunun devam edip etmedigini kontrol eder
     public static boolean oyunDevamEdiyorMu(char[][] tahta, char oyuncu) {

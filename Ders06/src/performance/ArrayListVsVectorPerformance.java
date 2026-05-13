@@ -9,7 +9,7 @@ import java.util.Vector;
 public class ArrayListVsVectorPerformance {
 
 	// TODO: try with different SIZE values
-	final static int SIZE = 100000;
+	final static int SIZE = 200000;
 
 	public static void main(String[] args) {
 		// Create an ArrayList and a Vector with the same number of elements.
