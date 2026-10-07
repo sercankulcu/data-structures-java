@@ -1,321 +1,138 @@
-
-// AVL Agaci dugum sinifi, agac yapisinin temel yapi taslarini olusturur.
-class AvlAgacDugum {
-
-	// Agactaki dugumun degerini temsil eder
-	int anahtar;
-	// Dugumun sol cocugunu temsil eden referans
-	AvlAgacDugum solCocuk;
-	// Dugumun sag cocugunu temsil eden referans
-	AvlAgacDugum sagCocuk;
-	// AVL agacinda kullanilan yukseklik bilgisini saklar
-	int yukseklik;
-
-	// Yapici metod: Belirtilen anahtar degeriyle bir AVL agaci dugumu olusturur
-	public AvlAgacDugum(int anahtar) {
-		this.anahtar = anahtar;
-		this.sagCocuk = null;
-		this.solCocuk = null;
-		this.yukseklik = 0;
-	}
-}
-
+// AVL agaci: her dugumde denge faktoru bf = h(sol) - h(sag) ve bf, {-1, 0, +1} icinde kalir.
+// Ekleme ve silme BST gibi yapilir; ozyineleme geri donerken yol uzerindeki her dugumde dengele cagrilir.
 public class AvlAgac {
 
-	AvlAgacDugum kok;
+	static class AvlDugum {
+		int anahtar;
+		AvlDugum sol, sag;
+		int yukseklik;      // yaprak: 0
 
-	public void ekle(int anahtar) {
-		kok = ekle(anahtar, kok);
-	}
-
-	//AVL agacina yeni bir dugum ekler ve agaci dengeler.
-	AvlAgacDugum ekle(int anahtar, AvlAgacDugum dugum) {
-		// Mevcut pozisyonda hic dugum yoksa, yeni dugumu bu pozisyona ekler.
-		if (dugum == null) {
-			dugum = new AvlAgacDugum(anahtar);
-			System.out.println("Agaca eklendi: " + anahtar); 
-		}
-
-		// Aksi takdirde, anahtara gore agacta sol veya sag yonde ilerler.
-		else if (anahtar < dugum.anahtar) {
-			dugum.solCocuk = ekle(anahtar, dugum.solCocuk);
-		} else if (anahtar > dugum.anahtar) {
-			dugum.sagCocuk = ekle(anahtar, dugum.sagCocuk);
-		} else {
-			System.out.println("Agacta bulundugu icin eklenemedi: " + anahtar); // Anahtar zaten agacta bulunuyor
-			return null;
-		}
-
-		// Yukseklik bilgisini gunceller.
-		yuksekligiGuncelle(dugum);
-
-		// Agaci dengelemek icin dengele() fonksiyonunu cagirir.
-		return dengele(dugum);
-	}
-
-	public void sil(int anahtar) {
-		kok = sil(anahtar, kok);
-		if (kok != null) {
-			System.out.println("Agacta silindi: " + anahtar);
+		AvlDugum(int anahtar) {
+			this.anahtar = anahtar;
+			this.yukseklik = 0;
 		}
 	}
 
-	//AVL agacindan bir dugumu siler.
-	AvlAgacDugum sil(int anahtar, AvlAgacDugum dugum) {
-		// Mevcut pozisyonda hic dugum yoksa, islemi sonlandirir ve bildirim gosterir.
-		if (dugum == null) {
-			System.out.println("Agacta bulunamadi: " + anahtar);
-			return null;
-		}
+	AvlDugum kok;
 
-		// Anahtara gore agacta sol veya sag yonde ilerler.
-		if (anahtar < dugum.anahtar) {
-			dugum.solCocuk = sil(anahtar, dugum.solCocuk);
-		} else if (anahtar > dugum.anahtar) {
-			dugum.sagCocuk = sil(anahtar, dugum.sagCocuk);
-		}
-
-		// Bu noktada, "dugum" silinmek istenen dugum olur.
-
-		// Dugumun hic cocugu yoksa --> dugumu sadece siler
-		else if (dugum.solCocuk == null && dugum.sagCocuk == null) {
-			dugum = null;
-		}
-
-		// Dugumun sadece bir cocugu varsa --> dugumu cocuguyla degistirir
-		else if (dugum.solCocuk == null) {
-			dugum = dugum.sagCocuk;
-		} else if (dugum.sagCocuk == null) {
-			dugum = dugum.solCocuk;
-		}
-
-		// Dugumun iki cocugu varsa
-		else {
-			ikiCocukluDugumuSil(dugum);
-		}
-
-		// Yukseklik bilgisini gunceller.
-		yuksekligiGuncelle(dugum);
-
-		// Agaci dengelemek icin dengele() fonksiyonunu cagirir.
-		return dengele(dugum);
+	// Bos alt agacin yuksekligi -1
+	int h(AvlDugum d) {
+		return d == null ? -1 : d.yukseklik;
 	}
 
-	//iki cocuklu bir dugumu siler.
-	private void ikiCocukluDugumuSil(AvlAgacDugum dugum) {
-		// Sag alt agacin en kucuk dugumunu bul ("inorder successor" olarak adlandirilir)
-		AvlAgacDugum siradakiDugum = minimumBul(dugum.sagCocuk);
-
-		// inorder successor'un verilerini su anki dugume kopyala
-		dugum.anahtar = siradakiDugum.anahtar;
-
-		// inorder successor'u tekrarlayarak sil
-		dugum.sagCocuk = sil(siradakiDugum.anahtar, dugum.sagCocuk);
+	// Denge faktoru: pozitif sol agir, negatif sag agir
+	int bf(AvlDugum d) {
+		return h(d.sol) - h(d.sag);
 	}
 
-	private AvlAgacDugum minimumBul(AvlAgacDugum dugum) {
-		while (dugum.solCocuk != null) {
-			dugum = dugum.solCocuk;
+	void guncelle(AvlDugum d) {
+		d.yukseklik = 1 + Math.max(h(d.sol), h(d.sag));
+	}
+
+	// Sol agir y: x yukari cikar, y x'in sag cocugu olur
+	AvlDugum sagaDondur(AvlDugum y) {
+		AvlDugum x = y.sol;
+		y.sol = x.sag;  // T2 -> y.sol
+		x.sag = y;      // y -> x.sag
+		guncelle(y);    // once alttaki
+		guncelle(x);
+		return x;       // yeni kok
+	}
+
+	// sagaDondur'un simetrigi (sol <-> sag)
+	AvlDugum solaDondur(AvlDugum x) {
+		AvlDugum y = x.sag;
+		x.sag = y.sol;  // T2 -> x.sag
+		y.sol = x;      // x -> y.sol
+		guncelle(x);    // once alttaki
+		guncelle(y);
+		return y;       // yeni kok
+	}
+
+	AvlDugum dengele(AvlDugum d) {
+		guncelle(d);
+		if (bf(d) > 1) {        // sol agir
+			if (bf(d.sol) < 0)  // LR
+				d.sol = solaDondur(d.sol);
+			return sagaDondur(d); // LL
 		}
-		return dugum;
-	}
-	
-	private AvlAgacDugum maksimumBul(AvlAgacDugum dugum) {
-		while (dugum.sagCocuk != null) {
-			dugum = dugum.sagCocuk;
+		if (bf(d) < -1) {       // sag agir
+			if (bf(d.sag) > 0)  // RL
+				d.sag = sagaDondur(d.sag);
+			return solaDondur(d); // RR
 		}
-		return dugum;
+		return d;
 	}
 
-	//Dugumun yuksekligini gunceller.
-	private void yuksekligiGuncelle(AvlAgacDugum dugum) {
+	AvlDugum ekle(AvlDugum d, int k) {
+		if (d == null) return new AvlDugum(k);
+		if (k < d.anahtar)
+			d.sol = ekle(d.sol, k);
+		else if (k > d.anahtar)
+			d.sag = ekle(d.sag, k);
+		else return d;          // tekrar yok
+		return dengele(d);
+	}
 
-		// Eger dugum null ise, islem yapmadan cik
-		if(dugum == null)
-			return;
-
-		int yukseklik = 0;
-
-		// Sol cocuk varsa, sol cocugun yuksekligini hesapla
-		if (dugum.solCocuk != null) {
-			yukseklik = yukseklikHesapla(dugum.solCocuk);
+	// BST silmesi + donuste dengele; birden fazla atada dondurme gerekebilir
+	AvlDugum sil(AvlDugum d, int k) {
+		if (d == null) return null;     // yok
+		if (k < d.anahtar)
+			d.sol = sil(d.sol, k);
+		else if (k > d.anahtar)
+			d.sag = sil(d.sag, k);
+		else if (d.sol == null)
+			return d.sag;               // yaprak / yalniz sag cocuk
+		else if (d.sag == null)
+			return d.sol;               // yalniz sol cocuk
+		else {                          // iki cocuk: ardil
+			AvlDugum ardil = d.sag;
+			while (ardil.sol != null)
+				ardil = ardil.sol;
+			d.anahtar = ardil.anahtar;
+			d.sag = sil(d.sag, ardil.anahtar);
 		}
-
-		// Sag cocuk varsa ve sag cocugun yuksekligi, sol cocugun yuksekliginden buyukse,
-		// sag cocugun yuksekligini kullan
-		if(dugum.sagCocuk != null)
-		{
-			int sagYukseklik = yukseklikHesapla(dugum.sagCocuk);
-			if(yukseklik < sagYukseklik) {
-				yukseklik = sagYukseklik;
-			}
-		}
-
-		// Dugumun yuksekligini, en yuksek cocugun yuksekligi + 1 olarak ayarla
-		dugum.yukseklik = yukseklik + 1;
+		return dengele(d);
 	}
 
-	//Dugumun AVL agacinda dengesini kontrol eder ve gerektiginde rotasyonlarla dengeyi saglar.
-	private AvlAgacDugum dengele(AvlAgacDugum dugum) {
-		int dengeFaktoru = dengeFaktoru(dugum);
-
-		// Sol taraf agirlikli mi?
-		if (dengeFaktoru < -1) {
-			if (dengeFaktoru(dugum.solCocuk) <= 0) {
-				// Saga dondurme islemi
-				dugum = sagaDondur(dugum);
-			} else {
-				// Sol-sag dondurme islemi
-				dugum.solCocuk = solaDondur(dugum.solCocuk);
-				dugum = sagaDondur(dugum);
-			}
-		}
-
-		// Sag taraf agirlikli mi?
-		if (dengeFaktoru > 1) {
-			if (dengeFaktoru(dugum.sagCocuk) >= 0) {
-				// Sola dondurme islemi
-				dugum = solaDondur(dugum);
-			} else {
-				// Sag-sola dondurme islemi
-				dugum.sagCocuk = sagaDondur(dugum.sagCocuk);
-				dugum = solaDondur(dugum);
-			}
-		}
-		return dugum;
+	// Agacin yapisini yazar: anahtar[bf](sol, sag), bos cocuk "-"
+	String yapi(AvlDugum d) {
+		if (d == null) return "-";
+		String s = d.anahtar + "[" + bf(d) + "]";
+		if (d.sol == null && d.sag == null) return s;
+		return s + "(" + yapi(d.sol) + ", " + yapi(d.sag) + ")";
 	}
 
-	//Dugumu saat yonune (saga) dondurerek AVL agacini dengelemek icin kullanilir.
-	private AvlAgacDugum sagaDondur(AvlAgacDugum dugum) {
-		
-		AvlAgacDugum solCocuk = dugum.solCocuk;
-
-		dugum.solCocuk = solCocuk.sagCocuk;
-		solCocuk.sagCocuk = dugum;
-
-		yuksekligiGuncelle(dugum);
-		yuksekligiGuncelle(solCocuk);
-
-		return solCocuk;
+	void ekleVeYaz(int k) {
+		kok = ekle(kok, k);
+		System.out.println("ekle " + k + ": " + yapi(kok));
 	}
 
-	//Dugumu saat yonunun tersine (sola) dondurerek AVL agacini dengelemek icin kullanilir.
-	private AvlAgacDugum solaDondur(AvlAgacDugum dugum) {
-		AvlAgacDugum sagCocuk = dugum.sagCocuk;
-
-		dugum.sagCocuk = sagCocuk.solCocuk;
-		sagCocuk.solCocuk = dugum;
-
-		yuksekligiGuncelle(dugum);
-		yuksekligiGuncelle(sagCocuk);
-
-		return sagCocuk;
-	}
-
-	private int dengeFaktoru(AvlAgacDugum dugum) {
-		if(dugum != null)
-			return yukseklikHesapla(dugum.sagCocuk) - yukseklikHesapla(dugum.solCocuk);
-		return -1;
-	}
-
-	private int yukseklikHesapla(AvlAgacDugum dugum) {
-		return dugum != null ? dugum.yukseklik : -1;
-	}
-
-	public AvlAgacDugum ara(int anahtar) {
-		AvlAgacDugum dugum = kok; // Kok dugumden baslanarak gezinme islemi
-		while (dugum != null) {
-			if (anahtar == dugum.anahtar) {
-				System.out.println("Agacta bulundu: " + anahtar); // Anahtar degeri agacta bulundugunda bildirim
-				return dugum; // Dugumu dondur
-			} else if (anahtar < dugum.anahtar) {
-				dugum = dugum.solCocuk; // Anahtar degeri dugumun anahtarindan kucukse sola git
-			} else {
-				dugum = dugum.sagCocuk; // Anahtar degeri dugumun anahtarindan buyukse saga git
-			}
-		}
-
-		System.out.println("Agacta bulunamadi: " + anahtar); // Anahtar degeri agacta bulunamadiginda bildirim
-		return null; // Dugum bulunamazsa null deger dondur
-	}
-
-	void kokBastaDolas(AvlAgacDugum kok) {
-		if (kok != null) {
-			System.out.print("{" + kok.anahtar + ", " + kok.yukseklik + ", " + 
-					(kok.solCocuk == null ? null : kok.solCocuk.anahtar) + ", " + 
-					(kok.sagCocuk == null ? null : kok.sagCocuk.anahtar) + "} ");  // Dugumun verisini yazdir
-			kokBastaDolas(kok.solCocuk);    // Sol cocugu ziyaret et
-			kokBastaDolas(kok.sagCocuk);    // Sag cocugu ziyaret et
-		}
-	}
-
-	void kokOrtadaDolas(AvlAgacDugum kok) {
-		if (kok != null) {
-			kokOrtadaDolas(kok.solCocuk);    // Sol cocugu ziyaret et
-			System.out.print("{" + kok.anahtar + ", " + kok.yukseklik + ", " + 
-					(kok.solCocuk == null ? null : kok.solCocuk.anahtar) + ", " + 
-					(kok.sagCocuk == null ? null : kok.sagCocuk.anahtar) + "} ");  // Dugumun verisini yazdir
-			kokOrtadaDolas(kok.sagCocuk);    // Sag cocugu ziyaret et
-		}
-	}
-
-	void kokSondaDolas(AvlAgacDugum kok) {
-		if (kok != null) {
-			kokSondaDolas(kok.solCocuk);    // Sol cocugu ziyaret et
-			kokSondaDolas(kok.sagCocuk);    // Sag cocugu ziyaret et
-			System.out.print("{" + kok.anahtar + ", " + kok.yukseklik + ", " + 
-					(kok.solCocuk == null ? null : kok.solCocuk.anahtar) + ", " + 
-					(kok.sagCocuk == null ? null : kok.sagCocuk.anahtar) + "} ");  // Dugumun verisini yazdir
-		}
+	void silVeYaz(int k) {
+		kok = sil(kok, k);
+		System.out.println("sil " + k + ": " + yapi(kok));
 	}
 
 	public static void main(String[] args) {
 		AvlAgac agac = new AvlAgac();
+		agac.ekleVeYaz(10);
+		agac.ekleVeYaz(20);
+		agac.ekleVeYaz(30);  // RR: 10'da solaDondur -> 20(10, 30)
+		agac.ekleVeYaz(40);
+		agac.ekleVeYaz(50);  // RR: 30'da solaDondur
+		agac.ekleVeYaz(25);  // RL: 40'ta sagaDondur, 20'de solaDondur -> 30(20(10, 25), 40(-, 50))
+		System.out.println("yukseklik: " + agac.h(agac.kok));   // 2
 
-		agac.ekle(50);   // Agaca dugumleri ekle
-		agac.kokOrtadaDolas(agac.kok);
-		System.out.println();
+		agac.silVeYaz(40);   // tek cocuk: 50 yukari cikar
+		agac.silVeYaz(50);   // 30'da bf = 2, bf(20) = 0 -> tek sagaDondur
+		agac.silVeYaz(99);   // agacta yok: degisiklik olmaz
 
-		agac.ekle(30);
-		agac.kokOrtadaDolas(agac.kok);
-		System.out.println();
-
-		agac.ekle(20);
-		agac.kokOrtadaDolas(agac.kok);
-		System.out.println();
-
-		agac.ekle(40);
-		agac.kokOrtadaDolas(agac.kok);
-		System.out.println();
-
-		agac.ekle(70);
-		agac.kokOrtadaDolas(agac.kok);
-		System.out.println();
-
-		agac.ekle(60);
-		agac.kokOrtadaDolas(agac.kok);
-		System.out.println();
-
-		agac.ekle(80);
-		agac.kokBastaDolas(agac.kok);
-		System.out.println();
-
-		agac.kokOrtadaDolas(agac.kok);
-		System.out.println();
-
-		agac.kokSondaDolas(agac.kok);
-		System.out.println();
-
-		agac.ara(60);  
-		agac.ara(32);  
-
-		agac.sil(60);
-		agac.sil(50);
-		agac.sil(30);
-
-		agac.ara(60);
-
-		agac.kokOrtadaDolas(agac.kok);
-		System.out.println();
+		// Ornek problemler: 3, 2, 1 (LL) ve 10, 30, 20 (RL)
+		AvlAgac ll = new AvlAgac();
+		for (int k : new int[] {3, 2, 1}) ll.kok = ll.ekle(ll.kok, k);
+		System.out.println("3, 2, 1   -> " + ll.yapi(ll.kok));    // 2(1, 3)
+		AvlAgac rl = new AvlAgac();
+		for (int k : new int[] {10, 30, 20}) rl.kok = rl.ekle(rl.kok, k);
+		System.out.println("10, 30, 20 -> " + rl.yapi(rl.kok));   // 20(10, 30)
 	}
 }

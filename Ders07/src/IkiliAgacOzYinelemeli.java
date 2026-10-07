@@ -1,108 +1,112 @@
+// Bagli gosterimde ikili agac: ozyinelemeli gezinmeler ve agac fonksiyonlari
 public class IkiliAgacOzYinelemeli {
 
-    private Dugum<Integer> kok;
+    // Agac dugumu: veri + sol ve sag cocuk referansi (yoksa null)
+    static class AgacDugumu {
+        int veri;
+        AgacDugumu sol;
+        AgacDugumu sag;
 
-    // Ikili agac olusturma islemi
-    public void ikiliAgacOlustur() {
-
-        // Dugumler olusturuluyor
-        Dugum<Integer> birinci = new Dugum<>(9);   // Kok dugum
-        Dugum<Integer> ikinci = new Dugum<>(2);    // Sol cocuk dugum
-        Dugum<Integer> ucuncu = new Dugum<>(3);    // Sag cocuk dugum
-        Dugum<Integer> dorduncu = new Dugum<>(4);  // Ikincinin solu
-        Dugum<Integer> besinci = new Dugum<>(7);   // Dorduncunun sagi
-        Dugum<Integer> altinci = new Dugum<>(5);   // Ucuncunun solu
-
-        // Agacin yapisi tanimlaniyor
-        kok = birinci;                // Kok dugumu tanimla
-        birinci.sol = ikinci;         // Kokun sol cocugu
-        birinci.sag = ucuncu;         // Kokun sag cocugu
-        ikinci.sol = dorduncu;        // Ikincinin sol cocugu
-        dorduncu.sag = besinci;       // Dorduncunun sag cocugu
-        ucuncu.sol = altinci;         // Ucuncunun sol cocugu
-    }
-
-    // Kok basta dolasma (preorder traversal)
-    public void kokBastaDolas(Dugum<Integer> kok) {
-        if (kok != null) {
-            System.out.print(kok.veri + " ");  // Dugumun degerini yazdir
-            kokBastaDolas(kok.sol);  // Sol alt agaci dolas
-            kokBastaDolas(kok.sag);  // Sag alt agaci dolas
+        AgacDugumu(int veri) {
+            this.veri = veri; // sol = sag = null
         }
     }
 
-    // Kok ortada dolasma (inorder traversal)
-    public void kokOrtadaDolas(Dugum<Integer> kok) {
+    // Kok basta: kok -> sol -> sag
+    public void kokBasta(AgacDugumu kok) {
         if (kok == null) {
-            return;  // Eger dugum bos ise islemi sonlandir
+            return; // taban durum: bos alt agac
         }
-        kokOrtadaDolas(kok.sol);   // Sol alt agaci dolas
-        System.out.print(kok.veri + " ");  // Dugumun degerini yazdir
-        kokOrtadaDolas(kok.sag);   // Sag alt agaci dolas
+        System.out.print(kok.veri + " ");
+        kokBasta(kok.sol);
+        kokBasta(kok.sag);
     }
 
-    // Kok sonda dolasma (postorder traversal)
-    public void kokSondaDolas(Dugum<Integer> kok) {
-        if (kok != null) {
-            kokSondaDolas(kok.sol); // Sol alt agaci dolas
-            kokSondaDolas(kok.sag); // Sag alt agaci dolas
-            System.out.print(kok.veri + " "); // Dugumun degerini yazdir
+    // Kok ortada: sol -> kok -> sag
+    public void kokOrtada(AgacDugumu kok) {
+        if (kok == null) {
+            return;
         }
+        kokOrtada(kok.sol);
+        System.out.print(kok.veri + " ");
+        kokOrtada(kok.sag);
     }
 
-    // Seviye sirali dolas (level-order traversal)
-    public void seviyeSiraliDolas(Dugum<Integer> kok) {
-        int derinlik = agacDerinligi(kok); // Agacin derinligini hesapla
-        for (int seviye = 0; seviye <= derinlik; seviye++) {
-            seviyeSiraliDolas(kok, seviye); // Her seviyeyi sirayla dolas
+    // Kok sonda: sol -> sag -> kok
+    public void kokSonda(AgacDugumu kok) {
+        if (kok == null) {
+            return;
         }
+        kokSonda(kok.sol);
+        kokSonda(kok.sag);
+        System.out.print(kok.veri + " ");
     }
 
-    // Belirli bir seviyedeki dugumleri dolas
-    private void seviyeSiraliDolas(Dugum<Integer> dugum, int hedefSeviye) {
-        if (dugum == null) {
-            return; // Dugum bos ise islem sonlandirilir
-        }
-        if (hedefSeviye == 0) {
-            System.out.print(dugum.veri + " "); // Hedef seviyedeki dugumu yazdir
-        } else {
-            seviyeSiraliDolas(dugum.sol, hedefSeviye - 1); // Sol cocuk icin seviyeyle azalt
-            seviyeSiraliDolas(dugum.sag, hedefSeviye - 1); // Sag cocuk icin seviyeyle azalt
-        }
+    // Dugum sayisi
+    int boyut(AgacDugumu k) {
+        if (k == null) return 0;
+        return 1 + boyut(k.sol) + boyut(k.sag);
     }
 
-    // Agacin derinligini hesapla
-    private int agacDerinligi(Dugum<Integer> dugum) {
-        if (dugum == null) {
-            return 0; // Bos agacin derinligi 0'dir
-        } else {
-            int solDerinlik = agacDerinligi(dugum.sol); // Sol alt agacin derinligi
-            int sagDerinlik = agacDerinligi(dugum.sag); // Sag alt agacin derinligi
-            return 1 + Math.max(solDerinlik, sagDerinlik); // Maksimum derinlik + 1
+    // Yukseklik kenar sayisidir: bos agac -1, tek dugum 0
+    int yukseklik(AgacDugumu k) {
+        if (k == null) return -1;
+        return 1 + Math.max(yukseklik(k.sol), yukseklik(k.sag));
+    }
+
+    // Iki cocugu da null olan dugumleri sayar
+    int yaprakSayisi(AgacDugumu k) {
+        if (k == null) return 0;
+        if (k.sol == null && k.sag == null) return 1;
+        return yaprakSayisi(k.sol) + yaprakSayisi(k.sag);
+    }
+
+    // Bos alt agac Integer.MIN_VALUE dondurur; karsilastirmayi bozmaz
+    public int enBuyukBul(AgacDugumu kok) {
+        if (kok == null) {
+            return Integer.MIN_VALUE;
         }
+        int sonuc = kok.veri;
+        int sol = enBuyukBul(kok.sol);
+        int sag = enBuyukBul(kok.sag);
+        if (sol > sonuc)
+            sonuc = sol;
+        if (sag > sonuc)
+            sonuc = sag;
+        return sonuc;
     }
 
     public static void main(String[] args) {
-
         IkiliAgacOzYinelemeli ia = new IkiliAgacOzYinelemeli();
-        ia.ikiliAgacOlustur(); // Agaci olustur
 
-        System.out.print("Kok basta: ");
-        ia.kokBastaDolas(ia.kok); // Kok basta dolas
+        // Slayttaki kucuk agac: 9 kokunde, 9 -> (2 -> 4), 3
+        AgacDugumu kok = new AgacDugumu(9);
+        kok.sol = new AgacDugumu(2);
+        kok.sag = new AgacDugumu(3);
+        kok.sol.sol = new AgacDugumu(4);
+
+        System.out.print("Kok basta : ");
+        ia.kokBasta(kok);   // 9 2 4 3
         System.out.println();
-
         System.out.print("Kok ortada: ");
-        ia.kokOrtadaDolas(ia.kok); // Kok ortada dolas
+        ia.kokOrtada(kok);  // 4 2 9 3
+        System.out.println();
+        System.out.print("Kok sonda : ");
+        ia.kokSonda(kok);   // 4 2 3 9
         System.out.println();
 
-        System.out.print("Kok sonda: ");
-        ia.kokSondaDolas(ia.kok); // Kok sonda dolas
-        System.out.println();
+        System.out.println("boyut = " + ia.boyut(kok));               // 4
+        System.out.println("yukseklik = " + ia.yukseklik(kok));       // 2
+        System.out.println("yaprakSayisi = " + ia.yaprakSayisi(kok)); // 2 (4 ve 3)
+        System.out.println("Bos agac: boyut = " + ia.boyut(null)
+                + ", yukseklik = " + ia.yukseklik(null));
 
-        System.out.print("Seviye sirali: ");
-        ia.seviyeSiraliDolas(ia.kok); // Seviye sirali dolas
-        System.out.println();
-
-        System.out.println("Agac derinligi: " + ia.agacDerinligi(ia.kok)); // Agacin derinligini yazdir
+        // En buyuk deger ornegi: 4 -> (3 -> 5), (7 -> sag 8)
+        AgacDugumu kok2 = new AgacDugumu(4);
+        kok2.sol = new AgacDugumu(3);
+        kok2.sag = new AgacDugumu(7);
+        kok2.sol.sol = new AgacDugumu(5);
+        kok2.sag.sag = new AgacDugumu(8);
+        System.out.println("enBuyukBul = " + ia.enBuyukBul(kok2)); // 8
     }
 }

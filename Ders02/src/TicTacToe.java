@@ -1,92 +1,92 @@
 import java.util.Scanner;
 
+// X-O oyunu: 3x3'luk char[][] tahta. Her hamle tek bir dizi atamasidir.
 public class TicTacToe {
+	static Scanner scanner = new Scanner(System.in); // tek Scanner
+	static final int GIRDI_YOK = Integer.MIN_VALUE;   // girdi bitti isareti
 
-    public static void main(String[] args) {
-        
-        // 3x3'luk oyun tahtasini tanimliyoruz
-        char[][] tahta = new char[3][3]; 
-        char oyuncu = 'X'; // Oyuncu X ile baslar
-        boolean oyunDevamEdiyor = true; // Oyun baslangicta devam ediyor kabul edilir
-        tahtayiDoldur(tahta); // Tahtayi bosluklarla dolduruyoruz
-        while (oyunDevamEdiyor) {
-            tahtayiGoster(tahta); // Tahtayi ekrana yazdir
-            hamleYap(tahta, oyuncu); // Oyuncunun hamlesini al
-            oyunDevamEdiyor = oyunDevamEdiyorMu(tahta, oyuncu); // Oyun bitmediyse devam et
-            oyuncu = (oyuncu == 'X') ? 'O' : 'X'; // Oyuncular sirasiyla X ve O arasinda degisir
-        }
-        tahtayiGoster(tahta); // Oyun bitince tahtayi son haliyle goster
-    }
-
-    // Tahtayi baslangic durumuyla doldurur (bosluklarla)
-    public static void tahtayiDoldur(char[][] tahta) {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                tahta[i][j] = ' '; // Baslangicta her hucre boslukla doldurulur
-            }
-        }
-    }
-
-    // Tahtayi ekranda gosterir
-    public static void tahtayiGoster(char[][] tahta) {
-        System.out.println("-------------");
-        for (int i = 0; i < 3; i++) {
-            System.out.print("| ");
-            for (int j = 0; j < 3; j++) {
-                System.out.print(tahta[i][j] + " | "); // Tahtadaki her bir elemani yazdir
-            }
-            System.out.println("\n-------------");
-        }
-    }
-
-    // Oyuncudan hamle alir ve tahtayi gunceller
-    public static void hamleYap(char[][] tahta, char oyuncu) {
-        Scanner scanner = new Scanner(System.in);
-			int satir;
-			int sutun;
-			do {
-			    // Kullanicidan satir ve sutun bilgisi alinir
-			    System.out.print("Sira " + oyuncu + " oyuncusunda. Satir ve sutun secin (1-3): ");
-			    satir = scanner.nextInt() - 1; // 1-3 arasi girdi alinir, 0-2 arasi indekse cevrilir
-			    sutun = scanner.nextInt() - 1; // Ayni sekilde sutun icin de gecerlidir
-			} while (satir < 0 || satir > 2 || sutun < 0 || sutun > 2 || tahta[satir][sutun] != ' '); // Gecersiz veya dolu alan kontrolu
-			tahta[satir][sutun] = oyuncu; // Hamle yapilir
+	public static void main(String[] args) {
+		char[][] tahta = new char[3][3];   // 3x3'luk oyun tahtasi
+		char oyuncu = 'X';                 // ilk oyuncu X
+		boolean oyunDevamEdiyor = true;
+		tahtaDoldur(tahta);                // tum hucreler ' '
+		while (oyunDevamEdiyor) {
+			tahtayiGoster(tahta);
+			if (!hamleYap(tahta, oyuncu)) {    // girdi bitti
+				System.out.println("\nGirdi kalmadi, oyun yarida birakildi.");
+				break;
+			}
+			oyunDevamEdiyor = oyunDevamEdiyorMu(tahta, oyuncu);
+			oyuncu = (oyuncu == 'X') ? 'O' : 'X';   // sira degisir
 		}
-    
+		tahtayiGoster(tahta);
+		scanner.close();
+	}
 
-    // Oyunun devam edip etmedigini kontrol eder
-    public static boolean oyunDevamEdiyorMu(char[][] tahta, char oyuncu) {
-        // Kazanma durumlari kontrol edilir
-        if ((tahta[0][0] == oyuncu && tahta[0][1] == oyuncu && tahta[0][2] == oyuncu) ||
-            (tahta[1][0] == oyuncu && tahta[1][1] == oyuncu && tahta[1][2] == oyuncu) ||
-            (tahta[2][0] == oyuncu && tahta[2][1] == oyuncu && tahta[2][2] == oyuncu) ||
-            (tahta[0][0] == oyuncu && tahta[1][0] == oyuncu && tahta[2][0] == oyuncu) ||
-            (tahta[0][1] == oyuncu && tahta[1][1] == oyuncu && tahta[2][1] == oyuncu) ||
-            (tahta[0][2] == oyuncu && tahta[1][2] == oyuncu && tahta[2][2] == oyuncu) ||
-            (tahta[0][0] == oyuncu && tahta[1][1] == oyuncu && tahta[2][2] == oyuncu) ||
-            (tahta[0][2] == oyuncu && tahta[1][1] == oyuncu && tahta[2][0] == oyuncu)) {
-            // Eger oyuncu kazanmissa
-            System.out.println("Tebrikler, " + oyuncu + " oyuncusu kazandi!");
-            return false; // Oyun sona erer
-        }
+	// new char[3][3] hucreleri 0 karakteri ile baslar; bos hucre ' ' ile gosterilir
+	static void tahtaDoldur(char[][] t) {
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++)
+				t[i][j] = ' ';
+	}
 
-        // Beraberlik durumunu kontrol et
-        boolean berabere = true;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                if (tahta[i][j] == ' ') { // Eger bos bir alan varsa oyun devam eder
-                    berabere = false;
-                    break;
-                }
-            }
-            if (!berabere) { // Eger bos alan bulunduysa dongu kirilir
-                break;
-            }
-        }
-        if (berabere) { // Eger bos alan yoksa ve kazanan yoksa oyun berabere biter
-            System.out.println("Oyun berabere bitti.");
-            return false;
-        }
-        return true; // Oyun devam ediyor
-    }
+	static void tahtayiGoster(char[][] t) {
+		System.out.println("-------------");
+		for (int i = 0; i < 3; i++) {
+			System.out.print("| ");
+			for (int j = 0; j < 3; j++)
+				System.out.print(t[i][j] + " | ");
+			System.out.println("\n-------------");
+		}
+	}
+
+	// Kullanici 1-3 girer, dizi 0-2; gecersiz/dolu hucre -> tekrar sor.
+	// Girdi biterse false dondurur.
+	static boolean hamleYap(char[][] t, char oyuncu) {
+		int satir, sutun;
+		do {
+			System.out.print("Sira " + oyuncu + ": satir ve sutun (1-3): ");
+			int s = sayiOku(), u = sayiOku();
+			if (s == GIRDI_YOK || u == GIRDI_YOK)
+				return false;
+			satir = s - 1;                     // kullanici 1-3, dizi 0-2
+			sutun = u - 1;
+		} while (satir < 0 || satir > 2
+				|| sutun < 0 || sutun > 2
+				|| t[satir][sutun] != ' ');
+		t[satir][sutun] = oyuncu;
+		return true;
+	}
+
+	// Siradaki tamsayiyi okur; sayi olmayan girdiyi atlar, girdi bitince GIRDI_YOK dondurur
+	static int sayiOku() {
+		while (scanner.hasNext()) {
+			if (scanner.hasNextInt())
+				return scanner.nextInt();
+			scanner.next();                    // sayi degil, atla
+		}
+		return GIRDI_YOK;
+	}
+
+	// 3 satir + 3 sutun + 2 capraz = 8 kazanma kosulu
+	static boolean kazandi(char[][] t, char o) {
+		for (int i = 0; i < 3; i++)
+			if ((t[i][0] == o && t[i][1] == o && t[i][2] == o)     // satir i
+			 || (t[0][i] == o && t[1][i] == o && t[2][i] == o))    // sutun i
+				return true;
+		return (t[0][0] == o && t[1][1] == o && t[2][2] == o)      // ana capraz
+			|| (t[0][2] == o && t[1][1] == o && t[2][0] == o);     // ters capraz
+	}
+
+	static boolean oyunDevamEdiyorMu(char[][] t, char o) {
+		if (kazandi(t, o)) {
+			System.out.println("Tebrikler, " + o + " oyuncusu kazandi!");
+			return false;
+		}
+		for (char[] satir : t)
+			for (char c : satir)
+				if (c == ' ') return true;     // bos hucre var -> devam
+		System.out.println("Oyun berabere bitti.");
+		return false;
+	}
 }

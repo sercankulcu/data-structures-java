@@ -1,85 +1,55 @@
-// Bagli liste dugumu
-class MatrisDugum<E> {
-	
-	E veri; // Dugumde saklanan veri
-	MatrisDugum<E> sag; // Sag dugume referans
-	MatrisDugum<E> asagi; // Asagi dugume referans
-	
-	// Dugumun baslatilmasi
-	MatrisDugum(E veri) {
-		this.veri = veri;
-		this.sag = null;
-		this.asagi = null;
-	}
-}
-
+// Matristen bagli yapi: her dugum sagdaki ve asagidaki dugumu gosterir.
 public class IkiBoyutluMatristenBagliListe {
 
-	// 2D matristen olusturulan bagli listenin baslangic isaretcisini dondurur
-	MatrisDugum<Integer> olustur(int[][] matris, int i, int j)
-	{
-		// i veya j sinirlari asildiysa don
-		if (i > matris.length - 1 || j > matris[0].length - 1)
-			return null;
-		
-		// Gecerli i ve j icin yeni bir dugum olustur ve
-		// alt ve sag isaretcilerini sirayla ayarla
-		MatrisDugum<Integer> temp = new MatrisDugum<>(matris[i][j]);
-		temp.sag = olustur(matris, i, j + 1); // Sag dugumu ayarla
-		temp.asagi = olustur(matris, i + 1, j); // Asagi dugumu ayarla
-		return temp;
-	}
-	
-	// Bagli liste verilerini goruntuleme
-	void goruntule(MatrisDugum<Integer> baslangic)
-	{
-		// Saga dogru hareket etmek icin isaretci
-		MatrisDugum<Integer> sag;
-		// Asagi dogru hareket etmek icin isaretci
-		MatrisDugum<Integer> asagi = baslangic;
+	// Dugum sinifi - iki baglanti: sag ve asagi
+	static class Dugum {
+		int veri;
+		Dugum sag, asagi;
 
-		int sayac = 0; // Her satirdaki dugum sayisini saklar
-		// Asagidaki dugum NULL olana kadar dongu
-		while (asagi != null) {
-			sayac = 0;
-			sag = asagi;
-			// Sag dugum NULL olana kadar saga hareket et
-			while (sag != null) {
-				System.out.print(sag.veri + " --> "); // Dugum verisini yazdir
-				sayac++;
+		Dugum(int veri) {
+			this.veri = veri;
+		}
+	}
+
+	// Sag alttan baslayarak her hucre icin tek dugum olusturur: O(satir * sutun).
+	// d tablosu sayesinde sag ve alt yollar ayni dugumu paylasir; dogrudan
+	// olustur(i, j+1) ve olustur(i+1, j) cagiran ozyinelemeli surum ayni hucreyi
+	// defalarca olusturur (ustel sayida dugum).
+	static Dugum olustur(int[][] m) {
+		int r = m.length, c = m[0].length;
+		Dugum[][] d = new Dugum[r][c];
+		for (int i = r - 1; i >= 0; i--)
+			for (int j = c - 1; j >= 0; j--) {
+				Dugum n = new Dugum(m[i][j]);
+				if (j + 1 < c) n.sag = d[i][j + 1];
+				if (i + 1 < r) n.asagi = d[i + 1][j];
+				d[i][j] = n;
+			}
+		return d[0][0];
+	}
+
+	// Satir satir goruntuleme - her dugum bir kez: O(satir * sutun)
+	static void goruntule(Dugum baslangic) {
+		Dugum asagi = baslangic;
+		while (asagi != null) {       // Satirlar
+			Dugum sag = asagi;
+			while (sag != null) {     // Sutunlar
+				System.out.print(sag.veri + " ");
 				sag = sag.sag;
 			}
-			System.out.print("null"); // Son dugum isaretcisi
 			System.out.println();
-			asagi = asagi.asagi; // Bir sonraki satira gec
-
-			// Cizgiler ve oklar ile baglantilari yazdir
-			for(int i = 0; i < sayac; i++) {
-				System.out.print("|     ");
-			}
-			System.out.println();
-			for(int i = 0; i < sayac; i++) {
-				System.out.print("v     ");
-			}
-			System.out.println();
-		}
-		// Alt satirdaki NULL degerlerini yazdir
-		for(int i = 0; i < sayac; i++) {
-			System.out.print("null  ");
+			asagi = asagi.asagi;
 		}
 	}
 
-	// Ana program
-	public static void main(String[] args)
-	{
-		IkiBoyutluMatristenBagliListe matristenBagliListe = new IkiBoyutluMatristenBagliListe();
-		// Iki boyutlu matris
-		int[][] matris = { 	{1, 2, 13},
-							{14, 5, 6},
-							{7, 18, 9} };
-		// Bagli listeyi olustur
-		MatrisDugum<Integer> baslangic = matristenBagliListe.olustur(matris, 0, 0);
-		// Bagli listeyi goruntule
-		matristenBagliListe.goruntule(baslangic);
+	public static void main(String[] args) {
+		int[][] matris = { { 1, 2, 3 },
+		                   { 4, 5, 6 },
+		                   { 7, 8, 9 } };
+		Dugum baslangic = olustur(matris);
+		goruntule(baslangic);   // 1 2 3 / 4 5 6 / 7 8 9
+
+		// Paylasim kontrolu: (0,1)'in asagisi ile (1,0)'in sagi ayni dugum (5)
+		System.out.println("Ayni dugum mu? " + (baslangic.sag.asagi == baslangic.asagi.sag)); // true
 	}
 }

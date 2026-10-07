@@ -1,42 +1,32 @@
-
+// Okul numarasi icin hash fonksiyonu.
+// Bicim: ab070c0de  ab: kayit yili (20-24), c: bolum (6 veya 7), de: kayit sirasi (00-99)
+// 5 yil x 2 bolum x 100 sira = 1000 numara, 1000 farkli indis: mukemmel hash.
 public class OgrenciNumaraHash {
 
-    /**
-     * Hash degerini hesaplar.
-     * @param ogrenciid Okul iD'si (ab070c0de formatinda, String olarak)
-     * @return Hash degeri (0 ile 999 arasinda bir tam sayi)
-     */
-    public static int hashHesapla(String ogrenciid) {
-        // Okul iD'sini dogrula
-        if (ogrenciid == null || ogrenciid.length() != 9) {
-            throw new IllegalArgumentException("Gecersiz okul iD formati");
+    // s: "ab070c0de" bicimindeki okul numarasi; sonuc 0..999
+    public static int calculateHash(String s) {
+        if (s == null || s.length() != 9) {
+            throw new IllegalArgumentException("Gecersiz okul numarasi bicimi: " + s);
         }
-
-        // Parcalari ayikla
-        int ab = Integer.parseInt(ogrenciid.substring(0, 2)); // ab: Kayit yili
-        int c = Integer.parseInt(ogrenciid.substring(5, 6));  // c: Bolum
-        int de = Integer.parseInt(ogrenciid.substring(7, 9)); // de: Kayit sirasi numarasi
-
-        // Yil, bolum ve kayit sirasini kontrol et
-        if (ab < 20 || ab > 24 || (c != 6 && c != 7) || de < 1 || de > 100) {
-            throw new IllegalArgumentException("Gecersiz okul iD degerleri");
+        int ab = Integer.parseInt(s.substring(0, 2));   // kayit yili
+        int c  = Integer.parseInt(s.substring(5, 6));   // bolum (substring bitisi haric)
+        int de = Integer.parseInt(s.substring(7, 9));   // kayit sirasi
+        if (ab < 20 || ab > 24 || (c != 6 && c != 7)) {
+            throw new IllegalArgumentException("Gecersiz okul numarasi degerleri: " + s);
         }
-
-        // Hash fonksiyonunu uygula
-        int yilFaktoru = (ab - 20) * 100;
-        int bolumFaktoru = (c - 6) * 500;
-        int hashDegeri = (yilFaktoru + bolumFaktoru + de) % 1000;
-
-        return hashDegeri;
+        int yil   = (ab - 20) * 100;   // yil blogu
+        int bolum = (c - 6) * 500;     // bolum: 0/500
+        return (yil + bolum + de) % 1000;
     }
 
     public static void main(String[] args) {
-        // Test verisi
-        String ogrenci1 = "210706003"; // ornek okul iD'si
-        String ogrenci2 = "240707050";
-
-        // Hash fonksiyonunu cagir ve sonuclari yazdir
-        System.out.println("Hash degeri (ogrenci1): " + hashHesapla(ogrenci1)); // cikti: 103
-        System.out.println("Hash degeri (ogrenci2): " + hashHesapla(ogrenci2)); // cikti: 950
+        for (String no : new String[]{"210706003", "240707050", "230707042", "230706015"}) {
+            System.out.println("calculateHash(" + no + ") = " + calculateHash(no));
+        }
+        try {
+            calculateHash("190706003");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Hata: " + e.getMessage());
+        }
     }
 }

@@ -1,65 +1,56 @@
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.EmptyStackException;
+import java.util.Stack;
 import java.util.Vector;
 
+// Vector: metotlari synchronized, eski (legacy) buyuyebilen dizi.
+// Stack: Vector'dan turer, LIFO yigin. Yeni kodda ArrayDeque onerilir.
 public class VectorOrnegi {
 	public static void main(String[] args) {
-		// Vector olusturuluyor (Dinamik dizi benzeri bir veri yapisi)
-		Vector<String> sehirler = new Vector<>();
+		System.out.println("--- Vector ---");
+		Vector<Integer> v = new Vector<>();
+		v.add(10);
+		v.add(20);
+		System.out.println(v);                          // [10, 20]
+		System.out.println("get(0) = " + v.get(0));     // 10
+		v.remove(0);
+		System.out.println(v);                          // [20]
+		System.out.println("size() = " + v.size());     // 1
+		System.out.println("capacity() = " + v.capacity());   // 10
 
-		// Elemanlar ekleniyor
-		sehirler.add("Ankara");
-		sehirler.add("Istanbul");
-		sehirler.add("Izmir");
-		sehirler.add("Bursa");
-
-		// Vector icerigini ekrana yazdiriyoruz
-		System.out.println("Sehirler: " + sehirler);
-
-		// Vector eleman sayisini aliyoruz
-		int elemanSayisi = sehirler.size();
-		System.out.println("Sehir Sayisi: " + elemanSayisi);
-
-		// Belirli bir indeksteki elemana erisim sagliyoruz
-		String ikinciSehir = sehirler.get(1);
-		System.out.println("Ikinci Sehir: " + ikinciSehir);
-
-		// Belirli bir elemani degistirme islemi
-		sehirler.set(2, "Antalya");
-		System.out.println("Degistirilmis Sehirler: " + sehirler);
-
-		// Belirli bir elemani kaldirma islemi
-		sehirler.remove(0);
-		System.out.println("Ankara Kaldirildi: " + sehirler);
-
-		// Bir elemanin Vector icinde varligini kontrol etme
-		boolean istanbulVarMi = sehirler.contains("Istanbul");
-		System.out.println("Istanbul Var Mi? " + istanbulVarMi);
-
-		// Vector bos mu? Kontrol ediyoruz
-		boolean bosMu = sehirler.isEmpty();
-		System.out.println("Liste Bos Mu? " + bosMu);
-
-		// Vector'e yeni elemanlar ekliyoruz
-		sehirler.add("Adana");
-		sehirler.add("Konya");
-		System.out.println("Yeni Eklenen Sehirler: " + sehirler);
-
-		// Vector'un boyutunu ogreniyoruz
-		elemanSayisi = sehirler.size();
-		System.out.println("Vector Boyutu: " + elemanSayisi);
-
-		// Vector'teki tum elemanlari yazdirmak icin dongu kullaniyoruz
-		System.out.print("Sehirler Listesi: ");
-		for (String sehir : sehirler) {
-			System.out.print(sehir + " ");
+		// Bilesik islem ("kontrol et, sonra yap"): tek tek senkronize metotlar
+		// birlikte atomik degildir, disaridan kilit gerekir
+		synchronized (v) {
+			if (!v.isEmpty())
+				v.remove(0);
 		}
-		System.out.println();
+		System.out.println("Bilesik islem sonrasi: " + v);   // []
 
-		// Vector'u tamamen temizliyoruz
-		sehirler.clear();
-		System.out.println("Vector Temizlendi: " + sehirler);
+		System.out.println("--- Stack ---");
+		Stack<String> yigin = new Stack<>();
+		yigin.push("A");
+		yigin.push("B");
+		yigin.push("C");
+		System.out.println(yigin);                              // [A, B, C] (ust sagda)
+		System.out.println("peek() = " + yigin.peek());         // C
+		System.out.println("search(A) = " + yigin.search("A")); // 3 (ustten uzaklik)
+		System.out.println("pop() = " + yigin.pop());           // C
+		// Vector'dan turedigi icin LIFO'yu bozan metotlar da vardir
+		yigin.add(0, "X");
+		System.out.println("add(0, X) sonrasi: " + yigin);     // [X, A, B]
+		yigin.clear();
+		System.out.println("empty() = " + yigin.empty());       // true
+		try {
+			yigin.pop();
+		} catch (EmptyStackException e) {
+			System.out.println("Bos yiginda pop() -> EmptyStackException");
+		}
 
-		// Vector bos mu? Kontrol ediyoruz
-		bosMu = sehirler.isEmpty();
-		System.out.println("Son Durum: Vector Bos Mu? " + bosMu);
+		// Onerilen yigin: Deque arayuzu ve ArrayDeque
+		Deque<String> s = new ArrayDeque<>();
+		s.push("A");
+		s.push("B");
+		System.out.println("ArrayDeque: " + s + ", pop() = " + s.pop());   // [B, A], B
 	}
 }

@@ -1,49 +1,30 @@
 import java.util.ArrayList;
 
+// ArrayList: buyuyebilen dizi. Islemler ve maliyetleri.
 public class ArrayListOrnegi {
 	public static void main(String[] args) {
-		// ArrayList olusturma (String turunde elemanlar tutacak)
-		ArrayList<String> meyveler = new ArrayList<>();
+		ArrayList<String> liste = new ArrayList<>();   // ilk eklemede 10 kapasiteli dizi
+		liste.add("Ali");          // sona ekleme: amortize O(1)
+		System.out.println(liste);           // [Ali]
+		liste.add("Veli");
+		System.out.println(liste);           // [Ali, Veli]
+		liste.add(0, "Can");       // basa ekleme: tum ogeler saga kayar, O(n)
+		System.out.println(liste);           // [Can, Ali, Veli]
+		String s = liste.get(1);   // indisle dogrudan erisim: O(1)
+		System.out.println("get(1) = " + s); // Ali
+		liste.remove(0);           // bastan silme: ogeler sola kayar, O(n)
+		System.out.println(liste);           // [Ali, Veli]
+		System.out.println("size() = " + liste.size());   // 2 (kapasite degil)
 
-		// Elemanlar ekleme
-		meyveler.add("Elma");
-		meyveler.add("Armut");
-		meyveler.add("Muz");
-		meyveler.add("cilek");
+		// Diger temel metotlar
+		String eski = liste.set(1, "Ayse");        // O(1), eski ogeyi dondurur
+		System.out.println("set(1): " + eski + " -> " + liste);         // Veli -> [Ali, Ayse]
+		System.out.println("contains(Ali): " + liste.contains("Ali"));  // O(n), true
+		System.out.println("indexOf(Veli): " + liste.indexOf("Veli"));  // yok: -1
 
-		// Liste icerigini goruntuleme
-		System.out.println("Meyveler: " + meyveler);
-
-		// Eleman sayisini alma
-		int elemanSayisi = meyveler.size();
-		System.out.println("Meyve Sayisi: " + elemanSayisi);
-
-		// Belirli bir indeksteki elemana erisim (1. indeks, 0 tabanli oldugu icin ikinci meyve)
-		String ikinciMeyve = meyveler.get(1);
-		System.out.println("ikinci Meyve: " + ikinciMeyve);
-
-		// Belirli bir elemani degistirme (Muz yerine Kivi)
-		meyveler.set(2, "Kivi");
-		System.out.println("Degistirilmis Meyveler: " + meyveler);
-
-		// Belirli bir elemani kaldirma (Elma'yi kaldiriyoruz)
-		meyveler.remove(0);
-		System.out.println("Elma Kaldirildi: " + meyveler);
-
-		// Bir elemanin varligini kontrol etme (Armut mevcut mu?)
-		boolean armutVarMi = meyveler.contains("Armut");
-		System.out.println("Armut Var Mi? " + armutVarMi);
-
-		// Liste bos mu? Kontrol etme
-		boolean bosMu = meyveler.isEmpty();
-		System.out.println("Liste Bos Mu? " + bosMu);
-
-		// Listeyi temizleyelim (tum elemanlari kaldiralim)
-		meyveler.clear();
-		System.out.println("Liste Temizlendi: " + meyveler);
-
-		// Listeyi tekrar kontrol edelim (bos mu?)
-		bosMu = meyveler.isEmpty();
-		System.out.println("Liste Bos Mu? (Temizlendikten Sonra): " + bosMu);
+		// Silmede kapasite kendiliginden kuculmez; trimToSize ile size'a indirilir
+		liste.trimToSize();
+		liste.clear();
+		System.out.println("clear sonrasi bos mu? " + liste.isEmpty());   // true
 	}
 }

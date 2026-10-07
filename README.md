@@ -1,75 +1,42 @@
 # Data Structures in Java
 
-Welcome to the **Data Structures in Java** repository! This project provides clean and well-documented implementations of fundamental data structures in Java. It serves as a learning resource for students, developers, and anyone interested in understanding how data structures work under the hood.
+Java code examples for the undergraduate **Data Structures (Veri Yapıları)** course at Giresun University. Each `DersNN/src` folder belongs to one chapter of the course and contains the code shown on that chapter's slides as small runnable programs. Class, method and variable names follow the slides, so each program's output can be compared directly with the slide examples.
 
-## Overview
+Course page and slides: <https://sercankulcu.github.io/teaching/data-structures>
 
-This repository contains Java implementations of various data structures, each in its own source file. The code is designed to be simple, readable, and reusable, making it ideal for educational purposes or as a reference for building more complex applications.
+## Chapters
 
-## Implemented Data Structures
+| Folder | Chapter | Programs |
+|---|---|---|
+| `Ders01` | Introduction | References vs. values, generics (`Kutu`), the `Yigin` ADT and `DiziYigin`, complexity examples, linear and binary search, doubling experiment, prefix averages, recursion |
+| `Ders02` | Arrays | Copying and comparing arrays, common array errors, mean/median/mode, Caesar cipher, multidimensional and jagged arrays, linear search, matching elements, insertion/deletion, selection/insertion/bubble sort, reversal, transpose, tic-tac-toe |
+| `Ders03` | Linked Lists | Singly, doubly and circular linked lists, sentinel doubly linked list, Floyd cycle detection, linked structure built from a matrix |
+| `Ders04` | Stacks | `Stack` interface; array, growable-array and linked stacks; string reversal, parenthesis check, next greater element, min-stack, Towers of Hanoi, stock span, infix → postfix/prefix, postfix evaluation |
+| `Ders05` | Queues | Linked queue, circular queue, deque, simple priority queue, queue from two stacks, binary numbers, Josephus, sliding-window maximum, round robin |
+| `Ders06` | Lists | `List` operations, `ArrayList`, `LinkedList`, `Vector`/`Stack`, iterators, removing while iterating, views and unmodifiable lists, `CopyOnWriteArrayList`, positional list, a list performance benchmark |
+| `Ders07` | Trees | Array representation, recursive and stack-based traversals, level order, expression trees, rebuilding a tree from traversals, general trees |
+| `Ders08` | Priority Queues & Heaps | Unsorted/sorted array and linked-list priority queues, `MaxHeap` (up-heap, down-heap, bottom-up construction, key change), heap sort, `PriorityQueue`, k-th largest |
+| `Ders09` | Maps & Hash Tables | Hash functions, separate chaining with resizing, open addressing with deletion markers, linear/quadratic probing and double hashing, `Map` usage and `equals`/`hashCode`, two-sum, student-number hashing |
+| `Ders10` | Search Trees | Binary search tree, successor/predecessor/range/validation queries, AVL tree, red-black tree, splay tree, a BST of student records |
+| `Ders11` | Graphs | Graph representations, BFS and DFS, connected components, bipartite test, topological sort and cycle detection, unweighted shortest paths, Dijkstra |
+| `Ders12` | Sets | Set operations, hash set, sorted-array union/intersection, bit-vector sets, multiset and multimap, disjoint sets (quick-find, union by size, union by rank with path compression), Kruskal |
 
-The following data structures are included in this repository:
+## Running the examples
 
-- **ArrayList**: A dynamic array implementation with resizing capabilities.
-- **LinkedList**: A singly or doubly linked list with basic operations (add, remove, etc.).
-- **Stack**: A LIFO (Last In, First Out) data structure with push and pop operations.
-- **Queue**: A FIFO (First In, First Out) data structure with enqueue and dequeue operations.
-- **Binary Search Tree (BST)**: A tree-based structure with efficient search, insert, and delete operations.
-- **AVL Tree**: A self-balancing binary search tree for optimized performance.
-- **Hash Table**: A key-value store with hashing for fast lookups.
-- **Heap**: A priority queue implementation (min-heap or max-heap).
-- **Graph**: Basic graph representation with adjacency list/matrix (if applicable).
+Requires **JDK 17 or later** (some examples use records and `List.of`).
 
-Each data structure is implemented in a separate file under the `src/` directory.
+Every file is a standalone program with a `main` method in the default package, and no program waits for keyboard input. To compile and run one chapter:
 
-## Getting Started
+```bash
+cd Ders04/src
+javac -d ../bin *.java
+java -cp ../bin ParantezKontrol
+```
 
-### Prerequisites
-- **Java Development Kit (JDK)**: Version 8 or higher.
-- A Java IDE (e.g., IntelliJ IDEA, Eclipse) or a text editor with a Java compiler.
+`Ders06/src/performance` is in the `performance` package: compile it from `Ders06/src` with `javac -d ../bin *.java performance/*.java` and run it as `java -cp ../bin performance.ListePerformansi`.
 
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/sercankulcu/data-structures-java.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd data-structures-java
-   ```
-3. Compile and run the desired Java file(s) using a Java compiler or IDE:
-   ```bash
-   javac src/<DataStructure>.java
-   ```
-   Note: Most files contain standalone implementations without a `main` method. You can create a test class to use these data structures.
-
-### Usage
-Each data structure is implemented as a Java class with methods for common operations (e.g., insert, delete, search). To use a data structure:
-
-1. Import the desired class into your Java project.
-2. Create an instance of the data structure and call its methods. For example:
-   ```java
-   ArrayList list = new ArrayList();
-   list.add(42);
-   System.out.println(list.get(0)); // Outputs: 42
-   ```
-
-Refer to the source code in `src/` for detailed method signatures and implementations.
-
-## Contributing
-Contributions are welcome! If you'd like to add new data structures, improve existing implementations, or fix bugs, please follow these steps:
-1. Fork the repository.
-2. Create a new branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -m "Add your feature"`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Open a pull request.
-
-Please ensure your code follows Java coding conventions and includes appropriate comments.
-
-## License
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Comments and identifiers are in Turkish, written without Turkish characters so the files compile with any platform encoding.
 
 ## Contact
-For questions or suggestions, feel free to contact the repository owner, [Sercan Kulcu](https://github.com/sercankulcu), or open an issue on GitHub.
 
-Happy coding!
+For questions or suggestions, contact [Sercan Külcü](https://github.com/sercankulcu) or open an issue on GitHub.

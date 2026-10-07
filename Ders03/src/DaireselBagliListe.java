@@ -1,102 +1,126 @@
-
+// Dairesel bagli liste: son dugum null yerine ilk dugumu gosterir.
+// Yalnizca son tutulur; bas = son.sonraki.
 public class DaireselBagliListe {
-	
-	private TekYonluDugum<Integer> ilk; // Dairesel bagli listenin ilk dugumu
-	private TekYonluDugum<Integer> son; // Dairesel bagli listenin son dugumu
 
-	// Dairesel bagli listenin baslatilmasi
-	public DaireselBagliListe() {
-		ilk = null;
-		son = null;
+	// Dugum sinifi
+	static class Dugum {
+		int veri;
+		Dugum sonraki;
+
+		Dugum(int veri) {
+			this.veri = veri;
+			this.sonraki = null;
+		}
 	}
 
-	//Listeye yeni bir dugum ekleme
-	public void ekle(int veri) {
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri); // Yeni bir dugum olustur
+	private Dugum son;   // bas = son.sonraki
+	private int boyut;   // Oge sayisi
 
-		if (ilk == null) {
-			ilk = yeniDugum;         // Liste bossa, yeni dugumu ilk olarak ayarla
-			son = yeniDugum;         // Liste bossa, yeni dugumu son olarak ayarla
-			yeniDugum.sonraki = ilk; // Dairesel baglantiyi olusturmak icin son dugumu basa bagla
+	int boyut() { return boyut; }
+
+	// Sona ekleme - O(1)
+	void sonaEkle(int deger) {
+		Dugum gecici = new Dugum(deger);
+		if (son == null) {
+			son = gecici;
+			son.sonraki = son;            // Tek dugum kendini gosterir
 		} else {
-			yeniDugum.sonraki = ilk;   // Yeni dugumun sonraki referansini basa bagla
-			son.sonraki = yeniDugum;   // Listenin sonundaki dugumun sonraki referansini yeni dugumu bagla
-			son = yeniDugum;           // Yeni dugumu son olarak ayarla
+			gecici.sonraki = son.sonraki; // Yeni dugum basi gosterir
+			son.sonraki = gecici;         // Eski son yeni dugumu gosterir
+			son = gecici;                 // Son artik yeni dugum
 		}
+		boyut++;
 	}
 
-
-	//Verilen bir dugumu dairesel bagli listeden silme
-	public void sil(int hedef) {
-		if (ilk == null) {
-			System.out.println("Liste bos. Dugum kaldirma islemi yapilamaz.");
-			return;
-		}
-
-		TekYonluDugum<Integer> onceki = null;
-		TekYonluDugum<Integer> gecici = ilk;
-
-		do {
-			if (gecici.veri == hedef) {
-				if (onceki != null) {
-					onceki.sonraki = gecici.sonraki;
-					if (gecici == ilk) {
-						ilk = gecici.sonraki; // Bas dugumu kaldiriyorsak ilki guncelle
-					}
-					return;
-				} else {
-					TekYonluDugum<Integer> son = ilk;
-					while (son.sonraki != ilk) {
-						son = son.sonraki;
-					}
-					if (ilk == son) {
-						ilk = null;
-					} else {
-						son.sonraki = ilk.sonraki;
-						ilk = ilk.sonraki; // Bas dugumu kaldiriyorsak ilki guncelle
-					}
-					return;
-				}
-			}
-
-			onceki = gecici;
-			gecici = gecici.sonraki;
-		} while (gecici != ilk);
-
-		System.out.println("Verilen anahtar ile eleman bulunamadi.");
+	// Basa ekleme - sona eklemenin son = gecici satiri olmayan hali: O(1)
+	void basaEkle(int deger) {
+		Dugum gecici = new Dugum(deger);
+		if (son == null) {
+			son = gecici;
+			son.sonraki = son;
+		} else {
+			gecici.sonraki = son.sonraki;
+			son.sonraki = gecici;
+		}   // son degismez
+		boyut++;
 	}
 
-
-	//Dairesel bagli listeyi yazdirma
-	public void yazdir() {
-		if (ilk == null) {
-			System.out.println("Bos Dairesel Bagli Liste"); // Liste bossa bildir
-			return;
-		}
-
-		TekYonluDugum<Integer> simdiki = ilk; // Baslangic dugumu ile basla
-		System.out.print("Dairesel Bagli Liste: ");
-		do {
-			System.out.print(simdiki.veri + " -> "); // Dugumun verisini yazdir
-			simdiki = simdiki.sonraki; // Bir sonraki dugume gec
-		} while (simdiki != ilk); // Basa donene kadar donguyu devam ettir
-		System.out.println("Basa Don"); // Liste donguyu tamamladiginda basa donuldugunu belirt
+	// Bastan silme - O(1)
+	void bastanSil() {
+		if (son == null) return;
+		Dugum bas = son.sonraki;
+		if (bas == son)   // Tek dugum
+			son = null;
+		else
+			son.sonraki = bas.sonraki;
+		boyut--;
 	}
 
+	// Sondan silme - sondan bir onceki dugumu bulmak icin gezinme: O(n)
+	void sondanSil() {
+		if (son == null) return;
+		if (son.sonraki == son) son = null;   // Tek dugum
+		else {
+			Dugum gecici = son.sonraki;
+			while (gecici.sonraki != son)     // Sondan bir onceki
+				gecici = gecici.sonraki;
+			gecici.sonraki = son.sonraki;     // Basa bagla
+			son = gecici;
+		}
+		boyut--;
+	}
+
+	// Dondurme - eski bas sona gecer, hicbir bag degismez: O(1)
+	void dondur() {
+		if (son != null)
+			son = son.sonraki;
+	}
+
+	// Yazdirma - halkada null yoktur, kosul != son: O(n)
+	void yazdir() {
+		System.out.print("Dairesel Liste: ");
+		if (son == null) { System.out.println("(bos)"); return; }
+		Dugum simdiki = son.sonraki;
+		while (simdiki != son) {
+			System.out.print(simdiki.veri + " -> ");
+			simdiki = simdiki.sonraki;
+		}
+		System.out.println(simdiki.veri + " -> (" + son.sonraki.veri + ")");  // Son dugum ayrica yazdirilir
+	}
 
 	public static void main(String[] args) {
 
 		DaireselBagliListe liste = new DaireselBagliListe();
+		liste.sonaEkle(1);
+		liste.sonaEkle(8);
+		liste.sonaEkle(10);
+		liste.yazdir();      // Dairesel Liste: 1 -> 8 -> 10 -> (1)
 
-		liste.ekle(10);
-		liste.ekle(20);
-		liste.ekle(30);
-		liste.yazdir(); //Dairesel Bagli Liste: 10 -> 20 -> 30 -> Basa Don
-		
-		liste.sil(20); 
-		liste.yazdir(); //Dairesel Bagli Liste: 10 -> 30 -> Basa Don
-		
-		liste.sil(25); //Verilen anahtar ile eleman bulunamadi.
-		liste.yazdir(); //Dairesel Bagli Liste: 10 -> 30 -> Basa Don
+		liste.basaEkle(5);
+		liste.yazdir();      // Dairesel Liste: 5 -> 1 -> 8 -> 10 -> (5)
+
+		liste.bastanSil();
+		liste.yazdir();      // Dairesel Liste: 1 -> 8 -> 10 -> (1)
+
+		liste.sonaEkle(16);
+		liste.yazdir();      // Dairesel Liste: 1 -> 8 -> 10 -> 16 -> (1)
+		liste.sondanSil();
+		liste.yazdir();      // Dairesel Liste: 1 -> 8 -> 10 -> (1)
+		System.out.println("boyut: " + liste.boyut());   // 3
+
+		// Round-robin: her tur bastakine hizmet et, sonra dondur
+		System.out.print("Round-robin: ");
+		for (int tur = 1; tur <= 4; tur++) {
+			System.out.print(liste.son.sonraki.veri + " ");
+			liste.dondur();
+		}
+		System.out.println();   // 1 8 10 1
+
+		// Tek dugumlu ve bos liste
+		DaireselBagliListe tekli = new DaireselBagliListe();
+		tekli.sonaEkle(7);
+		tekli.yazdir();      // Dairesel Liste: 7 -> (7)
+		tekli.sondanSil();
+		tekli.yazdir();      // Dairesel Liste: (bos)
 	}
 }

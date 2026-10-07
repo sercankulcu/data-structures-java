@@ -1,173 +1,161 @@
-
-class HashDugumu {
-    // HashDugumu sinifi, Hash tablosunda her bir elemani temsil eder
-    Integer anahtar; // Anahatarin tutuldugu degisken
-    String deger;    // Degerin tutuldugu degisken
-    HashDugumu sonraki; // Baglantiyi saglayan sonraki dugum
-
-    public HashDugumu(Integer anahtar, String deger) {
-        this.anahtar = anahtar;
-        this.deger = deger;
-        this.sonraki = null;
-    }
-}
-
+// Ayri zincirleme ile hash tablosu: her kova bir bagli listenin ilk dugumunu tutar.
+// Yuk faktoru esigi asilinca tablo yaklasik iki katina buyutulur.
 public class HashTablosu {
 
-	HashDugumu[] kovalar;
-	int kovaSayisi;
-	int buyukluk;
+    private static final double YUK_ESIGI = 0.75; // Java HashMap ile ayni esik
 
-	public HashTablosu(int kapasite) {
-		// Yapici metot - Belirli kapasiteye sahip bir Hash tablosu olusturur.
-		this.kovaSayisi = kapasite;
-		this.kovalar = new HashDugumu[kapasite];
-		this.buyukluk = 0;
-	}
+    private HashDugumu[] kovalar;   // zincirlerin ilk dugumleri
+    private int kovaSayisi, buyukluk;
 
-	public int getBuyukluk() {
-		// Tablonun icindeki toplam oge sayisini dondurur.
-		System.out.println("Tablo buyukluk: " + buyukluk);
-		return buyukluk;
-	}
+    public HashTablosu(int kapasite) {
+        this.kovaSayisi = kapasite;
+        this.kovalar = new HashDugumu[kapasite];
+        this.buyukluk = 0;
+    }
 
-	public boolean bosMu() {
-		// Tablo bos mu kontrolu - Tablo icinde oge varsa "false", aksi takdirde "true" dondurur.
-		return buyukluk == 0;
-	}
+    // Tek yonlu bagli liste dugumu: anahtar + deger + sonraki
+    private static class HashDugumu {
+        private Integer anahtar;
+        private String deger;
+        private HashDugumu sonraki;
 
-	public int getKovaIndeksi(Integer anahtar) {
-		return anahtar % kovalar.length;
-	}
+        public HashDugumu(Integer anahtar, String deger) {
+            this.anahtar = anahtar;
+            this.deger = deger;
+        }
+    }
 
-	public void yerlestir(Integer anahtar, String deger) {
-		// Anahtar ve deger bos olmamalidir, aksi takdirde bir beklenmeyen hata firlatilir.
-		if(anahtar == null || deger == null) {
-			throw new IllegalArgumentException("Anahtar veya Deger null!");
-		}
+    public int getBuyukluk() {
+        return buyukluk;
+    }
 
-		// Kova indeksi alinabilir.
-		int kovaIndeksi = getKovaIndeksi(anahtar);
+    public boolean bosMu() {
+        return buyukluk == 0;
+    }
 
-		// Kova indeksindeki ilk dugum alinir.
-		HashDugumu ilk = kovalar[kovaIndeksi];
+    // Kova indisi: anahtar % kovalar.length negatif olabilir, floorMod her zaman 0..N-1 verir.
+    // Math.abs(h) % N de guvenli degildir: Math.abs(Integer.MIN_VALUE) negatiftir.
+    private int getKovaIndisi(Integer anahtar) {
+        int h = anahtar.hashCode();  // Integer icin sayinin kendisi
+        return Math.floorMod(h, kovalar.length);
+    }
 
-		// Kova icindeki dugumler uzerinde gezilir.
-		while(ilk != null) {
-			// Eger anahtar eslesirse, degeri guncelle
-			if(ilk.anahtar.equals(anahtar)) {
-				ilk.deger = deger;
-				System.out.println("Tablo guncellendi: " + anahtar + "-" + deger);
-				return;
-			}
-			ilk = ilk.sonraki;
-		}
+    public void yerlestir(Integer anahtar, String deger) {
+        int kovaIndisi = getKovaIndisi(anahtar);
+        HashDugumu ilk = kovalar[kovaIndisi];
+        while (ilk != null) {    // anahtar zincirde var mi?
+            if (ilk.anahtar.equals(anahtar)) {
+                ilk.deger = deger;   // varsa yalnizca degeri guncelle
+                return;
+            }
+            ilk = ilk.sonraki;
+        }
+        buyukluk++;
+        HashDugumu dugum = new HashDugumu(anahtar, deger);
+        dugum.sonraki = kovalar[kovaIndisi];
+        kovalar[kovaIndisi] = dugum;   // zincirin basina ekle: O(1)
 
-		// Eger eslesen bir anahtar bulunmazsa, yeni dugum olustur
-		buyukluk++;
-		ilk = kovalar[kovaIndeksi];
-		HashDugumu dugum = new HashDugumu(anahtar, deger);
-		dugum.sonraki = ilk;
-		kovalar[kovaIndeksi] = dugum;
-		System.out.println("Tabloya eklendi: " + anahtar + "-" + deger);
-	}
+        // Yuk faktoru (lambda = n / N) esigi asildiysa tabloyu buyut
+        double yukFaktoru = (double) buyukluk / kovaSayisi;
+        if (yukFaktoru > YUK_ESIGI) {
+            System.out.printf("lambda = %d/%d = %.2f > %.2f -> yeniden boyutlandir%n",
+                    buyukluk, kovaSayisi, yukFaktoru, YUK_ESIGI);
+            yazdir();
+            yenidenBoyutlandir();
+        }
+    }
 
-	public String getir(Integer anahtar) {
-		// Anahtar bos olmamalidir, aksi takdirde bir istisna firlatilir.
-		if(anahtar == null) {
-			throw new IllegalArgumentException("Anahtar null!");
-		}
+    public String getir(Integer anahtar) {
+        int kovaIndisi = getKovaIndisi(anahtar);
+        HashDugumu ilk = kovalar[kovaIndisi];
+        while (ilk != null) {   // yalnizca bir kova taranir
+            if (ilk.anahtar.equals(anahtar)) {
+                return ilk.deger;        // bulundu
+            }
+            ilk = ilk.sonraki;
+        }
+        return null;                     // anahtar yok
+    }
 
-		// Kova indeksi alinabilir.
-		int kovaIndeksi = getKovaIndeksi(anahtar);
+    public String sil(Integer anahtar) {
+        int kovaIndisi = getKovaIndisi(anahtar);
+        HashDugumu ilk = kovalar[kovaIndisi];
+        HashDugumu onceki = null;        // dugumu koparmak icin onceki gerekir
+        while (ilk != null && !ilk.anahtar.equals(anahtar)) {
+            onceki = ilk;
+            ilk = ilk.sonraki;
+        }
+        if (ilk == null) {
+            return null;                 // anahtar yok
+        }
+        buyukluk--;
+        if (onceki != null) {            // ortadan / sondan
+            onceki.sonraki = ilk.sonraki;
+        } else {                         // bastan
+            kovalar[kovaIndisi] = ilk.sonraki;
+        }
+        return ilk.deger;
+    }
 
-		// Kova indeksindeki ilk dugum alinir.
-		HashDugumu ilk = kovalar[kovaIndeksi];
+    // Yeni dizi (2N + 1 kova) ayrilir, her cift yeniden hash'lenir: O(n)
+    private void yenidenBoyutlandir() {
+        HashDugumu[] eski = kovalar;
+        int yeniN = 2 * eski.length + 1;
+        kovalar = new HashDugumu[yeniN];
+        buyukluk = 0;                    // yerlestir her cifti yeniden sayar
+        kovaSayisi = yeniN;              // unutulursa yuk faktoru yanlis hesaplanir
+        for (HashDugumu ilk : eski) {    // her eski kova
+            while (ilk != null) {
+                yerlestir(ilk.anahtar, ilk.deger);
+                ilk = ilk.sonraki;
+            }
+        }
+    }
 
-		// Kova icindeki dugumler uzerinde gezilir
-		while(ilk != null) {
-			// Eger anahtar eslesirse, ilgili degeri dondur
-			if(ilk.anahtar.equals(anahtar)) {
-				System.out.println("Tabloda bulundu: " + anahtar + "-" + ilk.deger);
-				return ilk.deger;
-			}
-			ilk = ilk.sonraki;
-		}
+    // Her kovayi zinciriyle birlikte yazdir
+    public void yazdir() {
+        for (int i = 0; i < kovalar.length; i++) {
+            StringBuilder satir = new StringBuilder("  kova " + i + ":");
+            for (HashDugumu d = kovalar[i]; d != null; d = d.sonraki) {
+                satir.append(" ").append(d.anahtar).append("=").append(d.deger);
+                if (d.sonraki != null) {
+                    satir.append(" ->");
+                }
+            }
+            System.out.println(satir);
+        }
+    }
 
-		// Eslesen bir anahtar bulunmazsa, null degeri dondur
-		System.out.println("Tabloda bulunamadi: " + anahtar);
-		return null;
-	}
+    public static void main(String[] args) {
+        System.out.println("=== Ayri zincirleme, N = 10 ===");
+        HashTablosu tablo = new HashTablosu(10);
+        tablo.yerlestir(105, "Murat");
+        tablo.yerlestir(21, "Leyla");
+        tablo.yerlestir(41, "Sena");     // 21 ile ayni kova (1): cakisma
+        tablo.yerlestir(21, "Ali");      // guncelleme: "Leyla" -> "Ali"
+        tablo.yazdir();
+        System.out.println("buyukluk = " + tablo.getBuyukluk());
+        System.out.println("getKovaIndisi(-7) = " + tablo.getKovaIndisi(-7)
+                + "  (oysa -7 % 10 = " + (-7 % 10) + ")");
 
-	public String sil(Integer anahtar) {
-		// Anahtarin kova indeksini al
-		int kovaIndeksi = getKovaIndeksi(anahtar);
+        System.out.println("getir(105) = " + tablo.getir(105));
+        System.out.println("getir(21)  = " + tablo.getir(21));
+        System.out.println("getir(88)  = " + tablo.getir(88));
 
-		// Kova indeksindeki ilk dugumu al, onceki dugumu null olarak ata.
-		HashDugumu ilk = kovalar[kovaIndeksi];
-		HashDugumu onceki = null;
+        System.out.println("sil(21)  = " + tablo.sil(21));   // zincirin ortasindan
+        System.out.println("sil(105) = " + tablo.sil(105));  // zincirin basindan
+        System.out.println("sil(88)  = " + tablo.sil(88));   // yok
+        System.out.println("buyukluk = " + tablo.getBuyukluk() + ", bos mu? " + tablo.bosMu());
 
-		// Kova icindeki dugumler uzerinde gez
-		while(ilk != null) {
-			// Eger anahtar eslesirse, donguden cik
-			if(ilk.anahtar.equals(anahtar)) {
-				break;
-			}
-			onceki = ilk;
-			ilk = ilk.sonraki;
-		}
-
-		// Eger eslesen bir anahtar bulunmazsa, null dondur
-		if(ilk == null) {
-			System.out.println("Tabloda bulunamadi: " + anahtar);
-			return null;
-		}
-
-		// Eslesen bir anahtar bulunursa, ilgili dugumu sil
-		buyukluk--;
-
-		// Onceki dugum varsa, baglantilari guncelle
-		if(onceki != null) {
-			onceki.sonraki = ilk.sonraki;
-		}
-		// Eger onceki dugum yoksa, kovanin basini guncelle
-		else {
-			kovalar[kovaIndeksi] = ilk.sonraki;
-		}
-
-		// Silinen dugumun degerini dondur
-		System.out.println("Tablodan silindi: " + anahtar);
-		return ilk.deger;
-	}
-
-	public static void main(String[] args) {
-
-		// 10 kapasiteli HashTablosu nesnesi olustur
-		HashTablosu tablo = new HashTablosu(10);
-
-		// Anahtar ve degerler ekle
-		tablo.yerlestir(105, "Murat");
-		tablo.yerlestir(21, "Ali");
-		tablo.yerlestir(41, "Sena");
-		tablo.yerlestir(105, "Mehmet");
-		
-		// Tablonun mevcut boyutu
-		tablo.getBuyukluk();
-
-		// Anahtar 21 ile iliskilendirilen degeri sil
-		tablo.sil(21);
-		tablo.sil(21);
-
-		// Tablonun mevcut boyutu
-		tablo.getBuyukluk();
-		
-		tablo.getir(21);
-		tablo.getir(41);
-
-		// Anahtar 41 ile iliskilendirilen degeri sil
-		tablo.sil(41);
-
-		// Tablonun mevcut boyutu
-		tablo.getBuyukluk();
-	}
+        System.out.println();
+        System.out.println("=== Yeniden boyutlandirma, N = 5 ===");
+        HashTablosu kucuk = new HashTablosu(5);
+        kucuk.yerlestir(12, "Ece");
+        kucuk.yerlestir(7, "Can");
+        kucuk.yerlestir(20, "Ada");
+        kucuk.yerlestir(33, "Efe");      // lambda = 4/5 = 0.80 > 0.75
+        System.out.println("Yeni tablo (N = 11), buyukluk = " + kucuk.getBuyukluk() + ":");
+        kucuk.yazdir();
+        System.out.println("getir(12) = " + kucuk.getir(12));
+    }
 }

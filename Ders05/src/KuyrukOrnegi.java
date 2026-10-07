@@ -1,43 +1,37 @@
-import java.util.LinkedList; 
+import java.util.ArrayDeque;
 import java.util.Queue;
 
+// Java kutuphanesindeki kuyruk: Queue arayuzu, ArrayDeque gerceklemesi
+// Kendi siniflarimizda enqueue/dequeue, kutuphanede offer/poll/peek kullanilir.
 public class KuyrukOrnegi {
 
 	public static void main(String[] args) {
-		// Bir Queue olusturalim (Kuyruk yapisi)
-		Queue<String> kuyruk = new LinkedList<>();
-		
-		// Kuyruga eleman ekleyelim
-		kuyruk.offer("Eleman 1");
-		kuyruk.offer("Eleman 2");
-		kuyruk.offer("Eleman 3");
-		kuyruk.offer("Eleman 4");
-		kuyruk.offer("Eleman 5");
+		// ArrayDeque dairesel dizi ile gerceklenir
+		Queue<Integer> q = new ArrayDeque<>();
 
-		// Kuyrugun icerigini gosterelim
-		System.out.println("Kuyrugun Icerigi: " + kuyruk);
+		// Arkaya ekle (enqueue)
+		q.offer(20);
+		q.offer(10);
+		q.offer(15);
+		System.out.println("Kuyruk (onden arkaya): " + q);   // [20, 10, 15]
 
-		// Kuyrugun basindaki elemani alalim (poll metodu)
-		String basindakiEleman = kuyruk.poll();
-		System.out.println("Kuyrugun Basindaki Eleman: " + basindakiEleman);
+		// Ondeki ogeye bak, cikarma (peek)
+		System.out.println("peek() = " + q.peek());          // 20
 
-		// Kuyrugun icerigini tekrar gosterelim
-		System.out.println("Guncellenmis Kuyruk Icerigi: " + kuyruk);
+		// Ondeki ogeyi cikar (poll)
+		System.out.println("poll() = " + q.poll() + " -> " + q);  // 20 -> [10, 15]
+		System.out.println("poll() = " + q.poll() + " -> " + q);  // 10 -> [15]
+		System.out.println("size() = " + q.size());          // 1
+		System.out.println("poll() = " + q.poll() + " -> " + q);  // 15 -> []
 
-		// Kuyrugun basindaki elemana erisim saglayalim, ancak kuyruktan cikarmadan (peek metodu)
-		basindakiEleman = kuyruk.peek();
-		System.out.println("Kuyrugun Basindaki Eleman (Cikarmadan): " + basindakiEleman);
+		// Bos kuyrukta poll/peek hata firlatmaz, null dondurur
+		System.out.println("poll() = " + q.poll() + " (bos kuyruk)");
 
-		// Kuyrugun boyutunu alalim
-		int kuyrukBoyutu = kuyruk.size();
-		System.out.println("Kuyrugun Boyutu: " + kuyrukBoyutu);
-
-		// Kuyrugu bosaltalim
-		kuyruk.clear();
-		System.out.println("Kuyruk Temizlendi");
-
-		// Kuyrugun bos olup olmadigini kontrol edelim
-		boolean kuyrukBosMu = kuyruk.isEmpty();
-		System.out.println("Kuyruk Bos mu? " + kuyrukBosMu);
+		// remove() ise bos kuyrukta istisna firlatir
+		try {
+			q.remove();
+		} catch (java.util.NoSuchElementException e) {
+			System.out.println("remove() bos kuyrukta: NoSuchElementException");
+		}
 	}
 }

@@ -1,434 +1,335 @@
-// Dugum sinifi - Tek yonlu bagli liste dugumlerini temsil eden ic sinif.
-class TekYonluDugum<E> {
-	
-	E veri;      // Dugumun icinde saklanan veri.
-	TekYonluDugum<E> sonraki;  // Dugumun bir sonraki dugumune isaret eden referans.
-
-	TekYonluDugum(E veri) {
-		this.veri = veri;
-		this.sonraki = null;
-	}
-}
-
+// Tek yonlu bagli liste: bas ve son isaretcisi, boyut alani ve slaytlardaki
+// islemler (ekleme, silme, arama, ters cevirme, orta oge, kopyalama,
+// tekrarlari kaldirma, sirali listeleri birlestirme, siralama).
 public class TekYonluBagliListe {
 
-	TekYonluDugum<Integer> bas;  // Bagli listenin baslangic dugumunu temsil eden referans.
+	// Dugum sinifi - her dugum bir veri ve sonraki dugumun referansini tutar.
+	static class Dugum {
+		int veri;        // Dugumde saklanan veri
+		Dugum sonraki;   // Sonraki dugume referans (son dugumde null)
 
-	// Tek Yonlu Bagli Liste Baslatma - Bagli listenin baslangic durumunu olusturan constructor.
-	TekYonluBagliListe() {
-		bas = null;  // Baslangicta bagli liste bos olacak.
+		Dugum(int veri) {
+			this.veri = veri;
+			this.sonraki = null;
+		}
 	}
 
-	//Liste Basina Dugum Ekleme - Verilen veriyi liste basina ekler.
+	private Dugum bas = null, son = null;  // Ilk ve son dugum
+	private int boyut = 0;                 // Oge sayisi
+
+	public int boyut() { return boyut; }              // O(1)
+	public boolean bosMu() { return boyut == 0; }     // O(1)
+	public Integer ilk() { return bosMu() ? null : bas.veri; }  // Bos listede null
+
+	// Basa ekleme - O(1)
 	void basaEkle(int veri) {
-		// Yeni bir dugum olustur ve icine veriyi yerlestir.
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri);
-
-		// Yeni dugumun sonraki referansini mevcut bas dugume ayarla.
-		yeniDugum.sonraki = bas;
-
-		// Liste basini yeni dugume tasi.
-		bas = yeniDugum;
+		Dugum yeniDugum = new Dugum(veri);
+		yeniDugum.sonraki = bas;   // Once yeni dugum eski basi gostermeli
+		bas = yeniDugum;           // Sonra bas yeni dugume tasinir
+		if (son == null) son = yeniDugum;  // Liste bostuysa yeni dugum ayni zamanda son
+		boyut++;
 	}
 
-
-	//Liste Sonuna Dugum Ekleme - Verilen veriyi liste sonuna ekler.
+	// Sona ekleme - son isaretcisi sayesinde gezinme yok: O(1)
 	void sonaEkle(int veri) {
-		// Yeni bir dugum olustur ve icine veriyi yerlestir.
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri);
-
-		// Eger liste bossa, yeni dugumu listenin basi olarak ayarla ve islemi bitir.
+		Dugum yeniDugum = new Dugum(veri);
 		if (bas == null) {
-			bas = yeniDugum;
-			return;
+			bas = son = yeniDugum;      // Tek dugum hem bas hem son
+		} else {
+			son.sonraki = yeniDugum;    // Eski son yeni dugumu gosterir
+			son = yeniDugum;            // Son artik yeni dugum
 		}
-
-		// Gecici bir dugum olustur ve bu dugumu bas dugumle baslat.
-		TekYonluDugum<Integer> gecici = bas;
-
-		// Gecici dugumu listenin sonuna gitmek icin sonraki dugumleri takip ederek ilerlet.
-		while (gecici.sonraki != null) {
-			gecici = gecici.sonraki;
-		}
-
-		// Listenin sonunda yeni dugumu ekleyerek sona ekleme islemini tamamla.
-		gecici.sonraki = yeniDugum;
+		boyut++;
 	}
 
-
-	//Belirli Bir Konuma Dugum Ekleme - Verilen veriyi belirtilen konuma ekler.
-	void konumaEkle(int veri, int konum) {
-		// Yeni bir dugum olustur ve icine veriyi yerlestir.
-		TekYonluDugum<Integer> yeniDugum = new TekYonluDugum<>(veri);
-
-		// Eger konum 0 ise, yeni dugumu listenin basina ekleyerek islemi bitir.
-		if (konum == 0) {
-			yeniDugum.sonraki = bas;
-			bas = yeniDugum;
-			return;
-		}
-
-		// Gecici bir dugum olustur ve bu dugumu bas dugumle baslat.
-		TekYonluDugum<Integer> gecici = bas;
-
-		// Belirtilen konuma gitmek icin donguyu kullanarak gecici dugumu ilerlet.
-		for (int i = 0; i < konum - 1; i++) {
-			if (gecici == null) {
-				System.out.println("Belirtilen konum bulunamadi.");
-				return;
-			}
+	// Belirli bir konuma (indis 0'dan baslar) ekleme - O(indis)
+	void konumaEkle(int veri, int indis) {
+		if (indis == 0) { basaEkle(veri); return; }
+		Dugum gecici = bas;
+		for (int i = 0; i < indis - 1 && gecici != null; i++)
 			gecici = gecici.sonraki;
-		}
-
-		// Belirtilen konum bulunamazsa, bir hata mesaji yazdir ve islemi sonlandir.
-		if (gecici == null) {
+		if (gecici == null || indis < 0) {   // Liste indis'ten kisa ya da indis negatif
 			System.out.println("Belirtilen konum bulunamadi.");
 			return;
 		}
-
-		// Yeni dugumu belirtilen konuma ekleyerek islemi tamamla.
-		yeniDugum.sonraki = gecici.sonraki;
-		gecici.sonraki = yeniDugum;
+		Dugum yeniDugum = new Dugum(veri);
+		yeniDugum.sonraki = gecici.sonraki;   // (1) once yeni dugumun bagini kur
+		gecici.sonraki = yeniDugum;           // (2) sonra onceki dugumu yeni dugume bagla
+		if (gecici == son) son = yeniDugum;   // Sona eklendiyse son guncellenir
+		boyut++;
 	}
 
-
-	//ilk Elemani Silme - Listenin basindaki dugumu siler.
-	void ilkElemaniSil() {
-		// Eger liste zaten bossa, bir hata mesaji yazdir ve islemi sonlandir.
-		if (bas == null) {
-			System.out.println("Liste zaten bos.");
-			return;
-		}
-
-		// ilk dugumu silmeden once bu dugumu bir gecici degiskene kopyala.
-		TekYonluDugum<Integer> silinecekDugum = bas;
-
-		// Listenin basini bir sonraki dugume tasi.
+	// Bastan silme - silinen dugumu dondurur, bos listede null: O(1)
+	Dugum ilkOgeyiSil() {
+		if (bas == null)
+			return null;
+		Dugum gecici = bas;        // Silinecek dugum kaybolmasin
 		bas = bas.sonraki;
-
-		// Silinen dugumun sonraki referansini temizle.
-		silinecekDugum.sonraki = null;
+		gecici.sonraki = null;     // Silinen dugumu listeden tamamen kopar
+		if (bas == null) son = null;  // Liste bosaldiysa son da null
+		boyut--;
+		return gecici;
 	}
 
-
-	//Son Elemani Silme - Listenin sonundaki dugumu siler.
-	void sonElemaniSil() {
-		// Eger liste zaten bossa, bir hata mesaji yazdir ve islemi sonlandir.
-		if (bas == null) {
-			System.out.println("Liste zaten bos.");
+	// Sondan silme - sondan bir onceki dugum bulunmali: O(n)
+	void sonOgeyiSil() {
+		if (bas == null) return;
+		if (bas.sonraki == null) {   // Tek dugum
+			bas = son = null;
+			boyut--;
 			return;
 		}
-
-		// Eger liste sadece bir eleman iceriyorsa, bu elemani sil ve islemi sonlandir.
-		if (bas.sonraki == null) {
-			bas = null;
-			return;
-		}
-
-		// Gecici bir dugum olustur ve bu dugumu bas dugumle baslat.
-		TekYonluDugum<Integer> gecici = bas;
-
-		// Son dugume gitmek icin donguyu kullanarak gecici dugumu ilerlet.
-		while (gecici.sonraki.sonraki != null) {
+		Dugum gecici = bas;
+		while (gecici.sonraki.sonraki != null)
 			gecici = gecici.sonraki;
-		}
-
-		// Son dugumun sonraki referansini temizleyerek son dugumu sil.
 		gecici.sonraki = null;
+		son = gecici;                // Son isaretcisi geri tasinir
+		boyut--;
 	}
 
-
-	//Belirli Bir Elemani Silme - Verilen veriye sahip dugumu listeden siler.
-	void elemaniSil(int silinecekVeri) {
-		// Eger liste zaten bossa, bir hata mesaji yazdir ve islemi sonlandir.
-		if (bas == null) {
-			System.out.println("Liste zaten bos.");
-			return;
-		}
-
-		// Eger silinecek veri listenin basindaki dugumdeyse, bas dugumu guncelle ve islemi sonlandir.
-		if (bas.veri == silinecekVeri) {
+	// Belirli bir ogeyi silme - arama O(n) + baglama O(1)
+	void ogeyiSil(int silinecek) {
+		if (bas == null) return;
+		if (bas.veri == silinecek) {
 			bas = bas.sonraki;
+			if (bas == null) son = null;
+			boyut--;
 			return;
 		}
-
-		// Gecici dugum ve onceki dugum olustur, gecici dugumu bas dugumun sonraki dugumuyle baslat.
-		TekYonluDugum<Integer> onceki = bas;
-		TekYonluDugum<Integer> gecici = bas.sonraki;
-
-		// Verilen veriyi iceren dugumu aramak icin donguyu kullan.
+		Dugum onceki = bas;
+		Dugum gecici = bas.sonraki;
 		while (gecici != null) {
-			if (gecici.veri == silinecekVeri) {
-				// onceki dugumun sonraki referansini gecici dugumun sonraki dugumune ayarla ve islemi sonlandir.
-				onceki.sonraki = gecici.sonraki;
+			if (gecici.veri == silinecek) {
+				onceki.sonraki = gecici.sonraki;    // Silinecek dugum atlanir
+				if (gecici == son) son = onceki;    // Son siliniyorsa son guncellenir
+				boyut--;
 				return;
 			}
-
-			// Dugumleri bir sonraki dugume tasi ve aramaya devam et.
 			onceki = gecici;
 			gecici = gecici.sonraki;
 		}
-
-		// Belirtilen veri bulunamazsa, bir hata mesaji yazdir.
-		System.out.println("Belirtilen veri bulunamadi.");
+		System.out.println("Bulunamadi.");
 	}
 
-
-	//Belirli Bir Elemani Arama - Verilen veriyi arar ve konumunu veya bulunamadigini bildirir.
-	boolean elemaniAra(int arananVeri) {
-		// Gecici bir dugum olustur ve bas dugumle baslat, konumu sifirla.
-		TekYonluDugum<Integer> gecici = bas;
+	// Arama - ogenin indisini, yoksa -1 dondurur: O(n)
+	int ogeyiAra(int aranan) {
+		Dugum gecici = bas;
 		int konum = 0;
-
-		// Liste boyunca dongu ile verilen veriyi ara.
 		while (gecici != null) {
+			if (gecici.veri == aranan)
+				return konum;
 			konum++;
-			if (gecici.veri == arananVeri) {
-				// Belirtilen elemani bulursan, konumunu yazdir ve true dondur.
-				System.out.println("Belirtilen eleman " + konum + " konumda bulundu.");
-				return true;
-			}
-			// Gecici dugumu bir sonraki dugume tasi ve aramaya devam et.
 			gecici = gecici.sonraki;
 		}
-
-		// Belirtilen elemani bulamazsan, bir hata mesaji yazdir ve false dondur.
-		System.out.println("Belirtilen eleman bulunamadi.");
-		return false;
+		return -1;   // Bulunamadi
 	}
 
+	boolean iceriyor(int v) { return ogeyiAra(v) != -1; }
 
-	//Liste Uzunlugunu Hesaplama - Bagli listenin uzunlugunu hesaplar ve dondurur.
+	// Uzunluk - gezinerek sayar: O(n) (boyut() ise O(1))
 	int listeUzunlugu() {
-		int uzunluk = 0;  // Bagli listenin uzunlugunu saklayacak degisken.
-		TekYonluDugum<Integer> gecici = bas;  // Gecici bir dugum olustur ve bas dugumle baslat.
-
-		// Liste boyunca dongu ile dugumleri say ve uzunlugu hesapla.
+		int uzunluk = 0;
+		Dugum gecici = bas;
 		while (gecici != null) {
 			uzunluk++;
 			gecici = gecici.sonraki;
 		}
-
-		// Bagli listenin uzunlugunu yazdir ve degeri dondur.
-		System.out.println("Bagli Liste Uzunlugu: " + uzunluk);
 		return uzunluk;
 	}
 
-
-	//Liste uzerinde Dolasma ve Verileri Yazdirma - Bagli liste uzerinde dolasir ve verileri yazdirir.
+	// Gezinme ve yazdirma - O(n)
 	void listeyiYazdir() {
-		TekYonluDugum<Integer> gecici = bas;  // Gecici bir dugum olustur ve bas dugumle baslat.
-		System.out.print("Bagli Liste: ");  // Liste basligini yazdir.
-
-		// Liste boyunca dongu ile dugumleri gezin ve verileri yazdirin.
+		Dugum gecici = bas;   // bas degismez, yalnizca gecici ilerler
+		System.out.print("Bagli Liste: ");
 		while (gecici != null) {
-			System.out.print(gecici.veri + " -> ");  // Dugumun verisini yazdir.
-			gecici = gecici.sonraki;  // Gecici dugumu bir sonraki dugume tasi.
+			System.out.print(gecici.veri + " -> ");
+			gecici = gecici.sonraki;
 		}
-
-		// Liste sonunu belirtmek icin "null" yazdir.
 		System.out.println("null");
 	}
 
-
-	//Liste Ters cevirme - Bagli listeyi ters cevirir.
+	// Ters cevirme - O(n) zaman, O(1) ek bellek
 	void listeyiTersCevir() {
-		TekYonluDugum<Integer> onceki = null;  // onceki dugumu baslangicta null olarak ayarla.
-		TekYonluDugum<Integer> suanki = bas;   // su anki dugumu bas dugumle baslat.
-		TekYonluDugum<Integer> sonraki = null; // Sonraki dugumu baslangicta null olarak ayarla.
-
-		// Listenin sonuna kadar dolasarak dugumleri ters cevir.
+		son = bas;                 // Eski bas yeni son olur
+		Dugum onceki = null;
+		Dugum suanki = bas;
+		Dugum sonraki = null;
 		while (suanki != null) {
-			sonraki = suanki.sonraki;   // Sonraki dugumu sakla.
-			suanki.sonraki = onceki;    // su anki dugumun sonraki referansini onceki dugume cevir.
-			onceki = suanki;           // onceki dugumu su anki dugum yap.
-			suanki = sonraki;           // su anki dugumu bir sonraki dugum yap.
+			sonraki = suanki.sonraki;  // 1) sonrakini sakla
+			suanki.sonraki = onceki;   // 2) bagi ters cevir
+			onceki = suanki;           // 3) onceki ilerler
+			suanki = sonraki;          // 4) suanki ilerler
 		}
-
-		bas = onceki;  // Listenin basini ters cevrilmis liste basi yap.
+		bas = onceki;
 	}
 
-
-	//Tek Yonlu Bagli Listede Orta Elemani Bulma
-	int ortaElemaniBul() {
-		if (bas == null) {
-			return -1; // Liste bossa, -1 dondur
-		}
-
-		TekYonluDugum<Integer> yavas = bas;   // Yavas pointer bas dugumle baslar
-		TekYonluDugum<Integer> hizli = bas;   // Hizli pointer da bas dugumle baslar
-
-		// Hizli pointerin sonuna ulasana kadar yavas pointeri bir adim, hizli pointeri iki adim ilerlet
+	// Orta oge - yavas ve hizli isaretci, tek gecis: O(n)
+	// Cift uzunlukta ikinci orta dondurulur.
+	int ortaOgeyiBul() {
+		if (bas == null)
+			throw new IllegalStateException("Liste bos");
+		Dugum yavas = bas, hizli = bas;
 		while (hizli != null && hizli.sonraki != null) {
-			yavas = yavas.sonraki;         // Yavas pointer bir adim ilerler
-			hizli = hizli.sonraki.sonraki; // Hizli pointer iki adim ilerler
+			yavas = yavas.sonraki;          // 1 adim
+			hizli = hizli.sonraki.sonraki;  // 2 adim
 		}
-
-		System.out.println("Orta Eleman: " + yavas.veri); // Orta elemani yazdir
-		return yavas.veri;  // Orta elemani dondur
+		return yavas.veri;
 	}
 
-
-	//Tek Yonlu Bagli Listeyi Kopyalama
+	// Derin kopya - yeni dugumler olusturulur; son isaretcisiyle O(n)
 	TekYonluBagliListe kopyala() {
-		TekYonluBagliListe kopyaListe = new TekYonluBagliListe(); // Yeni bir bagli liste olustur
-		TekYonluDugum<Integer> gecici = bas; // Gecici bir dugum olustur ve bas dugumle baslat
-
+		TekYonluBagliListe kopya = new TekYonluBagliListe();
+		Dugum gecici = bas;
 		while (gecici != null) {
-			kopyaListe.sonaEkle(gecici.veri); // Gecici dugumun verisini kopya listeye ekle
-			gecici = gecici.sonraki; // Bir sonraki dugume gec
+			kopya.sonaEkle(gecici.veri);
+			gecici = gecici.sonraki;
 		}
-
-		kopyaListe.listeyiYazdir(); // Kopya listeyi yazdir
-		return kopyaListe; // Kopya listeyi dondur
+		return kopya;
 	}
 
-
-	//Tek Yonlu Bagli Listeden Tekrarlayanlari Kaldirma 
+	// Tekrarlayanlari kaldirma - gorulen degerler ikinci bir listede: O(n^2)
 	void tekrarlayanlariKaldir() {
-		if (bas == null) {
-			return; // Liste bossa islemi sonlandir
-		}
-
-		TekYonluBagliListe kume = new TekYonluBagliListe(); // Bir kume olustur, tekrarlayanlari kontrol etmek icin
-		TekYonluDugum<Integer> onceki = null; // onceki dugumu saklamak icin kullanilan gecici degisken
-		TekYonluDugum<Integer> gecici = bas;  // Gecici bir dugum olustur ve bas dugumle baslat
-
+		TekYonluBagliListe gorulen = new TekYonluBagliListe();
+		Dugum onceki = null, gecici = bas;
 		while (gecici != null) {
-			int veri = gecici.veri; // su anki dugumun verisini al
-			if (kume.elemaniAra(veri)) {
-				// Eger kumede eklenen veriyi bulursan, tekrarlayan elemani pas gec
-				onceki.sonraki = gecici.sonraki;
+			int v = gecici.veri;
+			if (gorulen.iceriyor(v)) {
+				// Ilk dugum hic tekrar olmaz; bu yuzden burada onceki null degildir.
+				onceki.sonraki = gecici.sonraki;   // Atla
+				if (gecici == son) son = onceki;
+				boyut--;
 			} else {
-				kume.sonaEkle(veri); // Eger tekrarlayan degilse, kumeye veriyi ekle
+				gorulen.basaEkle(v);
 				onceki = gecici;
 			}
-			gecici = gecici.sonraki; // Bir sonraki dugume gec
+			gecici = gecici.sonraki;
 		}
 	}
 
-
-	//iki Sirali Listeyi Birlestirme
-	static TekYonluBagliListe birlestir(TekYonluBagliListe liste1, TekYonluBagliListe liste2) {
-		TekYonluBagliListe birlesmisListe = new TekYonluBagliListe(); // Birlesmis liste olustur
-		TekYonluDugum<Integer> gecici1 = liste1.bas; // ilk liste icin gecici dugum
-		TekYonluDugum<Integer> gecici2 = liste2.bas; // ikinci liste icin gecici dugum
-
-		// iki listeyi karsilastirarak birlestir
-		while (gecici1 != null && gecici2 != null) {
-			if (gecici1.veri < gecici2.veri) {
-				birlesmisListe.sonaEkle(gecici1.veri);
-				gecici1 = gecici1.sonraki;
+	// Iki sirali listeyi birlestirme - son isaretcisiyle O(n + m)
+	static TekYonluBagliListe birlestir(TekYonluBagliListe l1, TekYonluBagliListe l2) {
+		TekYonluBagliListe sonuc = new TekYonluBagliListe();
+		Dugum g1 = l1.bas, g2 = l2.bas;
+		while (g1 != null && g2 != null) {
+			if (g1.veri <= g2.veri) {   // Esitlikte l1 once gelir
+				sonuc.sonaEkle(g1.veri);
+				g1 = g1.sonraki;
 			} else {
-				birlesmisListe.sonaEkle(gecici2.veri);
-				gecici2 = gecici2.sonraki;
+				sonuc.sonaEkle(g2.veri);
+				g2 = g2.sonraki;
 			}
 		}
-
-		// Eger bir liste sona erdiyse, diger listeyi dogrudan birlesmis liste sonuna ekle
-		while (gecici1 != null) {
-			birlesmisListe.sonaEkle(gecici1.veri);
-			gecici1 = gecici1.sonraki;
+		// Kalan ogeleri ekle
+		while (g1 != null) {
+			sonuc.sonaEkle(g1.veri);
+			g1 = g1.sonraki;
 		}
-
-		while (gecici2 != null) {
-			birlesmisListe.sonaEkle(gecici2.veri);
-			gecici2 = gecici2.sonraki;
+		while (g2 != null) {
+			sonuc.sonaEkle(g2.veri);
+			g2 = g2.sonraki;
 		}
-
-		return birlesmisListe; // Birlesmis listeyi dondur
+		return sonuc;
 	}
 
-
-	//Tek Yonlu Bagli Listeyi Siralama
+	// Siralama - deger takasi, dugumler yerinde kalir: O(n^2)
 	void sirala() {
-		if (bas == null) {
-			return; // Liste bossa siralama yapmaya gerek yok
-		}
-
-		TekYonluDugum<Integer> suanki = bas; // su anki dugumu bas dugumle baslat
-
+		Dugum suanki = bas;
 		while (suanki != null) {
-			TekYonluDugum<Integer> diger = suanki.sonraki; // Diger dugumu su anki dugumun bir sonraki dugumu olarak baslat
-
+			Dugum diger = suanki.sonraki;
 			while (diger != null) {
 				if (suanki.veri > diger.veri) {
-					// Eger su anki dugumun verisi diger dugumun verisinden buyukse, elemanlari degistir
 					int gecici = suanki.veri;
 					suanki.veri = diger.veri;
 					diger.veri = gecici;
 				}
-				diger = diger.sonraki; // Diger dugumu bir sonraki dugum yap
+				diger = diger.sonraki;
 			}
-			suanki = suanki.sonraki; // su anki dugumu bir sonraki dugum yap
+			suanki = suanki.sonraki;
 		}
 	}
 
-	public static void main(String[] args) {
-		
+	// Verilen degerleri sona ekleyerek liste olusturur (main icin yardimci)
+	static TekYonluBagliListe olustur(int... degerler) {
 		TekYonluBagliListe liste = new TekYonluBagliListe();
-		
-		// Dugumleri ekle
-		liste.sonaEkle(1);
-		liste.sonaEkle(2);
-		liste.sonaEkle(3);
-		liste.sonaEkle(4);
-		liste.listeyiYazdir();  //Bagli Liste: 1 -> 2 -> 3 -> 4 -> null
-		
-		liste.konumaEkle(5, 0);
-		liste.listeyiYazdir(); //Bagli Liste: 5 -> 1 -> 2 -> 3 -> 4 -> null
-		
-		liste.basaEkle(7);
-		liste.listeyiYazdir(); //Bagli Liste: 7 -> 5 -> 1 -> 2 -> 3 -> 4 -> null
-		
-		liste.konumaEkle(6, 2);
-		liste.listeyiYazdir(); //Bagli Liste: 7 -> 5 -> 6 -> 1 -> 2 -> 3 -> 4 -> null
-		
-		liste.ortaElemaniBul(); //Orta Eleman: 1
-		
-		liste.listeUzunlugu(); //Bagli Liste Uzunlugu: 7
-		
-		liste.ilkElemaniSil();
-		liste.listeyiYazdir(); //Bagli Liste: 5 -> 6 -> 1 -> 2 -> 3 -> 4 -> null
-		
-		liste.sonElemaniSil();
-		liste.listeyiYazdir(); //Bagli Liste: 5 -> 6 -> 1 -> 2 -> 3 -> null
-		
-		liste.elemaniSil(3);
-		liste.listeyiYazdir(); //Bagli Liste: 5 -> 6 -> 1 -> 2 -> null
+		for (int d : degerler)
+			liste.sonaEkle(d);
+		return liste;
+	}
 
-		liste.elemaniAra(2); //Belirtilen eleman 4 konumda bulundu.
-		liste.elemaniAra(11); //Belirtilen eleman bulunamadi.
+	public static void main(String[] args) {
 
+		// Dugumleri elle olusturup baglama
+		Dugum ilk = new Dugum(10);
+		Dugum ikinci = new Dugum(1);
+		Dugum ucuncu = new Dugum(8);
+		Dugum dorduncu = new Dugum(11);
+		ilk.sonraki = ikinci;
+		ikinci.sonraki = ucuncu;
+		ucuncu.sonraki = dorduncu;
+		System.out.print("Elle kurulan: ");
+		for (Dugum d = ilk; d != null; d = d.sonraki)
+			System.out.print(d.veri + " -> ");
+		System.out.println("null");             // 10 -> 1 -> 8 -> 11 -> null
+
+		// Basa ekleme
+		TekYonluBagliListe liste = new TekYonluBagliListe();
+		liste.basaEkle(11);
+		liste.basaEkle(8);
+		liste.basaEkle(1);
+		liste.listeyiYazdir();                  // 1 -> 8 -> 11 -> null
+
+		// Sona ekleme, uzunluk ve arama
+		liste = olustur(10, 1, 8, 11);
+		liste.listeyiYazdir();                  // 10 -> 1 -> 8 -> 11 -> null
+		System.out.println("listeUzunlugu(): " + liste.listeUzunlugu() + ", boyut(): " + liste.boyut()); // 4, 4
+		System.out.println("ogeyiAra(8): " + liste.ogeyiAra(8));    // 2
+		System.out.println("ogeyiAra(99): " + liste.ogeyiAra(99));  // -1
+
+		// Konuma ekleme ve belirli ogeyi silme
+		liste.konumaEkle(5, 2);
+		liste.listeyiYazdir();                  // 10 -> 1 -> 5 -> 8 -> 11 -> null
+		liste.ogeyiSil(5);
+		liste.ogeyiSil(8);
+		liste.listeyiYazdir();                  // 10 -> 1 -> 11 -> null
+
+		// Bastan silme (uc kez) ve bos listede silme
+		while (!liste.bosMu())
+			System.out.println("ilkOgeyiSil(): " + liste.ilkOgeyiSil().veri); // 10, 1, 11
+		System.out.println("Bos listede ilkOgeyiSil(): " + liste.ilkOgeyiSil()); // null
+
+		// Sondan silme
+		liste = olustur(10, 1, 8, 11);
+		liste.sonOgeyiSil();
+		liste.sonaEkle(5);                      // son dogru guncellendi mi?
+		liste.listeyiYazdir();                  // 10 -> 1 -> 8 -> 5 -> null
+
+		// Ters cevirme
+		liste = olustur(10, 8, 1, 11);
 		liste.listeyiTersCevir();
-		liste.listeyiYazdir(); //Bagli Liste: 2 -> 1 -> 6 -> 5 -> null
+		liste.listeyiYazdir();                  // 11 -> 1 -> 8 -> 10 -> null
 
-		liste.kopyala();
-		
-		liste.sonaEkle(6);
-		liste.listeyiYazdir(); //Bagli Liste: 2 -> 1 -> 6 -> 5 -> 6 -> null
-		
+		// Orta oge
+		System.out.println("Orta (10 8 1 11 5): " + olustur(10, 8, 1, 11, 5).ortaOgeyiBul()); // 1
+		System.out.println("Orta (10 8 1 11): " + olustur(10, 8, 1, 11).ortaOgeyiBul());     // 1
+
+		// Kopyalama: kopya degisince orijinal etkilenmez
+		liste = olustur(10, 1, 8);
+		TekYonluBagliListe kopya = liste.kopyala();
+		kopya.sonaEkle(99);
+		liste.listeyiYazdir();                  // 10 -> 1 -> 8 -> null
+		kopya.listeyiYazdir();                  // 10 -> 1 -> 8 -> 99 -> null
+
+		// Tekrarlari kaldirma
+		liste = olustur(3, 5, 3, 7, 5);
 		liste.tekrarlayanlariKaldir();
-		liste.listeyiYazdir(); //Bagli Liste: 2 -> 1 -> 6 -> 5 -> null
-		
+		liste.listeyiYazdir();                  // 3 -> 5 -> 7 -> null
+
+		// Sirali listeleri birlestirme
+		birlestir(olustur(1, 4, 7), olustur(2, 3, 8)).listeyiYazdir(); // 1 -> 2 -> 3 -> 4 -> 7 -> 8 -> null
+
+		// Siralama
+		liste = olustur(4, 1, 3, 2);
 		liste.sirala();
-		liste.listeyiYazdir(); //Bagli Liste: 1 -> 2 -> 5 -> 6 -> null
-
-		// ilk listeye dugumleri ekleyelim
-		TekYonluBagliListe liste1 = new TekYonluBagliListe();
-		liste1.sonaEkle(1);
-		liste1.sonaEkle(3);
-		liste1.sonaEkle(5);
-
-		// ikinci listeye dugumleri ekleyelim
-		TekYonluBagliListe liste2 = new TekYonluBagliListe();
-		liste2.sonaEkle(2);
-		liste2.sonaEkle(4);
-
-		// iki sirali listeyi birlestirelim
-		TekYonluBagliListe birlesmisListe = birlestir(liste1, liste2);
-
-		// Birlestirilmis listeyi yazdiralim
-		birlesmisListe.listeyiYazdir(); //Bagli Liste: 1 -> 2 -> 3 -> 4 -> 5 -> null
+		liste.listeyiYazdir();                  // 1 -> 2 -> 3 -> 4 -> null
 	}
 }
