@@ -11,17 +11,17 @@ Course page and slides: <https://sercankulcu.github.io/teaching/data-structures>
 | `Bolum01` | Introduction | References vs. values, generics (`Kutu`), the `Yigin` ADT and `DiziYigin` |
 | `Bolum02` | Algorithm Analysis | Complexity examples, linear and binary search, doubling experiment, prefix averages |
 | `Bolum03` | Arrays | Copying and comparing arrays, common array errors, mean/median/mode, Caesar cipher, multidimensional and jagged arrays, linear search, matching elements, insertion/deletion, selection/insertion/bubble sort, reversal, transpose, tic-tac-toe |
-| `Bolum04` | Recursion | Factorial, recursive and iterative Fibonacci |
+| `Bolum04` | Recursion | Countdown before/after the call, stack overflow, linear recursion (sum, reversal, slow and fast power), Fibonacci with call counts, memoization and a loop, recursive binary search, Towers of Hanoi, backtracking (subsets, permutations), tail recursion and converting it to a loop, recursion on a linked list |
 | `Bolum05` | Linked Lists | Singly, doubly and circular linked lists, sentinel doubly linked list, Floyd cycle detection, linked structure built from a matrix |
 | `Bolum06` | Lists | `List` operations, `ArrayList`, `LinkedList`, `Vector`/`Stack`, iterators, removing while iterating, views and unmodifiable lists, `CopyOnWriteArrayList`, positional list, a list performance benchmark |
-| `Bolum07` | Stacks | `Stack` interface; array, growable-array and linked stacks; string reversal, parenthesis check, next greater element, min-stack, Towers of Hanoi (recursive and with a task stack), stock span, infix → postfix/prefix, postfix evaluation |
+| `Bolum07` | Stacks | `Stack` interface; array, growable-array and linked stacks; string reversal, parenthesis check, next greater element, min-stack, Towers of Hanoi (recursive and with a task stack), stock span, infix → postfix/prefix, postfix evaluation, the call stack of `fakt` |
 | `Bolum08` | Queues and Deques | Linked queue, circular queue, deque, queue from two stacks, binary numbers, Josephus, sliding-window maximum, round robin |
 | `Bolum09` | Trees | Array representation, recursive and stack-based traversals, level order, expression trees, rebuilding a tree from traversals, general trees |
 | `Bolum10` | Search Trees | Binary search tree, successor/predecessor/range/validation queries, AVL tree, red-black tree, splay tree, a BST of student records |
 | `Bolum11` | Priority Queues & Heaps | Unsorted/sorted array and linked-list priority queues, `MaxHeap` (up-heap, down-heap, bottom-up construction, key change), heap sort, `PriorityQueue`, k-th largest |
 | `Bolum12` | Maps & Hash Tables | Hash functions, separate chaining with resizing, open addressing with deletion markers, linear/quadratic probing and double hashing, `Map` usage and `equals`/`hashCode`, two-sum, student-number hashing |
 | `Bolum13` | Sets & Disjoint Sets | Set operations, hash set, sorted-array union/intersection, bit-vector sets, multiset and multimap, disjoint sets (quick-find, union by size, union by rank with path compression) |
-| `Bolum14` | Graphs | Graph representations, BFS and DFS, connected components, bipartite test, topological sort and cycle detection, unweighted shortest paths, Dijkstra, Kruskal |
+| `Bolum14` | Graphs | Graph representations, BFS and DFS, connected components, bipartite test, topological sort and cycle detection, unweighted shortest paths, Dijkstra, Kruskal, lazy Prim |
 
 ## Running the examples
 
