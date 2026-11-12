@@ -53,3 +53,10 @@ public class IkiBoyutluMatristenBagliListe {
 		System.out.println("Ayni dugum mu? " + (baslangic.sag.asagi == baslangic.asagi.sag)); // true
 	}
 }
+
+/* Beklenen cikti:
+1 2 3
+4 5 6
+7 8 9
+Ayni dugum mu? true
+*/

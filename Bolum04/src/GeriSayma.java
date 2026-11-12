@@ -33,3 +33,12 @@ public class GeriSayma {
 		System.out.println();
 	}
 }
+
+/* Beklenen cikti:
+3
+2
+1
+Bitti
+4 3 2 1
+1 2 3 4
+*/

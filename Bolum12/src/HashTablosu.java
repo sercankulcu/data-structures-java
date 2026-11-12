@@ -159,3 +159,47 @@ public class HashTablosu {
         System.out.println("getir(12) = " + kucuk.getir(12));
     }
 }
+
+/* Beklenen cikti:
+=== Ayri zincirleme, N = 10 ===
+  kova 0:
+  kova 1: 41=Sena -> 21=Ali
+  kova 2:
+  kova 3:
+  kova 4:
+  kova 5: 105=Murat
+  kova 6:
+  kova 7:
+  kova 8:
+  kova 9:
+buyukluk = 3
+getKovaIndisi(-7) = 3  (oysa -7 % 10 = -7)
+getir(105) = Murat
+getir(21)  = Ali
+getir(88)  = null
+sil(21)  = Ali
+sil(105) = Murat
+sil(88)  = null
+buyukluk = 1, bos mu? false
+
+=== Yeniden boyutlandirma, N = 5 ===
+lambda = 4/5 = 0,80 > 0,75 -> yeniden boyutlandir
+  kova 0: 20=Ada
+  kova 1:
+  kova 2: 7=Can -> 12=Ece
+  kova 3: 33=Efe
+  kova 4:
+Yeni tablo (N = 11), buyukluk = 4:
+  kova 0: 33=Efe
+  kova 1: 12=Ece
+  kova 2:
+  kova 3:
+  kova 4:
+  kova 5:
+  kova 6:
+  kova 7: 7=Can
+  kova 8:
+  kova 9: 20=Ada
+  kova 10:
+getir(12) = Ece
+*/

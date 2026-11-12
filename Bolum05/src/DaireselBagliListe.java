@@ -124,3 +124,15 @@ public class DaireselBagliListe {
 		tekli.yazdir();      // Dairesel Liste: (bos)
 	}
 }
+
+/* Beklenen cikti:
+Dairesel Liste: 1 -> 8 -> 10 -> (1)
+Dairesel Liste: 5 -> 1 -> 8 -> 10 -> (5)
+Dairesel Liste: 1 -> 8 -> 10 -> (1)
+Dairesel Liste: 1 -> 8 -> 10 -> 16 -> (1)
+Dairesel Liste: 1 -> 8 -> 10 -> (1)
+boyut: 3
+Round-robin: 1 8 10 1
+Dairesel Liste: 7 -> (7)
+Dairesel Liste: (bos)
+*/

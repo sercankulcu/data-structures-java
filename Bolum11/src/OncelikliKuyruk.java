@@ -67,3 +67,12 @@ public class OncelikliKuyruk<E> {
 		System.out.println("Bos kuyrukta cikar() -> " + kuyruk.cikar());
 	}
 }
+
+/* Beklenen cikti:
+Kuyruk: B:5 D:5 A:2 C:1
+cikar() -> B   Kuyruk: D:5 A:2 C:1
+cikar() -> D   Kuyruk: A:2 C:1
+cikar() -> A   Kuyruk: C:1
+cikar() -> C   Kuyruk:
+Bos kuyrukta cikar() -> null
+*/

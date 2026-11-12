@@ -143,3 +143,22 @@ public class IkiliAgacYigin {
         ia.hepsiniYaz("Bos agac:", null);
     }
 }
+
+/* Beklenen cikti:
+1..7 agaci:
+  Kok basta    : 1 2 4 5 3 6 7
+  Kok ortada   : 4 2 5 1 6 3 7
+  Kok sonda    : 4 5 2 6 7 3 1
+  Seviye sirasi: 1 2 3 4 5 6 7
+1..6 agaci:
+  Kok basta    : 1 2 4 5 3 6
+  Kok ortada   : 4 2 5 1 3 6
+  Kok sonda    : 4 5 2 6 3 1
+  Seviye sirasi: 1 2 3 4 5 6
+4 kokunde agac, seviye sirasi: 4 3 7 5 8
+Bos agac:
+  Kok basta    :
+  Kok ortada   :
+  Kok sonda    :
+  Seviye sirasi:
+*/

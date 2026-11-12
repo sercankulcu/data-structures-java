@@ -135,3 +135,17 @@ public class KonumsalListe<E> {
 		}
 	}
 }
+
+/* Beklenen cikti:
+[A, C]
+addAfter(p, B): [A, B, C]
+after(p) = B
+before(c) = B
+addBefore(p, X): [X, A, B, C]
+p hala A
+set(b, b): [X, A, b, C]
+remove(p) = A
+[X, b, C], size = 3
+first = X, last = C
+Silinmis konum -> IllegalArgumentException
+*/

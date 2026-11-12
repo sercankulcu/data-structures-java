@@ -23,3 +23,14 @@ public class HanoiOzyinelemeli {
 		System.out.println("Hamle sayisi: " + hamle);   // 7 = 2^3 - 1
 	}
 }
+
+/* Beklenen cikti:
+1: A -> C
+2: A -> B
+1: C -> B
+3: A -> C
+1: B -> A
+2: B -> C
+1: A -> C
+Hamle sayisi: 7
+*/

@@ -34,3 +34,13 @@ public class MatrisTranspozu {
 		}
 	}
 }
+
+/* Beklenen cikti:
+m (2 x 3):
+1 2 3
+4 5 6
+t (3 x 2):
+1 4
+2 5
+3 6
+*/

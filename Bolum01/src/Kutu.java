@@ -18,3 +18,8 @@ public class Kutu<T> {
 		System.out.println("m.al() + 1 = " + (sayi + 1));
 	}
 }
+
+/* Beklenen cikti:
+k.al() = veri
+m.al() + 1 = 43
+*/

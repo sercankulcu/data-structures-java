@@ -47,3 +47,14 @@ public class AgirliksizEnKisaYol {
             System.out.println("Dugum " + v + " ile " + s + " arasindaki mesafe: " + mesafe.get(v));
     }
 }
+
+/* Beklenen cikti:
+Dugum 1 ile 1 arasindaki mesafe: 0
+Dugum 2 ile 1 arasindaki mesafe: 1
+Dugum 3 ile 1 arasindaki mesafe: 1
+Dugum 4 ile 1 arasindaki mesafe: 1
+Dugum 5 ile 1 arasindaki mesafe: 2
+Dugum 6 ile 1 arasindaki mesafe: 2
+Dugum 7 ile 1 arasindaki mesafe: 3
+Dugum 8 ile 1 arasindaki mesafe: 2
+*/

@@ -85,3 +85,16 @@ public class UnionFind {
         System.out.println("\nBilesen sayisi: " + bilesenSay(7, kenar)); // 3
     }
 }
+
+/* Beklenen cikti:
+ebeveyn = [1, 3, 3, 3, 4, 5], sira = [0, 1, 0, 2, 0, 0]
+ebeveyn = [3, 3, 3, 3, 3, 5], sira = [0, 1, 0, 2, 0, 0]
+union(1, 4) = false
+ebeveyn = [1, 3, 3, 3, 5, 5], sira = [0, 1, 0, 2, 0, 1]
+find(0) = 3
+
+findDongu(4) = 0
+ebeveyn = [0, 0, 0, 0, 0], sira = [0, 0, 0, 0, 0]
+
+Bilesen sayisi: 3
+*/

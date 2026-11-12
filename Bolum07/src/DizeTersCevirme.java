@@ -22,3 +22,8 @@ public class DizeTersCevirme {
         System.out.println(tersCevir("Merhaba Dunya"));
     }
 }
+
+/* Beklenen cikti:
+DCBA
+aynuD abahreM
+*/

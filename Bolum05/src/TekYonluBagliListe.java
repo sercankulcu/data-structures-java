@@ -333,3 +333,27 @@ public class TekYonluBagliListe {
 		liste.listeyiYazdir();                  // 1 -> 2 -> 3 -> 4 -> null
 	}
 }
+
+/* Beklenen cikti:
+Elle kurulan: 10 -> 1 -> 8 -> 11 -> null
+Bagli Liste: 1 -> 8 -> 11 -> null
+Bagli Liste: 10 -> 1 -> 8 -> 11 -> null
+listeUzunlugu(): 4, boyut(): 4
+ogeyiAra(8): 2
+ogeyiAra(99): -1
+Bagli Liste: 10 -> 1 -> 5 -> 8 -> 11 -> null
+Bagli Liste: 10 -> 1 -> 11 -> null
+ilkOgeyiSil(): 10
+ilkOgeyiSil(): 1
+ilkOgeyiSil(): 11
+Bos listede ilkOgeyiSil(): null
+Bagli Liste: 10 -> 1 -> 8 -> 5 -> null
+Bagli Liste: 11 -> 1 -> 8 -> 10 -> null
+Orta (10 8 1 11 5): 1
+Orta (10 8 1 11): 1
+Bagli Liste: 10 -> 1 -> 8 -> null
+Bagli Liste: 10 -> 1 -> 8 -> 99 -> null
+Bagli Liste: 3 -> 5 -> 7 -> null
+Bagli Liste: 1 -> 2 -> 3 -> 4 -> 7 -> 8 -> null
+Bagli Liste: 1 -> 2 -> 3 -> 4 -> null
+*/

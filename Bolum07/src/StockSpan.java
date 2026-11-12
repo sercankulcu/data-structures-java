@@ -36,3 +36,10 @@ public class StockSpan {
         System.out.println("Span    : " + Arrays.toString(span(fiyatlar2)));
     }
 }
+
+/* Beklenen cikti:
+Fiyatlar: [100, 80, 60, 70, 60, 75, 85]
+Span    : [1, 1, 1, 2, 1, 4, 6]
+Fiyatlar: [10, 4, 5, 90, 120, 80]
+Span    : [1, 1, 2, 4, 5, 1]
+*/

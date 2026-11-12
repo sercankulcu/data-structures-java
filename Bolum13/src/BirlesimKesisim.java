@@ -47,3 +47,9 @@ public class BirlesimKesisim {
         System.out.println("Fark a-b : " + fark(a, b));  // [1, 7, 9]
     }
 }
+
+/* Beklenen cikti:
+Birlesim : [1, 3, 4, 5, 7, 8, 9]
+Kesisim  : [3, 5]
+Fark a-b : [1, 7, 9]
+*/

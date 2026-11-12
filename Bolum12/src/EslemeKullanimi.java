@@ -70,3 +70,15 @@ public class EslemeKullanimi {
         System.out.println("elma = " + f.get("elma") + ", armut = " + f.get("armut") + ", kiraz = " + f.get("kiraz"));
     }
 }
+
+/* Beklenen cikti:
+put(21, "Ali") eski deger = Leyla
+get(21) = Ali
+remove(105) = Murat
+get(88) = null
+size() = 1, containsKey(21) = true
+notlar.get(Ogrenci(42, Ada)) = 87.5
+Nokta: get(1,2) = null  (hashCode yok)
+DuzgunNokta: get(1,2) = A
+elma = 3, armut = 2, kiraz = 1
+*/

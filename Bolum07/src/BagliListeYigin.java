@@ -56,3 +56,10 @@ public class BagliListeYigin {
         }
     }
 }
+
+/* Beklenen cikti:
+top(): 15, size: 2
+15
+10
+Alt tasma: yigin bos
+*/

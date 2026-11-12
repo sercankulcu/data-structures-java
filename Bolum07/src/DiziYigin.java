@@ -60,3 +60,13 @@ public class DiziYigin<E> implements Stack<E> {
         }
     }
 }
+
+/* Beklenen cikti:
+top(): 20, size: 3
+pop(): 20, size: 2
+size: 4 (dizi dolu)
+push(40): Tasma
+30 25 15 10
+top(): null
+pop(): Alt tasma
+*/

@@ -24,3 +24,15 @@ public class DeneyselAnaliz {
 		}
 	}
 }
+
+/* Not: bu programin ciktisi her calistirmada degisir (zaman olcumu, rastgele sayi ya da
+   is parcaciklarinin sirasi); asagidaki bir ornek calistirmadir. */
+/* Beklenen cikti:
+1000 1.8129 ms
+2000 0.8821 ms
+4000 6.0104 ms
+8000 5.0856 ms
+16000 22.5603 ms
+32000 90.4831 ms
+64000 370.9469 ms
+*/

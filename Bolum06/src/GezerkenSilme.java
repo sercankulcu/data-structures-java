@@ -55,3 +55,11 @@ public class GezerkenSilme {
 		System.out.println("removeIf ile: " + isimler);   // [Can]
 	}
 }
+
+/* Beklenen cikti:
+Yanlis: ConcurrentModificationException
+Yarim kalan liste: [Can, Ayse]
+it.remove() ile: [Can]
+Ikinci it.remove() -> IllegalStateException
+removeIf ile: [Can]
+*/

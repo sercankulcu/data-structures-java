@@ -48,3 +48,10 @@ public class BaglantiliBilesenler {
         System.out.println("2 ile 4 baglantili mi? " + (bil[2] == bil[4]));  // false
     }
 }
+
+/* Beklenen cikti:
+Bilesen sayisi: 3
+bil[] = [0, 0, 0, 1, 1, 2]
+1 ile 2 baglantili mi? true
+2 ile 4 baglantili mi? false
+*/

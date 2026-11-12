@@ -76,3 +76,23 @@ public class HashFonksiyonlari {
         }
     }
 }
+
+/* Beklenen cikti:
+hash("Ali") = 65918, String.hashCode = 65918, floorMod(kod, 13) = 8
+"abc".hashCode() = 96354
+crc32Hash("Ali") = 1933558706
+djb2Hash("Ali") = 193442657, djb2Hash("Giresun Universitesi") = -1020405258
+modulusHash tablosu: [10, 1, null, null, null, 5, 26, null, null, 99]
+k   mod 10  mod 11
+10  0       10
+20  0       9
+30  0       8
+40  0       7
+50  0       6
+-7 % 10 = -7, floorMod(-7, 10) = 3
+"polygenelubricants".hashCode() = -2147483648
+Math.abs(kod) % 10 = -8 (negatif!), floorMod(kod, 10) = 2
+1 -> 1  (karistirmasiz: 1)
+65537 -> 0  (karistirmasiz: 1)
+131073 -> 3  (karistirmasiz: 1)
+*/

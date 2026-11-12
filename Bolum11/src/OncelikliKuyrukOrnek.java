@@ -52,3 +52,16 @@ public class OncelikliKuyrukOrnek {
 		}
 	}
 }
+
+/* Beklenen cikti:
+1
+1
+5
+1
+3, 1, 2 eklendi: [1, 3, 2]
+maxPq.peek() = 8
+Siradaki hasta: (1, kalp krizi)
+Siradaki hasta: (2, yuksek ates)
+Siradaki hasta: (3, kirik)
+Siradaki hasta: (4, burkulma)
+*/

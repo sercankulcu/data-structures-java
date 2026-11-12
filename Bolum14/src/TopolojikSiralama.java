@@ -66,3 +66,10 @@ public class TopolojikSiralama {
         System.out.println("DAG'da donguVar(0): " + dag.donguVar(0, new int[6]));  // false
     }
 }
+
+/* Beklenen cikti:
+Kahn: [1, 2, 0, 4, 3, 5] (boyut 6 = n, dongu yok)
+donguVar(0): true
+Kahn: [] (boyut 0 < 5, topolojik sira yok)
+DAG'da donguVar(0): false
+*/

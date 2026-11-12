@@ -36,3 +36,9 @@ public class BagliListeOzyineleme {
 		System.out.println();
 	}
 }
+
+/* Beklenen cikti:
+3
+7 3 9
+9 3 7
+*/

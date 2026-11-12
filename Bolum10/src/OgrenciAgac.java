@@ -99,3 +99,23 @@ public class OgrenciAgac {
 		agac.inorder(agac.kok);       // 93 101 105 133 143 173
 	}
 }
+
+/* Beklenen cikti:
+Numara sirasiyla:
+  93 Mehmet Bey
+  101 Murat Aktas
+  105 Asli Hanim
+  123 Ali Aydin
+  133 Ayse Konak
+  143 Dilara Turk
+  173 Demir Demirkan
+ara(101): Murat Aktas
+ara(45): kayit yok
+123 silindi, yeni kok: 133 Ayse Konak
+  93 Mehmet Bey
+  101 Murat Aktas
+  105 Asli Hanim
+  133 Ayse Konak
+  143 Dilara Turk
+  173 Demir Demirkan
+*/

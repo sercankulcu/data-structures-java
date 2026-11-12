@@ -109,3 +109,17 @@ public class DaireselKuyruk<E> {
 		k2.diziyiGoster();
 	}
 }
+
+/* Beklenen cikti:
+cikar() -> 10
+cikar() -> 20
+  dizi = [60, 70, 30, 40, 50]  bas = 2  boyut = 5
+Dolu mu? true  ilk() = 30
+ekle(80): dolu
+Cikis sirasi: 30 40 50 60 70
+  dizi = [_, _, _, _, _]  bas = 2  boyut = 0
+Buyutmeden once:
+  dizi = [C, D, A, B]  bas = 2  boyut = 4
+ekleBuyuterek(E) sonrasi:
+  dizi = [A, B, C, D, E, _, _, _]  bas = 0  boyut = 5
+*/

@@ -30,3 +30,11 @@ public class ReferansKopyalama {
 		System.out.println("Arrays.equals   : " + Arrays.equals(p, q));  // true
 	}
 }
+
+/* Beklenen cikti:
+5 9
+y = 7, b = [0, 0]
+d[2] = 9, d = [7, 2, 9, 5, 8]
+p == q          : false
+Arrays.equals   : true
+*/

@@ -42,3 +42,11 @@ public class Ozyineleme {
 		// fib(4) -> 9 cagri; n 10 artinca cagri sayisi yaklasik 1,6^10 = 120 kat artar
 	}
 }
+
+/* Beklenen cikti:
+24
+fib(4) = 3, cagri sayisi = 9, fibDongu = 3
+fib(10) = 55, cagri sayisi = 177, fibDongu = 55
+fib(20) = 6765, cagri sayisi = 21891, fibDongu = 6765
+fib(30) = 832040, cagri sayisi = 2692537, fibDongu = 832040
+*/

@@ -58,3 +58,13 @@ public class KarmasiklikOrnekleri {
 		System.out.println("tekrarVar(d) = " + tekrarVar(d));       // false, 6 karsilastirma
 	}
 }
+
+/* Beklenen cikti:
+ilk(a)      = 7
+toplam(a)   = 18
+maksimum(b) = 9
+adimSay(16) = 4
+adimSay(16000) = 14
+tekrarVar(c) = true
+tekrarVar(d) = false
+*/

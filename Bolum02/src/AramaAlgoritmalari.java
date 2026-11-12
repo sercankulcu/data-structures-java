@@ -29,3 +29,10 @@ public class AramaAlgoritmalari {
 		System.out.println("ikiliArama(a, 40)    = " + ikiliArama(a, 40));     // -1 (4 tur)
 	}
 }
+
+/* Beklenen cikti:
+dogrusalArama(a, 23) = 5
+ikiliArama(a, 23)    = 5
+dogrusalArama(a, 40) = -1
+ikiliArama(a, 40)    = -1
+*/

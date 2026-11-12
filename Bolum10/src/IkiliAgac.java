@@ -125,3 +125,18 @@ public class IkiliAgac<E extends Comparable<E>> {
 		System.out.println("kok 50 silindi, yeni kok: " + a.kok.veri);          // 60
 	}
 }
+
+/* Beklenen cikti:
+inorder: 1 2 3 4 6 8
+min: 1
+max: 8
+ekle 5 sonrasi: 1 2 3 4 5 6 8
+ara(kok, 5) = true
+ara(kok, 10) = false
+sil 70 -> 30 40 42 45 50 60
+sil 45 -> 30 40 42 50 60 70
+sil 60 -> 30 40 42 45 50 70
+sil 40 -> 30 42 45 50 60 70
+40'in yerine gelen ardil: 42
+kok 50 silindi, yeni kok: 60
+*/

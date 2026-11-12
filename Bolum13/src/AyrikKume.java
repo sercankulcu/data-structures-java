@@ -93,3 +93,14 @@ public class AyrikKume {
         System.out.println("Kok: " + harfler[uf.find(h)] + ", boyut: " + uf.boyut[uf.find(h)]); // C, 12
     }
 }
+
+/* Beklenen cikti:
+Quick-Find id: [1, 1, 3, 3, 4, 5]
+Quick-Find id: [3, 3, 3, 3, 3, 5]
+find(0) == find(4)? true
+
+Boyuta gore birlestirme sonrasi ebeveyn:
+E->F F->C I->C D->C C->C A->C J->A L->F G->H K->C B->A H->F
+H ile B ayni kumede mi? true
+Kok: C, boyut: 12
+*/

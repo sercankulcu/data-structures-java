@@ -47,3 +47,22 @@ public class HanoiKuleleri {
         hanoi(3);
     }
 }
+
+/* Beklenen cikti:
+Ozyinelemeli (3 disk):
+1: A -> C
+2: A -> B
+1: C -> B
+3: A -> C
+1: B -> A
+2: B -> C
+1: A -> C
+Yiginla (3 disk):
+A -> C
+A -> B
+C -> B
+A -> C
+B -> A
+B -> C
+A -> C
+*/

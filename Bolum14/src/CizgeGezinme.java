@@ -94,3 +94,11 @@ public class CizgeGezinme {
         System.out.println();
     }
 }
+
+/* Beklenen cikti:
+bfs(A):      A B F I C E G D H
+dfs(A):      A B C D G E F H I
+dfsYigin(A): A B C D G E F H I
+bfs(H):      H D C G B E F A I
+dfs(H):      H D C B A F G E I
+*/

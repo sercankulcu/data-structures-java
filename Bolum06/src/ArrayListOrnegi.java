@@ -28,3 +28,16 @@ public class ArrayListOrnegi {
 		System.out.println("clear sonrasi bos mu? " + liste.isEmpty());   // true
 	}
 }
+
+/* Beklenen cikti:
+[Ali]
+[Ali, Veli]
+[Can, Ali, Veli]
+get(1) = Ali
+[Ali, Veli]
+size() = 2
+set(1): Veli -> [Ali, Ayse]
+contains(Ali): true
+indexOf(Veli): -1
+clear sonrasi bos mu? true
+*/

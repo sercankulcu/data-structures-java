@@ -53,3 +53,18 @@ public class BitVektorKume {
         System.out.println("get(3) = " + ba.get(3) + ", cardinality() = " + ba.cardinality());
     }
 }
+
+/* Beklenen cikti:
+a = 26 -> {1, 3, 4}
+b = 40 -> {3, 5}
+a | b  = 58 -> {1, 3, 4, 5}
+a & b  = 8 -> {3}
+a & ~b = 18 -> {1, 4}
+3 a'da mi? true
+|a| = 3
+
+BitSet birlesim : {1, 3, 4, 5}
+BitSet kesisim  : {3}
+BitSet fark     : {1, 4}
+get(3) = true, cardinality() = 3
+*/

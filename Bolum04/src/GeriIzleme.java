@@ -38,3 +38,8 @@ public class GeriIzleme {
 		System.out.println();   // ABC ACB BAC BCA CAB CBA
 	}
 }
+
+/* Beklenen cikti:
+[1, 2, 3] [1, 2] [1, 3] [1] [2, 3] [2] [3] []
+ABC ACB BAC BCA CAB CBA
+*/

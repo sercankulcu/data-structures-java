@@ -30,3 +30,19 @@ public class Josephus {
 		System.out.println("Kazanan: " + josephus(q2, 3));  // 3, 6, 2, 7, 5, 1 elenir; kazanan 4
 	}
 }
+
+/* Beklenen cikti:
+C elendi
+A elendi
+E elendi
+B elendi
+Kazanan: D
+
+3 elendi
+6 elendi
+2 elendi
+7 elendi
+5 elendi
+1 elendi
+Kazanan: 4
+*/

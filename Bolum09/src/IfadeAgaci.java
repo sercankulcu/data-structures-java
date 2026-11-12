@@ -111,3 +111,15 @@ public class IfadeAgaci {
         yazdir(sonektenKur("12 3 / 4 + 2 *")); // ((12 / 3) + 4) * 2 = 16
     }
 }
+
+/* Beklenen cikti:
+Kok basta (onek) : * + 3 4 - 5 2
+Kok ortada (ara ek): ((3 + 4) * (5 - 2))
+Kok sonda (sonek): 3 4 + 5 2 - *
+hesapla = 21
+
+Kok basta (onek) : * + / 12 3 4 2
+Kok ortada (ara ek): (((12 / 3) + 4) * 2)
+Kok sonda (sonek): 12 3 / 4 + 2 *
+hesapla = 16
+*/

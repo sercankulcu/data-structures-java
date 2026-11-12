@@ -37,3 +37,9 @@ public class IkiToplam {
         System.out.println("ikiToplam(a, 100)   = " + Arrays.toString(ikiToplam(a, 100)));
     }
 }
+
+/* Beklenen cikti:
+ikiToplam(a, 12)    = [3, 4]
+kaba kuvvet(a, 12)  = [3, 4]
+ikiToplam(a, 100)   = null
+*/

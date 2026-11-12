@@ -55,3 +55,14 @@ public class DogrusalOzyineleme {
 		// 5, 8, 11, 21 cagri: us(x, n) ise n + 1 cagri yapar
 	}
 }
+
+/* Beklenen cikti:
+15
+[6, 1, 9, 4, 7, 2]
+1024
+1024
+hizliUs n = 10: 5 cagri
+hizliUs n = 100: 8 cagri
+hizliUs n = 1000: 11 cagri
+hizliUs n = 1000000: 21 cagri
+*/

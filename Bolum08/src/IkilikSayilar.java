@@ -25,3 +25,9 @@ public class IkilikSayilar {
 		System.out.println("n = 5: " + Arrays.toString(ikilikSayiUret(5)));   // [1, 10, 11, 100, 101]
 	}
 }
+
+/* Beklenen cikti:
+n = 3: [1, 10, 11]
+n = 4: [1, 10, 11, 100]
+n = 5: [1, 10, 11, 100, 101]
+*/

@@ -39,3 +39,9 @@ public class PostfixDegerlendirme {
             System.out.println(s + " = " + postfixDegerlendir(s));
     }
 }
+
+/* Beklenen cikti:
+412+*3/ = 4
+512+4*+3- = 14
+52- = 3
+*/

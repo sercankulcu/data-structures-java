@@ -74,3 +74,11 @@ public class SirasizSiraliDizi {
 		System.out.println("removeMin() = " + t.removeMin() + " -> " + t);
 	}
 }
+
+/* Beklenen cikti:
+Sirasiz: [5, 9, 3, 7, 4]
+removeMin() = 3 -> [5, 9, 4, 7]
+Sirali:  [9, 7, 5, 3, 2]
+insert(4)     -> [9, 7, 5, 4, 3, 2]
+removeMin() = 2 -> [9, 7, 5, 4, 3]
+*/

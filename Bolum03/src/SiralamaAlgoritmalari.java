@@ -65,3 +65,9 @@ public class SiralamaAlgoritmalari {
 		}
 	}
 }
+
+/* Beklenen cikti:
+Secimli sirala  : [11, 12, 22, 25, 64]
+Eklemeli sirala : [1, 2, 3, 4, 5]
+Kabarcik sirala : [1, 2, 4, 5, 8]
+*/

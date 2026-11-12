@@ -77,3 +77,21 @@ public class GorunumOrnegi {
 		System.out.println(liste + " " + esnek);       // [x, b, z] [x, b, z, d]
 	}
 }
+
+/* Beklenen cikti:
+--- subList ---
+[B, C]
+[A, X, C, Y, D, E]
+[A, D, E]
+Eski gorunum -> ConcurrentModificationException
+--- List.of, kopya, unmodifiableList ---
+sabit.add -> UnsupportedOperationException
+[Ali, Veli] [Ali, Veli, Can]
+gorunum.set -> UnsupportedOperationException
+gorunum: [Ece, Veli, Can]
+kopya:   [Ali, Veli, Can]
+--- Arrays.asList ---
+[x, b, z] [x, b, z]
+liste.add -> UnsupportedOperationException
+[x, b, z] [x, b, z, d]
+*/

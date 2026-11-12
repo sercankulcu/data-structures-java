@@ -77,3 +77,23 @@ public class ListDemo {
 		}
 	}
 }
+
+/* Beklenen cikti:
+--- Tekrar ve null ---
+[Ali, Ali, null, Ali]
+4
+0
+3
+2
+--- remove(int) ve remove(Object) ---
+remove(1) -> 20, liste [10, 30]
+remove(Integer 10) -> true, liste [30]
+remove(Integer 99) -> false, liste [30]
+remove(5) -> IndexOutOfBoundsException: Index 5 out of bounds for length 1
+--- replaceAll ve sort ---
+[ALI, AHMET, MEHMET] [1, 3, 5]
+--- get ve kutulama ---
+Ali
+x = 5
+get(3) -> IndexOutOfBoundsException: Index 3 out of bounds for length 3
+*/

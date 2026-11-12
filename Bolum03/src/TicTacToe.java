@@ -90,3 +90,22 @@ public class TicTacToe {
 		return false;
 	}
 }
+
+/* Beklenen cikti:
+-------------
+|   |   |   |
+-------------
+|   |   |   |
+-------------
+|   |   |   |
+-------------
+Sira X: satir ve sutun (1-3):
+Girdi kalmadi, oyun yarida birakildi.
+-------------
+|   |   |   |
+-------------
+|   |   |   |
+-------------
+|   |   |   |
+-------------
+*/

@@ -63,3 +63,25 @@ public class KumeIslemleri {
         System.out.println("subSet(10,30): " + s.subSet(10, 30)); // [10, 15, 20, 25]
     }
 }
+
+/* Beklenen cikti:
+A = [1, 2, 3, 4, 5], B = [3, 4, 5, 6, 7]
+Birlesim A U B : [1, 2, 3, 4, 5, 6, 7]
+Kesisim A n B  : [3, 4, 5]
+Fark A - B     : [1, 2]
+B, A'nin alt kumesi mi? false
+{3, 4}, A'nin alt kumesi mi? true
+add(3) ikinci kez: false
+
+Ilk tekrar eden oge: 7
+
+HashSet       : [elma, armut, kiraz]
+LinkedHashSet : [elma, kiraz, armut]
+TreeSet       : [armut, elma, kiraz]
+
+S = [5, 10, 15, 20, 25, 30, 40]
+first / last : 5 / 40
+floor(17)    : 15
+ceiling(17)  : 20
+subSet(10,30): [10, 15, 20, 25]
+*/

@@ -35,3 +35,14 @@ public class KuyrukOrnegi {
 		}
 	}
 }
+
+/* Beklenen cikti:
+Kuyruk (onden arkaya): [20, 10, 15]
+peek() = 20
+poll() = 20 -> [10, 15]
+poll() = 10 -> [15]
+size() = 1
+poll() = 15 -> []
+poll() = null (bos kuyruk)
+remove() bos kuyrukta: NoSuchElementException
+*/

@@ -85,3 +85,16 @@ public class OrtalamaOrtancaMod {
 		return enCok;
 	}
 }
+
+/* Beklenen cikti:
+Dizi boyutunu girin: 1. ogeyi girin: 2. ogeyi girin: 3. ogeyi girin: 4. ogeyi girin: 5. ogeyi girin:
+Dizi: [4.0, 8.0, 15.0, 16.0, 23.0]
+Ortalama: 13.2
+ortalama(4, 8, 15)            = 9.0
+ortalama(7.5)                 = 7.5
+ortalama()                    = NaN
+ortalama(new double[] {1, 2}) = 1.5
+ortanca({6, 2, 8, 4})    = 5.0
+ortanca({9, 3, 11, 7, 5}) = 7.0
+mod({4, 1, 4, 2, 1, 4}) = 4
+*/

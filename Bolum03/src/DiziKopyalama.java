@@ -45,3 +45,20 @@ public class DiziKopyalama {
 		System.out.println("dk = " + Arrays.deepToString(dk)); // [[9, 5], [3, 4]]
 	}
 }
+
+/* Beklenen cikti:
+dizi     = [99, 2, 3, 4, 5]
+referans = [99, 2, 3, 4, 5]
+kopya    = [1, 2, 3, 4, 5]
+a == b              : false
+Arrays.equals(a, b) : true
+println(a) yazdirir : [I@681a9515
+fill(c, 7)          : [7, 7, 7, 7, 7]
+copyOf(a, 5)        : [1, 2, 3, 0, 0]
+sort(d)             : [1, 4, 5, 7, 9]
+binarySearch(d, 7)  : 3
+binarySearch(d, 6)  : -4
+m  = [[9, 2], [3, 4]]
+s  = [[9, 2], [7, 8]]
+dk = [[9, 5], [3, 4]]
+*/

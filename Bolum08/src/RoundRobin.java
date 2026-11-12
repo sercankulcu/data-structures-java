@@ -36,3 +36,9 @@ public class RoundRobin {
 		roundRobin(q, 2);   // P3 t=6, P2 t=9, P1 t=10
 	}
 }
+
+/* Beklenen cikti:
+P3 t=6
+P2 t=9
+P1 t=10
+*/

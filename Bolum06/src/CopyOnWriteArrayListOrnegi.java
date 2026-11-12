@@ -48,3 +48,12 @@ public class CopyOnWriteArrayListOrnegi {
 		}
 	}
 }
+
+/* Beklenen cikti:
+it.next() = a
+Eski okuyucu devam ediyor: b c
+Yeni okuyucu: [a, b, c, d]
+Gezerken silme sonrasi: [a, c, d]
+it.remove() -> UnsupportedOperationException
+ArrayList -> ConcurrentModificationException
+*/

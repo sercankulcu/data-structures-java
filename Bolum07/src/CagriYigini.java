@@ -25,3 +25,13 @@ public class CagriYigini {
 		System.out.println(fakt(3));   // 6; en buyuk derinlik 3 (main ile 4 cerceve)
 	}
 }
+
+/* Beklenen cikti:
+  push fakt(3)   yigin derinligi: 1
+    push fakt(2)   yigin derinligi: 2
+      push fakt(1)   yigin derinligi: 3
+      pop  fakt(1) = 1
+    pop  fakt(2) = 2
+  pop  fakt(3) = 6
+6
+*/

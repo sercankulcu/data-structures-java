@@ -86,3 +86,13 @@ public class BagliListeKuyruk {
 		}
 	}
 }
+
+/* Beklenen cikti:
+Kuyruk (onden arkaya): 10 15 20  uzunluk = 3
+ilk() = 10
+dequeue() -> 10
+dequeue() -> 15
+dequeue() -> 20
+on = null, arka = null
+Bos kuyrukta dequeue(): NoSuchElementException
+*/

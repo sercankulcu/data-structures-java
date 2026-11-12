@@ -82,3 +82,15 @@ public class BekciliCiftYonluListe {
 		liste.yazdir();                  // [bas] <-> [son]  (boyut = 0)
 	}
 }
+
+/* Beklenen cikti:
+Bekcili Liste: [bas] <-> [son]  (boyut = 0)
+Bekcili Liste: [bas] <-> 5 <-> 10 <-> [son]  (boyut = 2)
+Bekcili Liste: [bas] <-> 5 <-> [son]  (boyut = 1)
+Bekcili Liste: [bas] <-> 5 <-> 20 <-> 30 <-> [son]  (boyut = 3)
+ilkOgeyiSil(): 5
+sonOgeyiSil(): 30
+sonOgeyiSil(): 20
+Bos listede: null
+Bekcili Liste: [bas] <-> [son]  (boyut = 0)
+*/

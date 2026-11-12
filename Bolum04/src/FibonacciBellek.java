@@ -48,3 +48,13 @@ public class FibonacciBellek {
 		System.out.println("fibDongu(90) = " + fibDongu(90));   // 2880067194370816120
 	}
 }
+
+/* Beklenen cikti:
+3
+fib(5) = 5, cagri: 15
+fib(10) = 55, cagri: 177
+fib(20) = 6765, cagri: 21891
+fib(30) = 832040, cagri: 2692537
+fibBellek(40) = 102334155, cagri: 79
+fibDongu(90) = 2880067194370816120
+*/

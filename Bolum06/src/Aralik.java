@@ -53,3 +53,11 @@ public class Aralik implements Iterable<Integer> {
 		}
 	}
 }
+
+/* Beklenen cikti:
+x = 2
+x = 3
+x = 4
+2 3 4
+Oge kalmadi: NoSuchElementException
+*/

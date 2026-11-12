@@ -65,3 +65,8 @@ public class AgaciYenidenKurma {
         System.out.println();
     }
 }
+
+/* Beklenen cikti:
+Kurulan agac: 1(2(4, 5), 3(-, 6))
+Kok sonda   : 4 5 2 6 3 1
+*/

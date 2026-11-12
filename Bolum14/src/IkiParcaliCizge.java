@@ -52,3 +52,9 @@ public class IkiParcaliCizge {
         System.out.println("C5 iki parcali mi?         " + dongu(5).ikiParcaliMi());  // false (tek dongu)
     }
 }
+
+/* Beklenen cikti:
+6'li dongu iki parcali mi? true
+Ucgen iki parcali mi?      false
+C5 iki parcali mi?         false
+*/

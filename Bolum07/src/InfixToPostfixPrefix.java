@@ -83,3 +83,21 @@ public class InfixToPostfixPrefix {
         }
     }
 }
+
+/* Beklenen cikti:
+Infix  : A*(B+C)/D
+Postfix: ABC+*D/
+Prefix : /*A+BCD
+
+Infix  : A+B*C-D/E
+Postfix: ABC*+DE/-
+Prefix : -+A*BC/DE
+
+Infix  : (A+B)*(C-D)/E
+Postfix: AB+CD-*E/
+Prefix : /*+AB-CDE
+
+Infix  : A-B+C
+Postfix: AB-C+
+Prefix : +-ABC
+*/

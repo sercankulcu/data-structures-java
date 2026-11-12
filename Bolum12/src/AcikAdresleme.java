@@ -118,3 +118,17 @@ public class AcikAdresleme {
         }
     }
 }
+
+/* Beklenen cikti:
+Dogrusal yoklama sonrasi tablo (N = 13):
+  0:- 1:- 2:41 3:- 4:- 5:18 6:44 7:59 8:32 9:22 10:31 11:73 12:-
+sil(44) = d44
+  0:- 1:- 2:41 3:- 4:- 5:18 6:X 7:59 8:32 9:22 10:31 11:73 12:-
+getir(32) = d32  (6'daki X atlandi, 8'de bulundu)
+getir(44) = null
+yerlestir(57) sonrasi:
+  0:- 1:- 2:41 3:- 4:- 5:18 6:57 7:59 8:32 9:22 10:31 11:73 12:-
+buyukluk = 8
+Dolu tabloda getir(4) = null
+Hata: Tablo dolu, 4 eklenemedi
+*/

@@ -65,3 +65,28 @@ public class Prim {
         // ic duzeni belirler. Esit agirliklar yuzunden MST tek olmayabilir, toplam her zaman aynidir.
     }
 }
+
+/* Beklenen cikti:
+A'dan baslayan Prim:
+A-E (1)
+E-F (1)
+E-D (2)
+D-B (2)
+D-H (2)
+H-G (1)
+G-I (4)
+I-J (0)
+I-C (1)
+Kenar sayisi: 9, toplam agirlik: 14
+J'den baslayan Prim:
+J-I (0)
+I-C (1)
+C-H (4)
+H-G (1)
+H-D (2)
+D-B (2)
+D-E (2)
+E-A (1)
+E-F (1)
+Kenar sayisi: 9, toplam agirlik: 14
+*/

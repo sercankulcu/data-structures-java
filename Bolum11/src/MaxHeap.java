@@ -145,3 +145,15 @@ public final class MaxHeap {
 		System.out.println("heapMi([10, 8, 9, 3, 5, 7]) = " + heapMi(new int[] {10, 8, 9, 3, 5, 7}));
 	}
 }
+
+/* Beklenen cikti:
+4, 5, 2, 6, 1, 3 eklendi: [6, 5, 3, 4, 1, 2]
+ekle(10), ekle(8):     [10, 9, 6, 8, 1, 5, 4, 2, 3]
+silMax() = 10  -> [9, 8, 6, 3, 1, 5, 4, 2]
+silMax() = 9  -> [8, 3, 6, 2, 1, 5, 4]
+anahtarDegistir(4, 8): [9, 8, 6, 2, 3, 5, 4]
+anahtarDegistir(0, 1): [8, 3, 6, 2, 1, 5, 4]
+heapOlustur[4, 1, 3, 2, 16, 9, 10, 14, 8, 7] -> [16, 14, 10, 8, 7, 9, 3, 2, 4, 1]
+heapMi([10, 8, 9, 3, 5, 7, 4, 6]) = false
+heapMi([10, 8, 9, 3, 5, 7]) = true
+*/

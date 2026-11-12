@@ -69,3 +69,22 @@ public class CizgeGosterimleri {
         System.out.println("1-4 kenari var mi? " + mg.kenarVarMi(1, 4));   // true
     }
 }
+
+/* Beklenen cikti:
+Kenar listesi: (0,1) (0,4) (1,2) (1,4) (2,3) (3,4)
+Komsuluk listesi:
+  0: [1, 4]
+  1: [0, 2, 4]
+  2: [1, 3]
+  3: [2, 4]
+  4: [0, 1, 3]
+derece(1) = 3
+Komsuluk matrisi:
+  0 1 0 0 1
+  1 0 1 0 1
+  0 1 0 1 0
+  0 0 1 0 1
+  1 1 0 1 0
+2-4 kenari var mi? false
+1-4 kenari var mi? true
+*/

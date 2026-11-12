@@ -74,3 +74,39 @@ public class OkuyucuOrnegi {
 		}
 	}
 }
+
+/* Beklenen cikti:
+--- indisli for ---
+0: Ali
+1: Ahmet
+2: Mehmet
+--- forEach ---
+Ali
+Ahmet
+Mehmet
+--- Iterator ---
+Ali
+Ahmet
+Mehmet
+Bir kez daha next() -> NoSuchElementException
+--- ListIterator ileri ve geri ---
+Ali
+Ahmet
+Mehmet
+Mehmet
+Ahmet
+Ali
+--- ListIterator set, add, remove ---
+[Ali, AHMET, Mehmet]
+[Ali, AHMET, Ayse, Mehmet]
+previous() -> Ayse
+[Ali, AHMET, Mehmet]
+Ikinci remove() -> IllegalStateException
+--- Spliterator ---
+b parcasi:
+Java
+Python
+a parcasi:
+C++
+Go
+*/

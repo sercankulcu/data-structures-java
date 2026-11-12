@@ -33,3 +33,10 @@ public class SonrakiBuyukOge {
         System.out.println("sonuc: " + Arrays.toString(sonrakiBuyuk(dizi2)));
     }
 }
+
+/* Beklenen cikti:
+dizi : [4, 7, 3, 4, 8, 1]
+sonuc: [7, 8, 4, 8, -1, -1]
+dizi : [2, 5, 3, 1, 4]
+sonuc: [5, -1, 4, 4, -1]
+*/

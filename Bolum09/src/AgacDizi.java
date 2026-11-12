@@ -104,3 +104,16 @@ public class AgacDizi {
         agac.seviyeSirasi();
     }
 }
+
+/* Beklenen cikti:
+sol(2) = 4 -> D
+sag(2) = 5 -> E
+ebeveyn(2) = 1 -> A
+D (i = 4): sol = H, sag = I, ebeveyn = B
+E (i = 5): cocugu yok (yaprak), cunku 2i = 10 > n = 9
+I'dan koke yol: I D B A
+Kok basta : A B D H I E C F G
+Kok ortada: H D I B E A F C G
+Kok sonda : H I D E B F G C A
+Seviye sirasi: A B C D E F G H I
+*/

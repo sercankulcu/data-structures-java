@@ -54,3 +54,22 @@ public class VectorOrnegi {
 		System.out.println("ArrayDeque: " + s + ", pop() = " + s.pop());   // [B, A], B
 	}
 }
+
+/* Beklenen cikti:
+--- Vector ---
+[10, 20]
+get(0) = 10
+[20]
+size() = 1
+capacity() = 10
+Bilesik islem sonrasi: []
+--- Stack ---
+[A, B, C]
+peek() = C
+search(A) = 3
+pop() = C
+add(0, X) sonrasi: [X, A, B]
+empty() = true
+Bos yiginda pop() -> EmptyStackException
+ArrayDeque: [B, A], pop() = B
+*/

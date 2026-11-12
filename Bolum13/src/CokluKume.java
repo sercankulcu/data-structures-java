@@ -83,3 +83,18 @@ public class CokluKume<E> {
         System.out.println("get(\"FIZ101\") = " + dersler.get("FIZ101"));   // []
     }
 }
+
+/* Beklenen cikti:
+M = {a=2, b=1, c=1}, size = 4
+count("a") = 2
+remove("a") = true
+remove("b") = true
+remove("x") = false
+count("b") = 0
+M = {a=1, c=1}, size = 2
+
+kavak: count('a') = 2, size() = 5
+
+get("BIL201") = [Ali, Ece, Can]
+get("FIZ101") = []
+*/

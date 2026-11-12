@@ -15,3 +15,8 @@ public class DogrusalArama {
 		return false;
 	}
 }
+
+/* Beklenen cikti:
+dogrusalArama(dizi, 5) = true
+dogrusalArama(dizi, 3) = false
+*/

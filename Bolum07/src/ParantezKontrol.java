@@ -34,3 +34,13 @@ public class ParantezKontrol {
             System.out.println(s + " -> " + (gecerliMi(s) ? "gecerli" : "gecersiz"));
     }
 }
+
+/* Beklenen cikti:
+{{[]}()}[] -> gecerli
+{[()]} -> gecerli
+([)] -> gecersiz
+(() -> gecersiz
+()) -> gecersiz
+{[()()]} -> gecerli
+{[(])} -> gecersiz
+*/

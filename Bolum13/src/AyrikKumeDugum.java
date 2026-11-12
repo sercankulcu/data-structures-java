@@ -60,3 +60,10 @@ public class AyrikKumeDugum {
         System.out.println("Kokun rutbesi: " + find(d.get(0)).sira); // 2
     }
 }
+
+/* Beklenen cikti:
+0->3 1->3 2->3 3->3 4->3 5->5
+0 ile 4 ayni kumede mi? true
+0 ile 5 ayni kumede mi? false
+Kokun rutbesi: 2
+*/

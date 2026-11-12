@@ -106,3 +106,18 @@ public class GenelAgac {
         System.out.println();
     }
 }
+
+/* Beklenen cikti:
+Agac (girinti = derinlik):
+A
+  B
+    D
+    E
+      G
+  C
+    F
+derinlik(G) = 3
+yukseklik(B) = 2
+yukseklik(A) = 3
+Ilk cocuk - sonraki kardes, kok basta: A B D E G C F
+*/

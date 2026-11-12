@@ -36,3 +36,10 @@ public class MinYigin {
         System.out.println("pop(): " + yigin.pop() + ", getMin(): " + yigin.getMin());
     }
 }
+
+/* Beklenen cikti:
+getMin(): 3
+pop(): 3, getMin(): 3
+pop(): 7, getMin(): 3
+pop(): 3, getMin(): 5
+*/

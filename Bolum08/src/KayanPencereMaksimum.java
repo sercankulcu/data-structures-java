@@ -29,3 +29,8 @@ public class KayanPencereMaksimum {
 		System.out.println("enb = " + Arrays.toString(pencereMax(a, k)));   // [3, 3, 5, 5, 6]
 	}
 }
+
+/* Beklenen cikti:
+a = [1, 3, -1, -3, 5, 3, 6], k = 3
+enb = [3, 3, 5, 5, 6]
+*/

@@ -48,3 +48,21 @@ public class HashKume {
             System.out.println("kova " + i + ": " + s.kova.get(i));
     }
 }
+
+/* Beklenen cikti:
+add(12): true
+add(25): true
+add(7) : true
+add(19): true
+add(12): false
+contains(26): false
+contains(19): true
+n = 4
+kova 0: [7]
+kova 1: []
+kova 2: []
+kova 3: []
+kova 4: [25]
+kova 5: [12, 19]
+kova 6: []
+*/

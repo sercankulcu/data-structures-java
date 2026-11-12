@@ -164,3 +164,17 @@ public class CiftYonluBagliListe {
 		liste.listeyiGeriYazdir();    // Geri Yonde: null
 	}
 }
+
+/* Beklenen cikti:
+Ileri Yonde: 1 <-> 10 <-> 15 <-> 25 <-> null
+Ileri Yonde: 1 <-> 10 <-> 15 <-> 25 <-> 30 <-> null
+Geri Yonde: 30 <-> 25 <-> 15 <-> 10 <-> 1 <-> null
+Ileri Yonde: 1 <-> 10 <-> 15 <-> 25 <-> null
+Ileri Yonde: 1 <-> 10 <-> 12 <-> 15 <-> 25 <-> null
+ogeyiAra(15): 3
+Ileri Yonde: 1 <-> 10 <-> 25 <-> null
+Ileri Yonde: 10 <-> 25 <-> null
+Geri Yonde: 10 <-> null
+Ileri Yonde: null
+Geri Yonde: null
+*/

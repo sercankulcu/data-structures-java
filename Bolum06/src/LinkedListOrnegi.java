@@ -38,3 +38,14 @@ public class LinkedListOrnegi {
 		System.out.println("Iterator toplam adim: " + adimIt);       // 5
 	}
 }
+
+/* Beklenen cikti:
+[B]
+[A, B]
+[A, B, C]
+get(1) = B
+[B, C]
+size() = 2
+Indisli dongu toplam adim: 6
+Iterator toplam adim: 5
+*/

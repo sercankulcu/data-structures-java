@@ -110,3 +110,14 @@ public class IkiliAgacOzYinelemeli {
         System.out.println("enBuyukBul = " + ia.enBuyukBul(kok2)); // 8
     }
 }
+
+/* Beklenen cikti:
+Kok basta : 9 2 4 3
+Kok ortada: 4 2 9 3
+Kok sonda : 4 2 3 9
+boyut = 4
+yukseklik = 2
+yaprakSayisi = 2
+Bos agac: boyut = 0, yukseklik = -1
+enBuyukBul = 8
+*/

@@ -71,3 +71,23 @@ public class Dijkstra {
         calistir(cizgeKur(6, g2), 0);                         // F: 20, A -> C -> E -> D -> F
     }
 }
+
+/* Beklenen cikti:
+dijkstra(A), 9 dugumlu cizge:
+  A: d = 0  yol: A
+  B: d = 4  yol: A -> B
+  C: d = 5  yol: A -> B -> C
+  D: d = 11  yol: A -> B -> E -> G -> D
+  E: d = 6  yol: A -> B -> E
+  F: d = 7  yol: A -> F
+  G: d = 8  yol: A -> B -> E -> G
+  H: d = 16  yol: A -> B -> E -> G -> D -> H
+  I: d = 3  yol: A -> I
+dijkstra(A), 6 dugumlu cizge:
+  A: d = 0  yol: A
+  B: d = 4  yol: A -> B
+  C: d = 2  yol: A -> C
+  D: d = 9  yol: A -> C -> E -> D
+  E: d = 5  yol: A -> C -> E
+  F: d = 20  yol: A -> C -> E -> D -> F
+*/

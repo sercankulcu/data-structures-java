@@ -18,3 +18,9 @@ public class OzyinelemeliIkiliArama {
 		System.out.println(ikiliAra(a, 40, 0, 9));          // -1
 	}
 }
+
+/* Beklenen cikti:
+5
+9
+-1
+*/

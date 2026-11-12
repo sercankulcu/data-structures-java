@@ -51,3 +51,15 @@ public class DinamikDiziYigin<E> implements Stack<E> {
         System.out.println();
     }
 }
+
+/* Beklenen cikti:
+push(10)
+push(20)
+push(30)
+  buyut(4): 2 oge kopyalandi
+push(40)
+push(50)
+  buyut(8): 4 oge kopyalandi
+size: 5, kapasite: 8
+50 40 30 20 10
+*/

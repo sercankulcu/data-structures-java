@@ -14,3 +14,8 @@ public class EslesenOgeler {
 					System.out.println("Eslesen oge: " + oge1);
 	}
 }
+
+/* Beklenen cikti:
+Eslesen oge: 3
+Eslesen oge: 5
+*/

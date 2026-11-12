@@ -102,3 +102,14 @@ public class BstSorgulari {
 			+ bstMi(kok3, Long.MIN_VALUE, Long.MAX_VALUE));  // false
 	}
 }
+
+/* Beklenen cikti:
+ardil(5) = 6
+ardil(6) = 7
+ardil(9) = yok
+oncul(6) = 5
+oncul(2) = yok
+aralik(kok, 5, 10): 5 6 7 8 10
+bstMi = true
+7 eklenince bstMi = false
+*/

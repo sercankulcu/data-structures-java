@@ -69,3 +69,17 @@ public class Kruskal {
         System.out.println("Kenar sayisi: " + T.size() + ", toplam agirlik: " + toplam); // 9, 14
     }
 }
+
+/* Beklenen cikti:
+Minimum kapsayan agac kenarlari:
+I-J (0)
+A-E (1)
+C-I (1)
+E-F (1)
+G-H (1)
+B-D (2)
+D-E (2)
+D-H (2)
+B-C (4)
+Kenar sayisi: 9, toplam agirlik: 14
+*/

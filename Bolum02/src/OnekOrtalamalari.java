@@ -40,3 +40,12 @@ public class OnekOrtalamalari {
 			System.out.println("n = " + n + ": onekOrt1 " + n * (n + 1) / 2 + " toplama, onekOrt2 " + n + " toplama");
 	}
 }
+
+/* Beklenen cikti:
+onekOrt1: [4.0, 6.0, 6.0, 5.0]
+onekOrt2: [4.0, 6.0, 6.0, 5.0]
+n = 10: onekOrt1 55 toplama, onekOrt2 10 toplama
+n = 100: onekOrt1 5050 toplama, onekOrt2 100 toplama
+n = 1000: onekOrt1 500500 toplama, onekOrt2 1000 toplama
+n = 1000000: onekOrt1 500000500000 toplama, onekOrt2 1000000 toplama
+*/

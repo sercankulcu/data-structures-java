@@ -38,3 +38,8 @@ public class DiziYigin<E> implements Yigin<E> {
 		System.out.println("top = " + y.top() + ", size = " + y.size());
 	}
 }
+
+/* Beklenen cikti:
+8
+top = 3, size = 2
+*/

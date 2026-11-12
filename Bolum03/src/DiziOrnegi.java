@@ -27,3 +27,10 @@ public class DiziOrnegi {
 		return max;
 	}
 }
+
+/* Beklenen cikti:
+Dizinin birinci ogesi: 10
+Dizinin ucuncu ogesi: 30
+Dizi Ogeleri: 10 20 30 40 50
+En buyuk oge: 50
+*/

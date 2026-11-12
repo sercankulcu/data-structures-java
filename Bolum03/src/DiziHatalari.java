@@ -40,3 +40,11 @@ public class DiziHatalari {
 		System.out.println("m[0][0] = " + m[0][0]);
 	}
 }
+
+/* Beklenen cikti:
+Hata: Index 5 out of bounds for length 5
+Gecersiz indis: 7
+Hata: ArrayStoreException (java.lang.Integer)
+Hata: NullPointerException, m[0] = null
+m[0][0] = 1
+*/

@@ -94,3 +94,15 @@ public class CiftUcluKuyruk<E> {
 		System.out.println("Bos deque'de bastanCikar() -> " + deque.bastanCikar());
 	}
 }
+
+/* Beklenen cikti:
+Deque (bas -> son): 3 5 8 9  boyut = 4
+ilk() = 3, son() = 9
+sondanCikar() -> 9
+bastanCikar() -> 3
+Deque (bas -> son): 5 8  boyut = 2
+sondanCikar() -> 8
+sondanCikar() -> 5
+Bos mu? true, ilk() = null, son() = null
+Bos deque'de bastanCikar() -> null
+*/

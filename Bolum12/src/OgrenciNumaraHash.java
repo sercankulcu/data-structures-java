@@ -30,3 +30,11 @@ public class OgrenciNumaraHash {
         }
     }
 }
+
+/* Beklenen cikti:
+calculateHash(210706003) = 103
+calculateHash(240707050) = 950
+calculateHash(230707042) = 842
+calculateHash(230706015) = 315
+Hata: Gecersiz okul numarasi degerleri: 190706003
+*/

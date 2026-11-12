@@ -35,3 +35,9 @@ public class ArayaEklemeSilme {
 		return boyut - 1;      // yeni boyut
 	}
 }
+
+/* Beklenen cikti:
+Baslangic        : [7, 2, 9, 5, 1, 0] boyut = 5
+ekle(indis 1, 4) : [7, 4, 2, 9, 5, 1] boyut = 6
+sil(indis 1)     : [7, 2, 9, 5, 1, 0] boyut = 5
+*/

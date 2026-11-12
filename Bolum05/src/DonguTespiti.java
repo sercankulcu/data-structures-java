@@ -46,3 +46,10 @@ public class DonguTespiti {
 		System.out.println("Tek dugum, 1 -> 1: " + donguVarMi(listeKur(1, 1))); // true
 	}
 }
+
+/* Beklenen cikti:
+1..6, 6 -> 3: true
+1..6, dongu yok: false
+Bos liste: false
+Tek dugum, 1 -> 1: true
+*/

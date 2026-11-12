@@ -82,3 +82,14 @@ public class OncelikliKuyrukBagliListe {
 		System.out.println("removeMin() = " + pq.removeMin() + " (bos kuyruk)");
 	}
 }
+
+/* Beklenen cikti:
+insert x3:   { (3,B) (5,A) (9,C) }
+min()       = (3,B)
+removeMin() = (3,B)  { (5,A) (9,C) }
+insert(7,D): { (5,A) (7,D) (9,C) }
+removeMin() = (5,A)  { (7,D) (9,C) }
+removeMin() = (7,D)  { (9,C) }
+removeMin() = (9,C)  { }
+removeMin() = null (bos kuyruk)
+*/

@@ -219,3 +219,17 @@ public class KirmiziSiyahAgac {
 		}
 	}
 }
+
+/* Beklenen cikti:
+ekle 10: 10S  siyah yukseklik: 1
+ekle 20: 10S(-, 20K)  siyah yukseklik: 1
+ekle 30: 20S(10K, 30K)  siyah yukseklik: 1
+ekle 15: 20S(10S(-, 15K), 30S)  siyah yukseklik: 2
+ekle 12: 20S(12S(10K, 15K), 30S)  siyah yukseklik: 2
+ekle 5: 20S(12K(10S(5K, -), 15S), 30S)  siyah yukseklik: 2
+sil 5: 20S(12K(10S, 15S), 30S)  siyah yukseklik: 2
+sil 30: 12S(10S, 20S(15K, -))  siyah yukseklik: 2
+sil 20: 12S(10S, 15S)  siyah yukseklik: 2
+sil 12: 15S(10K, -)  siyah yukseklik: 1
+sil 99 (yok): 15S(10K, -)  siyah yukseklik: 1
+*/

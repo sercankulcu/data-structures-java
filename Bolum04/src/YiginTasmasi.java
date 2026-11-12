@@ -22,3 +22,9 @@ public class YiginTasmasi {
 		System.out.println(n * (n + 1) / 2);   // 500000500000
 	}
 }
+
+/* Beklenen cikti:
+50005000
+topla(1_000_000): StackOverflowError
+500000500000
+*/

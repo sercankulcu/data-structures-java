@@ -83,3 +83,17 @@ public class ListePerformansi {
 		if (cop == 42) System.out.println();   // cop degiskeni kullanilsin
 	}
 }
+
+/* Not: bu programin ciktisi her calistirmada degisir (zaman olcumu, rastgele sayi ya da
+   is parcaciklarinin sirasi); asagidaki bir ornek calistirmadir. */
+/* Beklenen cikti:
+n = 20000 oge, sure (ms), en iyi 5 olcum (5 isinma turundan sonra)
+Islem                   ArrayList  LinkedList     COWList
+n x add(e) (sona)            0.28        0.32       83.36
+n x add(0, e) (basa)        17.11        0.09      100.18
+for + get(i)                 0.11      176.71        0.13
+for-each (okuyucu)           0.11        0.22        0.25
+Beklenen: ArrayList get ve sona eklemede hizli; LinkedList basa
+eklemede hizli ama get(i) dongusunde O(n^2); CopyOnWriteArrayList
+her yazmada diziyi kopyalar, okumada ArrayList kadar hizlidir.
+*/

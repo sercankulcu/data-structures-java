@@ -38,3 +38,10 @@ public class DiziTersCevirme {
 		return yeni;
 	}
 }
+
+/* Beklenen cikti:
+Orijinal dizi : [3, 8, 1, 9, 4, 6]
+Ters kopya    : [6, 4, 9, 1, 8, 3]
+Orijinal dizi : [3, 8, 1, 9, 4, 6]
+Yerinde ters  : [6, 4, 9, 1, 8, 3]
+*/

@@ -19,3 +19,9 @@ public class KinciEnBuyuk {
 		}
 	}
 }
+
+/* Beklenen cikti:
+1. en buyuk: 9
+2. en buyuk: 7
+3. en buyuk: 6
+*/

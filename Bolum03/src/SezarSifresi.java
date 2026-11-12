@@ -18,3 +18,9 @@ public class SezarSifresi {
 		return new String(harf);
 	}
 }
+
+/* Beklenen cikti:
+sifrele("ZEKA", 3)  = CHND
+coz (k = 26 - 3)    = ZEKA
+sifrele("XYZ", 2)   = ZAB
+*/

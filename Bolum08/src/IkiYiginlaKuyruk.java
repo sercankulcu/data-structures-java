@@ -34,3 +34,7 @@ public class IkiYiginlaKuyruk {
 		System.out.println(" " + q.dequeue());            // 1 2 3 4 = giris sirasi
 	}
 }
+
+/* Beklenen cikti:
+Cikis sirasi: 1 2 3 4
+*/

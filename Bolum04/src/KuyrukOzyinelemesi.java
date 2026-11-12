@@ -32,3 +32,10 @@ public class KuyrukOzyinelemesi {
 		System.out.println(faktDongu(12));      // 479001600 (13! int'e sigmaz)
 	}
 }
+
+/* Beklenen cikti:
+24
+24
+24
+479001600
+*/
