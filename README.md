@@ -4,6 +4,8 @@ Java code examples for the undergraduate **Data Structures (Veri Yapıları)** c
 
 Course page and slides: <https://sercankulcu.github.io/teaching/data-structures>
 
+The same programs with English identifiers, comments and output, matching the English edition of the course, are in [data-structures-java-en](https://github.com/sercankulcu/data-structures-java-en).
+
 ## Chapters
 
 | Folder | Chapter | Programs |
