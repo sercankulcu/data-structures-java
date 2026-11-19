@@ -55,6 +55,8 @@ public class OrtalamaOrtancaMod {
 
 	// Sirali dizinin ortasindaki deger; cagiranin dizisi bozulmasin diye kopya siralanir
 	static double ortanca(double[] dizi) {
+		if (dizi.length == 0)
+			throw new IllegalArgumentException();
 		double[] s = dizi.clone();  // kopya
 		Arrays.sort(s);             // O(n log n)
 		int boyut = s.length;

@@ -15,6 +15,7 @@ public class MatrisTranspozu {
 	}
 
 	// Satirlar sutuna, sutunlar satira donusur: t[j][i] = m[i][j]
+	// m: bos olmayan, dikdortgen matris
 	static int[][] transpoz(int[][] m) {
 		int satir = m.length;
 		int sutun = m[0].length;
